@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+   background-color: #f0f0f0;
+   margin: 0;
+   padding: 0;
+  }
+  .conteudo {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cards-container {
+    display: flex;
+    gap: 25px;
+    padding: 16px;
+    justify-content: center;
+    margin-bottom: 40px; /* espaço entre os cards e as caixas abaixo */
+    flex-wrap: wrap;
+  }
+  
+  .conteudo h2 {
+    margin-bottom: 24px;
+    font-size: 24px;
+    color: #333;
+    
+  }
+
+  
+  .card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 5px;
+    border-top: 5px solid;
+    transition: transform 0.2s ease;
+    width: 150px;
+    height: 80px;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card h3 {
+    font-size: 14px;
+    color: #444;
+    margin: 0;
+  }
+  
+  .card .number {
+    font-size: 32px;
+    font-weight: bold;
+    margin-top: 8px;
+  }
+  .card.orange {
+    border-left: 5px solid orange;
+    border-top: none;
+  }
+  
+  .card.blue {
+    border-left: 5px solid #007bff;
+    border-top: none;
+  }
+  
+  .card.gray {
+    border-left: 5px solid gray;
+    border-top: none;
+  }
+  
+  .card.yellow {
+    border-left: 5px solid gold;
+    border-top: none;
+  }
+  
+  
+
+  
+
+  .cards-graficos {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-left: 10%;
+  }
+  
+  .caixa {
+    width: 500px;
+    height: 400px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
