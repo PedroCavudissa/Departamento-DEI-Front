@@ -11,4 +11,5 @@ export const routes: Routes = [
     component: MenuComponent, // componente que contém o layout da barra lateral
     
   },
+
 ];
