@@ -9,6 +9,7 @@
   /* Sidebar */
   .sidebar {
     width: 200px;
+    height: 100%;
     background-color: #47B5FF;
     color: white;
     padding: 10px;
@@ -66,5 +67,38 @@
     background-color: #c3d8f1;
     border-radius: 5px;
   }
-  
+ /* Botão Hamburguer */
+.menu-toggle {
+  display: none;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 28px;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1100;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background: #47B5FF;
+    display: none;
+    z-index: 1000;
+  }
+
+  .sidebar.menu-open {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}
   

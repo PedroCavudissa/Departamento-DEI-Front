@@ -1,31 +1,40 @@
-/* header.component.css */
-.header {
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.top-bar {
+  background: #6795dc;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start; /* Alinha o conteúdo no topo */
+  height: 50px; /* Defina a altura que você deseja */
+}
+
+.top-icons button {
+  background: none;
+  color: white;
+  border: none;
+  margin-left: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
   
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  /* ---------- RESPONSIVIDADE ---------- */
+  @media (max-width: 768px) {
+    
+    .top-icons {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
   
-  .nav-links {
-    list-style-type: none;
-    display: flex;
-    gap: 20px;
+    .top-bar {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+    }
   }
-  
-  .nav-links li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .nav-links li a:hover {
-    text-decoration: underline;
-  }
-  

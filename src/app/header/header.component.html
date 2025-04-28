@@ -1,15 +1,9 @@
 
 <!-- header.component.html -->
-<header class="header">
-    <nav class="navbar">
-      <div class="logo">
-        <a href="/">Minha Logo</a>
-      </div>
-      <ul class="nav-links">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/sobre">Sobre</a></li>
-        <li><a href="/contato">Contato</a></li>
-      </ul>
-    </nav>
-  </header>
-  
+<div class="top-bar">
+  <button class="menu-toggle" (click)="toggleMenu()">☰</button>
+  <div class="top-icons">
+    <button>🔔 Notificação</button>
+    <button>👤 Perfil</button>
+  </div>
+</div>

@@ -1,6 +1,8 @@
 
+
 <!-- Sidebar -->
-<div class="sidebar">
+<div class="sidebar" [class.open]="menuAberto">
+ 
     <img src="assets/imagens/Logo.jpg" alt="Logo">
     <h2>Dashboard</h2>
     <ul>
@@ -18,13 +20,13 @@
                 </a>
               </li>
               <li>
-                <a routerLink="/home" class="menu-link">
+                <a routerLink="/login" class="menu-link">
                   <img src="assets/icones/aluno.png" alt="Ícone">
                   <span>Funcionários</span>
                 </a>
               </li>
               <li>
-                <a routerLink="/home" class="menu-link">
+                <a routerLink="menu/matriculas" class="menu-link">
                   <img src="assets/icones/matricula.png" alt="Ícone">
                   <span>Matrículas</span>
                 </a>
