@@ -12,7 +12,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to top, #295E99, #449CFF);
+    /*background: linear-gradient(to top, #295E99, #449CFF);*/
+    background-color: #f4f0f0;
 }
 /* Container do formulário de login */
 .login-container {

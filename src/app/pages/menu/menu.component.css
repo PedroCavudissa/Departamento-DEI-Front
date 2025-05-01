@@ -2,18 +2,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
   }
   
   body {
-   background-color: #f0f0f0;
+    background-color: #fff;
    margin: 0;
    padding: 0;
   }
   .conteudo {
     padding: 40px 20px;
+    padding-top: 60px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 100px;
+   
   }
   
   .cards-container {
@@ -23,6 +28,7 @@
     justify-content: center;
     margin-bottom: 40px; /* espaço entre os cards e as caixas abaixo */
     flex-wrap: wrap;
+   
   }
   
   .conteudo h2 {
@@ -38,10 +44,12 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     padding: 5px;
-    border-top: 5px solid;
+    border: 1px solid #333;
     transition: transform 0.2s ease;
-    width: 150px;
+    width: 180px;
     height: 80px;
+   
+   
   }
   
   .card:hover {
@@ -61,22 +69,22 @@
   }
   .card.orange {
     border-left: 5px solid orange;
-    border-top: none;
+  
   }
   
   .card.blue {
     border-left: 5px solid #007bff;
-    border-top: none;
+    
   }
   
   .card.gray {
     border-left: 5px solid gray;
-    border-top: none;
+   
   }
   
   .card.yellow {
     border-left: 5px solid gold;
-    border-top: none;
+   
   }
   
   
@@ -88,6 +96,7 @@
     justify-content: center;
     gap: 25px;
     margin-left: 10%;
+    flex-wrap: wrap;
   }
   
   .caixa {
@@ -98,4 +107,22 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
+    border:1px solid #333;
+  }
+
+  /*Responsividade*/
+  @media (max-width:768px){
+    .caixa{
+      width: 450px;
+      margin-right: 5%;
+    }
+    .caixa h3{
+      font-size: 18px;
+      text-align: center;
+    }
+    .conteudo {
+      margin-left: 0 !important;
+      justify-content: center;
+      align-items: center;
+    }
   }
