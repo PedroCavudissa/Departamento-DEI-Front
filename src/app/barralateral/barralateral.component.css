@@ -99,8 +99,10 @@
   transform: translateX(-100%);
 }  
 
-.abas{
- overflow-y: auto;
+.scroll-container {
+  height: 600px; /* ou qualquer valor fixo que você desejar */
+  overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+  overflow-x: hidden; /* oculta a barra de rolagem horizontal */
 }
   /*RESPONSIVIDADE*/
   @media (max-width: 768px) {
@@ -128,6 +130,11 @@
     .supbar{
       width: 100%;
       position: fixed;/*Faz com que a barra superior não se movimenta*/
+    }
+    .scroll-container {
+      height: 500px; /* ou qualquer valor fixo que você desejar */
+      overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+      overflow-x: hidden; /* oculta a barra de rolagem horizontal */
     }
   }
   
