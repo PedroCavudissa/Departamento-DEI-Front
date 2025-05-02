@@ -98,6 +98,10 @@
 .sidebar.hidden {
   transform: translateX(-100%);
 }  
+
+.abas{
+ overflow-y: auto;
+}
   /*RESPONSIVIDADE*/
   @media (max-width: 768px) {
     .hamburger {
@@ -123,7 +127,7 @@
     }
     .supbar{
       width: 100%;
-      position: fixed;
+      position: fixed;/*Faz com que a barra superior não se movimenta*/
     }
   }
   

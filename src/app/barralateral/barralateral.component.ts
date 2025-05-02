@@ -15,6 +15,7 @@ export class BarralateralComponent {
   toggleMenu(): void {
     this.menuAtivo = !this.menuAtivo;
    
+  
   }
 
   selecionarMenu(novoTitulo: string) {
