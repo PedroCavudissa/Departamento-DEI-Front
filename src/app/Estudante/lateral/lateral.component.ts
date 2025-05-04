@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'app-barralateral',
-  standalone: true,
+  selector: 'app-lateral',
+  standalone: true, 
   imports: [],
-  templateUrl: './barralateral.component.html',
-  styleUrls: ['./barralateral.component.css']
+  templateUrl: './lateral.component.html',
+  styleUrl: './lateral.component.css'
 })
-export class BarralateralComponent {
-  titulo = 'Dados Gerais';
+export class LateralComponent {
+  titulo = 'Olá, Pedro José Cavudissa' ;
   menuAtivo: boolean = false;
 
   toggleMenu(): void {
@@ -24,4 +24,3 @@ export class BarralateralComponent {
    
   }
 }
-

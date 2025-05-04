@@ -1,0 +1,42 @@
+<div class="tela-principal">
+    <div class="conteudo">
+      <main class="painel">
+        <div class="container-principal">
+            <div class="caixa-branca">
+              <h3 class="titulo">Disciplinas em Atraso</h3>
+
+             <div class="filtro">
+              <div class="filtro-box">
+                <label for="anoSelect">Ano Acadêmico</label>
+                 <select id="anoSelect" [(ngModel)]="anoSelecionado">
+                  <option *ngFor="let ano of anosDisponiveis" [ngValue]="ano">{{ ano }}º</option>
+                </select>
+              </div>
+             </div>
+              <div class="tabela">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Nº</th>
+                      <th>Cadeira</th>
+                      <th>Ano Acadêmico</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let disciplina of disciplinasFiltradas">
+                      <td>{{ disciplina.id }}</td>
+                      <td>{{ disciplina.nome }}</td>
+                      <td>{{ disciplina.ano }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+      </main>
+      
+    </div>
+  </div>
+  
+<app-lateral></app-lateral>
