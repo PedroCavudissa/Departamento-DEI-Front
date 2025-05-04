@@ -9,6 +9,7 @@ import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.com
 import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
 
 
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
   { path: 'login', component: LoginComponent },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
+
 
 ];
