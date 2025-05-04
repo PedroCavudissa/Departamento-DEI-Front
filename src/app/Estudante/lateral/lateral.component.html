@@ -1,0 +1,48 @@
+<!--Barra -Superior-->
+<div class="hamburger" (click)="toggleMenu()">☰</div>
+<div class="supbar">
+  <h2 id="nome">{{titulo}}</h2>
+  <div class="icons">
+    <div class="icon noti">
+      <img src="assets/icones/R.png" alt="Notificação" />
+      <span class="badge">1</span>
+      <p>Notificação</p>
+    </div>
+    <div class="icon">
+      <img src="assets/icones/perfil.png" alt="Perfil" />
+      <p>Perfil</p>
+    </div>
+  </div>
+</div>
+
+<!-- Barra-Lateral -->
+<nav class="sidebar" [class.active]="menuAtivo">
+    <br><img src="assets/imagens/Logo.jpg" alt="Logo" height="40px">
+   
+    <ul>
+        <div class="scroll-container">
+ <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/matricula.png" alt="Ícone">
+  <span (click)="selecionarMenu('Confirmação da Matrícula')">Confirmação da Matrícula</span> </a></li>
+
+  <li><a routerLink="/tela-nota " class="menu-link" (click)="selecionarMenu('Disciplinas em Atraso')">
+     <img src="assets/icones/book.png" alt="Ícone">
+   <span  >Disciplinas em Atraso</span></a> </li>
+   
+   <li><a routerLink="/tela-nota" class="menu-link"> <img src="assets/icones/book.png" alt="Ícone">
+     <span (click)="selecionarMenu('Minhas Notas')">Minhas Notas</span> </a> </li>
+            
+ 
+   <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/hora.png" alt="Ícone">
+     <span (click)="selecionarMenu('Horários')">Horários</span> </a></li>
+      
+            
+      <li> <a routerLink="/home" class="menu-link"> <img src="assets/icones/mensagem.png" alt="Ícone">
+     <span (click)="selecionarMenu('Chat')">Chat</span></a> </li>
+  </div>
+        </ul>
+      
+    </nav> 
+ 
+   
+  
+
