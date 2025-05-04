@@ -24,12 +24,13 @@ private senhaValida = '123456';
     });
   }
   entrar() {
+    
     if (this.loginForm.valid) {
       const emailDigitado = this.loginForm.get('username')?.value;
       const senhaDigitada = this.loginForm.get('password')?.value;
       if (emailDigitado === this.emailValido && senhaDigitada === this.senhaValida) {
         alert('Login realizado com sucesso!');
-        this.router.navigate(['/menu']);
+        this.router.navigate(['/tela-estudante']);
       } else {
         alert('E-mail ou senha incorretos.');
       }
