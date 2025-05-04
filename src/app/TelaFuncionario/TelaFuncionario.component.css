@@ -1,0 +1,111 @@
+.funcionario-container {
+  background-color: #f4faff;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.header h1 {
+  font-size: 28px;
+  color: #333;
+  margin: 0; /* Remove margem para alinhar corretamente */
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.menu a:hover {
+  color: #47B5FF;
+}
+
+.funcionario-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.foto img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #47B5FF;
+}
+
+.dados-pessoais,
+.dados-academicos,
+.dados-administrativos {
+  flex: 1 1 300px;
+  background-color: #fff;
+  border-left: 5px solid #47B5FF;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.dados-pessoais h2,
+.dados-academicos h2,
+.dados-administrativos h2 {
+  color: #47B5FF;
+  font-size: 20px;
+}
+
+.acoes {
+  margin-top: 20px;
+}
+
+.editar-btn {
+  background-color: #47B5FF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.editar-btn:hover {
+  background-color: #3399dd;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .funcionario-info {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .foto img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .dados-pessoais, .dados-academicos, .dados-administrativos {
+    flex: 1 1 100%;
+    margin-bottom: 20px;
+  }
+
+  .menu {
+    gap: 10px;
+  }
+
+  .menu a {
+    font-size: 14px;
+  }
+}
