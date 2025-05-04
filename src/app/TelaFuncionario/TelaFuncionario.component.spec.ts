@@ -7,7 +7,7 @@ describe('TelaFuncionarioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TelaFuncionarioComponent]
+      declarations: [TelaFuncionarioComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TelaFuncionarioComponent);
@@ -15,7 +15,7 @@ describe('TelaFuncionarioComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
