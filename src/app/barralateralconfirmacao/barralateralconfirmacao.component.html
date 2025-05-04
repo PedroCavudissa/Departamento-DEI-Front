@@ -1,0 +1,62 @@
+<!--Barra -Superior-->
+<div class="hamburger" (click)="toggleMenu()">☰</div>
+<div class="supbar">
+  <h2 id="nome">{{titulo}}</h2>
+</div>
+<!-- Barra-Lateral -->
+<nav class="sidebar" [class.active]="menuAtivo">
+    <img src="assets/imagens/Logo.jpg" alt="Logo">
+<div class="scroll-container">
+    <ul>
+      
+      <!-- Menu principal: Geral -->
+      <li>
+        <a routerLink="/home" class="menu-link principal">
+          <span (click)="selecionarMenu('Área Administrativa')">Área Administrativa</span>
+        </a>
+        <ul class="submenu-list">
+          
+          <li>
+            <a routerLink="/home" class="menu-link submenu">
+              <img src="assets/icones/aluno.png" alt="Ícone">
+              <span (click)="selecionarMenu('Área Administrativa - Confirmação de Semestre')">Confirmação de Semestre</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/home" class="menu-link submenu">
+              <img src="assets/icones/aluno.png" alt="Ícone">
+              <span (click)="selecionarMenu('Área Administrativa - Desciplinas em Atraso')">Desciplinas em Atraso</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/home" class="menu-link submenu">
+              <img src="assets/icones/cale.png" alt="Ícone">
+              <span (click)="selecionarMenu('Área Administrativa - Minhas Notas')">Minhas Notas</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    
+      <!-- Menu principal: Comunicados -->
+      <li>
+        <a routerLink="/home" class="menu-link principal">
+          <span (click)="selecionarMenu('Reclamações')">Reclamação</span>
+        </a>
+        <ul class="submenu-list">
+          <li>
+            <a routerLink="/home" class="menu-link submenu">
+              <img src="assets/icones/cale.png" alt="Ícone">
+              <span (click)="selecionarMenu('Reclamações - Minhas Reclamações')">Minhas Reclamações</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/home" class="menu-link submenu">
+              <img src="assets/icones/cale.png" alt="Ícone">
+              <span (click)="selecionarMenu('Reclamações - Nova Reclamação')">Nova Reclamação</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>    
+       </div>
+    </nav> 

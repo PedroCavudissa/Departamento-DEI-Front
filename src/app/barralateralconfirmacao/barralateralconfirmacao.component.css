@@ -1,0 +1,228 @@
+/* Layout geral */
+:host {
+    display: flex;
+   height: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0px;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 200px;
+    background-color: #47B5FF;
+    color: white;
+    padding: 10px;
+    margin-top: 0;
+    padding-top: 0;
+    position: fixed;
+    top: 0;
+    left: 1px; 
+    padding-right: 40px;
+  transform: translateX(0); 
+   
+  }
+
+  .sidebar img{
+    width: 85%;
+    margin-left: 8%;
+  }
+  
+  .menu-link{
+    display: flex;
+    gap: 12px; /* Espaço entre o ícone e o texto */
+    cursor: pointer;
+   
+      padding: 12px;
+    font-size: 20px;
+    text-decoration: none;
+   
+ 
+  }
+
+  .menu-link img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  .sidebar h2 {
+    margin-top: 0;
+    font-size: 30px;
+    text-align: center;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+  }
+  
+  .sidebar ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #c3d8f1;
+    border-radius: 5px;
+  }
+
+  .supbar{
+    background-color:#47B5FF;
+    width: 99%;
+    height: 8%;
+    position: absolute;
+    top: 0%;
+   
+  }
+  .supbar h2{
+    color: white;
+    text-align: center;
+
+  }
+  /* Botão hambúrguer escondido por padrão */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  position: absolute;
+  top: 0px;
+  left: 15px;
+  z-index: 2000;
+  cursor: pointer;
+  color: white;
+  background-color: #47B5FF;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+.sidebar.hidden {
+  transform: translateX(-100%);
+}  
+
+.scroll-container {
+  height: 600px; /* ou qualquer valor fixo que você desejar */
+  overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+  overflow-x: hidden; /* oculta a barra de rolagem horizontal */
+}
+
+
+.menu-item {
+  cursor: pointer;
+}
+
+.submenu {
+  list-style: none;
+  margin-top: 5px;
+}
+
+.submenu li a {
+  display: block;
+  padding: 5px 0;
+  color: #fff;
+  padding-left: 55px;
+  font-size: 18px;
+  text-decoration: none;
+}
+.menu-item > .menu-link span {
+  font-weight: bold;
+}
+
+
+.submenu li a:hover {
+  text-decoration: underline;
+}
+
+
+  /*RESPONSIVIDADE*/
+  @media (max-width: 768px) {
+    .hamburger {
+      display: block;
+      position: fixed;
+    }
+  
+    .sidebar {
+      transform: translateX(-150%);
+      transition: transform 0.3s ease; width: 200px;
+      background-color: #47B5FF;
+      color: white;
+      padding: 10px;
+      margin-top: 0;
+      padding-top: 0;
+      position: fixed;
+      top: 55px;
+      left: 8px; 
+      height: 100vh; 
+    }
+  
+    .sidebar.active {
+      transform: translateX(0);
+    }
+    .supbar{
+      width: 100%;
+      position: fixed;/*Faz com que a barra superior não se movimenta*/
+    }
+    .scroll-container {
+      height: 500px; /* ou qualquer valor fixo que você desejar */
+      overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+      overflow-x: hidden; /* oculta a barra de rolagem horizontal */
+    }
+    #nome{
+      font-size: 16px;
+    }
+  }
+  
+  /* Menu principal */
+.menu-link.principal {
+  font-weight: bold;
+  border-radius: 6px;
+  font-size: 21px;
+  color: white;
+}
+
+/* Submenus */
+.menu-link.submenu {
+  font-size: 18px;
+  font-weight: normal;
+  color: #eaeaea;
+  padding: 10px;
+  margin-left: 30px;
+  border-left: 2px solid #0d47a1;
+}
+
+.menu-link.submenu:hover {
+  background-color: #c3d8f1;
+  border-radius: 5px;
+  color: #000;
+}
+@media (max-width: 576px) {
+  .sidebar {
+    width: 70%;
+    max-width: 250px;
+    top: 50px;
+    left: 0;
+    padding: 8px 15px;
+  }
+  .menu-link {
+    font-size: 16px;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .menu-link img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .submenu li a {
+    font-size: 15px;
+    padding-left: 30px;
+  }
+
+  .scroll-container {
+    height: 400px;
+  }
+  #nome{
+    font-size: 16px;
+  }
+}
