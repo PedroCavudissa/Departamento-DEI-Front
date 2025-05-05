@@ -34,6 +34,9 @@ export class LateralComponent {
       case 'Minhas Notas':
         this.router.navigate(['/tela-notas']);
         break;
+        case 'Sair':
+          this.router.navigate(['/login']);
+          break;
       default:
         alert('Menu não reconhecido.');
         break;
