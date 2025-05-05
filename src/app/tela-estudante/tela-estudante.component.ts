@@ -5,7 +5,7 @@ import { BarralateralComponent } from "../barralateral/barralateral.component";
 
 @Component({
   selector: 'app-tela-estudante',
-  imports: [HeaderComponent, LateralComponent, ],
+  imports: [HeaderComponent, BarralateralComponent, LateralComponent],
   templateUrl: './tela-estudante.component.html',
   styleUrl: './tela-estudante.component.css'
 })

@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './lateral.component.css'
 })
 export class LateralComponent {
+titulo: any;
+toggleMenu() {
+throw new Error('Method not implemented.');
+}
 
 }
