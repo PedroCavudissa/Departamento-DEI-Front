@@ -5,6 +5,8 @@ import { MenuComponent } from './Admin-Secretaria/menu/menu.component';
 import { TelaNotasComponent } from './Estudante/tela-notas/tela-notas.component';
 import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudante.component';
 import { CadeiraComponent } from './Estudante/Cadeiras/cadeira.component';
+import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.component';
+import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
 
 
 export const routes: Routes = [
@@ -15,5 +17,7 @@ export const routes: Routes = [
   {path:'tela-notas',component:TelaNotasComponent},
   { path: 'tela-estudante', component: TelaEstudanteComponent },
   { path: 'cadeira', component: CadeiraComponent },
+  { path: 'confirmacao1', component: Confirmacao1Component },
+  { path: 'confirmacao2', component: Confirmacao2Component },
 
 ];

@@ -1,0 +1,221 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fefefe;
+  }
+  
+  .container {
+    display: flex;
+  }
+  
+
+  .logo {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .logo span {
+    font-size: 12px;
+  }
+  
+  nav h3 {
+    margin-top: 20px;
+    font-size: 14px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 10px 0;
+  }
+  
+  nav li {
+    margin: 8px 0;
+    cursor: pointer;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+
+  
+  .icons span {
+    margin-left: 15px;
+  }
+  
+  .form-section {
+    background-color: #fff;
+    margin-top: 80px;
+    padding: 15px;
+    border: 3px solid #0c0a02;
+    border-radius: 10px;
+    width: 900px;
+    margin-left: 375px;
+    height: 870px;
+  }
+  
+  .form-section h2 {
+    background-color: #0dc871;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+  }
+  
+  .table-section {
+    margin-top: 20px;
+  }
+  
+  .table-section h3 {
+    margin: 15px 0 5px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+  
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .page {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #0c0206;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    
+  }
+  
+  .page.active {
+    background-color: white;
+    color: #007bff;
+  }
+  
+  .confirm-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 378px;
+  }
+  
+  .cards-graficos {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-left: 10%;
+    flex-wrap: wrap;
+  }
+  
+  .caixa {
+    width: 620px;
+    height: 220px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px white;
+    padding: 20px;
+    text-align: center;
+    border:1px solid #070101;
+    margin-left: 130px;
+  }
+  
+  /*Responsividade*/
+  @media (max-width:768px){
+    .caixa{
+      width: 450px;
+      margin-right: 5%;
+    }
+    .caixa h3{
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .top-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      border-radius: 0;
+    }
+  
+    .form-section {
+      width: 90%;
+      margin: 20px auto;
+      height: auto;
+      margin-top: 15%;
+    }
+  
+    .cards-graficos {
+      margin-left: 0;
+      justify-content: center;
+    }
+  
+    .caixa {
+      width: 90%;
+      margin: 10px auto;
+    }
+  
+    .confirm-btn {
+      margin: 20px auto;
+      display: block;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .form-section h2,
+    .table-section h3 {
+      font-size: 16px;
+      padding: 8px;
+    }
+  
+    th, td {
+      font-size: 12px;
+      padding: 6px;
+    }
+  
+    .page {
+      width: 25px;
+      height: 25px;
+      line-height: 22px;
+      font-size: 14px;
+    }
+  
+    .confirm-btn {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  
+  }

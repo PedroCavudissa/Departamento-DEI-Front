@@ -100,8 +100,8 @@
 }  
 
 .scroll-container {
-  height: 600px; /* ou qualquer valor fixo que você desejar */
-  overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+  height: 600px; 
+  /* 
   overflow-x: hidden; /* oculta a barra de rolagem horizontal */
 }
   /*RESPONSIVIDADE*/
@@ -132,8 +132,7 @@
       position: fixed;/*Faz com que a barra superior não se movimenta*/
     }
     .scroll-container {
-      height: 500px; /* ou qualquer valor fixo que você desejar */
-      overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+      height: 500px; /* 
       overflow-x: hidden; /* oculta a barra de rolagem horizontal */
     }
   }

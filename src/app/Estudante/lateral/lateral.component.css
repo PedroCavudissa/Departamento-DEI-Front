@@ -179,7 +179,7 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
     position: fixed;/*Faz com que a barra superior não se movimenta*/
   }
   .scroll-container {
-    height: 500px; /* ou qualquer valor fixo que você desejar */
+    height: 500px; /*
     overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
     overflow-x: hidden; /* oculta a barra de rolagem horizontal */
   }

@@ -21,23 +21,26 @@
    
     <ul>
         <div class="scroll-container">
- <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/matricula.png" alt="Ícone">
-  <span (click)="selecionarMenu('Confirmação da Matrícula')">Confirmação da Matrícula</span> </a></li>
+          <li> <a routerLink="/" class="menu-link"><img src="assets/icones/matricula.png" alt="Ícone">
+            <span (click)="selecionarMenu('Página Inicial','Olá, Pedro José Cavudissa')">Página Inicial</span> </a></li>
 
-  <li><a routerLink="/tela-nota " class="menu-link" (click)="selecionarMenu('Disciplinas em Atraso')">
+ <li> <a routerLink="/" class="menu-link"><img src="assets/icones/matricula.png" alt="Ícone">
+  <span (click)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')">Confirmação da Matrícula</span> </a></li>
+
+  <li><a routerLink="/cadeira" class="menu-link" (click)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')">
      <img src="assets/icones/book.png" alt="Ícone">
    <span  >Disciplinas em Atraso</span></a> </li>
    
    <li><a routerLink="/tela-nota" class="menu-link"> <img src="assets/icones/book.png" alt="Ícone">
-     <span (click)="selecionarMenu('Minhas Notas')">Minhas Notas</span> </a> </li>
+     <span (click)="selecionarMenu('Minhas Notas','Minhas Notas')">Minhas Notas</span> </a> </li>
             
  
    <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/hora.png" alt="Ícone">
-     <span (click)="selecionarMenu('Horários')">Horários</span> </a></li>
+     <span (click)="selecionarMenu('Horários','Horários')">Horários</span> </a></li>
       
             
       <li> <a routerLink="/home" class="menu-link"> <img src="assets/icones/mensagem.png" alt="Ícone">
-     <span (click)="selecionarMenu('Chat')">Chat</span></a> </li>
+     <span (click)="selecionarMenu('Chat','Chat')">Chat</span></a> </li>
   </div>
         </ul>
       
