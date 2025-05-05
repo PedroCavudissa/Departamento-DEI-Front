@@ -1,0 +1,164 @@
+
+.icons span {
+margin-left: 15px;
+}
+
+.form-section {
+background-color: #fff;
+margin-top: 40px;
+padding: 15px;
+border: 2px solid #020f17;
+border-radius: 10px;
+width: 900px;
+margin-left: 400px;
+height: 550px;
+margin-top: 7%;
+}
+
+.form-section h2 {
+background-color: #007bff;
+color: white;
+padding: 10px;
+text-align: center;
+border-radius: 8px #007bff;
+}
+
+.table-section {
+margin-top: 20px;
+}
+
+.table-section h3 {
+margin: 15px 0 5px;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin-bottom: 15px;
+}
+
+table, th, td {
+border: 1px solid #ccc;
+}
+
+th, td {
+padding: 8px;
+text-align: center;
+}
+
+.termo-link {
+color: blue;
+font-size: 20px;
+text-decoration: underline;
+display: inline-block;
+margin: 10px 0;
+}
+
+.termo-check {
+margin-bottom: 20px;
+font-size: 20px;
+}
+
+.pagination {
+display: flex;
+justify-content: center;
+gap: 10px;
+margin-bottom: 20px;
+}
+
+.page {
+width: 30px;
+height: 30px;
+border: 2px solid #007bff;
+border-radius: 50%;
+text-align: center;
+line-height: 26px;
+font-weight: bold;
+cursor: pointer;
+
+}
+
+.page.active {
+background-color: white;
+color: #007bff;
+}
+
+.confirm-btn {
+background-color: #007bff;
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+cursor: pointer;
+margin-left: 378px;
+}
+/* Responsividade geral */
+@media (max-width: 768px) {
+.container {
+  flex-direction: column;
+}
+
+
+
+.form-section {
+  width: 100%;
+  margin: 20px auto;
+  margin-left: 0;
+  padding: 10px;
+}
+
+.top-bar {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 0;
+}
+
+.confirm-btn {
+  margin-left: 0;
+  width: 100%;
+  text-align: center;
+}
+}
+
+/* Telas menores ainda (mobile) */
+@media (max-width: 576px) {
+.form-section h2 {
+  font-size: 18px;
+  padding: 8px;
+}
+
+.table-section h3,
+.termo-check,
+.termo-link {
+  font-size: 16px;
+}
+
+th, td {
+  padding: 6px;
+  font-size: 12px;
+}
+
+.page {
+  width: 25px;
+  height: 25px;
+  line-height: 21px;
+}
+
+.confirm-btn {
+  font-size: 14px;
+  padding: 8px 15px;
+}
+
+.form-section {
+    background-color: #fff;
+    padding: 15px;
+    box-shadow: 2px solid #020f17;
+    border-radius: 10px;
+    width: 370px;
+    margin-left: 40px;
+    height: 550px;
+    margin-top: 20%;
+    }
+}

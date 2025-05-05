@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './barralateral.component.html',
-  styleUrls: ['./barralateral.component.css'] // ← aqui está o erro corrigido
+
+  styleUrls: ['./barralateral.component.css']
+
 })
 export class BarralateralComponent {
   titulo = 'Dados Gerais';

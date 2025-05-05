@@ -100,10 +100,12 @@
 }  
 
 .scroll-container {
+
+  height: 600px; 
+  
   height: 600px; /* ou qualquer valor fixo que você desejar */
-  overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
-  overflow-x: hidden; /* oculta a barra de rolagem horizontal */
-}
+  overflow-y: auto;} /* ativa a barra de rolagem vertical apenas quando necessário */
+
   /*RESPONSIVIDADE*/
   @media (max-width: 768px) {
     .hamburger {
@@ -132,9 +134,10 @@
       position: fixed;/*Faz com que a barra superior não se movimenta*/
     }
     .scroll-container {
+
+      height: 500px; 
       height: 500px; /* ou qualquer valor fixo que você desejar */
       overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
-      overflow-x: hidden; /* oculta a barra de rolagem horizontal */
     }
   }
   

@@ -1,0 +1,33 @@
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <img src="assets/imagens/logo-feuan.png" alt="logitipo">
+            <p>Faculdade de Enegenharia <br>
+            Departamento de informática <br> <br></p>
+            <h2>Faça Login</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="entrar()">
+                <div class="input-group">
+                        <label for="username">Email</label>
+
+                    <input type="email"  formControlName="username" placeholder="Digite seu email" >
+                   
+                </div>
+
+                <div class="input-group">
+                   <label for="password">Senha</label>
+                    <input type="password" id="password" formControlName="password" placeholder="Digite sua senha" >
+                  
+            </div>
+                <div class="input-group">
+                    
+                    <button  class="btn" (click)="entrar()">
+                        <img src="assets/icones/entrar.png" alt="">
+                        Entrar</button>
+                </div>
+              
+
+               
+            </form>
+        </div>
+    </div>
