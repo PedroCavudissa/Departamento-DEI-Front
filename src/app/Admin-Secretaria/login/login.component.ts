@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {  NavigationEnd } from '@angular/router';
+import { BarralateralComponent } from "../../barralateral/barralateral.component";
 
 @Component({
   selector: 'app-login',
@@ -9,10 +11,15 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
+
 })
 export class LoginComponent implements OnInit {
+  
+  mostrarSidebar = true;
+
+
   // Valores válidos (você pode mudar aqui)
-  private emailValido = 'firmino@gmail.com';
+  private emailValido = 'admin@gmail.com';
   private senhaValida = '123456';
 
 private emailValidos = 'estudante@teste.com';
@@ -20,7 +27,14 @@ private senhaValidas = '123456';
 
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Oculta a sidebar apenas no login
+        this.mostrarSidebar = event.url !== '/login';
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({

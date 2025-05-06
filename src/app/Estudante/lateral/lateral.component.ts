@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginComponent } from '../../Admin-Secretaria/login/login.component';
 
 @Component({
   selector: 'app-lateral',
   standalone: true, 
-  imports: [],
+  imports: [LoginComponent],
   templateUrl: './lateral.component.html',
   styleUrl: './lateral.component.css'
 })
@@ -34,6 +35,12 @@ export class LateralComponent {
       case 'Minhas Notas':
         this.router.navigate(['/tela-notas']);
         break;
+        case 'Sair':
+          const confirmacao = window.confirm('Tem certeza que deseja sair?');
+          if (confirmacao) {
+            this.router.navigate(['/login']);
+          }
+          break;
       default:
         alert('Menu não reconhecido.');
         break;
