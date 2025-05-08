@@ -21,5 +21,4 @@ export const routes: Routes = [
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
 
-
 ];

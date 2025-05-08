@@ -6,7 +6,7 @@
   }
   
   body {
-    background-color: #fff;
+    background-color: #fff8f8;
    margin: 0;
    padding: 0;
   }
@@ -23,13 +23,14 @@
   
   .cards-container {
     display: flex;
-    gap: 25px;
+    gap: 5px;
     padding: 16px;
     justify-content: center;
-    margin-bottom: 40px; /* espaço entre os cards e as caixas abaixo */
+    margin-bottom: 40px;
     flex-wrap: wrap;
-   
   }
+  
+  
   
   .conteudo h2 {
     margin-bottom: 24px;
@@ -48,8 +49,7 @@
     transition: transform 0.2s ease;
     width: 180px;
     height: 80px;
-   
-   
+    margin: 5px;
   }
   
   .card:hover {
@@ -111,18 +111,43 @@
   }
 
   /*Responsividade*/
-  @media (max-width:768px){
-    .caixa{
-      width: 450px;
-      margin-right: 5%;
+  @media (max-width: 1024px) {
+    .card {
+      flex: 1 1 calc(50% - 20px);
+      max-width: calc(50% - 20px);
+      margin-left: 0;
     }
-    .caixa h3{
-      font-size: 18px;
-      text-align: center;
+  }
+  
+  /* Telas pequenas (tablets/celulares) — 100% */
+  @media (max-width: 600px) {
+    body {
+      overflow-x: hidden;
     }
-    .conteudo {
-      margin-left: 0 !important;
-      justify-content: center;
-      align-items: center;
+    .cards-graficos{
+      margin-right: 20%;
     }
+    .cards-container{
+      margin-right: 13%;
+    }
+  
+    .card {
+      flex: 1 1 100%;
+      width: 380px;
+      font-size: 12px;
+
+   
+    }
+  
+    .caixa {
+      width: 330px;
+      height: 280px;
+      
+      
+    }
+
+    .conteudo{
+      margin-right: 20%;
+    }
+ 
   }
