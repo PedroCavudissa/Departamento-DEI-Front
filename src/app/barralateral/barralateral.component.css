@@ -74,7 +74,7 @@
     background-color:#47B5FF;
     width: 99%;
     height: 8%;
-    position: absolute;
+    position: fixed;
     top: 0%;
    
     
@@ -85,6 +85,8 @@
     margin-left: 250px;
   }
   .supbar h2{
+
+   
     color: white;
     text-align: center;
 

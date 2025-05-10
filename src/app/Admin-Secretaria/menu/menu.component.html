@@ -4,33 +4,38 @@
         
         <div class="cards-container">
           <div class="card orange">
-            <h3>Estudantes Matriculados</h3>
+           
+            <a routerLink="/home" >
+              <h3 (click)="verDetalhes('estudantes')"  tabindex="" (keyup)="verDetalhes('')">Estudantes Matriculados</h3>
+               </a>
             <p class="number">95</p>
           </div>
       
           <div class="card blue">
-            <h3>Funcionários</h3>
+            <h3  (click)="verDetalhes('funcionarios')"  tabindex="" (keyup)="verDetalhes('')">Funcionários</h3>
             <p class="number">27</p>
           </div>
       
           <div class="card gray">
-            <h3>Cadeiras</h3>
+            <h3 (click)="verDetalhes('cadeiras')"  tabindex="" (keyup)="verDetalhes('')">Cadeiras</h3>
             <p class="number">52</p>
           </div>
       
           <div class="card yellow">
-            <h3>Salas</h3>
+            <h3 (click)="verDetalhes('salas')"  tabindex="" (keyup)="verDetalhes('')">Salas</h3>
             <p class="number">7</p>
           </div>
         </div>
         <div class="cards-graficos">
             <div class="caixa">
             <h3>Estatística Geral</h3>
+      <canvas id="pie-chart"></canvas>
             
         </div>
         <div class="caixa">
             <h3>Estudantes Matriculados nos Últimos anos</h3>
-            
+      
+<canvas id="bar-chart"></canvas>
         </div>
         </div>
       </main>

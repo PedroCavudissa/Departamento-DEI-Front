@@ -12,7 +12,7 @@ import { LoginComponent } from '../../Admin-Secretaria/login/login.component';
 export class LateralComponent {
   constructor( private router: Router) {}
   titulo = 'Olá, Pedro José Cavudissa' ;
-  menuAtivo: boolean = false;
+  menuAtivo = false;
 
   toggleMenu(): void {
     this.menuAtivo = !this.menuAtivo;
