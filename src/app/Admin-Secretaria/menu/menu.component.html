@@ -1,12 +1,14 @@
 <body>
- 
+  <button (click)="toggleTheme()">Mudar Tema</button>
+
     <main class="conteudo">
         
         <div class="cards-container">
+
           <div class="card orange">
            
             <a routerLink="/home" >
-              <h3 (click)="verDetalhes('estudantes')"  tabindex="" (keyup)="verDetalhes('')">Estudantes Matriculados</h3>
+              <h3 (click)="verDetalhes('estudantes')"  tabindex="" (keyup)="verDetalhes('')">Estudantes </h3>
                </a>
             <p class="number">95</p>
           </div>
@@ -23,7 +25,7 @@
       
           <div class="card yellow">
             <h3 (click)="verDetalhes('salas')"  tabindex="" (keyup)="verDetalhes('')">Salas</h3>
-            <p class="number">7</p>
+            <p class="number">70</p>
           </div>
         </div>
         <div class="cards-graficos">

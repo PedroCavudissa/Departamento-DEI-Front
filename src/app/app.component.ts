@@ -8,7 +8,6 @@ import { LateralComponent } from './Estudante/lateral/lateral.component';
   imports: [RouterOutlet,LateralComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-
 })
 export class AppComponent {
   title = 'DepartamentoDEI';

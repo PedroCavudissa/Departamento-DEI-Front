@@ -1,5 +1,3 @@
-
-
 .card {
     background-color: white;
     border-radius: 8px;
@@ -14,7 +12,6 @@
   }
   .card.blue {
     border-left: 5px solid blue;
-  
   }
   .card h3 {
     font-size: 14px;
@@ -22,20 +19,15 @@
     margin: 0;
    
   }
-  
   .card .number {
     font-size: 32px;
     font-weight: bold;
     margin-top: 8px;
    
   }
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }body {
+body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background: #f4f4f4;
     padding: 20px;
     width: 100%;
     overflow-y: hidden;
@@ -51,8 +43,28 @@
   .results { background:#fff; border-radius:8px; height:200px; }
 
   
-  @media(max-width:768px) {
-    .header-card { width:100%; align-items:flex-start; }
-    .form-search { flex-direction:column; }
-    .form-search select, .form-search input, .form-search button { width:100%; }
+  @media (max-width: 768px) {
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    
+    }
+    .container {
+      margin: 30% auto 0 auto;  /* Centraliza horizontalmente e dá espaço superior */
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80%;
+      overflow-x: hidden;
+      
+    }
+    .results { background: #fff; 
+      border-radius: 8px; padding: 16px;
+       box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+       width: 100%;
+       height: 85%;
   }
+
+  }
+  

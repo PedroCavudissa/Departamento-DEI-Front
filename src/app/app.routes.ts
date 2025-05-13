@@ -9,10 +9,11 @@ import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.com
 import {MenuEstudantesComponent } from './Admin-Secretaria/menu/estudantes/menu-estudantes.component';
 import { DetalhesFuncionariosComponent } from './Admin-Secretaria/menu/detalhes-funcionarios/detalhes-funcionarios.component'; 
 import { DetalhesCadeirasComponent } from './Admin-Secretaria/menu/detalhes-cadeiras/detalhes-cadeiras.component';
-import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
+
 import { ChatComponent } from './Admin-Secretaria/menu/chat/chat.component';
-import { TelaFuncionariosComponent } from './Admin-Secretaria/menu/tela-funcionarios/tela-funcionarios.component';
 import { DetalhesEstudantesComponent } from './Admin-Secretaria/menu/detalhes-estudantes/detalhes-estudantes.component';
+import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
+import { TelaFuncionariosComponent } from './Admin-Secretaria/menu/tela-funcionarios/tela-funcionarios.component';
 
 
 

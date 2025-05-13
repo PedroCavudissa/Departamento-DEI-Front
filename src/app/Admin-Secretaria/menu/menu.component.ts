@@ -1,5 +1,4 @@
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-import { LoginComponent } from '../login/login.component';
 import { Router } from '@angular/router';
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart,ChartConfiguration } from 'chart.js';
@@ -7,7 +6,7 @@ import { Chart,ChartConfiguration } from 'chart.js';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [ BarralateralComponent,LoginComponent],
+  imports: [ BarralateralComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
@@ -29,14 +28,28 @@ export class MenuComponent  implements AfterViewInit{
   ngAfterViewInit(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     new Chart(pieCtx, {
-      type: 'pie',
+      type: 'doughnut',
       data: {
         labels: ['Funcionários', 'Estudantes','Cadeiras','Salas'],
         datasets: [{
-          data: [97, 33,12,34],
+          data: [27, 97,52,70],
           backgroundColor: ['#009cff', 'orange','gray','gold']
         }]
       },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',    
+            align: 'start',
+            labels: {
+              boxWidth: 30,
+              padding: 10
+            }
+          }
+        }
+      }
     
     });
     const barLabels = Object.keys(this.colors);
@@ -46,7 +59,7 @@ export class MenuComponent  implements AfterViewInit{
       data: {
         labels: barLabels,
         datasets: [{
-          data: [10, 208, 18, 15, 101],
+          data: [100, 68, 38, 25, 10],
           backgroundColor: barLabels.map(label => this.colors[label])
         }]
       },  
@@ -89,5 +102,24 @@ export class MenuComponent  implements AfterViewInit{
     
   }
 
+  //Altera Tema
+  ngOnInit(): void {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    }
+  }
+
+  toggleTheme(): void {
+    alert("Fui clicado")
+    const isDark = document.body.classList.contains('dark-theme');
+    if (isDark) {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
  
 }
