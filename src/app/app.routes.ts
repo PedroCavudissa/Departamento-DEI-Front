@@ -7,6 +7,8 @@ import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudant
 import { CadeiraComponent } from './Estudante/Cadeiras/cadeira.component';
 import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.component';
 import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
+import { AprovarComunicadoComponent } from './aprovar-comunicado/aprovar-comunicado.component';
+import { ComunicadoComponent } from './comunicado/comunicado.component';
 
 
 export const routes: Routes = [
@@ -19,4 +21,7 @@ export const routes: Routes = [
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
+  {path:'aprovarComunicado',component:AprovarComunicadoComponent},
+  {path:'comunicado',component:ComunicadoComponent}
 ];
+
