@@ -1,0 +1,69 @@
+<div class="pauta-container"> 
+    <app-barralateral></app-barralateral>
+  
+    <main class="conteudo-exato">
+      <!-- Cabeçalho azul com botão -->
+      <div class="cabecalho-azul"></div>
+  
+      <!-- Título centralizado com caixa azul -->
+      <div class="titulo-caixa">
+        <h1 class="titulo-principal">Aprovar Pauta</h1>
+      </div>
+  
+      <!-- Controles -->
+      <div class="controle-acoes">
+        <div class="seletor-categoria">
+          <label>Selecione a categoria</label>
+          <select [(ngModel)]="categoriaSelecionada">
+            <option>1º ano</option>
+            <option>2º ano</option>
+            <option>3º ano</option>
+            <option>4º ano</option>
+            <option>5º ano</option>
+          </select>
+        </div>
+  
+        <div class="botoes">
+          <button class="btn-azul">Aprovar Pauta</button>
+          <button class="btn-preto" (click)="pedirRevisao()">Pedir Revisão</button>
+        </div>
+      </div>
+  
+      <!-- Informações da cadeira -->
+      <div class="info-cadeira">
+        <strong>Cadeira:</strong> IHC
+        &nbsp;&nbsp;&nbsp;
+        <strong>Docente:</strong> Ms. Panzo Rafael Chiló
+      </div>
+  
+      <!-- Tabela -->
+      <div class="tabela-container">
+        <table class="tabela-pauta">
+          <thead>
+            <tr>
+              <th>NOME</th>
+              <th>AC1</th>
+              <th>AC2</th>
+              <th>PT</th>
+              <th>PE</th>
+              <th>MS</th>
+              <th>RS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let aluno of alunos">
+              <td>{{ aluno.nome }}</td>
+              <td>{{ aluno.ac1 }}</td>
+              <td>{{ aluno.ac2 }}</td>
+              <td>{{ aluno.pt }}</td>
+              <td>{{ aluno.pe }}</td>
+              <td>{{ aluno.ms }}</td>
+              <td>{{ aluno.rs }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  
+  

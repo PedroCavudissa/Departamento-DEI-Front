@@ -1,0 +1,146 @@
+:host {
+  display: flex;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background-color: #007BFF; /* Cor azul mais consistente e acessível */
+  color: white;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+.sidebar img {
+  width: 85%;
+  margin-left: 8%;
+}
+
+.menu-link {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  padding: 12px;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+.menu-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 30px;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #c3d8f1;
+  color: #000;
+}
+
+.supbar {
+  background-color: #007BFF;
+  width: 100%;
+  height: 55px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+}
+
+.supbar h2 {
+  color: white;
+  text-align: center;
+  line-height: 55px;
+  margin: 0;
+}
+
+/* Botão hamburguer */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  position: fixed;
+  top: 10px;
+  left: 15px;
+  z-index: 2000;
+  cursor: pointer;
+  color: white;
+  background-color: #007BFF;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.scroll-container {
+  height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .sidebar {
+    transform: translateX(-150%);
+    top: 55px;
+    left: 0;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .supbar {
+    width: 100%;
+  }
+
+  .scroll-container {
+    height: 500px;
+  }
+}
+
+/* Exibe horário das mensagens */
+.time {
+  font-size: 0.75rem;
+  color: #777;
+  margin-top: 4px;
+  display: block;
+}
+
