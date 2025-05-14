@@ -20,24 +20,11 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-           "assets": [
-  "src/assets",
-  "src/favicon.ico"
-],
+            "assets": [
+              "src/assets"
 
-"styles": [
-
- 
-  "src/styles.css"
-
-
-],
-
-
-
-
-
-
+            ],
+           
             "scripts": []
           },
           "configurations": {
@@ -98,11 +85,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "54b3101e-5ea5-4e1b-9a44-9222f26104a2"
+    "analytics": "54b3101e-5ea5-4e1b-9a44-9222f26104a2",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

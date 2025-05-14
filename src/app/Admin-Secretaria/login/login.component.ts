@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
-import { BarralateralComponent } from "../../barralateral/barralateral.component";
+
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
 
   // Valores válidos (você pode mudar aqui)
-  private emailValido = 'admin@gmail.com';
+  private emailValido = 'admin@teste.com';
   private senhaValida = '123456';
 
 private emailValidos = 'estudante@teste.com';

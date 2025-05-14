@@ -1,5 +1,5 @@
 .container{
-  background-color: #fff8f8;
+  background-color: #f5f5f5;
 }
 .icons span {
 margin-left: 15px;
@@ -14,7 +14,7 @@ border-radius: 10px;
 width: 900px;
 margin-left: 400px;
 height: 550px;
-margin-top: 7%;
+margin: 7% auto 0 auto;
 }
 
 .form-section h2 {
@@ -98,15 +98,15 @@ margin-left: 378px;
 /* Responsividade geral */
 @media (max-width: 768px) {
 .container {
+  margin-top: 50%;
   flex-direction: column;
 }
 
 
-
 .form-section {
+ 
   width: 100%;
   margin: 20px auto;
-  margin-left: 0;
   padding: 10px;
 }
 
@@ -154,13 +154,10 @@ th, td {
 }
 
 .form-section {
-    background-color: #fff;
-    padding: 15px;
-    box-shadow: 2px solid #020f17;
-    border-radius: 10px;
-    width: 370px;
-    margin-left: 40px;
-    height: 550px;
-    margin-top: 20%;
-    }
+  margin-top: 45%;
+  width: 90%;
+  margin: 20% auto;
+  height: auto;
+}
+
 }

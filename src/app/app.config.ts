@@ -1,7 +1,9 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
+
 
 // Definindo o appConfig com o tipo ApplicationConfig corretamente configurado
 export const appConfig: ApplicationConfig = {
