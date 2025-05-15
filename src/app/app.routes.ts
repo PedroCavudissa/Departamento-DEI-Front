@@ -6,9 +6,14 @@ import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudant
 import { CadeiraComponent } from './Estudante/Cadeiras/cadeira.component';
 import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.component';
 import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
+
+import { AprovarComunicadoComponent } from './aprovar-comunicado/aprovar-comunicado.component';
+import { ComunicadoComponent } from './comunicado/comunicado.component';
+
 import { MenuEstudantesComponent } from './Admin-Secretaria/menu/estudantes/menu-estudantes.component';
 import { DetalhesFuncionariosComponent } from './Admin-Secretaria/menu/detalhes-funcionarios/detalhes-funcionarios.component';
 import { DetalhesCadeirasComponent } from './Admin-Secretaria/menu/detalhes-cadeiras/detalhes-cadeiras.component';
+
 
 import { ChatComponent } from './Admin-Secretaria/menu/chat/chat.component';
 import { DetalhesEstudantesComponent } from './Admin-Secretaria/menu/detalhes-estudantes/detalhes-estudantes.component';
@@ -27,6 +32,10 @@ export const routes: Routes = [
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
+
+  {path:'aprovarComunicado',component:AprovarComunicadoComponent},
+  {path:'comunicado',component:ComunicadoComponent}
+
   { path: 'menu-estudantes', component: MenuEstudantesComponent },
   { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent },
   { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent },
@@ -39,4 +48,6 @@ export const routes: Routes = [
   { path: 'tela-funcionarios', component: TelaFuncionariosComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: 'pautas', component: PautaComponent }
+
 ];
+
