@@ -11,7 +11,7 @@ import { LateralComponent } from "../lateral/lateral.component";
   styleUrls: ['./cadeira.component.css'] 
 })
 export class CadeiraComponent {
-  anoSelecionado: number = 1;
+  anoSelecionado = 1;
 
   anosDisponiveis: number[]= [1, 2, 3, 4, 5];
 

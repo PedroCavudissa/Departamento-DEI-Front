@@ -74,7 +74,7 @@
     background-color:#47B5FF;
     width: 99%;
     height: 8%;
-    position: absolute;
+    position: fixed;
     top: 0%;
    
     
@@ -85,6 +85,8 @@
     margin-left: 250px;
   }
   .supbar h2{
+
+   
     color: white;
     text-align: center;
 
@@ -94,14 +96,15 @@
   display: none;
   font-size: 30px;
   position: absolute;
-  top: 0px;
-  left: 15px;
+  top: -3px;
+  left: 4%;
   z-index: 2000;
   cursor: pointer;
   color: white;
   background-color: #47B5FF;
   padding: 8px 12px;
   border-radius: 4px;
+  overflow-y: hidden;
 }
 .sidebar.hidden {
   transform: translateX(-100%);
@@ -109,21 +112,21 @@
 
 .scroll-container {
   height: 600px; 
-  /* 
-  overflow-x: hidden; /* oculta a barra de rolagem horizontal */
-}
-  /*RESPONSIVIDADE*/
+  overflow-y:auto;} 
+
 /* TELAS ATÉ 1200px */
-@media (max-width: 1200px) {
+@media (max-width: 1500px) {
   .hamburger {
     display: block;
     position: fixed;
+
   }
 
   .sidebar {
     transform: translateX(-150%);
     transition: transform 0.3s ease;
-    width: 200px;
+    width: 15%;
+    height: 100%;
     background-color: #47B5FF;
     color: white;
     padding: 10px;
@@ -149,8 +152,12 @@
   }
 }
 
-/* TELAS ATÉ 600px */
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
+  .hamburger {
+   
+
+  }
   .supbar {
     width: 100%;
     margin-left: -10px;

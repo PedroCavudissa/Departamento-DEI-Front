@@ -1,7 +1,8 @@
 <!--Barra -Superior-->
-<div class="hamburger" (click)="toggleMenu()">☰</div>
+<div class="hamburger" (click)="toggleMenu()" tabindex="0" (keyup.enter)="toggleMenu()">☰</div>
 <div class="supbar">
   <h2 id="nome">{{titulo}}</h2>
+  <div ></div>
 </div>
 <!-- Barra-Lateral -->
 <nav class="sidebar" [class.active]="menuAtivo">
@@ -9,38 +10,37 @@
     <h2>Dashboard</h2>
     <ul>
         <div class="scroll-container">
- <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/prof.png" alt="Ícone">
-  <span (click)="selecionarMenu('Dados Gerais','Dados Gerais')">Geral</span> </a></li>
+ <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/home.png" alt="Ícone">
+  <span (click)="selecionarMenu('Dados Gerais','Dados Gerais')" tabindex="0" (keydown)="selecionarMenu('','')">Geral</span> </a></li>
 
   <li><a routerLink="/home" class="menu-link"> <img src="assets/icones/aluno.png" alt="Ícone">
-   <span (click)="selecionarMenu('Estudantes','Estudantes')" >Estudantes</span></a> </li>
+   <span (click)="selecionarMenu('Estudantes','Estudantes')"tabindex="0" (keyup.enter)="selecionarMenu('','')" >Estudantes</span></a> </li>
    
-   <li><a routerLink="/home" class="menu-link"> <img src="assets/icones/aluno.png" alt="Ícone">
-     <span (click)="selecionarMenu('Funcionários','Funcionários')">Funcionários</span> </a> </li>
+   <li><a routerLink="/home" class="menu-link"> <img src="assets/icones/prof.png" alt="Ícone">
+     <span (click)="selecionarMenu('Funcionários','Funcionários')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Funcionários</span> </a> </li>
             
   <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/matricula.png" alt="Ícone">
-    <span (click)="selecionarMenu('Matrículas','Matrículas')">Matrículas</span></a></li>
-    
+    <span (click)="selecionarMenu('Matrículas','Matrículas')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Matrículas</span></a></li>
   <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/book.png" alt="Ícone">
-     <span  (click)="selecionarMenu('Disciplinas','Disciplinas')">Disciplinas</span> </a> </li>
+     <span  (click)="selecionarMenu('Disciplinas','Disciplinas')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Disciplinas</span> </a> </li>
              
    <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/hora.png" alt="Ícone">
-     <span (click)="selecionarMenu('Horários','Horários')">Horários</span> </a></li>
+     <span (click)="selecionarMenu('Horários','Horários')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Horários</span> </a></li>
              
      <li><a routerLink="/home" class="menu-link"><img src="assets/icones/cale.png" alt="Ícone">
-       <span (click)="selecionarMenu('Calendário','Calendário')">Calendário</span></a></li>
+       <span (click)="selecionarMenu('Calendário','Calendário')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Calendário</span></a></li>
             
       <li> <a routerLink="/home" class="menu-link"> <img src="assets/icones/mensagem.png" alt="Ícone">
-     <span (click)="selecionarMenu('Chat','Chat')">Chat</span></a> </li>
+     <span (click)="selecionarMenu('Chat','Chat')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Chat</span></a> </li>
             
      <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/comunicado.png" alt="Ícone">
-       <span (click)="selecionarMenu('Comunicados','Comunicados')">Comunicados</span></a></li>
+       <span (click)="selecionarMenu('Comunicados','Comunicados')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Comunicados</span></a></li>
             
        <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/conf.png" alt="Ícone">
-     <span (click)="selecionarMenu('Definições','Definições')">Definições</span> </a> </li>
+     <span (click)="selecionarMenu('Definições','Definições')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Definições</span> </a> </li>
      
-    <li> <a routerLink="/home" class="menu-link"><img src="assets/icones/sair.png" alt="Ícone">
-      <span (click)="selecionarMenu('Sair','')">Sair</span> </a> </li>
+    <li> <a routerLink="/home" class="menu-link" tabindex="0" (keyup.enter)="selecionarMenu('','')"><img src="assets/icones/sair.png" alt="Ícone">
+      <span (click)="selecionarMenu('Sair','')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Sair</span> </a> </li>
      </div>  
         </ul>
       

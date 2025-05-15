@@ -1,0 +1,24 @@
+<div class="titulo-container">
+  <h2 class="titulo">Calendário de Actividades</h2>
+</div>
+
+<div class="quadro">
+  <a class="ver-provas" href="/calendario/provas">Ver Calendário de Provas</a>
+  <button class="botao" (click)="toggleFormulario()">Adicionar Evento</button>
+  
+  <ul class="lista-eventos">
+    <li *ngFor="let evento of eventos">
+      <strong>{{ evento.data }}</strong> — {{ evento.titulo }}
+      <a *ngIf="evento.link" [href]="evento.link" target="_blank">Mais informações</a>
+    </li>
+  </ul>
+
+</div>
+
+
+<app-adicionar-evento
+  *ngIf="mostrarFormulario"
+  (submitEvento)="adicionarEvento($event)"
+  (fechar)="mostrarFormulario = false">
+</app-adicionar-evento>
+<app-barralateral></app-barralateral>

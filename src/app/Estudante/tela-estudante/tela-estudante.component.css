@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #fff8f8;
+  background-color: #f5f5f5;
   font-family: Arial, sans-serif;
 }
 
@@ -14,7 +14,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
+  min-height: 100vh; /* centraliza verticalmente */
+  padding: 20px;
 }
 
 /* Card base */
@@ -22,14 +23,14 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: white;
-  padding: 30px;
+  background-color:#fff;
   border-radius: 12px;
-  width: 500px;
-  height: auto;
-  gap: 20px;
+  width: 90%;
+  max-width: 500px; /* limite máximo para não estourar */
   border: 2px solid black;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  gap: 20px;
 }
 
 /* Imagem */
@@ -64,54 +65,27 @@ body {
 
 /* RESPONSIVIDADE */
 
-/* Telas médias (até 1200px) */
-@media (max-width: 1200px) {
+/* Telas médias e pequenas */
+@media (max-width: 768px) {
   .card {
-    width: 90%;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
+    text-align: center;
     padding: 20px;
+    width: 100%;
   }
 
   .card img {
     width: 120px;
     height: 120px;
+    margin-bottom: 15px;
   }
 
   .aluno-dados {
+    margin-top: 10px;
     font-size: 15px;
   }
 
   .card h3 {
     font-size: 18px;
-  }
-}
-
-/* Telas pequenas (até 600px) */
-@media (max-width: 600px) {
-  .container {
-    margin-top: 100px;
-    padding: 10px;
-  }
-
-  .card {
-    flex-direction: column;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-  }
-
-  .card img {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 15px;
-  }
-
-  .aluno-dados {
-    font-size: 15px;
-  }
-
-  .card h3 {
-    font-size: 16px;
   }
 }

@@ -2,12 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #fff8f8;
+  background-color: #f4f4f4;
   overflow-x: hidden;
+  width: 100%;  
+  height: 100%;
 }
 
 .layout {
@@ -103,11 +106,12 @@ table td {
 }
 
 /* Até 600px: barra lateral oculta por padrão, conteúdo 100% */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
  
   .principal{
-    margin-top: 150px;
-    margin-left: 25px;
+   width: 90%;
+    margin: 50% auto;
+    height: auto;
   }
 
   .caixa button,
