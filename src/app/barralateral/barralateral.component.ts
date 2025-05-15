@@ -48,7 +48,13 @@ export class BarralateralComponent {
                 break;}
 
                 
+                case 'Calendário':
+                {this.router.navigate(['/calendario']);
+                break;}
                 
+                case 'Matrículas':
+                {this.router.navigate(['/pautas']);
+                break;}
 
         case 'Sair':
          { const confirmacao = window.confirm('Tem certeza que deseja sair?');
