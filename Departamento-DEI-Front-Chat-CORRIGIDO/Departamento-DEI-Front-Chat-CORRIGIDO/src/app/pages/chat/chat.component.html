@@ -1,0 +1,19 @@
+<div class="chat-layout">
+  <app-barralateral></app-barralateral>
+  <div class="chat-area">
+    <div class="chat-header">
+      <h2>Conversa com o Funcionário</h2>
+      <button class="clear-btn" (click)="limparMensagens()">Limpar mensagens</button>
+    </div>
+    <div class="chat-messages">
+      <div *ngFor="let msg of messages" [ngClass]="msg.from">
+        <span>{{ msg.text }}</span>
+      </div>
+    </div>
+    <div class="chat-input">
+      <input [(ngModel)]="newMessage" placeholder="Digite sua mensagem..." (keyup.enter)="sendMessage()" />
+      <button class="send-btn" (click)="sendMessage()">Enviar</button>
+    </div>
+  </div>
+</div>
+
