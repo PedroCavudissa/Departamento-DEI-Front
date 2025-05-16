@@ -38,6 +38,20 @@ export class MenuEstudantesComponent implements AfterViewInit {
           },
         ],
       },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              boxWidth: 30,
+              padding: 10,
+            },
+          },
+        },
+      },
     });
 
     const barLabels = Object.keys(this.colors);
@@ -72,8 +86,6 @@ export class MenuEstudantesComponent implements AfterViewInit {
       '2º Ano': '#009cff',
       '1º Ano': '#009cff',
     };
-
-    // Criar legenda customizada
 
     // Criar gráfico de barras horizontais
     const ctx = document.getElementById('horizontal-bar') as HTMLCanvasElement;

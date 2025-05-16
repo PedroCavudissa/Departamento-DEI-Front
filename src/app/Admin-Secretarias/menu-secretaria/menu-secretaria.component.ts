@@ -102,14 +102,6 @@ export class MenuSecretariaComponent implements AfterViewInit {
     }
   }
 
-  //Altera Tema
-  ngOnInit(): void {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-    }
-  }
-
   toggleTheme(): void {
     alert('Fui clicado');
     const isDark = document.body.classList.contains('dark-theme');

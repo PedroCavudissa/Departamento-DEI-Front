@@ -37,6 +37,19 @@ export class MenuEstudantesSecretariaComponent implements AfterViewInit {
             backgroundColor: ['#009cff', '#ff9400'],
           },
         ],
+      },  options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              boxWidth: 30,
+              padding: 10,
+            },
+          },
+        },
       },
     });
 
