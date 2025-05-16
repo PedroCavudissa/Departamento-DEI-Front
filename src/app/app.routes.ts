@@ -31,6 +31,7 @@ import { MaisDetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/m
 import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/estudantes-secretaria/menu-estudantes-secretaria.component';
 import { PautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/pauta-secretaria/pauta.component';
 import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
+import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
@@ -59,11 +60,11 @@ export const routes: Routes = [
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
-
+  { path: 'perfil-estudante', component: PerfilEstudanteComponent  },
     //Rotas para os Professores
   { path: 'tela-professor', component: TelaProfessorComponent },
   { path: 'dado-professor', component: DadoProfessorComponent },
-  { path: 'perfil-professor', component: PerfilProfessorComponent },
+  { path: 'perfil-professor', component: PerfilProfessorComponent},
 
   //Rotas para as Secretárias
   { path: 'menu-secretaria', component: MenuSecretariaComponent },

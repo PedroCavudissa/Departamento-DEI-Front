@@ -38,6 +38,11 @@ export class LateralComponent {
         this.router.navigate(['/tela-notas']);
         break;
       }
+
+      case 'Perfil': {
+        this.router.navigate(['/perfil-estudante']);
+        break;
+      }
       case 'Sair': {
         const confirmacao = window.confirm('Tem certeza que deseja sair?');
         if (confirmacao) {

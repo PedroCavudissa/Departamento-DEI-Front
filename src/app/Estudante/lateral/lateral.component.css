@@ -119,6 +119,7 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
 .icon {
   text-align: center;
   position: relative;
+  cursor: pointer;
   
 }
 
