@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 
 @Component({
@@ -10,10 +11,19 @@ import { BarralateralComponent } from '../../barralateral/barralateral.component
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
-  recipient: string = 'Ma. Panso Rafael Child';
-  subject: string = 'Revisão de Pauta >';
+export class ChatComponent implements OnInit {
+  recipient: string = '';
+  subject: string = '';
   description: string = '';
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.recipient = params['destinatario'] || '';
+      this.subject = params['assunto'] || '';
+    });
+  }
 
   sendMessage() {
     if (this.description.trim()) {

@@ -1,13 +1,16 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './pages/login/login.component';
 
+// Definindo o appConfig com o tipo ApplicationConfig corretamente configurado
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
-    provideClientHydration()
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes)
   ]
 };
+
 
 

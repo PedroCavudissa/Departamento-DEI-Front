@@ -8,20 +8,14 @@
 /* Sidebar */
 .sidebar {
   width: 200px;
-  background-color: #007BFF; /* Cor azul mais consistente e acessível */
+  background-color: #3aaaf3;
   color: white;
   padding: 10px;
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
   z-index: 1000;
-}
-
-.sidebar.hidden {
-  transform: translateX(-100%);
 }
 
 .sidebar img {
@@ -74,7 +68,7 @@
 }
 
 .supbar {
-  background-color: #007BFF;
+  background-color: #3aaaf3;
   width: 100%;
   height: 55px;
   position: fixed;
@@ -90,50 +84,10 @@
   margin: 0;
 }
 
-/* Botão hamburguer */
-.hamburger {
-  display: none;
-  font-size: 30px;
-  position: fixed;
-  top: 10px;
-  left: 15px;
-  z-index: 2000;
-  cursor: pointer;
-  color: white;
-  background-color: #007BFF;
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-
 .scroll-container {
   height: 600px;
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-  }
-
-  .sidebar {
-    transform: translateX(-150%);
-    top: 55px;
-    left: 0;
-  }
-
-  .sidebar.active {
-    transform: translateX(0);
-  }
-
-  .supbar {
-    width: 100%;
-  }
-
-  .scroll-container {
-    height: 500px;
-  }
 }
 
 /* Exibe horário das mensagens */
@@ -144,3 +98,4 @@
   display: block;
 }
 
+/* Removido comportamento responsivo de menu suspenso */

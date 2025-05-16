@@ -10,14 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class BarralateralComponent {
   titulo = 'Dados Gerais';
-  menuAtivo: boolean = false;
-
-  toggleMenu(): void {
-    this.menuAtivo = !this.menuAtivo;
-  }
 
   selecionarMenu(novoTitulo: string) {
     this.titulo = novoTitulo;
-    this.menuAtivo = false;
   }
 }
