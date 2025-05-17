@@ -32,6 +32,8 @@ import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secr
 import { PautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/pauta-secretaria/pauta.component';
 import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
 import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
+import { AlterarSenhaComponent } from './alterar-senha/alterar-senha.component';
+import { DadosPessoaisComponent } from './dados-pessoais/dados-pessoais.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
@@ -45,8 +47,9 @@ export const routes: Routes = [
   { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent },
   { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent },
   { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent },
-  {
-    path: 'mais-detalhes-estudantes',
+  { path: 'dados-pessoais', component: DadosPessoaisComponent },
+  { path: 'alterar-senha', component: AlterarSenhaComponent },
+  {path: 'mais-detalhes-estudantes',
     component: MaisDetalhesEstudantesComponent,
   },
   { path: 'aprovar-comunicado', component: AprovarComunicadoComponent },
