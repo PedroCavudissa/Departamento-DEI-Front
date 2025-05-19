@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BarralateralComponent } from "../barralateral/barralateral.component";
+import { LateralProfessorComponent } from '../Professor/lateral-professor/lateral-professor.component';
 
 @Component({
   selector: 'app-horarios',
-  imports: [BarralateralComponent],
+  imports: [LateralProfessorComponent],
   templateUrl: './horarios.component.html',
   styleUrl: './horarios.component.css'
 })

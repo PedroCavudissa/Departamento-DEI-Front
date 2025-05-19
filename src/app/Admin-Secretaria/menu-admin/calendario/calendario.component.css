@@ -1,0 +1,176 @@
+/* formataçao do titulo e conteudo principal*/
+.titulo-container {
+  width: 100%;
+  text-align: center;
+  background-color: #44b1f0; 
+  padding: 12px 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: 670px; 
+  margin-top: 150px;
+  max-width: 350px; 
+  position: relative;
+}
+
+.titulo {
+  color: #ffffff;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.quadro {
+  width: 600px; 
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  position: relative;
+  margin-left: 550px; 
+  margin-top: 40px;
+  margin-right: 20rem;
+  border: 1px solid #333;
+}
+
+.quadro .ver-provas a {
+  margin: 10px 0;
+  color: #444;
+  font-size: 16px;
+}
+
+.ver-provas {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ver-provas:hover {
+  text-decoration: underline;
+}
+
+
+.botao {
+  margin-top: 5px;
+  padding: 12px 24px;
+  background-color: #44b1f0;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute;
+  top: 2px;  
+  right: 10px;   
+}
+
+.botao:hover {
+  background-color: #3498db;
+}
+
+/* formataçao do formulário */
+.form-container {
+  width: 300px;
+  margin: 20px auto;
+  margin-right: 20rem;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  position: relative;
+  background-color: white;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 4px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.btn-salvar {
+  margin-top: 16px;
+  background-color: #4db8ff;
+  color: white;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: #4db8ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+/* Efeito de desfoque e opacidade no fundo quando o formulário está ativo */
+.blur {
+  filter: blur(4px);
+  opacity: 0.4;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+/* Sobreposição escura por trás do formulário */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sobrescreve form-container apenas quando for modal */
+.overlay .form-container {
+  position: relative;
+  z-index: 1001;
+  margin: 0; 
+}
+
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .titulo-container,
+  .quadro {
+    width: 90%;
+    margin: 70px auto;
+  }
+
+  .botao {
+    width: 40%;
+    position: static;
+    display: block;
+    margin: 10px 0 20px auto;
+  }
+}
