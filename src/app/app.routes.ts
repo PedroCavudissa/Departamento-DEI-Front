@@ -14,6 +14,7 @@ import { ChatComponent } from './Admin-Secretaria/menu/chat/chat.component';
 import { DetalhesEstudantesComponent } from './Admin-Secretaria/menu/detalhes-estudantes/detalhes-estudantes.component';
 import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
 import { TelaFuncionariosComponent } from './Admin-Secretaria/menu/tela-funcionarios/tela-funcionarios.component';
+import { HorariosComponent } from './horarios/horarios.component';
 
 
 
@@ -33,6 +34,6 @@ export const routes: Routes = [
   {path:'detalhes-estudantes', component: DetalhesEstudantesComponent},
   {path:'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent},
   {path:'chat', component: ChatComponent},
-  {path:'tela-funcionarios', component: TelaFuncionariosComponent}
-
+  {path:'tela-funcionarios', component: TelaFuncionariosComponent},
+  {path:'horarios', component: HorariosComponent},
 ];

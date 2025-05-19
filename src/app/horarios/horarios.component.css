@@ -1,0 +1,46 @@
+#selecao
+{
+   width: 200px;
+   background-color: #ffff; 
+   padding: 15px 20px;
+   margin-top: 80px; 
+   border-radius: 4px;
+}
+#conteiner
+{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    height: 100px;
+    gap: 20px;
+    justify-content: center;
+    left: 500px;
+}
+#horario
+{
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+    background-color: #f7f7f7;
+    width: 700px;
+    height: 380px;
+    position: absolute;
+    left: 255px;
+    border-radius: 4px;
+}
+#foto
+{
+    width: 700px;
+    height: 380px;
+    border-radius: 4px;
+}
+#logo
+{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 1070px;
+    margin: 20px;
+    margin-top: -150px;
+}
