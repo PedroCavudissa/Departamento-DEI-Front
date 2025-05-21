@@ -32,6 +32,7 @@ import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secr
 import { PautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/pauta-secretaria/pauta.component';
 import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
 import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
+import { HorariosComponent } from './horarios/horarios.component';
 
 
 export const routes: Routes = [
@@ -80,5 +81,5 @@ export const routes: Routes = [
   { path: 'estudantes-secretaria', component: MenuEstudantesSecretariaComponent },
   { path: 'pauta-secretaria', component: PautaSecretariaComponent },
   { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent },
-
+  { path: 'horarios', component: HorariosComponent},
 ];
