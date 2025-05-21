@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .odete{
+    color:slateblue ;
+}
+  
+  .card {
+    background: #fff;
+    border-radius: 22px;
+    padding: 19px;
+    width: 450px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+
+     
+  
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    
+    max-width: 400px;
+   
+  }
+
+  .card h3 {
+    text-align: center;
+   
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+     width: 100%;
+    
+  }
+
+  .buttons button {
+    padding: 9px 9px;
+    border: none;
+    border-radius: 8px;
+    background-color:  #47B5FF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: background-color 0.3s;
+     width: 100%;
+    max-width: 200px;
+
+      }
+
+  .buttons button:hover {
+    background-color: #0056b3;
+  }
+
+    @media (max-width: 768px) {
+.card {
+  flex-direction: column;
+  padding: 20px;
+  width: 300px;
+}
+
+.card h3 {
+  font-size: 18px;
+}
+   .form-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .form-group label {
+      width: 70%;
+      margin-bottom: 5px;
+    }
+
+    .button {
+      width: 90%;
+    }
+}
+ .erro {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Estilo do modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+}
+
+.modal-conteudo {
+  background-color: white;
+  
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-botoes button {
+  padding: 4px;    
+  margin: 10px;
+ background-color:  #47B5FF;
+}

@@ -1,0 +1,77 @@
+<body>
+
+  <div class="login-container">
+      <div class="login-box">
+          <img src="assets/imagens/logo-feuan.png" alt="logitipo">
+          <p>Faculdade de Enegenharia <br>
+          Departamento de informática <br> <br></p>
+          <h2>Faça Login</h2>
+
+          <form [formGroup]="loginForm" (ngSubmit)="entrar()">
+
+              <div class="input-group">
+                      <label for="username">Email</label>
+                  <input type="email"  formControlName="username" placeholder="Digite seu email" >
+                   <div class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')">
+                          Este campo é obrigatório!
+                   </div>
+
+              </div>
+
+              <div class="input-group">
+                 <label for="password">Senha</label>      
+                  <input type="password" id="password" formControlName="password" placeholder="Digite sua senha" >
+                  <div class="error-message" id="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
+                        Este campo é obrigatório!
+                  </div>
+
+          </div>
+              <div class="input-group">
+                  
+                  <button  class="btn" (click)="entrar()">
+                      <img src="assets/icones/entrar.png" alt="">
+                      Entrar</button>
+
+              </div>         
+          </form>
+
+       
+                  <div class="mensagem-login" *ngIf="mensagemLogin" [ngClass]="tipoMensagem">
+                      {{ mensagemLogin }}
+                  </div>
+
+                  <div class="esqueci-senha">
+                      <a href="#" (click)="abrirModal($event)">Esqueci a senha</a>
+                  </div>
+
+              </div>         
+       
+
+
+
+<!-- Modal Esqueci a Senha -->
+<div class="modal-overlay" *ngIf="mostrarModal">
+<div class="modal">
+  
+  <p>Digite seu Email Para Continuar!</p>
+
+  <form [formGroup]="recuperarForm" (ngSubmit)="continuarRecuperacao()">
+    <input type="email" formControlName="gmail" placeholder="Digite seu Gmail" />
+    <div class="error-message" *ngIf="recuperarForm.get('gmail')?.touched && recuperarForm.get('gmail')?.hasError('required')">
+      O Email é obrigatório!
+    </div>
+    <div class="error-message" *ngIf="recuperarForm.get('gmail')?.touched && recuperarForm.get('gmail')?.hasError('email')">
+      Email inválido!
+    </div>
+
+    <div class="modal-buttons">
+      <button type="button" (click)="fecharModal()">Cancelar</button>
+      <button type="submit">Continuar</button>
+    </div>
+  </form>
+</div>
+</div>
+
+
+      </div>
+</body>
