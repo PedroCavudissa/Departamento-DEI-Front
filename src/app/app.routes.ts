@@ -59,19 +59,14 @@ export const routes: Routes = [
   { path: 'tela-estudante', component: TelaEstudanteComponent },
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
-<<<<<<< HEAD
-  { path: 'confirmacao2', component: Confirmacao2Component }
 
 
-=========
-=======
   { path: 'confirmacao2', component: Confirmacao2Component },
   { path: 'perfil-estudante', component: PerfilEstudanteComponent  },
     //Rotas para os Professores
   { path: 'tela-professor', component: TelaProfessorComponent },
   { path: 'dado-professor', component: DadoProfessorComponent },
   { path: 'perfil-professor', component: PerfilProfessorComponent},
->>>>>>> Dev
 
   //Rotas para as Secretárias
   { path: 'menu-secretaria', component: MenuSecretariaComponent },
