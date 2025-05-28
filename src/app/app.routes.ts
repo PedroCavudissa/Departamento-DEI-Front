@@ -38,7 +38,7 @@ export const routes: Routes = [
 
   //Rotas para o Admin-Master(Acesso Geral)
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuAdminComponent },
+  { path: 'menu-admin', component: MenuAdminComponent },
   { path: 'aprovarComunicado', component: AprovarComunicadoComponent },
   { path: 'comunicado', component: ComunicadoComponent },
   { path: 'menu-estudantes', component: MenuEstudantesComponent },

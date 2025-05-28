@@ -1,13 +1,13 @@
-import { BarralateralComponent } from '../barralateral/barralateral.component';
+
 import { Router } from '@angular/router';
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
-import { BarralateralSecretariaComponent } from "../../Admin-Secretarias/barralateral-secretaria/barralateral-secretaria.component";
+import { BarralateralComponent } from "../barralateral/barralateral.component";
 
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
-  imports: [BarralateralComponent, BarralateralSecretariaComponent],
+  imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
 })

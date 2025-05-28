@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-<<<<<<< HEAD:src/app/components/calendario/calendario.component.ts
-=======
+
 import { BarralateralComponent } from "../../barralateral/barralateral.component";
->>>>>>> Dev:src/app/Admin-Secretaria/menu-admin/calendario/calendario.component.ts
 
 interface Evento {
   data: string;
@@ -16,11 +14,8 @@ interface Evento {
 @Component({
   selector: 'app-calendario',
   standalone: true,
-<<<<<<< HEAD:src/app/components/calendario/calendario.component.ts
-  imports: [CommonModule, FormsModule],
-=======
+
   imports: [CommonModule, FormsModule, BarralateralComponent],
->>>>>>> Dev:src/app/Admin-Secretaria/menu-admin/calendario/calendario.component.ts
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
@@ -33,11 +28,7 @@ export class CalendarioComponent {
   tipo ='';
   link?= '';
 
-  // Dados do novo evento 
-  data: string = '';
-  titulo: string = '';
-  tipo: string = '';
-  link?: string = '';
+ 
 
   eventos: Evento[] = [
     {
@@ -77,17 +68,10 @@ fecharFormulario() {
     this.eventos.push(novoEvento);
     this.mostrarFormulario = false;
     this.limparCampos();
-<<<<<<< HEAD:src/app/components/calendario/calendario.component.ts
+
   }
 
-  limparCampos() {
-    this.data = '';
-    this.titulo = '';
-    this.tipo = '';
-    this.link = '';
-=======
->>>>>>> Dev:src/app/Admin-Secretaria/menu-admin/calendario/calendario.component.ts
-  }
+
 
   limparCampos() {
     this.data = '';

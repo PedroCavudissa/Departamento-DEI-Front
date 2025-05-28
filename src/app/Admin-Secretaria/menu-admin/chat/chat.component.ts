@@ -12,24 +12,12 @@ import { BarralateralComponent } from '../../barralateral/barralateral.component
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
-<<<<<<< HEAD:Departamento-DEI-Front-Chat-CORRIGIDO/src/app/pages/chat/chat.component.ts
-  recipient: string = '';
-  subject: string = '';
-  description: string = '';
-=======
+
   recipient = '';
   subject = '';
   description = '';
 
-  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.recipient = params['destinatario'] || '';
-      this.subject = params['assunto'] || '';
-    });
-  }
->>>>>>> Dev:src/app/Admin-Secretaria/menu-admin/chat/chat.component.ts
 
   constructor(private route: ActivatedRoute) {}
 

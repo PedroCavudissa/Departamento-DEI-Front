@@ -99,7 +99,7 @@ continuarRecuperacao() {
         this.router.navigate(['/tela-professor']);
       }else if(emailDigitado==this.emailValidAdmin &&  senhaDigitada==this.senhaValidAdmin){
         alert("Login Realizado Com Sucesso"+"Admin");
-        this.router.navigate(['/menu']);
+        this.router.navigate(['/menu-admin']);
       }
       else
       {
