@@ -22,13 +22,11 @@ interface Evento {
 export class CalendarioComponent {
   mostrarFormulario = false;
 
-  // Dados do novo evento 
-  data= '';
-  titulo= '';
-  tipo ='';
-  link?= '';
-
- 
+  // Dados do novo evento
+  data = '';
+  titulo = '';
+  tipo = '';
+  link? = '';
 
   eventos: Evento[] = [
     {
@@ -48,9 +46,10 @@ export class CalendarioComponent {
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;
   }
-fecharFormulario() {
-  this.mostrarFormulario = false;
-}
+
+  fecharFormulario() {
+    this.mostrarFormulario = false;
+  }
 
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
@@ -68,12 +67,9 @@ fecharFormulario() {
     this.eventos.push(novoEvento);
     this.mostrarFormulario = false;
     this.limparCampos();
+ }
 
-  }
-
-
-
-  limparCampos() {
+limparCampos() {
     this.data = '';
     this.titulo = '';
     this.tipo = '';
