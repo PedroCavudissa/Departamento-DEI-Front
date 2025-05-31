@@ -38,9 +38,18 @@ export class LateralComponent {
         this.router.navigate(['/tela-notas']);
         break;
       }
+      case 'Horários': {
+        this.router.navigate(['/horario-estudante']);
+        break;
+      }
 
       case 'Perfil': {
         this.router.navigate(['/perfil-estudante']);
+        break;
+      }
+
+      case 'Chat': {
+        this.router.navigate(['/chat-estudante']);
         break;
       }
       case 'Sair': {

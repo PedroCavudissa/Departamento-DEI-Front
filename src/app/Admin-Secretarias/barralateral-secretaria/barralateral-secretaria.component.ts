@@ -54,7 +54,11 @@ export class BarralateralSecretariaComponent {
                 break;}
                 
                 case 'Pautas':
-                {this.router.navigate(['/pautas-secretaria']);
+                {this.router.navigate(['/ver-pauta-secretaria']);
+                break;}
+                   
+                case 'Horários':
+                {this.router.navigate(['/horario-secretaria']);
                 break;}
 
                 case 'Comunicados':
