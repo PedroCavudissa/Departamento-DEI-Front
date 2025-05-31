@@ -1,5 +1,8 @@
 
-
+*{
+  margin: 0;
+  padding: 0;
+}
 .card {
     background-color: white;
     border-radius: 8px;
@@ -29,19 +32,15 @@
     margin-top: 8px;
    
   }
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }body {
+body {
     font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    background: #f4f4f4;
     padding: 20px;
     width: 100%;
     overflow-y: hidden;
+    height: 100vh;
   }
   .container { max-width:1000px; margin:0 auto;margin-top: 7%; margin-left: 22%;}
-  
   h2 { margin:24px 0 12px; font-size:16px; text-transform:uppercase; color:#333; }
   .form-search { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
   .form-search select, .form-search input { flex:1; min-width:120px; padding:8px 12px; font-size:14px; border:1px solid #ccc; border-radius:4px; }
@@ -58,7 +57,7 @@
     
     }
     .container {
-      margin: 30% auto 0 auto;  /* Centraliza horizontalmente e dá espaço superior */
+      margin: 30% auto 0 auto;  
       padding: 20px;
       display: flex;
       flex-direction: column;

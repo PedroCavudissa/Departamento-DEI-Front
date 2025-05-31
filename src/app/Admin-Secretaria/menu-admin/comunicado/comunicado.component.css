@@ -24,12 +24,13 @@ body, html{
      
 }
 .main{ 
-    width: 100%;  
+    width: 80%;  
     min-height: 400px;
     padding: 20px;  
        margin-top: 20px;
        border: 1px solid rgba(179, 179, 179, 0.521);
          border-radius: 6px;
+         margin-left: 140px;
  
 }
 

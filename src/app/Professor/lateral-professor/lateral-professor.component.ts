@@ -30,6 +30,15 @@ export class LateralProfessorComponent {
         case 'Perfil':
           {this.router.navigate(['dado-professor']);
           break;}
+          case 'Horários':
+            {this.router.navigate(['horario-professor']);
+            break;}
+            case 'Chat':
+              {this.router.navigate(['chat-professor']);
+              break;}
+             
+           
+           
          
       
         case 'Sair':

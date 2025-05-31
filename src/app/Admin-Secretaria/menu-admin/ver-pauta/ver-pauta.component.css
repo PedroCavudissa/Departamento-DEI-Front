@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  .pauta-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin-top: 100px;
+  }
+  
+  .conteudo-exato {
+    flex: 1;
+    margin-left: 200px;
+    background-color: white;
+    padding-bottom: 40px;
+  
+  }
+  
+  
+  
+  .btn-principal {
+    background-color: white;
+    color: #3aaaf3;
+    border: none;
+    padding: 0.6rem 1.8rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .btn-principal:hover {
+    background-color: #e4f1fc;
+  }
+  
+  /* Título */
+  .titulo-caixa {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0 1.5rem;
+  }
+  
+  
+  
+  /* Controles */
+  .controle-acoes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .seletor-categoria label {
+    display: block;
+    margin-bottom: 5px;
+    color: #444;
+  }
+  
+  .seletor-categoria select {
+    padding: 6px;
+    min-width: 180px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .botoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .btn-azul {
+    background-color: #3aaaf3;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .btn-azul:hover {
+    background-color: #1e8edf;
+  }
+  
+  .btn-preto {
+    background-color: black;
+    color: white;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Info cadeira */
+  .info-cadeira {
+    padding: 0 2rem;
+    margin-bottom: 15px;
+    color: #444;
+  }
+  
+  /* Tabela */
+  .tabela-container {
+    padding: 0 2rem 2.5rem;
+    overflow-x: auto;
+  }
+  
+  .tabela-pauta {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  
+  .tabela-pauta th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .tabela-pauta td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  /* RESPONSIVIDADE */
+  @media (max-width: 1024px) {
+    .conteudo-exato {
+      margin-left: 0;
+    }
+  
+    .controle-acoes {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  
+    .btn-principal {
+      font-size: 0.95rem;
+      padding: 0.5rem 1.2rem;
+    }
+  
+    .titulo-principal {
+      font-size: 1.1rem;
+      padding: 0.7rem 1.5rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .titulo-principal {
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+    }
+  
+    .btn-principal, .btn-azul, .btn-preto {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .seletor-categoria select {
+      width: 100%;
+    }
+  
+    .botoes {
+      width: 100%;
+      flex-direction: column;
+    }
+  
+    .info-cadeira {
+      margin-left: 0;
+    }
+  }
+  

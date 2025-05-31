@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+  }
+  
+  .main-wrapper {
+    margin-left: 169px;
+    width: calc(100% - 169px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 50px;
+  }
+  
+  .main {
+    margin: 50px auto;
+    width: 60%;
+    min-height: 400px;
+    padding: 20px;
+    border: 1px solid rgba(179, 179, 179, 0.521);
+    border-radius: 6px;
+    background-color: white;
+  }
+  
+  .texto {
+    background-color: #0d91f7;
+    text-align: center;
+    margin: 30px auto;
+    padding: 12px 40px;
+    border-radius: 30px;
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  
+  .main > .caixa {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 8px 20px;
+    margin: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  
+  .btn-azul {
+    background-color: #0d91f7;
+    color: white;
+    border: none;
+  }
+  
+  .btn-preto {
+    background-color: black;
+    color: white;
+    border: none;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 20px;
+    border-radius: 6px;
+    resize: vertical;
+  }
+  
+  input, select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 100%;
+    margin: 5px 0;
+  }
+  
+  /* Responsivo para tablets e smartphones */
+  @media (max-width: 1024px) {
+    .main {
+      width: 80%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .main-wrapper {
+      margin-left: 0;
+      width: 100%;
+      padding-top: 60px;
+      align-items: center;
+    }
+  
+    .main {
+      width: 90%;
+      margin: 20px auto;
+      padding: 15px;
+    }
+  
+    .texto {
+      font-size: 0.95rem;
+      padding: 10px 25px;
+    }
+  
+    button {
+      font-size: 0.85rem;
+      padding: 6px 14px;
+    }
+  
+    .main > .caixa {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main {
+      width: 95%;
+      padding: 10px;
+    }
+  
+    .texto {
+      font-size: 0.85rem;
+      padding: 8px 18px;
+    }
+  
+    button {
+      width: 100%;
+      text-align: center;
+    }
+  
+    textarea {
+      padding: 15px;
+    }
+  }
+  
