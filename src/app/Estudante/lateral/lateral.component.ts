@@ -5,13 +5,13 @@ import { LoginComponent } from '../../login/login.component';
 @Component({
   selector: 'app-lateral',
   standalone: true,
-  imports: [LoginComponent],
+  imports: [LoginComponent], 
   templateUrl: './lateral.component.html',
   styleUrl: './lateral.component.css',
 })
 export class LateralComponent {
   constructor(private router: Router) {}
-  titulo = 'Olá, Pedro José Cavudissa';
+  titulo = 'Olá, Pedro Cavudissa';
   menuAtivo = false;
 
   toggleMenu(): void {

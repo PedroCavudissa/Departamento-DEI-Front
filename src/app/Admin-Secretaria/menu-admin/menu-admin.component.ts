@@ -1,6 +1,6 @@
 
 import { Router } from '@angular/router';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { BarralateralComponent } from "../barralateral/barralateral.component";
 
@@ -11,7 +11,7 @@ import { BarralateralComponent } from "../barralateral/barralateral.component";
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
 })
-export class MenuAdminComponent implements AfterViewInit {
+export class MenuAdminComponent implements AfterViewInit, OnInit {
   colors: Record<string, string> = {
     '1º Ano': '#009cff',
     '2º Ano': '#ff9400',
@@ -104,7 +104,7 @@ export class MenuAdminComponent implements AfterViewInit {
   }
 
   //Altera Tema
-  ngOnInit(): void {
+   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-theme');
