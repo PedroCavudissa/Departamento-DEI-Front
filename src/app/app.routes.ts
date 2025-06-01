@@ -31,16 +31,20 @@ import { MaisDetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/m
 import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/estudantes-secretaria/menu-estudantes-secretaria.component';
 import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
 import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
-import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configuracoes/configuracoes.component';
+
 import { GerirPerfilComponent } from './Admin-Secretaria/menu-admin/Configuracoes/Gerirperfis/GerirPerfil.component';
 import { HorarioComponent } from './Admin-Secretaria/menu-admin/horario/horario.component';
-import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
+
 import { VerPautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/ver-pauta-secretaria/ver-pauta-secretaria.component';
 import { HorarioSecretariaComponent } from './Admin-Secretarias/menu-secretaria/horario-secretaria/horario-secretaria.component';
 import { HorarioEstudanteComponent } from './Estudante/horario-estudante/horario-estudante.component';
-import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
+
 import { HorarioProfessorComponent } from './Professor/horario-professor/horario-professor.component';
+import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configuracoes/configuracoes.component';
+import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
+import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
+import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
@@ -84,9 +88,9 @@ export const routes: Routes = [
     path: 'horario-professor',
     component: HorarioProfessorComponent,
   },
-  {path: 'chat-professor',
-  component: ChatProfessorComponent,
-},
+  { path: 'chat-professor', component: ChatProfessorComponent },
+
+  {path:'lancamento', component: LancamentoComponent},
   //Rotas para as Secretárias
   { path: 'menu-secretaria', component: MenuSecretariaComponent },
   { path: 'chat-secretaria', component: ChatSecretariaComponent },
@@ -121,5 +125,4 @@ export const routes: Routes = [
     path: 'horario-secretaria',
     component: HorarioSecretariaComponent,
   },
-
 ];

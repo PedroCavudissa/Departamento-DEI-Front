@@ -37,6 +37,11 @@ export class LateralProfessorComponent {
               {this.router.navigate(['chat-professor']);
               break;}
              
+              case 'Lançamento':
+                {this.router.navigate(['lancamento']);
+                break;}
+               
+             
            
            
          

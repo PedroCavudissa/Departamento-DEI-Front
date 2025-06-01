@@ -1,0 +1,50 @@
+
+  <!--<div class="container">
+  <h2>Lançamento de Notas</h2>
+
+  <label for="tipoSelecionado">Tipo de Nota:</label>
+  <select [(ngModel)]="tipoSelecionado" id="tipoSelecionado" class="form-select">
+    <option [value]="''">-- Selecione o tipo --</option>
+    <option *ngFor="let tipo of tipos" [value]="tipo.id">
+      {{ tipo.nome }}
+    </option>
+  </select>
+
+  <div class="botoes">
+    <button (click)="gerarExcel()" [disabled]="!tipoSelecionado" class="btn">Gerar Excel</button>
+    <input type="file" (change)="onFileSelected($event)" [disabled]="!tipoSelecionado" />
+  </div>
+
+  <div *ngIf="notas.length">
+    <h3>Notas Carregadas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>AC</th>
+          <th>PF</th>
+          <th>Nota Final</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let nota of notas">
+          <td>{{ nota.id }}</td>
+          <td>{{ nota.nome }}</td>
+          <td><input [(ngModel)]="nota.ac" type="number" /></td>
+          <td><input [(ngModel)]="nota.pf" type="number" /></td>
+          <td><input [(ngModel)]="nota.notaFinal" type="number" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="botoes">
+      <button class="btn">Salvar</button>
+      <button  class="btn">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<app-lateral-professor></app-lateral-professor>
+z
+-->
