@@ -22,7 +22,7 @@ export class BarralateralSecretariaComponent {
   
   }
 
-  selecionarMenu(item: string,novoTitulo: string) {
+  selecionarMenu(novoTitulo: string,item: string,) {
     this.titulo = novoTitulo;
     this.menuAtivo = false;
 

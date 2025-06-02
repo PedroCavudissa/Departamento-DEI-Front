@@ -14,7 +14,7 @@ export interface Disciplina {
 
 @Injectable({ providedIn: 'root' })
 export class DisciplinaService {
-  private apiUrl = 'https://ab29-102-218-85-83.ngrok-free.app/api/disciplina/list';
+  private apiUrl = 'https://4118-102-214-36-111.ngrok-free.app/api/disciplina/list/1';
 
   constructor(private http: HttpClient) {}
 

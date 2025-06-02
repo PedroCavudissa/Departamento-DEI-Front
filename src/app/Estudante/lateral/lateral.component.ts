@@ -43,6 +43,10 @@ export class LateralComponent {
         break;
       }
 
+      case 'Calendário': {
+        this.router.navigate(['/calendario-estudante']);
+        break;
+      }
       case 'Perfil': {
         this.router.navigate(['/perfil-estudante']);
         break;

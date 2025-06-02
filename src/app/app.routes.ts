@@ -45,6 +45,8 @@ import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-p
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
+import { CalendarioProfessorComponent } from './calendario-professor/calendario-professor.component';
+import { CalendarioEstudanteComponent } from './calendario-estudante/calendario-estudante.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
@@ -80,6 +82,7 @@ export const routes: Routes = [
   { path: 'perfil-estudante', component: PerfilEstudanteComponent },
   { path: 'horario-estudante', component: HorarioEstudanteComponent },
   { path: 'chat-estudante', component: ChatEstudanteComponent },
+  { path: 'calendario-estudante', component: CalendarioEstudanteComponent },
   //Rotas para os Professores
   { path: 'tela-professor', component: TelaProfessorComponent },
   { path: 'dado-professor', component: DadoProfessorComponent },
@@ -91,6 +94,8 @@ export const routes: Routes = [
   { path: 'chat-professor', component: ChatProfessorComponent },
 
   {path:'lancamento', component: LancamentoComponent},
+  { path: 'calendario-professor', component: CalendarioProfessorComponent },
+
   //Rotas para as Secretárias
   { path: 'menu-secretaria', component: MenuSecretariaComponent },
   { path: 'chat-secretaria', component: ChatSecretariaComponent },

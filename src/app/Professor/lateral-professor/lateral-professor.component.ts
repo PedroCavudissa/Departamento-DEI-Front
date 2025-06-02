@@ -33,6 +33,10 @@ export class LateralProfessorComponent {
           case 'Horários':
             {this.router.navigate(['horario-professor']);
             break;}
+            case 'Calendário': {
+              this.router.navigate(['/calendario-professor']);
+              break;
+            }
             case 'Chat':
               {this.router.navigate(['chat-professor']);
               break;}
