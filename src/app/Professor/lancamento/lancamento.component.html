@@ -1,5 +1,4 @@
-
-  <!--<div class="container">
+<div class="container">
   <h2>Lançamento de Notas</h2>
 
   <label for="tipoSelecionado">Tipo de Nota:</label>
@@ -10,14 +9,16 @@
     </option>
   </select>
 
-  <div class="botoes">
-    <button (click)="gerarExcel()" [disabled]="!tipoSelecionado" class="btn">Gerar Excel</button>
+  <div class="botoes" style="margin: 1rem 0;">
+    <button (click)="gerarExcel()" [disabled]="!tipoSelecionado" class="btn btn-primary">
+      Gerar Excel
+    </button>
     <input type="file" (change)="onFileSelected($event)" [disabled]="!tipoSelecionado" />
   </div>
 
-  <div *ngIf="notas.length">
+  <div *ngIf="notas.length > 0">
     <h3>Notas Carregadas</h3>
-    <table>
+    <table class="table table-striped">
       <thead>
         <tr>
           <th>ID</th>
@@ -27,24 +28,41 @@
           <th>Nota Final</th>
         </tr>
       </thead>
+      <thead>
+        <tr>
+          <th>Matrícula</th>
+          <th>Aluno</th>
+          <th *ngIf="tipoSelecionado === 1 || tipoSelecionado=== 2">AC</th>
+          <th *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">PF</th>
+          <th>Nota Final</th>
+        </tr>
+      </thead>
       <tbody>
-        <tr *ngFor="let nota of notas">
-          <td>{{ nota.id }}</td>
-          <td>{{ nota.nome }}</td>
-          <td><input [(ngModel)]="nota.ac" type="number" /></td>
-          <td><input [(ngModel)]="nota.pf" type="number" /></td>
-          <td><input [(ngModel)]="nota.notaFinal" type="number" /></td>
+        <tr *ngFor="let nota of notas; let i = index">
+          <td>{{ nota.matricula }}</td>
+          <td>{{ nota.aluno }}</td>
+      
+          <td *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">
+            <input [(ngModel)]="notas[i].ac" type="number" class="form-control" />
+          </td>
+          <td *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">
+            <input [(ngModel)]="notas[i].pf" type="number" class="form-control" />
+          </td>
+          
+      
+          <td>
+            <input [(ngModel)]="notas[i].notaFinal" type="number" class="form-control" />
+          </td>
         </tr>
       </tbody>
+      
     </table>
 
-    <div class="botoes">
-      <button class="btn">Salvar</button>
-      <button  class="btn">Publicar</button>
+    <div class="botoes" style="margin-top: 1rem;">
+      <button (click)="salvar()" class="btn btn-success">Salvar</button>
+      <button (click)="publicar()" class="btn btn-warning">Publicar</button>
     </div>
   </div>
 </div>
 
 <app-lateral-professor></app-lateral-professor>
-z
--->

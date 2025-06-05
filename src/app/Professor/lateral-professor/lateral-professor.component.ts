@@ -28,28 +28,22 @@ export class LateralProfessorComponent {
         break;}
        
         case 'Perfil':
-          {this.router.navigate(['dado-professor']);
+          {this.router.navigate(['/dado-professor']);
           break;}
           case 'Horários':
-            {this.router.navigate(['horario-professor']);
+            {this.router.navigate(['/horario-professor']);
             break;}
             case 'Calendário': {
               this.router.navigate(['/calendario-professor']);
               break;
             }
             case 'Chat':
-              {this.router.navigate(['chat-professor']);
+              {this.router.navigate(['/chat-professor']);
               break;}
              
               case 'Lançamento':
-                {this.router.navigate(['lancamento']);
+                {this.router.navigate(['/lancamento']);
                 break;}
-               
-             
-           
-           
-         
-      
         case 'Sair':
           {const confirmacao = window.confirm('Tem certeza que deseja sair?');
           if (confirmacao) {

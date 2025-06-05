@@ -44,9 +44,10 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
-import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
+
 import { CalendarioProfessorComponent } from './calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './calendario-estudante/calendario-estudante.component';
+import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir

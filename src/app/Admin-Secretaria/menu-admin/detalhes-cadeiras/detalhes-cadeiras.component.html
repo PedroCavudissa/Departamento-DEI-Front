@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card blue">
     <h3>Cadeiras</h3>
-    <p class="number">{{ disciplinas.length }}</p>
+    <p class="number">{{disciplinas.length }}</p>
   </div>
 
   <form class="form-search" onsubmit="return false;">
@@ -30,6 +30,7 @@
         <th>Ano Acadêmico</th>
         <th>Semestre</th>
         <th>Precedência</th>
+        <th>Detalhes</th> 
         </tr>
       </thead>
       <tbody>
@@ -40,6 +41,9 @@
           <td>{{ d.ano_academico }}</td>
           <td>{{ d.semestre }}</td>
           <td>{{ d.precedencia }}</td>
+          <td>
+            <a  class="link-detalhes" style="color:blue">Ver detalhes</a>
+          </td>
         </tr>
       </tbody>
     </table>
