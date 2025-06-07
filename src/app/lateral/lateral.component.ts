@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-lateral',
   imports: [],
   templateUrl: './lateral.component.html',
-  styleUrl: './lateral.component.css'
+
 })
 export class LateralComponent {
 titulo: any;

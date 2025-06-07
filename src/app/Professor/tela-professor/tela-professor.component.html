@@ -1,0 +1,28 @@
+
+
+<div class="container">
+ 
+<div class="card">
+  <img src="assets/icones/perfil.png" alt="Perfil" />
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf=" professorSelecionado;">
+ 
+
+     
+        
+        <p><strong>Nome:</strong> {{  professorSelecionado.nome}}</p>
+        <p><strong>Apelido:</strong>{{ professorSelecionado.dataNascimento}}</p>
+        <p><strong>Documentos:</strong>{{  professorSelecionado.tipoDocumento}}</p>
+        
+    
+    </div>
+  <ng-template #noEstudantes>
+    <p>Nenhum estudante encontrado.</p>
+  </ng-template>
+  </div>
+</div>
+
+<app-lateral-professor></app-lateral-professor>

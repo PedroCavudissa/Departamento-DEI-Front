@@ -1,22 +1,29 @@
-<body>
-  
-  
-        <div class="container">
-          
-            <div class="card">
-              <img src="assets/icones/perfil.png" alt="Perfil" />
-              <div class="aluno-dados">
-                <h3>Dados</h3>
-                <p><strong>Nome:</strong> Vivaldo Vieira</p>
-                <p><strong>Contacto:</strong> 20231234 </p>
-                <p><strong>Cadeira(s) a lecionar:</strong> Analise /Fisica</p>
-                <p><strong>Grau:</strong> Engenheiro</p>
-                <p><strong>Nivel na instituição:</strong> contratado</p>
-  
-              </div>
-            </div>
-          </div>
-    
-    
-       
-    </body>
+<!--
+<div class="container">
+ 
+<div class="card">
+  <img src="assets/icones/perfil.png" alt="Perfil" />
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="estudantes.length > 0; else noEstudantes">
+ 
+
+      <div *ngFor="let estudante of estudantes">
+        
+        <p><strong>Nome:</strong> {{ estudante.nome}}</p>
+        <p><strong>Apelido:</strong>{{ estudante.apelido}}</p>
+        <p><strong>Data Nasc:</strong>{{estudante.dataNascimento| date:'shortDate' }}  </p>
+        <p><strong>Identificação:</strong>{{ estudante.numIdentificacao}}</p>
+        <p><strong>Contacto:</strong>{{ estudante.contacto}}</p>
+        <p><strong>Data Ingresso:</strong>{{estudante.dataIngresso| date:'shortDate' }} </p>
+        
+      </div>
+    </div>
+  <ng-template #noEstudantes>
+    <p>Nenhum estudante encontrado.</p>
+  </ng-template>
+  </div>
+</div>
+-->
