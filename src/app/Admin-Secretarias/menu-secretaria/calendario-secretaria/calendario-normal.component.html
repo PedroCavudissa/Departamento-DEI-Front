@@ -3,8 +3,7 @@
 <!-- CONTEÚDO PRINCIPAL COM BLUR CONDICIONAL -->
 <main class="quadro" [class.blur]="mostrarFormulario">
   <a class="ver-provas" href="/calendario/provas">Ver Calendário de Provas</a>
- 
-
+<button class="botao" (click)="toggleFormulario()">Adicionar Evento</button>
   <ul class="lista-eventos">
     <li *ngFor="let evento of eventos">
       <strong>{{ evento.data }}</strong> — {{ evento.titulo }}

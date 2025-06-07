@@ -13,7 +13,9 @@ import { DisciplinaService, DisciplinaEmAtraso } from '../../services/disciplina
 })
 export class CadeiraComponent implements OnInit {
   anoSelecionado = 1;
-  alunoId = 1; // Você pode tornar isso dinâmico futuramente
+  semestreSelecionado = 1; 
+  estudanteId = 1;
+
   anosDisponiveis: number[] = [1, 2, 3, 4, 5];
 
   disciplinas: DisciplinaEmAtraso[] = [];
@@ -21,13 +23,15 @@ export class CadeiraComponent implements OnInit {
   constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {
-    this.disciplinaService.getDisciplinas(this.alunoId).subscribe({
+    this.disciplinaService.getDisciplinas(this.estudanteId).subscribe({
       next: (dados) => this.disciplinas = dados,
       error: (err) => console.error('Erro ao buscar disciplinas', err)
     });
   }
 
   get disciplinasFiltradas(): DisciplinaEmAtraso[] {
-    return this.disciplinas.filter(d => d.ano === this.anoSelecionado);
+    return this.disciplinas.filter(d =>
+      d.ano === this.anoSelecionado && d.semestre === this.semestreSelecionado
+    );
   }
 }

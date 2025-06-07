@@ -5,16 +5,18 @@ import { Observable } from 'rxjs';
 export interface DisciplinaEmAtraso {
   id: number;
   nome: string;
+  estudante: number;
   ano: number;
+  semestre: number;
 }
 
 @Injectable({ providedIn: 'root' })
 export class DisciplinaService {
-  private apiUrl = 'http://localhost:8080/api/alunos';
+  private apiUrl = '/api/subject/atrasadas';
 
   constructor(private http: HttpClient) {}
 
-  getDisciplinas(alunoId: number): Observable<DisciplinaEmAtraso[]> {
-    return this.http.get<DisciplinaEmAtraso[]>(`${this.apiUrl}/${alunoId}/disciplinas-em-atraso`);
+  getDisciplinas(estudanteId: number): Observable<DisciplinaEmAtraso[]> {
+    return this.http.get<DisciplinaEmAtraso[]>(`${this.apiUrl}/${estudanteId}`);
   }
 }

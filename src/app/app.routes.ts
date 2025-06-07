@@ -41,6 +41,8 @@ import { HorarioEstudanteComponent } from './Estudante/horario-estudante/horario
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { HorarioProfessorComponent } from './Professor/horario-professor/horario-professor.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
+import { CadastroComponent  } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
+import { AnolectivoComponent} from './Admin-Secretaria/menu-admin/anolectivo/anolectivo.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
@@ -67,6 +69,8 @@ export const routes: Routes = [
   { path: 'pautas', component: PautaComponent },
   { path: 'ver-pauta', component: VerPautaComponent },
   { path: 'horario', component: HorarioComponent },
+  { path: 'cadastro', component: CadastroComponent },
+  { path: 'anolectivo', component: AnolectivoComponent },
   //Rotas para os Estudantes
   { path: 'tela-notas', component: TelaNotasComponent },
   { path: 'tela-estudante', component: TelaEstudanteComponent },
