@@ -8,7 +8,7 @@ import { Estudante } from '../interface/estudante.interface';
   providedIn: 'root'
 })
 export class EstudanteService {
-  private apiUrl = 'https://dd3f-102-218-85-31.ngrok-free.app/api/estudantes'; // URL da API
+  private apiUrl = 'https://5df5-102-214-36-223.ngrok-free.app//api/estudantes'; // URL da API
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class EstudanteService {
     } else if (error.status === 200) {
       // https://96a0-102-218-85-117.ngrok-free.app/swagger-ui/index.html
 
-
+///https://5df5-102-214-36-223.ngrok-free.app/swagger-ui/index.html#
       // Verifica se a resposta é HTML quando deveria ser JSON
       if (typeof error.error === 'string' && error.error.startsWith('<!DOCTYPE html>')) {
         return throwError(() => new Error('O servidor retornou uma página HTML em vez de dados JSON'));
