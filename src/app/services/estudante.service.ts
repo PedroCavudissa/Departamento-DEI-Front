@@ -8,7 +8,7 @@ import { Estudante } from '../interface/estudante.interface';
   providedIn: 'root'
 })
 export class EstudanteService {
-  private apiUrl = 'https://5df5-102-214-36-223.ngrok-free.app//api/estudantes'; // URL da API
+  private apiUrl = 'https://5df5-102-214-36-223.ngrok-free.app/api/estudantes'; // URL da API
 
   constructor(private http: HttpClient) { }
 

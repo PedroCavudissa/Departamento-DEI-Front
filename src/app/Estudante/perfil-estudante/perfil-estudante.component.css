@@ -62,14 +62,14 @@
     display: flex;
     justify-content: center;
      width: 100%;
-     
+    
     
   }
 
   .buttons button {
     padding: 8px 7px;
     border: none;
-    border-radius: 9px;
+    border-radius: 5px;
     background-color:  #47B5FF;
     color: white;
     font-weight: bold;

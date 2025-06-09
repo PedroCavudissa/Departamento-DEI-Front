@@ -20,7 +20,7 @@ export class TelaEstudanteComponent implements OnInit {
   // Método ngOnInit para inicializar o componente
   ngOnInit(): void {
     // Substitua '1' pelo ID real do estudante que deseja buscar
-    this.buscarEstudantePorId(2);
+    this.buscarEstudantePorId(1);
   }
 
 
