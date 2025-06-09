@@ -45,16 +45,16 @@ import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-p
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
 
-import { CalendarioProfessorComponent } from './calendario-professor/calendario-professor.component';
-import { CalendarioEstudanteComponent } from './calendario-estudante/calendario-estudante.component';
+import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
+import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
-
-  //Rotas para o Admin-Master(Acesso Geral)
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuAdminComponent },
+  //Rotas para o Admin-Master(Acesso Geral)
+ 
+  { path: 'menu-admin', component: MenuAdminComponent },
   { path: 'aprovarComunicado', component: AprovarComunicadoComponent },
   { path: 'comunicado', component: ComunicadoComponent },
   { path: 'menu-estudantes', component: MenuEstudantesComponent },

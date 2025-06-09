@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LateralComponent } from "../Estudante/lateral/lateral.component";
+import { LateralComponent } from "../lateral/lateral.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

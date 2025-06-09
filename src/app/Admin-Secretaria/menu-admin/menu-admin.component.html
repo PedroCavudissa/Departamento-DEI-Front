@@ -10,12 +10,12 @@
             <a routerLink="/home" >
               <h3 (click)="verDetalhes('estudantes')"  tabindex="" (keyup)="verDetalhes('')">Estudantes </h3>
                </a>
-            <p class="number">95</p>
+            <p class="number">{{totalEstudantes}}</p>
           </div>
       
           <div class="card blue">
             <h3  (click)="verDetalhes('funcionarios')"  tabindex="" (keyup)="verDetalhes('')">Funcionários</h3>
-            <p class="number">27</p>
+            <p class="number">{{totalFuncionarios}}</p>
           </div>
       
           <div class="card gray">

@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
 
 
 @Component({
   selector: 'app-login',
-  standalone: true, // define como standalone
-  imports: [CommonModule, ReactiveFormsModule],
+  standalone: true, 
+  imports: [CommonModule, ReactiveFormsModule,FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 
@@ -99,7 +99,7 @@ continuarRecuperacao() {
         this.router.navigate(['/tela-professor']);
       }else if(emailDigitado==this.emailValidAdmin &&  senhaDigitada==this.senhaValidAdmin){
         alert("Login Realizado Com Sucesso"+"Admin");
-        this.router.navigate(['/menu']);
+        this.router.navigate(['/menu-admin']);
       }
       else
       {

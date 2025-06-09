@@ -18,7 +18,7 @@ export interface Disciplina {
   providedIn: 'root'
 })
 export class DisciplinaService {
-  private apiUrl = 'https://96a0-102-218-85-117.ngrok-free.app/api/disciplina/list';
+  private apiUrl = 'https://5df5-102-214-36-223.ngrok-free.app/api/disciplina/list';
 
   constructor(private http: HttpClient) { }
 

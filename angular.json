@@ -42,8 +42,8 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all",
-              "buildOptimizer": true
+              "outputHashing": "all"
+              
             },
             "development": {
               "optimization": false,
@@ -97,6 +97,9 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
@@ -105,6 +108,8 @@
     "analytics": "54b3101e-5ea5-4e1b-9a44-9222f26104a2",
     "schematicCollections": [
       "angular-eslint"
+      
     ]
   }
+  
 }

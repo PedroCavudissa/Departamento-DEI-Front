@@ -1,8 +1,8 @@
-import { BarralateralComponent } from '../barralateral/barralateral.component';
-import { Router } from '@angular/router';
 import { Component, AfterViewInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Chart, ChartConfiguration } from 'chart.js';
-import { HttpClient } from '@angular/common/http';
+import { MenuAdminService } from '../../Services/relatorio.service';
+import { BarralateralComponent } from '../barralateral/barralateral.component';
 
 @Component({
   selector: 'app-menu-admin',
@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
+  providers: [MenuAdminService],
 })
 export class MenuAdminComponent implements AfterViewInit {
   colors: Record<string, string> = {
@@ -25,23 +26,25 @@ export class MenuAdminComponent implements AfterViewInit {
     maintainAspectRatio: false,
   };
 
-  constructor(private router: Router, private http: HttpClient) {}
+  estudantes: unknown;
+  totalEstudantes = 9;
+  totalFuncionarios = 0;
+
+  constructor(
+    private router: Router,
+    private service: MenuAdminService
+  ) {}
 
   async ngAfterViewInit(): Promise<void> {
     try {
-    
-        const estudantesResponse = await this.http
-        .get<{ total: number }>('https://ec5f-105-172-62-238.ngrok-free.app/api/relatorios/estudante/total')
-        .toPromise();
-      
-        const funcionariosResponse = await this.http
-      .get<{ total: number }>('https://ec5f-105-172-62-238.ngrok-free.app/api/relatorios/funcionario/total')
-      .toPromise();
-   
-    const totalEstudantes = estudantesResponse?.total ?? 0;
-    const totalFuncionarios = funcionariosResponse?.total ?? 0;
-    
-     
+      // Espera corretamente as promessas
+      const [estudantes, funcionarios] = await Promise.all([
+        this.service.getTotalEstudantes(),
+        this.service.getTotalFuncionarios(),
+      ]);
+
+      this.totalEstudantes = estudantes;
+      this.totalFuncionarios = funcionarios;
 
       const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
       new Chart(pieCtx, {
@@ -50,7 +53,7 @@ export class MenuAdminComponent implements AfterViewInit {
           labels: ['Funcionários', 'Estudantes', 'Cadeiras', 'Salas'],
           datasets: [
             {
-              data: [totalFuncionarios, totalEstudantes, 52, 70], 
+              data: [funcionarios, estudantes, 52, 70],
               backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
             },
           ],
@@ -70,31 +73,22 @@ export class MenuAdminComponent implements AfterViewInit {
           },
         },
       });
-
-
     } catch (error) {
       console.error('Erro ao carregar dados dos gráficos', error);
     }
   }
 
-  
-
   verDetalhes(nome: string): void {
-    switch (nome) {
-      case 'funcionarios':
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-      case 'estudantes':
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
-      case 'cadeiras':
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-      case 'salas':
-        alert('Dados Indisponíveis');
-        break;
-      default:
-        alert('Dados não disponíveis');
+    const rotas: Record<string, string> = {
+      funcionarios: '/detalhes-funcionarios',
+      estudantes: '/detalhes-estudantes',
+      cadeiras: '/detalhes-cadeiras',
+    };
+
+    if (rotas[nome]) {
+      this.router.navigate([rotas[nome]]);
+    } else {
+      alert('Dados não disponíveis');
     }
   }
 }
