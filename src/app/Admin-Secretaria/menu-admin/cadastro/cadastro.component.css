@@ -15,6 +15,10 @@
   background-color: #f0f8ff; /* Azul claro de fundo opcional */
   
 }
+.formulario-container{
+  position: absolute;
+  left: 350px;
+}
 
 /* Formulário */
 form {
@@ -61,13 +65,13 @@ form {
 
 /* Botão */
 button {
-  background-color: #add8e6;
+  background-color: #47B5FF;
   border: none;
   padding: 12px;
   border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
-  color: #000;
+  color: #fff;
   transition: background-color 0.3s ease;
   width: 100%;
   max-width: 220px;
