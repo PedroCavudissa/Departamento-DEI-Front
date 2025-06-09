@@ -6,7 +6,7 @@ import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudant
 import { CadeiraComponent } from './Estudante/Cadeiras/cadeira.component';
 import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.component';
 import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
-import { AprovarComunicadoComponent } from './Admin-Secretaria/aprovar-comunicado/aprovar-comunicado.component';
+import { AprovarComunicadoComponent } from './Admin-Secretaria/menu-admin/Configuracoes/aprovar-comunicado/aprovar-comunicado.component';
 import { ComunicadoComponent } from './Admin-Secretaria/menu-admin/comunicado/comunicado.component';
 import { MenuEstudantesComponent } from './Admin-Secretaria/menu-admin/estudantes/menu-estudantes.component';
 import { DetalhesFuncionariosComponent } from './Admin-Secretaria/menu-admin/detalhes-funcionarios/detalhes-funcionarios.component';
@@ -29,9 +29,25 @@ import { DetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/menu-
 import { DetalhesFuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-funcionarios-secretaria/detalhes-funcionarios-secretaria.component';
 import { MaisDetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/mais-detalhes-estudantes-secretaria/mais-detalhes-estudantes-secretaria.component';
 import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/estudantes-secretaria/menu-estudantes-secretaria.component';
-import { PautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/pauta-secretaria/pauta.component';
 import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
 import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
+
+import { GerirPerfilComponent } from './Admin-Secretaria/menu-admin/Configuracoes/Gerirperfis/GerirPerfil.component';
+import { HorarioComponent } from './Admin-Secretaria/menu-admin/horario/horario.component';
+
+import { VerPautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/ver-pauta-secretaria/ver-pauta-secretaria.component';
+import { HorarioSecretariaComponent } from './Admin-Secretarias/menu-secretaria/horario-secretaria/horario-secretaria.component';
+import { HorarioEstudanteComponent } from './Estudante/horario-estudante/horario-estudante.component';
+
+import { HorarioProfessorComponent } from './Professor/horario-professor/horario-professor.component';
+import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configuracoes/configuracoes.component';
+import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
+import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
+import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
+
+import { CalendarioProfessorComponent } from './calendario-professor/calendario-professor.component';
+import { CalendarioEstudanteComponent } from './calendario-estudante/calendario-estudante.component';
+import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
@@ -45,6 +61,8 @@ export const routes: Routes = [
   { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent },
   { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent },
   { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent },
+  { path: 'Configuracoes', component: ConfiguracoesComponent },
+  { path: 'Gerirperfis', component: GerirPerfilComponent },
   {
     path: 'mais-detalhes-estudantes',
     component: MaisDetalhesEstudantesComponent,
@@ -54,28 +72,63 @@ export const routes: Routes = [
   { path: 'calendario', component: CalendarioComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'pautas', component: PautaComponent },
+  { path: 'ver-pauta', component: VerPautaComponent },
+  { path: 'horario', component: HorarioComponent },
   //Rotas para os Estudantes
   { path: 'tela-notas', component: TelaNotasComponent },
   { path: 'tela-estudante', component: TelaEstudanteComponent },
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
-  { path: 'perfil-estudante', component: PerfilEstudanteComponent  },
-    //Rotas para os Professores
+  { path: 'perfil-estudante', component: PerfilEstudanteComponent },
+  { path: 'horario-estudante', component: HorarioEstudanteComponent },
+  { path: 'chat-estudante', component: ChatEstudanteComponent },
+  { path: 'calendario-estudante', component: CalendarioEstudanteComponent },
+  //Rotas para os Professores
   { path: 'tela-professor', component: TelaProfessorComponent },
   { path: 'dado-professor', component: DadoProfessorComponent },
-  { path: 'perfil-professor', component: PerfilProfessorComponent},
+  { path: 'perfil-professor', component: PerfilProfessorComponent },
+  {
+    path: 'horario-professor',
+    component: HorarioProfessorComponent,
+  },
+  { path: 'chat-professor', component: ChatProfessorComponent },
+
+  {path:'lancamento', component: LancamentoComponent},
+  { path: 'calendario-professor', component: CalendarioProfessorComponent },
 
   //Rotas para as Secretárias
   { path: 'menu-secretaria', component: MenuSecretariaComponent },
   { path: 'chat-secretaria', component: ChatSecretariaComponent },
   { path: 'calendario-normal', component: CalendarioNormalComponent },
   { path: 'comunicado-secretaria', component: ComunicadoSecretariaComponent },
-  { path: 'detalhes-cadeiras-secretaria', component: DetalhesCadeirasSecretariaComponent },
-  { path: 'detalhes-estudantes-secretaria', component: DetalhesEstudantesSecretariaComponent },
-  { path: 'detalhes-funcionarios-secretaria', component: DetalhesFuncionariosSecretariaComponent },
-  { path: 'mais-detalhes-funcionarios-secretaria', component: MaisDetalhesEstudantesSecretariaComponent },
-  { path: 'estudantes-secretaria', component: MenuEstudantesSecretariaComponent },
-  { path: 'pauta-secretaria', component: PautaSecretariaComponent },
-  { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent },
+  {
+    path: 'detalhes-cadeiras-secretaria',
+    component: DetalhesCadeirasSecretariaComponent,
+  },
+  {
+    path: 'detalhes-estudantes-secretaria',
+    component: DetalhesEstudantesSecretariaComponent,
+  },
+  {
+    path: 'detalhes-funcionarios-secretaria',
+    component: DetalhesFuncionariosSecretariaComponent,
+  },
+  {
+    path: 'mais-detalhes-funcionarios-secretaria',
+    component: MaisDetalhesEstudantesSecretariaComponent,
+  },
+  {
+    path: 'estudantes-secretaria',
+    component: MenuEstudantesSecretariaComponent,
+  },
+  { path: 'ver-pauta-secretaria', component: VerPautaSecretariaComponent },
+  {
+    path: 'funcionario-secretaria',
+    component: FuncionariosSecretariaComponent,
+  },
+  {
+    path: 'horario-secretaria',
+    component: HorarioSecretariaComponent,
+  },
 ];

@@ -53,13 +53,19 @@ export class BarralateralComponent {
                 break;}
                 
                 case 'Pautas':
-                {this.router.navigate(['/pautas']);
+                {this.router.navigate(['/ver-pauta']);
+                break;}
+                case 'Horários':
+                {this.router.navigate(['/horario']);
                 break;}
 
                 case 'Comunicados':
                   {this.router.navigate(['/comunicado']);
                   break;}
   
+                  case 'Definições':
+                    {this.router.navigate(['/Configuracoes']);
+                    break;}
 
         case 'Sair':
          { const confirmacao = window.confirm('Tem certeza que deseja sair?');

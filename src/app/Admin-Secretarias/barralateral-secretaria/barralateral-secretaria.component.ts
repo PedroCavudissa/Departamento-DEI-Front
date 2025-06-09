@@ -22,7 +22,7 @@ export class BarralateralSecretariaComponent {
   
   }
 
-  selecionarMenu(item: string,novoTitulo: string) {
+  selecionarMenu(novoTitulo: string,item: string,) {
     this.titulo = novoTitulo;
     this.menuAtivo = false;
 
@@ -54,7 +54,11 @@ export class BarralateralSecretariaComponent {
                 break;}
                 
                 case 'Pautas':
-                {this.router.navigate(['/pautas-secretaria']);
+                {this.router.navigate(['/ver-pauta-secretaria']);
+                break;}
+                   
+                case 'Horários':
+                {this.router.navigate(['/horario-secretaria']);
                 break;}
 
                 case 'Comunicados':
