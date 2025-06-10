@@ -4,13 +4,17 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-lateral',
   standalone: true,
+<<<<<<< HEAD
   imports: [],
+=======
+  imports: [LoginComponent], 
+>>>>>>> main
   templateUrl: './lateral.component.html',
   styleUrl: './lateral.component.css',
 })
 export class LateralComponent {
   constructor(private router: Router) {}
-  titulo = 'Olá, Pedro José Cavudissa';
+  titulo = 'Olá, Pedro Cavudissa';
   menuAtivo = false;
 
   toggleMenu(): void {

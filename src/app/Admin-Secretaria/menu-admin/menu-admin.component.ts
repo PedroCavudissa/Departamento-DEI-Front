@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { MenuAdminService } from '../../Services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
+=======
+
+import { Router } from '@angular/router';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Chart, ChartConfiguration } from 'chart.js';
+import { BarralateralComponent } from "../barralateral/barralateral.component";
+>>>>>>> main
 
 @Component({
   selector: 'app-menu-admin',
@@ -12,7 +20,7 @@ import { BarralateralComponent } from '../barralateral/barralateral.component';
   styleUrls: ['./menu-admin.component.css'],
   providers: [MenuAdminService],
 })
-export class MenuAdminComponent implements AfterViewInit {
+export class MenuAdminComponent implements AfterViewInit, OnInit {
   colors: Record<string, string> = {
     '1º Ano': '#009cff',
     '2º Ano': '#ff9400',
@@ -85,8 +93,37 @@ export class MenuAdminComponent implements AfterViewInit {
       cadeiras: '/detalhes-cadeiras',
     };
 
+<<<<<<< HEAD
     if (rotas[nome]) {
       this.router.navigate([rotas[nome]]);
+=======
+      case 'cadeiras': {
+        this.router.navigate(['/detalhes-cadeiras']);
+        break;
+      }
+      case 'salas':
+        alert('Dados Indisponíveis');
+        break;
+      default:
+        alert('Dados não disponíveis');
+    }
+  }
+
+  //Altera Tema
+   ngOnInit(): void {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    }
+  }
+
+  toggleTheme(): void {
+    alert('Fui clicado');
+    const isDark = document.body.classList.contains('dark-theme');
+    if (isDark) {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+>>>>>>> main
     } else {
       alert('Dados não disponíveis');
     }

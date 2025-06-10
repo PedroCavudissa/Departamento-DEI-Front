@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { BarralateralComponent } from "../../barralateral/barralateral.component";
 
 interface Evento {
@@ -13,6 +14,7 @@ interface Evento {
 @Component({
   selector: 'app-calendario',
   standalone: true,
+
   imports: [CommonModule, FormsModule, BarralateralComponent],
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
@@ -20,11 +22,11 @@ interface Evento {
 export class CalendarioComponent {
   mostrarFormulario = false;
 
-  // Dados do novo evento 
-  data= '';
-  titulo= '';
-  tipo ='';
-  link?= '';
+  // Dados do novo evento
+  data = '';
+  titulo = '';
+  tipo = '';
+  link? = '';
 
   eventos: Evento[] = [
     {
@@ -44,9 +46,10 @@ export class CalendarioComponent {
   toggleFormulario() {
     this.mostrarFormulario = !this.mostrarFormulario;
   }
-fecharFormulario() {
-  this.mostrarFormulario = false;
-}
+
+  fecharFormulario() {
+    this.mostrarFormulario = false;
+  }
 
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
@@ -64,9 +67,9 @@ fecharFormulario() {
     this.eventos.push(novoEvento);
     this.mostrarFormulario = false;
     this.limparCampos();
-  }
+ }
 
-  limparCampos() {
+limparCampos() {
     this.data = '';
     this.titulo = '';
     this.tipo = '';

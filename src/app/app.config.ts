@@ -7,6 +7,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+<<<<<<< HEAD
     importProvidersFrom(HttpClientModule) 
+=======
+    
+>>>>>>> main
   ]
 };

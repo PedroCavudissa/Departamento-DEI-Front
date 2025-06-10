@@ -3,13 +3,9 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-<<<<<<< HEAD
   imports: [RouterOutlet],
-=======
-  imports: [RouterOutlet, LateralComponent],
->>>>>>> main
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css']  // <- corrigido aqui
 })
 export class AppComponent {
   title = 'DepartamentoDEI';

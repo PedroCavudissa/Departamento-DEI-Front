@@ -1,4 +1,10 @@
 <div class="chat-layout"> 
+<<<<<<< HEAD:Departamento-DEI-Front-Chat-CORRIGIDO/src/app/pages/chat/chat.component.html
+    <app-barralateral></app-barralateral>
+    <div class="chat-area">
+      <div class="chat-header">
+        <h2></h2>
+=======
   <app-barralateral></app-barralateral>
   <div class="chat-area">
     <div class="chat-header">
@@ -9,21 +15,33 @@
       <div class="form-field">
         <label for="recipient">Destinatário</label>
         <input id="recipient" [(ngModel)]="recipient" placeholder="Destinatário" />
+>>>>>>> Dev:src/app/Admin-Secretaria/menu-admin/chat/chat.component.html
       </div>
-      
-      <div class="form-field">
-        <label for="subject">Assunto</label>
-        <input id="subject" [(ngModel)]="subject" placeholder="Assunto" />
+  
+      <div class="message-form">
+        <div class="form-field">
+          <label for="recipient">Destinatário</label>
+          <input id="recipient" [(ngModel)]="recipient" placeholder="Destinatário" />
+        </div>
+        
+        <div class="form-field">
+          <label for="subject">Assunto</label>
+          <input id="subject" [(ngModel)]="subject" placeholder="Assunto" />
+        </div>
+        
+        <div class="form-field">
+          <label for="description">Descrição</label>
+          <textarea id="description" [(ngModel)]="description" rows="5"></textarea>
+        </div>
+        
+        <button class="send-message-btn" (click)="sendMessage()">Enviar Mensagem</button>
       </div>
-      
-      <div class="form-field">
-        <label for="description">Descrição</label>
-        <textarea id="description" [(ngModel)]="description" rows="5"></textarea>
-      </div>
-      
-      <button class="send-message-btn" (click)="sendMessage()">Enviar Mensagem</button>
     </div>
   </div>
+<<<<<<< HEAD:Departamento-DEI-Front-Chat-CORRIGIDO/src/app/pages/chat/chat.component.html
+  
+=======
 </div>
 
 <app-barralateral></app-barralateral>
+>>>>>>> Dev:src/app/Admin-Secretaria/menu-admin/chat/chat.component.html

@@ -52,8 +52,11 @@ import { LancamentoComponent } from './Professor/lancamento/lancamento.component
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
   { path: 'login', component: LoginComponent },
+<<<<<<< HEAD
   //Rotas para o Admin-Master(Acesso Geral)
  
+=======
+>>>>>>> main
   { path: 'menu-admin', component: MenuAdminComponent },
   { path: 'aprovarComunicado', component: AprovarComunicadoComponent },
   { path: 'comunicado', component: ComunicadoComponent },
