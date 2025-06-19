@@ -1,4 +1,4 @@
-// src/app/services/calendario.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ export interface Evento {
   titulo: string;
   tipo: string;
   link?: string;
+  hora?: string; 
 }
 
 @Injectable({
@@ -20,6 +21,10 @@ export class CalendarioService {
 
   salvarEvento(evento: Evento): Observable<Evento> {
     return this.http.post<Evento>(`${this.apiUrl}/save`, evento);
+  }
 
+  /** 🔄 Obter todos os eventos do backend */
+  obterEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${this.apiUrl}/all`);
   }
 }
