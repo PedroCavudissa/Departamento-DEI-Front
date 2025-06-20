@@ -1,18 +1,13 @@
-
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 
-
 *{
   margin: 0;
   padding: 0;
 }
-
 }
-
 body {
   font-family: Arial, sans-serif;
   background-color: #eef1f5;
@@ -20,7 +15,7 @@ body {
 }
 
 .container {
-  padding: 20px;
+  padding: 40px;
 }
 
 .form-section {
@@ -31,10 +26,11 @@ body {
   margin: 40px auto;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  
 }
 
 .table-section h3 {
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
@@ -42,7 +38,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
-  border-radius: 20px;
+  border-radius: 200px;
 }
 
 th, td {
@@ -50,7 +46,6 @@ th, td {
   padding: 8px 10px;
   text-align: center;
   font-size: 14px;
-  
 }
 
 th {
@@ -96,47 +91,94 @@ th {
   cursor: pointer;
 }
 
-/* Responsivo para tablets e celulares */
-@media (max-width: 768px) {
+    /* Responsividade */
+  
+@media screen and (width: 375px) and (height: 667px){
   .form-section {
-    padding: 15px;
-    margin: 20px auto;
-  }
-
-  th, td {
-    font-size: 13px;
-    padding: 6px;
-  }
-
-  .confirm-btn {
-    width: 100%;
+    padding: 16px;
+    margin-top: 91px;
   }
 }
 
-@media (max-width: 480px) {
-  .form-section {
-    border-radius: 6px;
-    padding: 12px;
-  }
+@media screen and (width: 414px) and (height: 896px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
+    @media screen and (width: 390px) and (height: 844px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
 
-  .table-section h3 {
-    font-size: 16px;
-  }
+ @media screen and (width: 430px) and (height: 932px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
+     @media screen and (width: 412px) and (height: 914px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
 
-  th, td {
-    font-size: 12px;
-    padding: 5px;
-  }
+  @media screen and (width: 412px) and (height: 915px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
 
-  .page {
-    width: 24px;
-    height: 24px;
-    line-height: 22px;
-    font-size: 12px;
-  }
+ @media screen and (width: 360px) and (height: 740px) {
+      .form-section {
+        margin-top: 80px;
+      }
+    }
+     @media screen and (width: 768px) and (height: 1024px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
+     @media screen and (width: 820px) and (height: 1180px) {
+      .form-section {
+        margin-top: 150px;
+      }
+    }
+     @media screen and (width: 1024px) and (height: 1366px) {
+      .form-section {
+        margin-top: 180px;
+      }
+    }
 
-  .confirm-btn {
-    font-size: 13px;
-    padding: 8px;
-  }
-}
+ @media screen and (width: 912px) and (height: 1368px) {
+      .form-section {
+        margin-top: 180px;
+      }
+    }
+ @media screen and (width: 540px) and (height: 720px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
+
+ @media screen and (width: 344px) and (height: 882px) {
+      .form-section {
+        margin-top: 100px;
+      }
+    }
+ @media screen and (width: 853px) and (height: 1280px) {
+      .form-section {
+        margin-top: 150px;
+      }
+    }
+ @media screen and (width: 1024px) and (height: 600px) {
+      .form-section {
+        margin-top: 80px;
+      }
+    }
+
+ @media screen and (width: 1280px) and (height: 800px) {
+      .form-section {
+        margin-top: 100px;
+        
+      }
+    }
