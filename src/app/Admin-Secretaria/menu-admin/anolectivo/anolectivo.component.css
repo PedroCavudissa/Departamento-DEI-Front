@@ -1,0 +1,92 @@
+/* Container para centralizar o formulário */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  height: 100vh;
+  text-align: center;
+}
+.formulario-container{
+  position: absolute;
+  left: 350px;
+}
+/* Formulário */
+form {
+  display: inline-block;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  width: 100%; /* Para garantir que o formulário ocupe 100% da largura disponível */
+  max-width: 900px; /* Definir largura máxima para o formulário */
+  margin-left: 160px; 
+  margin-top: 40px;
+  margin-right: 20rem
+}
+
+/* Cada grupo de campo (label + input) */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Organiza os itens verticalmente (label + input) */
+  align-items: flex-start; /* Alinha os itens à esquerda */
+  margin-bottom: 15px;
+}
+
+/* Estilo da label */
+.form-group label {
+  margin-bottom: 5px; /* Espaçamento entre a label e o input */
+  font-weight: bold;  /* Para dar mais destaque às labels */
+  text-align: left; /* Garantir que o texto da label fique à esquerda */
+}
+
+/* Estilo dos inputs */
+.form-group input {
+  padding: 8px;
+  width: 70%; /* O input ocupa parte da largura disponível */
+  box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Botão */
+button {
+  background-color: #47B5FF; /* Azul bebê */
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;  /* Espaçamento superior */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff; /* Texto preto */
+  transition: background-color 0.3s ease;
+  width: 100%; /* Faz o botão ocupar toda a largura disponível */
+  max-width: 200px; /* Largura máxima para o botão */
+  margin: 20px auto 10px; /* Centraliza o botão com margens laterais automáticas */
+}
+
+/* Botão desabilitado */
+button:disabled {
+  background-color: #cce4f7; /* Azul bebê mais claro */
+  cursor: not-allowed;
+}
+
+/* Efeito de hover no botão */
+button:hover:not(:disabled) {
+  background-color: #9acde3; /* Azul bebê mais escuro */
+}
+
+/* Wrapper para campos lado a lado (responsivo) */
+.form-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Empilha os campos na vertical em telas pequenas */
+@media (max-width: 768px) {
+  .form-wrapper {
+    flex-direction: column;
+  }
+}

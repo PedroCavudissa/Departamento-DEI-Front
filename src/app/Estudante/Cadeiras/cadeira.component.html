@@ -1,42 +1,56 @@
-<body>
-    <div class="conteudo">
-      <main class="painel">
-        <div class="container-principal">
-            <div class="caixa-branca">
-              <h3 class="titulo">Disciplinas em Atraso</h3>
+<div class="conteudo">
+  <main class="painel">
+    <div class="container-principal">
+      <div class="caixa-branca">
+        <h3 class="titulo">Disciplinas em Atraso</h3>
 
-             <div class="filtro">
-              <div class="filtro-box">
-                <label for="anoSelect">Ano Acadêmico</label>
-                 <select id="anoSelect" [(ngModel)]="anoSelecionado">
-                  <option *ngFor="let ano of anosDisponiveis" [ngValue]="ano">{{ ano }}º</option>
-                </select>
-              </div>
-             </div>
-              <div class="tabela">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Nº</th>
-                      <th>Cadeira</th>
-                      <th>Ano Acadêmico</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let disciplina of disciplinasFiltradas">
-                      <td>{{ disciplina.id }}</td>
-                      <td>{{ disciplina.nome }}</td>
-                      <td>{{ disciplina.ano }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+        <div class="filtro">
+          <div class="filtro-box">
+            <label for="anoSelect">Ano Acadêmico</label>
+            <select id="anoSelect" [(ngModel)]="anoSelecionado">
+              <option *ngFor="let ano of anosDisponiveis" [ngValue]="ano">{{ ano }}º</option>
+            </select>
+          </div>
+
+         
+          <div class="filtro-box" style="margin-top: 10px;">
+            <label>Semestre</label>
+            <div>
+              <label>
+                <input type="radio" name="semestre" [(ngModel)]="semestreSelecionado" [value]="1" />
+                1º
+              </label>
+              <label style="margin-left: 15px;">
+                <input type="radio" name="semestre" [(ngModel)]="semestreSelecionado" [value]="2" />
+                2º
+              </label>
             </div>
           </div>
-          
-      </main>
-      
+        </div>
+
+        <div class="tabela" *ngIf="disciplinasFiltradas.length > 0; else semDados">
+          <table>
+            <thead>
+              <tr>
+                <th>Cadeira</th>
+                <th>Ano Acadêmico</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let disciplina of disciplinasFiltradas">
+                <td>{{ disciplina.nome }}</td>
+                <td>{{ disciplina.ano }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ng-template #semDados>
+          <p>Nenhuma disciplina em atraso para o ano/semestre selecionado.</p>
+        </ng-template>
+      </div>
     </div>
-  </body>
-  
+  </main>
+</div>
+
 <app-lateral></app-lateral>

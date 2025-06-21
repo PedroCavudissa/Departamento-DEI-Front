@@ -44,6 +44,8 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
+import { CadastroComponent  } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
+import { AnolectivoComponent} from './Admin-Secretaria/menu-admin/anolectivo/anolectivo.component';
 
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
@@ -77,6 +79,8 @@ export const routes: Routes = [
   { path: 'pautas', component: PautaComponent },
   { path: 'ver-pauta', component: VerPautaComponent },
   { path: 'horario', component: HorarioComponent },
+  { path: 'cadastro', component: CadastroComponent },
+  { path: 'anolectivo', component: AnolectivoComponent },
   //Rotas para os Estudantes
   { path: 'tela-notas', component: TelaNotasComponent },
   { path: 'tela-estudante', component: TelaEstudanteComponent },

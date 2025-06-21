@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-lateral',
   standalone: true,
-<<<<<<< HEAD
-  imports: [],
-=======
-  imports: [LoginComponent], 
->>>>>>> main
+
+  
+
+  imports: [], 
+
   templateUrl: './lateral.component.html',
   styleUrl: './lateral.component.css',
 })

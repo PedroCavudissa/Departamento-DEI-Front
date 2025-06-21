@@ -1,0 +1,50 @@
+<div class="formulario-container">
+  <h2 class="titulo">Dados Académicos</h2>
+
+  <form #form="ngForm" class="formulario">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="classe">Ano:</label>
+        <select id="classe" name="classe" [(ngModel)]="anoLetivo.classe" required>
+          <option value="" disabled selected>Selecione o Ano</option>
+          <option value="1º">1ª</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="curso">Curso:</label>
+        <select id="curso" name="curso" [(ngModel)]="anoLetivo.curso" required>
+          <option value="Engenharia Informática">Engenharia Informática</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="anoIngresso">Ano de Ingresso:</label>
+        <input
+          type="text"
+          id="anoIngresso"
+          name="anoIngresso"
+          [(ngModel)]="anoLetivo.anoIngresso"
+          (input)="autoCompletarAno()"
+          maxlength="9"
+          placeholder="Ex: 1999"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="turno">Turno:</label>
+        <select id="turno" name="turno" [(ngModel)]="anoLetivo.turno" required>
+          <option value="" disabled selected>Selecione o Turno</option>
+          <option value="Diurno">Diurno</option>
+          <option value="Noturno">Noturno</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="botao-container">
+      <button type="button" (click)="salvarTudo()">Cadastrar</button>
+    </div>
+  </form>
+</div>
+
+<app-barralateral></app-barralateral>

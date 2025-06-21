@@ -4,6 +4,11 @@
 }
 
 /* Sidebar */
+.sidebar.active {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
 .sidebar {
   width: 200px;
   background-color: #47B5FF;

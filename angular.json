@@ -55,12 +55,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          " options": {
+             "proxyConfig": "proxy.conf.json"
+            },
           "configurations": {
             "production": {
               "buildTarget": "DepartamentoDEI:build:production"
             },
             "development": {
-              "buildTarget": "DepartamentoDEI:build:development"
+              "buildTarget": "DepartamentoDEI:build:development" 
             }
           },
           "defaultConfiguration": "development"
