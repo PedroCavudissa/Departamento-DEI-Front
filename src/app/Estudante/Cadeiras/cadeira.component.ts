@@ -12,12 +12,7 @@ import { DisciplinaService, DisciplinaEmAtraso } from '../../services/disciplina
   styleUrls: ['./cadeira.component.css']
 })
 export class CadeiraComponent implements OnInit {
-  anoSelecionado = 1;
-  semestreSelecionado = 1; 
-  estudanteId = 1;
-
-  anosDisponiveis: number[] = [1, 2, 3, 4, 5];
-
+  estudanteId = 1; // Substitua pelo ID real do estudante logado
   disciplinas: DisciplinaEmAtraso[] = [];
 
   constructor(private disciplinaService: DisciplinaService) {}
@@ -27,11 +22,5 @@ export class CadeiraComponent implements OnInit {
       next: (dados) => this.disciplinas = dados,
       error: (err) => console.error('Erro ao buscar disciplinas', err)
     });
-  }
-
-  get disciplinasFiltradas(): DisciplinaEmAtraso[] {
-    return this.disciplinas.filter(d =>
-      d.ano === this.anoSelecionado && d.semestre === this.semestreSelecionado
-    );
   }
 }
