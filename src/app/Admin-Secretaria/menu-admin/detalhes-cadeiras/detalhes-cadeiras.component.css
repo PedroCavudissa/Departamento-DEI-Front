@@ -129,3 +129,21 @@
 
   }
   
+
+
+  @media (max-width: 568px) {
+
+  .results table th  {  
+    width: 100%;
+    height: 100%;
+    font-size: 8px;
+}
+
+.results table td { 
+       
+  width: 100%;
+  height: 100%;
+}
+
+  }
+  

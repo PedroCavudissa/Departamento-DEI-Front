@@ -1,176 +1,217 @@
-/* formataçao do titulo e conteudo principal*/
+/* Cabeçalho */
 .titulo-container {
-  width: 100%;
   text-align: center;
-  background-color: #44b1f0; 
-  padding: 12px 0;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-left: 670px; 
-  margin-top: 150px;
-  max-width: 350px; 
-  position: relative;
+  background-color: #44b1f0;
+  padding: 16px;
+  border-radius: 8px;
+  color: #fff;
+  margin: 140px auto 20px;
+  max-width: 380px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .titulo {
-  color: #ffffff;
+  font-size: 1.8rem;
   margin: 0;
-  font-size: 1.5rem;
 }
 
+/* Quadro principal */
 .quadro {
-  width: 600px; 
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-  position: relative;
-  margin-left: 550px; 
-  margin-top: 150px;
-  margin-right: 20rem;
-  border: 1px solid #333;
+  max-width: 700px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: filter 0.3s ease;
 }
 
-.quadro .ver-provas a {
-  margin: 10px 0;
-  color: #444;
-  font-size: 16px;
+/* Área de ações */
+.acoes-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
-.ver-provas {
-  display: inline-block;
-  margin-top: 10px;
-  text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.ver-provas:hover {
-  text-decoration: underline;
-}
-
-
+/* Botões e links */
 .botao {
-  margin-top: 5px;
-  padding: 12px 24px;
   background-color: #44b1f0;
   color: white;
+  padding: 10px 18px;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
+  border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
-  transition: background-color 0.3s;
-  position: absolute;
-  top: 2px;  
-  right: 10px;   
+  transition: background-color 0.3s ease;
 }
 
 .botao:hover {
   background-color: #3498db;
 }
 
-/* formataçao do formulário */
+.ver-provas {
+  text-decoration: none;
+  font-weight: bold;
+  color: #007bff;
+  font-size: 15px;
+}
+
+.ver-provas:hover {
+  text-decoration: underline;
+}
+
+/* Lista de eventos */
+.lista-eventos {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.lista-eventos li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.lista-eventos li .titulo-evento {
+  font-weight: 500;
+}
+
+.lista-eventos li .tipo {
+  color: #888;
+  margin-left: 4px;
+}
+
+/* Formulário flutuante */
+.overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .form-container {
-  width: 300px;
-  margin: 20px auto;
-  margin-right: 20rem;
-  padding: 15px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   position: relative;
-  background-color: white;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
-  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.form-titulo {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  text-align: center;
 }
 
 label {
   display: block;
-  margin-top: 12px;
-  font-weight: bold;
+  margin: 10px 0 4px;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 input[type="text"] {
   width: 100%;
-  padding: 6px 10px;
-  margin-top: 4px;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
+  padding: 8px 10px;
   border-radius: 6px;
+  border: 1px solid #ccc;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .btn-salvar {
   margin-top: 16px;
-  background-color: #4db8ff;
-  color: white;
+  background-color: #44b1f0;
+  color: #fff;
   font-weight: bold;
-  padding: 10px 16px;
+  padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   width: 100%;
+  font-size: 15px;
   cursor: pointer;
-  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-salvar:hover {
+  background-color: #3498db;
 }
 
 .close-btn {
   position: absolute;
-  right: 10px;
+  right: 12px;
   top: 10px;
-  background-color: #4db8ff;
-  color: white;
-  font-weight: bold;
+  background-color: transparent;
+  color: #333;
   border: none;
-  border-radius: 6px;
-  padding: 6px 10px;
+  font-size: 20px;
   cursor: pointer;
 }
 
-/* Efeito de desfoque e opacidade no fundo quando o formulário está ativo */
+/* Blur */
 .blur {
   filter: blur(4px);
   opacity: 0.4;
   pointer-events: none;
-  transition: all 0.3s ease;
 }
-
-/* Sobreposição escura por trás do formulário */
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(2px);
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Sobrescreve form-container apenas quando for modal */
-.overlay .form-container {
-  position: relative;
-  z-index: 1001;
-  margin: 0; 
-}
-
 
 /* Responsivo */
 @media (max-width: 768px) {
-  .titulo-container,
-  .quadro {
-    width: 90%;
-    margin: 70px auto;
+  .quadro, .titulo-container {
+    margin: 20px;
+    width: auto;
+  }
+
+  .acoes-topo {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .botao {
-    width: 40%;
-    position: static;
-    display: block;
-    margin: 10px 0 20px auto;
+    width: 100%;
   }
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* TOAST DE SUCESSO */
+.toast {
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  z-index: 2000;
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
 }

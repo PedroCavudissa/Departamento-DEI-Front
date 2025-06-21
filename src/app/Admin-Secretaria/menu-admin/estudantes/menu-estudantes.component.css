@@ -113,12 +113,40 @@ button { cursor: pointer; }
      height: 45%;
 }
 
+
+
+@media (max-width: 568px) {
+  .container {
+    margin: 30% auto 0 auto;  /* Centraliza horizontalmente e dá espaço superior */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+  }
+
+  .chart-box{
+width: 100%;
+height: 80%;
+margin: 18px auto;
+
+   }
+
+   .chart-box h2{
+    font-size: 0.70rem;
+   
+    
+       }
+}
+
+
+
 /* Telas médias e grandes (acima de 768px) */
 @media (min-width: 769px) {
   .container {
     margin-left: 255px;
     margin-top: 100px;
-    width: 80%;
+    width: 70%;
   }
 
   .row {
@@ -130,7 +158,7 @@ button { cursor: pointer; }
 
   .chart-box {
     width: 60%;
-    flex: 1 1 calc(50% - 20px);
+    flex: 1 1 calc(45% - 16px);
   }
 
   form {

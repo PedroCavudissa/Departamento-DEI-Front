@@ -28,7 +28,7 @@ export class BarralateralComponent {
 
     switch (item) {
       case 'Dados Gerais':
-        {this.router.navigate(['/menu']);
+        {this.router.navigate(['/menu-admin']);
         break;}
         case 'Estudantes':
         {this.router.navigate(['/menu-estudantes']);

@@ -11,7 +11,7 @@
     <ul>
         <div class="scroll-container">
           <li> <a  class="menu-link"> <i class='bx bx-home'></i>
-            <span (click)="selecionarMenu('Dados Gerais','Dados Gerais')"tabindex="0" (keydown)="selecionarMenu('Geral','Geral')">Geral</span> </a></li>
+            <span (click)="selecionarMenu('Dados Gerais','Dados Gerais')"tabindex="0" (keydown)="selecionarMenu('Dados Gerais','Dados Gerais')">Geral</span> </a></li>
           
             <li><a  class="menu-link"> <i class='bx bx-group'></i>
              <span  (click)="selecionarMenu('Estudantes','Estudantes')"tabindex="0" (keyup.enter)="selecionarMenu('Estudantes','Estudantes')" >Estudantes </span></a> </li>
@@ -45,7 +45,7 @@
      <span (click)="selecionarMenu('Definições','Definições')" tabindex="0" (keyup.enter)="selecionarMenu('Definições','Definições')">Definições</span> </a> </li>
      
     <li> <a class="menu-link" > <i class='bx bx-log-out'></i>
-      <span tabindex="0" (keyup.enter)="selecionarMenu('Sair','Sair')">Sair</span> </a> </li>
+      <span (click)="selecionarMenu('Sair','Sair')"  tabindex="0" (keyup.enter)="selecionarMenu('Sair','Sair')">Sair</span> </a> </li>
      </div>  
         </ul>
       

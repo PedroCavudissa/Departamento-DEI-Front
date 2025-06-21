@@ -4,11 +4,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-lateral',
   standalone: true,
-<<<<<<< HEAD
+
   imports: [],
-=======
-  imports: [LoginComponent], 
->>>>>>> main
+
   templateUrl: './lateral.component.html',
   styleUrl: './lateral.component.css',
 })

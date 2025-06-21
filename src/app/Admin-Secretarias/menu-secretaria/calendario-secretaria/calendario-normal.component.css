@@ -163,7 +163,7 @@ input[type="text"] {
 @media (max-width: 768px) {
   .titulo-container,
   .quadro {
-    width: 90%;
+    width: 80%;
     margin: 120px auto;
   }
 
