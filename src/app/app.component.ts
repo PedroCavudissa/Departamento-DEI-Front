@@ -3,13 +3,10 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-<<<<<<< HEAD
-  imports: [RouterOutlet],
-=======
-  imports: [RouterOutlet, LateralComponent],
->>>>>>> main
+  standalone: true,
+  imports: [RouterOutlet], // aqui você pode incluir FormsModule também se quiser
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'] // ✅ corrigido: 'styleUrls' com "s"
 })
 export class AppComponent {
   title = 'DepartamentoDEI';

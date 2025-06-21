@@ -50,13 +50,10 @@ import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/c
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' }, // redireciona pra login ao abrir
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-<<<<<<< HEAD
-  //Rotas para o Admin-Master(Acesso Geral)
- 
-=======
->>>>>>> main
+
+  // Rotas para o Admin-Master (Acesso Geral)
   { path: 'menu-admin', component: MenuAdminComponent },
   { path: 'aprovarComunicado', component: AprovarComunicadoComponent },
   { path: 'comunicado', component: ComunicadoComponent },
@@ -77,7 +74,8 @@ export const routes: Routes = [
   { path: 'pautas', component: PautaComponent },
   { path: 'ver-pauta', component: VerPautaComponent },
   { path: 'horario', component: HorarioComponent },
-  //Rotas para os Estudantes
+
+  // Rotas para os Estudantes
   { path: 'tela-notas', component: TelaNotasComponent },
   { path: 'tela-estudante', component: TelaEstudanteComponent },
   { path: 'cadeira', component: CadeiraComponent },
@@ -87,20 +85,17 @@ export const routes: Routes = [
   { path: 'horario-estudante', component: HorarioEstudanteComponent },
   { path: 'chat-estudante', component: ChatEstudanteComponent },
   { path: 'calendario-estudante', component: CalendarioEstudanteComponent },
-  //Rotas para os Professores
+
+  // Rotas para os Professores
   { path: 'tela-professor', component: TelaProfessorComponent },
   { path: 'dado-professor', component: DadoProfessorComponent },
   { path: 'perfil-professor', component: PerfilProfessorComponent },
-  {
-    path: 'horario-professor',
-    component: HorarioProfessorComponent,
-  },
+  { path: 'horario-professor', component: HorarioProfessorComponent },
   { path: 'chat-professor', component: ChatProfessorComponent },
-
-  {path:'lancamento', component: LancamentoComponent},
+  { path: 'lancamento', component: LancamentoComponent },
   { path: 'calendario-professor', component: CalendarioProfessorComponent },
 
-  //Rotas para as Secretárias
+  // Rotas para as Secretárias
   { path: 'menu-secretaria', component: MenuSecretariaComponent },
   { path: 'chat-secretaria', component: ChatSecretariaComponent },
   { path: 'calendario-normal', component: CalendarioNormalComponent },
@@ -130,8 +125,5 @@ export const routes: Routes = [
     path: 'funcionario-secretaria',
     component: FuncionariosSecretariaComponent,
   },
-  {
-    path: 'horario-secretaria',
-    component: HorarioSecretariaComponent,
-  },
+  { path: 'horario-secretaria', component: HorarioSecretariaComponent },
 ];
