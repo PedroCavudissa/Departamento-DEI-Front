@@ -1,58 +1,70 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 
-*{
-  margin: 0;
-  padding: 0;
-}
-}
-body {
-  font-family: Arial, sans-serif;
-  background-color: #eef1f5;
-  color: #333;
-}
+
 
 .container {
-  padding: 40px;
+    max-width: 600px;
+  margin: 80px auto;
+  padding: 8px;
 }
 
 .form-section {
-  background-color: #fff;
+  position: relative;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 20px;
+  padding: 8px;
+  margin-bottom: 15px;
+  background-color: #fff;
+   overflow: hidden;
+   padding-top: 40px;
   
 }
 
-.table-section h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
+
+.secao-titulo {
+   position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #47B5FF;
+  text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 0px;
+  font-size: 14px;
+  width: 98%;
 }
 
-table {
+.table-section table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
   margin-bottom: 20px;
-  border-radius: 200px;
+  border-radius: 20px;
+  border-spacing: 0;
+  overflow: hidden;
 }
 
-th, td {
+.table-section table thead tr:first-child th:first-child {
+  border-top-left-radius: 20px;
+}
+
+ .table-section table thead tr:first-child th:last-child {
+  border-top-right-radius: 20px;
+}
+
+.table-section table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
+}
+
+.table-section table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+.table-section table th, .table-section table td {
   border: 1px solid #ddd;
   padding: 8px 10px;
   text-align: center;
   font-size: 14px;
+  background-color: white; 
 }
-
-th {
-  background-color: #007bff;
-  color: white;
-}
-
 .pagination {
   display: flex;
   justify-content: center;
@@ -63,19 +75,19 @@ th {
 .page {
   width: 28px;
   height: 28px;
-  border: 1px solid #007bff;
+  border: 1px solid #47B5FF;
   border-radius: 50%;
   text-align: center;
   line-height: 26px;
   font-weight: bold;
   font-size: 14px;
-  color: #007bff;
+  color: #47B5FF;
   cursor: pointer;
   background-color: white;
 }
 
 .page.active {
-  background-color: #007bff;
+  background-color: #47B5FF;
   color: white;
 }
 
@@ -83,101 +95,104 @@ th {
   display: block;
   margin: 0 auto;
   padding: 10px 16px;
-  background-color: #007bff;
+  background-color: #47B5FF;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
 }
+.confirm-btn:hover {
+  background-color: #0056b3;
+}
 
     /* Responsividade */
   
 @media screen and (width: 375px) and (height: 667px){
-  .form-section {
+  .container  {
     padding: 16px;
     margin-top: 91px;
   }
 }
 
 @media screen and (width: 414px) and (height: 896px) {
-      .form-section {
+      .container {
         margin-top: 100px;
       }
     }
     @media screen and (width: 390px) and (height: 844px) {
-      .form-section {
+      .container  {
         margin-top: 100px;
       }
     }
 
  @media screen and (width: 430px) and (height: 932px) {
-      .form-section {
+      .container  {
         margin-top: 100px;
       }
     }
      @media screen and (width: 412px) and (height: 914px) {
-      .form-section {
+      .container {
         margin-top: 100px;
       }
     }
 
   @media screen and (width: 412px) and (height: 915px) {
-      .form-section {
+      .container {
         margin-top: 100px;
       }
     }
 
  @media screen and (width: 360px) and (height: 740px) {
-      .form-section {
+      .container  {
         margin-top: 80px;
       }
     }
      @media screen and (width: 768px) and (height: 1024px) {
-      .form-section {
+      .container  {
         margin-top: 100px;
       }
     }
      @media screen and (width: 820px) and (height: 1180px) {
-      .form-section {
+      .container {
         margin-top: 150px;
       }
     }
      @media screen and (width: 1024px) and (height: 1366px) {
-      .form-section {
+      .container  {
         margin-top: 180px;
       }
     }
 
  @media screen and (width: 912px) and (height: 1368px) {
-      .form-section {
+     .container  {
         margin-top: 180px;
       }
     }
  @media screen and (width: 540px) and (height: 720px) {
-      .form-section {
+      .container {
         margin-top: 100px;
       }
     }
 
  @media screen and (width: 344px) and (height: 882px) {
-      .form-section {
+      .container  {
         margin-top: 100px;
       }
     }
  @media screen and (width: 853px) and (height: 1280px) {
-      .form-section {
+      .container {
         margin-top: 150px;
       }
     }
  @media screen and (width: 1024px) and (height: 600px) {
-      .form-section {
+      .container  {
         margin-top: 80px;
       }
     }
 
  @media screen and (width: 1280px) and (height: 800px) {
-      .form-section {
+      .container  {
         margin-top: 100px;
         
       }
