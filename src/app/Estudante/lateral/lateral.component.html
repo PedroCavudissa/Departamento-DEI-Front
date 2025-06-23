@@ -1,47 +1,57 @@
 
+
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 
 <!--Barra -Superior-->
 <button class="hamburger" (click)="toggleMenu()">☰</button>
 <div class="supbar">
   <h2 id="nome">{{titulo}}</h2>
   <div class="icons">
-    <div class="icon" (click)="selecionarMenu('Notificação','Notificação')"  tabindex="0" (keyup.enter)="selecionarMenu('','')">
+    <div class="icon" (click)="selecionarMenu('Notificação','Notificação')" tabindex="0" (keyup.enter)="selecionarMenu('','')">
       <i class="bx bx-bell"></i>
       <span class="badge">1</span>
-      <p >Notificações</p>
+      <p>Notificações</p>
     </div>
-    <div class="icon" (click)="selecionarMenu('Perfil','Perfil')"  tabindex="0" (keyup.enter)="selecionarMenu('','')">
-      <i class="bx bx-user" ></i>
-      <p > Perfil</p>
+    <div class="icon" (click)="selecionarMenu('Perfil','Perfil')" tabindex="0" (keyup.enter)="selecionarMenu('','')">
+      <i class="bx bx-user"></i>
+      <p>Perfil</p>
     </div>
   </div>
 </div>
 
 <!-- Barra-Lateral -->
 <nav class="sidebar" [class.active]="menuAtivo">
-    <ul>
-        <div class="scroll-container">
-           
-   <li><a class="menu-link"> <i class='bx bx-home'></i>
-    <span (click)="selecionarMenu('Página Inicial','Página Inicial')" tabindex="0" (keyup.enter)="selecionarMenu('Página Inicial','Olá, Pedro José Cavudissa')">Página Inicial</span> </a> </li>
+  <ul>
+    <div class="scroll-container">
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-home'></i>
+          <span (click)="selecionarMenu('Página Inicial','Página Inicial')" tabindex="0" (keyup.enter)="selecionarMenu('Página Inicial','Olá, Pedro José Cavudissa')">Página Inicial</span>
+        </a>
+      </li>
 
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-book'></i>
+          <span (click)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')" tabindex="0" (keyup.enter)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')">Confirmação da Matrícula</span>
+        </a>
+      </li>
 
-    <li><a  class="menu-link"> <i class='bx bx-book'></i>
-      <span (click)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')"tabindex="0" (keyup.enter)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')">Confirmação da Matrícula</span> </a> </li>
-  
-      <li><a  class="menu-link"> <i class='bx bx-certification'></i>
-        <span (click)="selecionarMenu('Minhas Notas','Minhas Notas')"tabindex="0" (keyup.enter)="selecionarMenu('Minhas Notas','Minhas Notas')">Minhas Notas</span> </a> </li>
-    
-        <li><a  class="menu-link"> <i class='bx bx-time-five'></i>
-          <span (click)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')"tabindex="0" (keyup.enter)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')">Disciplinas em Atraso</span> </a> </li>
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-certification'></i>
+          <span (click)="selecionarMenu('Minhas Notas','Minhas Notas')" tabindex="0" (keyup.enter)="selecionarMenu('Minhas Notas','Minhas Notas')">Minhas Notas</span>
+        </a>
+      </li>
 
-          <li><a  class="menu-link"> <i class='bx bx-time'></i>
-            <span (click)="selecionarMenu('Horários','Horários')"  tabindex="0" (keyup.enter)="selecionarMenu('Horários','Horários')">Horários</span> </a> </li>
-        
-            <li> <a  class="menu-link"><i class='bx bx-calendar'></i>
-              <span (click)="selecionarMenu('Calendário','Calendário')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Calendário</span> </a></li>
-               
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-time-five'></i>
+          <span (click)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')" tabindex="0" (keyup.enter)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')">Disciplinas em Atraso</span>
+        </a>
+      </li>
 
             <li><a  class="menu-link"> <i class='bx bx-chat'></i>
               <span (click)="selecionarMenu('Chat','Chat')" tabindex="0" (keyup.enter)="selecionarMenu('Chat','Chat')">Chat</span> </a> </li>
@@ -54,6 +64,35 @@
       
     </nav> 
  
- 
-  
 
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-time'></i>
+          <span (click)="selecionarMenu('Horários','Horários')" tabindex="0" (keyup.enter)="selecionarMenu('Horários','Horários')">Horários</span>
+        </a>
+
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-calendar'></i>
+          <span (click)="selecionarMenu('Calendário','Calendário')" tabindex="0" (keyup.enter)="selecionarMenu('','')">Calendário</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-chat'></i>
+          <span (click)="selecionarMenu('Chat','Chat')" tabindex="0" (keyup.enter)="selecionarMenu('Chat','Chat')">Chat</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="menu-link">
+          <i class='bx bx-log-out'></i>
+          <span (click)="selecionarMenu('Sair','Sair')" tabindex="0" (keyup.enter)="selecionarMenu('Sair','Sair')">Sair</span>
+        </a>
+      </li>
+    </div>
+  </ul>
+</nav>
+
+<app-login></app-login>

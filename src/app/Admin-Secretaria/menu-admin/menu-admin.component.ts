@@ -27,13 +27,17 @@ export class MenuAdminComponent implements AfterViewInit, OnInit {
   };
 
   estudantes: unknown;
-  totalEstudantes = 9;
+  totalEstudantes = 0;
   totalFuncionarios = 0;
 
-  constructor(
-    private router: Router,
-    private service: MenuAdminService
-  ) {}
+  constructor(private router: Router, private service: MenuAdminService) {}
+
+  ngOnInit(): void {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    }
+  }
 
   async ngAfterViewInit(): Promise<void> {
     try {
@@ -77,24 +81,6 @@ export class MenuAdminComponent implements AfterViewInit, OnInit {
     }
   }
 
-  ngOnInit(): void {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-    }
-  }
-
-  toggleTheme(): void {
-    const isDark = document.body.classList.contains('dark-theme');
-    if (isDark) {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
-    }
-  }
-
   verDetalhes(nome: string): void {
     const rotas: Record<string, string> = {
       funcionarios: '/detalhes-funcionarios',
@@ -108,6 +94,17 @@ export class MenuAdminComponent implements AfterViewInit, OnInit {
       alert('Dados Indisponíveis');
     } else {
       alert('Dados não disponíveis');
+    }
+  }
+
+  toggleTheme(): void {
+    const isDark = document.body.classList.contains('dark-theme');
+    if (isDark) {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
     }
   }
 }

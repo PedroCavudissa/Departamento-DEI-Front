@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'] // ✅ 'styleUrls' está correto
 })
 export class AppComponent {
   title = 'DepartamentoDEI';
