@@ -1,38 +1,16 @@
+<main class="quadro">
+  <a class="ver-provas" routerLink="/calendario/provas">Ver Calendário de Provas</a>
 
+  <ul class="lista-eventos" *ngIf="eventos.length > 0; else semEventos">
+    <li *ngFor="let evento of eventos">
+      <strong>{{ evento.data }}</strong> — {{ evento.titulo }}
+      <a *ngIf="evento.link" [href]="evento.link" target="_blank">Mais informações</a>
+    </li>
+  </ul>
 
-<!-- CONTEÚDO PRINCIPAL COM BLUR CONDICIONAL -->
-<main class="quadro" [class.blur]="mostrarFormulario">
-    <a class="ver-provas" href="/calendario/provas">Ver Calendário de Provas</a>
-   
-  
-    <ul class="lista-eventos">
-      <li *ngFor="let evento of eventos">
-        <strong>{{ evento.data }}</strong> — {{ evento.titulo }}
-        <a *ngIf="evento.link" [href]="evento.link" target="_blank">Mais informações</a>
-      </li>
-    </ul>
-  </main>
-  
-  <!-- FORMULÁRIO EM OVERLAY -->
-  <div *ngIf="mostrarFormulario" class="overlay">
-    <div class="form-container">
-      <form (ngSubmit)="salvarEvento()" #eventoForm="ngForm">
-        <button type="button" class="close-btn" (click)="fecharFormulario()">X</button>
-  
-        <label for="data">Data</label>
-        <input type="text" id="data" name="data" placeholder="dd/mm/aaaa" [(ngModel)]="data" required />
-  
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required />
-  
-        <label for="tipo">Tipo</label>
-        <input type="text" id="tipo" name="tipo" [(ngModel)]="tipo" required />
-  
-        <label for="link">Link (Opcional)</label>
-        <input type="text" id="link" name="link" [(ngModel)]="link" />
-  
-        <button type="submit" class="btn-salvar">Salvar</button>
-      </form>
-    </div>
-  </div>
-  <app-lateral>
+  <ng-template #semEventos>
+    <p>Nenhum evento disponível no momento.</p>
+  </ng-template>
+</main>
+
+<app-lateral></app-lateral>

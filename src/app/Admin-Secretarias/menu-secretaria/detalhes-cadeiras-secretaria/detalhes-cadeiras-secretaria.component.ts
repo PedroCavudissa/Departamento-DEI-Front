@@ -1,19 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { Disciplina, DisciplinaService } from '../../../Services/disciplina.service';
+import { DisciplinaEmAtraso, DisciplinaService } from '../../../Services/disciplina.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+const estudanteId = 1;
 @Component({
   selector: 'app-detalhes-cadeiras-secretaria',
   imports: [BarralateralSecretariaComponent,FormsModule,CommonModule],
   templateUrl: './detalhes-cadeiras-secretaria.component.html',
   styleUrls: ['./detalhes-cadeiras-secretaria.component.css'],
 })
-export class DetalhesCadeirasSecretariaComponent {
+export class DetalhesCadeirasSecretariaComponent implements OnInit {
 
-  disciplinas: Disciplina[] = [];
+  disciplinas: DisciplinaEmAtraso[] = [];
   errorMessage: string | null = null;
+  
 
   constructor(private disciplinaService: DisciplinaService) {}
 
@@ -22,7 +24,8 @@ export class DetalhesCadeirasSecretariaComponent {
   }
 
   carregarEstudantes(): void {
-    this.disciplinaService.getDisciplinas().subscribe({
+    this.disciplinaService.getDisciplinas(estudanteId)
+.subscribe({
       next: (data) => {
         this.disciplinas = data;
         this.errorMessage = null;

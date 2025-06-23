@@ -27,4 +27,8 @@ export class CalendarioService {
   obterEventos(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`${this.apiUrl}/all`);
   }
+listarEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(this.apiUrl);
+  
+}
 }
