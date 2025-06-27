@@ -67,12 +67,19 @@ export class LancamentoComponent implements OnInit {
   }
 
   onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement | null;
-    if (!this.tipoSelecionado || !this.disciplinaSelecionada || !input?.files?.length) return;
-
-    const file: File = input.files[0];
-
-    this.lancamentoService.importarExcel(this.disciplinaSelecionada as number, this.tipoSelecionado as number, file).subscribe({
+    const input = event.target as HTMLInputElement;
+    if (!input?.files?.length) return;
+  
+    const file = input.files[0];
+    const disciplinaId = Number(this.disciplinaSelecionada);
+    const tipoId = Number(this.tipoSelecionado);
+  
+    if (!disciplinaId || !tipoId) {
+      alert('Selecione a disciplina e o tipo de avaliação antes de importar.');
+      return;
+    }
+  
+    this.lancamentoService.importarExcel(disciplinaId, tipoId, file).subscribe({
       next: (notasImportadas: Nota[]) => {
         this.notas = notasImportadas;
         alert('Arquivo importado com sucesso!');
@@ -80,6 +87,7 @@ export class LancamentoComponent implements OnInit {
       error: (err) => alert('Erro ao importar arquivo: ' + (err.message || err)),
     });
   }
+  
 
   salvar(): void {
     if (!this.tipoSelecionado || !this.disciplinaSelecionada) return;
@@ -100,8 +108,9 @@ export class LancamentoComponent implements OnInit {
   }
 
   private getErrorMessage(err: HttpErrorResponse): string {
-    return err?.message || 'Erro desconhecido';
+    return err?.error?.message || err.message || 'Erro desconhecido';
   }
+  
 
   resetar(): void {
     this.tipoSelecionado = '';
