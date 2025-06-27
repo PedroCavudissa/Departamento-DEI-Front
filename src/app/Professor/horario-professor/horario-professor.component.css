@@ -1,41 +1,82 @@
 .container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin-top: 60px;
-    margin-left: 500px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+select {
+  padding: 10px;
+  width: 100%;
+  max-width: 180px;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.visualizacao-horario {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.upload-horario {
+  background-color: #e9f7ff;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px dashed #3aaaf3;
+}
+
+.upload-horario input[type="file"] {
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+    margin-top: 40px;
+    padding: 15px;
   }
-  
+
   .filtros {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
+    gap: 8px;
   }
-  
+
   select {
+    max-width: 100%;
+  }
+
+  .visualizacao-horario, .upload-horario {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
     padding: 10px;
-    width: 100%;
-    max-width: 180px;
-    border-radius: 5px;
+    margin-top: 30px;
   }
-  
-  .visualizacao-horario {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 6px;
-    margin-bottom: 30px;
-    text-align: center;
+
+  select {
+    padding: 8px;
   }
-  
-  .upload-horario {
-    background-color: #e9f7ff;
-    padding: 20px;
-    border-radius: 6px;
-    border: 1px dashed #3aaaf3;
+
+  .visualizacao-horario, .upload-horario {
+    padding: 10px;
+    font-size: 14px;
   }
-  
-  .upload-horario input[type="file"] {
-    margin-bottom: 10px;
-  }
-  
+}

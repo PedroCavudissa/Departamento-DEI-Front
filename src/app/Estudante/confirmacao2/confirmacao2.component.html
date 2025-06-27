@@ -1,32 +1,39 @@
 
 
-<div class="container">
+<div class="matricula-container">
 
-    <main class="main-content">
-  
-      <section class="form-section">
-        <div class="table-section">
-            <div class="caixa">
-                <h3>Dados Acadêmicos</h3>
-            </div>
-            <br>
-            <div class="caixa">
-                <h3>Disciplinas a Fazer</h3>
-            </div>
-            <br>
-            <div class="caixa">
-                <h3>Disciplinas em Atraso</h3>
-            </div>
-          <br><br>
-        </div>
-  
-        <div class="pagination">
+  <section class="secao">
+
+    <h3 class="secao-titulo">Dados Académicos</h3>
+    
+    <div class="grid-dados">
+      <p><strong>Nome:</strong> {{ dadosAcademicos.nome }}</p>
+      <p><strong>Contacto:</strong> {{ dadosAcademicos.contacto }}</p>
+      <p><strong>Email:</strong> {{ dadosAcademicos.email }}</p>
+      <p><strong>Nº Estudante:</strong> {{ dadosAcademicos.numeroEstudante }}</p>
+      <p><strong>BI:</strong> {{ dadosAcademicos.bi }}</p>
+    </div>
+    <p class="confirmacao"><strong>Confirmação a ser feita:</strong> {{ dadosAcademicos.confirmacao }}</p>
+  </section>
+
+  <section class="secao">
+    <h3 class="secao-titulo">Disciplinas a Fazer</h3>
+    <ul>
+      <li *ngFor="let disciplina of disciplinasfaze">{{ disciplina.nome }}</li>
+    </ul>
+  </section>
+
+  <section class="secao">
+    <h3 class="secao-titulo">Disciplinas em Atraso</h3>
+    <ul>
+      <li *ngFor="let disciplina of disciplinasAtrasadas">{{ disciplina.nome }}</li>
+    </ul>
+  </section>
+  <div class="pagination">
           <span class="page active">1</span>
           <span class="page active">2</span>
           <span class="page">3</span>
         </div>
-        <button class="confirm-btn">Confirmar</button>
-      </section>
-    </main>
-  </div>
+        <button class="confirm-btn">Continuar</button>
+</div>
 <app-lateral></app-lateral>

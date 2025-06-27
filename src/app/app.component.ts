@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-
 import { RouterOutlet } from '@angular/router';
- @Component({
+
+@Component({
   selector: 'app-root',
-  imports: [RouterOutlet ],
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrls: ['./app.component.css'] // ✅ 'styleUrls' está correto
 })
 export class AppComponent {
   title = 'DepartamentoDEI';

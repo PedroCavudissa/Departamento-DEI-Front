@@ -1,6 +1,6 @@
 
 <body>
-  <button (click)="toggleTheme()">Mudar Tema</button>
+  
 
     <main class="conteudo">
         
@@ -11,17 +11,17 @@
             <a routerLink="/home" >
               <h3 (click)="verDetalhes('estudantes')"  tabindex="" (keyup)="verDetalhes('')">Estudantes </h3>
                </a>
-            <p class="number">95</p>
+            <p class="number">{{totalEstudantes}}</p>
           </div>
       
           <div class="card blue">
             <h3  (click)="verDetalhes('funcionarios')"  tabindex="" (keyup)="verDetalhes('')">Funcionários</h3>
-            <p class="number">27</p>
+            <p class="number">{{totalFuncionarios}}</p>
           </div>
       
           <div class="card gray">
             <h3 (click)="verDetalhes('cadeiras')"  tabindex="" (keyup)="verDetalhes('')">Cadeiras</h3>
-            <p class="number">52</p>
+            <p class="number">5</p>
           </div>
       
           <div class="card yellow">

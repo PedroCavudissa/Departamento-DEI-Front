@@ -1,131 +1,49 @@
+<div class="content">
+  <main class="principal">
+    <h3>Minhas Notas</h3>
 
- 
-  
-  <body>
-    
+    <div class="caixa">
+      <select [(ngModel)]="filtroDisciplina" (change)="scrollTabela()">
+        <option value="">-- Selecione a disciplina --</option>
+        <option *ngFor="let d of disciplinas" [value]="d">{{ d }}</option>
+      </select>
 
-  <div class="content">
-  
-    <main class="principal">
-      <h3>Minhas Notas</h3>
-      <div class="caixa">
-        <input class="imprimir"
-          type="number"
-          id="numero"
-          name="numero"
-          min="1"
-          max="5"
-          placeholder="Ano Acadêmico"
-        />
-        <button class="imprimir"><i class="bi bi-printer"> </i> Imprimir</button>
-      </div>
-  <div class="table-wrapper">
+      <select [(ngModel)]="filtroSemestre" (change)="scrollTabela()">
+        <option value="">-- Selecione o semestre --</option>
+        <option *ngFor="let s of semestres" [value]="s">{{ s }}</option>
+      </select>
+
+      <button (click)="limparFiltros()" class="btn-limpar">Limpar Filtro</button>
+    </div>
+
+    <div class="table-wrapper" id="tabela">
       <table class="table">
         <thead>
-          <tr>         
-            <th scope="col">Cadeira </th>
-            <th scope="col">Semestre</th>
-            <th scope="col">AC1</th>
-            <th scope="col">AC2</th>
-            <th scope="col">P1</th>
-            <th scope="col">P2</th>
-            <th scope="col">MS</th>
-            <th scope="col">Exame</th>
+          <tr>
+            <th>Cadeira</th>
+            <th>Semestre</th>
+            <th>AC1</th>
+            <th>AC2</th>
+            <th>P1</th>
+            <th>P2</th>
+            <th>MS</th>
+            <th>Exame</th>
           </tr>
         </thead>
         <tbody>
-          <tr>      
-            <td>Análise Matemática I</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td>  
-            <td>15</td>        
-          </tr>
-  
-          <tr>        
-            <td>FTI</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td> 
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td>      
-          </tr>
-  
-          <tr>         
-            <td>Fundamento de Programação</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-  
-          <tr>         
-            <td>InglêS Técnico 1</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td>
-            <td>15</td>  
-          </tr>
-  
-          <tr>         
-            <td>Algoritmos</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-  
-          <tr>         
-            <td>FTI</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td>
-            <td>15</td>  
-          </tr>
-  
-          <tr>
-           
-            <td>InglêS Técnico 2</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-  
-          <tr>         
-            <td>FAnálise Matemática 2</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
+          <tr *ngFor="let nota of notasFiltradas">
+            <td>{{ nota.cadeira }}</td>
+            <td>{{ nota.semestre }}</td>
+            <td>{{ nota.ac1 }}</td>
+            <td>{{ nota.ac2 }}</td>
+            <td>{{ nota.p1 }}</td>
+            <td>{{ nota.p2 }}</td>
+            <td>{{ nota.ms }}</td>
+            <td>{{ nota.exame }}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    </main>
-  </div>
-  <app-lateral></app-lateral>
-</body>
+  </main>
+</div>
+<app-barralateral></app-barralateral>
