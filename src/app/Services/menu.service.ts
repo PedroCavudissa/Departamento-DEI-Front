@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' }) 
-export class MenuAdminService {
+export class MenuService {
   private baseUrl = 'https://ec5f-105-172-62-238.ngrok-free.app/api/relatorios';
 
   constructor(private http: HttpClient) {}
@@ -21,7 +21,7 @@ export class MenuAdminService {
       .then(res => res?.total ?? 0);
   }
 
-  getTotalDisciplinas(): Promise<number> {
+  getTotalCadeiras(): Promise<number> {
     return this.http
       .get<{ total: number }>(`${this.baseUrl}/funcionario/total`)
       .toPromise()

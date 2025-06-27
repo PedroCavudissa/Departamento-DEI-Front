@@ -137,18 +137,16 @@ input, select {
     font-size: 0.95rem;
     padding: 10px 25px;
   }
-<<<<<<< HEAD
+
   
   .btn-azul {
     background-color: #0d91f7;
     color: white;
     border: none;
-=======
-
   button {
     font-size: 0.85rem;
     padding: 6px 14px;
->>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
+
     width: 100%;
   }
 
@@ -188,4 +186,5 @@ input, select {
     padding: 10px;
     font-size: 0.9rem;
   }
+}
 }

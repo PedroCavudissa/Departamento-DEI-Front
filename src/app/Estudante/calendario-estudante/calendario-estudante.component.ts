@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from '../lateral/lateral.component';
-import { CalendarioService, Evento } from '../../Services/calendario.service';
+import { CalendarioService, Evento } from '../../services/calendario.service';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-calendario-estudante',
   standalone: true,
-  imports: [LateralComponent, CommonModule],
+  imports: [LateralComponent, CommonModule,FormsModule],
   templateUrl: './calendario-estudante.component.html',
   styleUrl: './calendario-estudante.component.css',
 })

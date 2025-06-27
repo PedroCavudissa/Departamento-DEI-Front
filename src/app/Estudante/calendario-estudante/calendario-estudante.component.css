@@ -100,8 +100,7 @@
   .lista-eventos li {
     font-size: 14px;
   }
-<<<<<<< HEAD
-  
+
   
   /* Responsivo */
   @media (max-width: 768px) {
@@ -118,6 +117,5 @@
       margin: 10px 0 20px auto;
     }
   }
-=======
+
 }
->>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf

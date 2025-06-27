@@ -4,13 +4,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-lateral',
   standalone: true,
-<<<<<<< HEAD
 
   imports: [],
 
-=======
-  imports: [],
->>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
+
   templateUrl: './lateral.component.html',
   styleUrls: ['./lateral.component.css'],
 })

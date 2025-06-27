@@ -8,13 +8,6 @@ import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css'; 
 import { LoginService } from '../services/login.service';
 
-const notyf = new Notyf({
-  duration: 3000, 
-  position: {
-    x: 'right',
-    y: 'top',     
-  },
-});
 @Component({
   selector: 'app-login',
   standalone: true, // define como standalone
@@ -36,6 +29,13 @@ export class LoginComponent implements OnInit {
     });
   }
   
+ notyf = new Notyf({
+  duration: 3000, 
+  position: {
+    x: 'right',
+    y: 'top',     
+  },
+});
   
   mostrarSidebar = true;
   mensagemLogin = '';
