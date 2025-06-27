@@ -1,14 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LateralProfessorComponent } from "../lateral-professor/lateral-professor.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CalendarioService, Evento } from '../../Services/calendario.service';
 
-interface Evento {
-  data: string;
-  titulo: string;
-  tipo: string;
-  link?: string;
-}
 
 @Component({
   selector: 'app-calendario-professor',
@@ -16,41 +11,33 @@ interface Evento {
   templateUrl: './calendario-professor.component.html',
   styleUrl: './calendario-professor.component.css'
 })
-export class CalendarioProfessorComponent {
-
+export class CalendarioProfessorComponent implements OnInit {
   mostrarFormulario = false;
+  mostrarToast = false;
 
-  // Dados do novo evento
   data = '';
   titulo = '';
   tipo = '';
   link? = '';
 
-  eventos: Evento[] = [
-    {
-      data: '20-03-2025',
-      titulo: 'Abertura do Semestre',
-      tipo: 'Acadêmico',
-      link: 'https://exemplo.com/evento1',
-    },
-    {
-      data: '20-07-2025',
-      titulo: 'Lançamento das Pautas',
-      tipo: 'Acadêmico',
-      link: 'https://exemplo.com/evento2',
-    },
-  ];
+  eventos: Evento[] = [];
 
-  toggleFormulario() {
-    this.mostrarFormulario = !this.mostrarFormulario;
+  constructor(private calendarioService: CalendarioService) {}
+
+  ngOnInit(): void {
+    this.carregarEventos();
   }
-  fecharFormulario() {
-    this.mostrarFormulario = false;
+
+  carregarEventos() {
+    this.calendarioService.obterEventos().subscribe({
+      next: (res) => (this.eventos = res),
+      error: (err) => console.error('Erro ao carregar eventos:', err)
+    });
   }
 
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
-      alert('Por favor, preencha todos os campos obrigatórios.');
+      alert('Preencha todos os campos obrigatórios.');
       return;
     }
 
@@ -58,12 +45,26 @@ export class CalendarioProfessorComponent {
       data: this.data.trim(),
       titulo: this.titulo.trim(),
       tipo: this.tipo.trim(),
-      link: this.link?.trim() || '',
+      link: this.link?.trim() || ''
     };
 
-    this.eventos.push(novoEvento);
+    this.calendarioService.salvarEvento(novoEvento).subscribe({
+      next: evento => {
+        this.eventos.push(evento);
+        this.fecharFormulario();
+        this.limparCampos();
+        this.exibirToast();
+      },
+      error: err => console.error('Erro ao salvar evento:', err)
+    });
+  }
+
+  toggleFormulario() {
+    this.mostrarFormulario = !this.mostrarFormulario;
+  }
+
+  fecharFormulario() {
     this.mostrarFormulario = false;
-    this.limparCampos();
   }
 
   limparCampos() {
@@ -71,5 +72,12 @@ export class CalendarioProfessorComponent {
     this.titulo = '';
     this.tipo = '';
     this.link = '';
+  }
+
+  exibirToast() {
+    this.mostrarToast = true;
+    setTimeout(() => {
+      this.mostrarToast = false;
+    }, 3000);
   }
 }

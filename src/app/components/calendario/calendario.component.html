@@ -5,8 +5,8 @@
 
 <!-- CONTEÚDO PRINCIPAL COM BLUR CONDICIONAL -->
 <main class="quadro" [class.blur]="mostrarFormulario">
-  <a class="ver-provas" href="/calendario/provas">Ver Calendário de Provas</a>
-  <button class="botao" (click)="toggleFormulario()">Adicionar Evento</button>
+  <a class="ver-provas" href="/calendario/provas">Ver Calendário de Avaliação</a>
+  <button class="botao" (click)="toggleFormulario()">Adicionar Eventos</button>
 
   <ul class="lista-eventos">
     <li *ngFor="let evento of eventos">
@@ -23,6 +23,7 @@
       <button type="button" class="close-btn" (click)="fecharFormulario()">X</button>
 
       <label for="data">Data</label>
+
       <input type="text" id="data" name="data" placeholder="dd/mm/aaaa" [(ngModel)]="data" required />
 
       <label for="titulo">Título</label>

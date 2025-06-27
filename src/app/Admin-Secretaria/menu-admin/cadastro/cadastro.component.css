@@ -1,0 +1,105 @@
+/* Container para centralizar o formulário */
+.container h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #333;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px; /* Adiciona espaço interno para telas pequenas */
+  background-color: #f0f8ff; /* Azul claro de fundo opcional */
+  
+}
+.formulario-container{
+  position: absolute;
+  left: 350px;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 800px; /* Aumenta a largura máxima do formulário */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-left: 170px; 
+  margin-top: 40px;
+  margin-right: 15rem
+}
+
+/* Cada grupo de campo (label + input) */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Estilo da label */
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+}
+
+/* Estilo dos inputs */
+.form-group input {
+  padding: 10px;
+  width: 100%; /* Faz o input preencher toda a largura */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Botão */
+button {
+  background-color: #47B5FF;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 220px;
+  align-self: center;
+}
+
+/* Botão desabilitado */
+button:disabled {
+  background-color: #cce4f7;
+  cursor: not-allowed;
+}
+
+/* Efeito de hover no botão */
+button:hover:not(:disabled) {
+  background-color: #9acde3;
+}
+
+/* Agrupamento horizontal de campos (ex: nome + sobrenome) */
+.form-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* Responsividade: empilha os campos em telas pequenas */
+@media (max-width: 768px) {
+  .form-wrapper {
+    flex-direction: column;
+  }
+}

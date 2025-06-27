@@ -9,9 +9,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+
 /* Container central */
 .container-principal {
-  margin-left: 220px; /* mesmo valor da sidebar */
+  margin-left: 220px; 
   display: flex;
   justify-content: center;
   align-items: center;

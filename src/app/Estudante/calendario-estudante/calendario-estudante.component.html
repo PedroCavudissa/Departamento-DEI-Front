@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <body>
   
   <!-- CONTEÚDO PRINCIPAL COM BLUR CONDICIONAL -->
@@ -43,3 +44,21 @@
   </body>
   
     <app-lateral>
+=======
+<main class="quadro">
+  <a class="ver-provas" routerLink="/calendario/provas">Ver Calendário de Provas</a>
+
+  <ul class="lista-eventos" *ngIf="eventos.length > 0; else semEventos">
+    <li *ngFor="let evento of eventos">
+      <strong>{{ evento.data }}</strong> — {{ evento.titulo }}
+      <a *ngIf="evento.link" [href]="evento.link" target="_blank">Mais informações</a>
+    </li>
+  </ul>
+
+  <ng-template #semEventos>
+    <p>Nenhum evento disponível no momento.</p>
+  </ng-template>
+</main>
+
+<app-lateral></app-lateral>
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf

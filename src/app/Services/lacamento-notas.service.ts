@@ -1,15 +1,21 @@
+export interface Nota {
+  matricula: string;
+  nomeAluno: string;   // ← Adicione esta linha
+  ac: number;
+  pf: number;
+  notaFinal: number;
+}
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Nota {
   matricula: string;
+  nomeAluno: string; // ← ADICIONADO
   ac: number;
   pf: number;
   notaFinal: number;
 }
-
-
 
 @Injectable({
   providedIn: 'root',

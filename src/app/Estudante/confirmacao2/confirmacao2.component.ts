@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { LateralComponent } from "../lateral/lateral.component";
 
 
@@ -10,6 +11,8 @@ import { LateralComponent } from "../lateral/lateral.component";
   styleUrl: './confirmacao2.component.css'
 })
 export class Confirmacao2Component {
+  constructor(private router: Router) {}
+  
 dadosAcademicos = {
   nome: 'Pedro José Cavudissa',
   contacto: 'xxxxxxx',
@@ -31,4 +34,10 @@ disciplinasAtrasadas = [
   { nome: 'Fundamentos de Programação' }
 ];
 
+confi1() {
+  this.router.navigate(['/confirmacao1']);
+}
+confi3() {
+  this.router.navigate(['/confirmacao3']);
+}
 }

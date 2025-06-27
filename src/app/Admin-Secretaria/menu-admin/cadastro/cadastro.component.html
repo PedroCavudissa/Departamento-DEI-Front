@@ -1,0 +1,84 @@
+<!-- estudante-form.component.html -->
+<div class="formulario-container">
+  <h2>Dados do Estudante</h2>
+
+  <form (ngSubmit)="avancar()" #form="ngForm" class="formulario-estudante">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" [(ngModel)]="estudante.nome" required>
+      </div>
+
+      <div class="form-group">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input
+          type="text"
+          id="dataNascimento"
+          name="dataNascimento"
+          [(ngModel)]="estudante.dataNascimento"
+          (input)="formatarData($event)"
+          maxlength="10"
+          required
+          placeholder="DD/MM/AAAA"
+          title="Formato: DD/MM/AAAA"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="bi">Nº do BI:</label>
+        <input
+          type="text"
+          id="bi"
+          name="bi"
+          [(ngModel)]="estudante.bi"
+          pattern="\\d{9}[A-Za-z]{2}\\d{3}"
+          required
+          title="Formato: 9 números, 2 letras, 3 números (ex: 123456789AB123)"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="endereco">Endereço:</label>
+        <input
+          type="text"
+          id="endereco"
+          name="endereco"
+          [(ngModel)]="estudante.endereco"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Nº de Telefone:</label>
+        <input
+          type="text"
+          id="telefone"
+          name="telefone"
+          [(ngModel)]="estudante.telefone"
+          pattern="^(91|92|93|94|95|97|99)\\d{7}$"
+          required
+          title="Número deve ter 9 dígitos e começar com: 91, 92, 93, 94, 95, 97 ou 99"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          [(ngModel)]="estudante.email"
+          pattern="^[a-zA-Z0-9._%+-]+@gmail\\.com$"
+          required
+        >
+      </div>
+    </div>
+
+    <div class="botao-container">
+      <button type="submit">Avançar</button>
+    </div>
+  </form>
+</div>
+
+
+<app-barralateral></app-barralateral>

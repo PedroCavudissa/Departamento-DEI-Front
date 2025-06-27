@@ -12,8 +12,8 @@
       <p><strong>Email:</strong> {{ dadosAcademicos.email }}</p>
       <p><strong>Nº Estudante:</strong> {{ dadosAcademicos.numeroEstudante }}</p>
       <p><strong>BI:</strong> {{ dadosAcademicos.bi }}</p>
-    </div>
     <p class="confirmacao"><strong>Confirmação a ser feita:</strong> {{ dadosAcademicos.confirmacao }}</p>
+    </div>
   </section>
 
   <section class="secao">
@@ -29,11 +29,16 @@
       <li *ngFor="let disciplina of disciplinasAtrasadas">{{ disciplina.nome }}</li>
     </ul>
   </section>
-  <div class="pagination">
+  
+       <div class="pagination">
           <span class="page active">1</span>
           <span class="page active">2</span>
           <span class="page">3</span>
         </div>
-        <button class="confirm-btn">Continuar</button>
+        
+      <div class="button-container">
+        <button class="back-btn" (click)="confi1()">Anterior</button>
+        <button class="confirm-btn" (click)="confi3()">Continuar</button>
+      </div>  
 </div>
 <app-lateral></app-lateral>

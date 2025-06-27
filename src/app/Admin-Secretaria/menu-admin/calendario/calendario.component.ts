@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
+<<<<<<< HEAD
 import { CalendarioService, Evento } from '../../../services/calendario.service';
+=======
+import { CalendarioService, Evento } from '../../../Services/calendario.service';
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
 
 @Component({
   selector: 'app-calendario',
@@ -80,4 +84,8 @@ export class CalendarioComponent implements OnInit {
       this.mostrarToast = false;
     }, 3000);
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf

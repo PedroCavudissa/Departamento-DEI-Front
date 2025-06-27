@@ -4,14 +4,19 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-lateral',
   standalone: true,
+<<<<<<< HEAD
 
   imports: [],
 
+=======
+  imports: [],
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
   templateUrl: './lateral.component.html',
-  styleUrl: './lateral.component.css',
+  styleUrls: ['./lateral.component.css'],
 })
 export class LateralComponent {
   constructor(private router: Router) {}
+
   titulo = 'Olá, Pedro Cavudissa';
   menuAtivo = false;
 
@@ -19,46 +24,39 @@ export class LateralComponent {
     this.menuAtivo = !this.menuAtivo;
   }
 
-  selecionarMenu(item: string, novoTitulo: string) {
+  selecionarMenu(item: string, novoTitulo: string): void {
     this.titulo = novoTitulo;
     this.menuAtivo = false;
+
     switch (item) {
-      case 'Página Inicial': {
+      case 'Página Inicial':
         this.router.navigate(['/tela-estudante']);
         break;
-      }
-      case 'Confirmação da Matrícula': {
+      case 'Confirmação da Matrícula':
         this.router.navigate(['/confirmacao1']);
         break;
-      }
-      case 'Disciplinas em Atraso': {
+      case 'Disciplinas em Atraso':
         this.router.navigate(['/cadeira']);
         break;
-      }
-      case 'Minhas Notas': {
+      case 'Minhas Notas':
         this.router.navigate(['/tela-notas']);
         break;
-      }
-      case 'Horários': {
+      case 'Horários':
         this.router.navigate(['/horario-estudante']);
         break;
-      }
-
-      case 'Calendário': {
+      case 'Calendário':
         this.router.navigate(['/calendario-estudante']);
         break;
-      }
-      case 'Perfil': {
+      case 'Perfil':
         this.router.navigate(['/perfil-estudante']);
         break;
-      }
-
-      case 'Chat': {
+      case 'Chat':
         this.router.navigate(['/chat-estudante']);
         break;
-      }
       case 'Sair': {
-        const confirmacao = window.confirm('Tem certeza que deseja sair?');
+        const confirmacao: boolean = window.confirm(
+          'Tem certeza que deseja sair?'
+        );
         if (confirmacao) {
           this.router.navigate(['/login']);
         }

@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
+=======
+import { Component, AfterViewInit, OnInit } from '@angular/core';
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
 import { Router } from '@angular/router';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { MenuAdminService } from '../../Services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
 
 @Component({
   selector: 'app-menu-admin',
@@ -28,17 +35,20 @@ export class MenuAdminComponent {
   };
 
   estudantes: unknown;
-  totalEstudantes = 9;
+  totalEstudantes = 0;
   totalFuncionarios = 0;
 
-  constructor(
-    private router: Router,
-    private service: MenuAdminService
-  ) {}
+  constructor(private router: Router, private service: MenuAdminService) {}
+
+  ngOnInit(): void {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-theme');
+    }
+  }
 
   async ngAfterViewInit(): Promise<void> {
     try {
-      // Espera corretamente as promessas
       const [estudantes, funcionarios] = await Promise.all([
         this.service.getTotalEstudantes(),
         this.service.getTotalFuncionarios(),
@@ -88,6 +98,7 @@ export class MenuAdminComponent {
     this.router.navigate(['/detalhes-funcionários'])
     break;
 
+<<<<<<< HEAD
     case'Estudantes':
     this.router.navigate(['/detalhes-estudantes'])
     break;
@@ -96,4 +107,25 @@ export class MenuAdminComponent {
   }
 
   
+=======
+    if (rotas[nome]) {
+      this.router.navigate([rotas[nome]]);
+    } else if (nome === 'salas') {
+      alert('Dados Indisponíveis');
+    } else {
+      alert('Dados não disponíveis');
+    }
+  }
+
+  toggleTheme(): void {
+    const isDark = document.body.classList.contains('dark-theme');
+    if (isDark) {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
 }

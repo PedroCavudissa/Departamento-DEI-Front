@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Disciplina, DisciplinaService } from '../../../Services/disciplina.service';
+import { DisciplinaEmAtraso, DisciplinaService } from '../../../Services/disciplina.service';
 import { CommonModule } from '@angular/common';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { FormsModule } from '@angular/forms';
 
+const estudanteId = 1;
 @Component({
   selector: 'app-detalhes-cadeiras',
   standalone: true,
@@ -13,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class DetalhesCadeirasComponent implements OnInit {
  
-    disciplinas: Disciplina[] = [];
+    disciplinas: DisciplinaEmAtraso[] = [];
     errorMessage: string | null = null;
   
     constructor(private disciplinaService: DisciplinaService) {}
@@ -23,7 +24,8 @@ export class DetalhesCadeirasComponent implements OnInit {
     }
   
     carregarEstudantes(): void {
-      this.disciplinaService.getDisciplinas().subscribe({
+      this.disciplinaService.getDisciplinas(estudanteId)
+.subscribe({
         next: (data) => {
           this.disciplinas = data;
           this.errorMessage = null;

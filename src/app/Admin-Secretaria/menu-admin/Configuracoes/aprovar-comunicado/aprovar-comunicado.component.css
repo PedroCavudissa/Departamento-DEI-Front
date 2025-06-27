@@ -1,147 +1,191 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-  }
-  
-  .main-wrapper {
-    margin-left: 169px;
-    width: calc(100% - 169px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    overflow-y: auto;
-    padding-top: 50px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Wrapper geral */
+.main-wrapper {
+  margin-left: 169px;
+  width: calc(100% - 169px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding-top: 50px;
+}
+
+/* Container de conteúdo */
+.main {
+  margin: 50px auto;
+  width: 60%;
+  min-height: 400px;
+  padding: 20px;
+  border: 1px solid rgba(179, 179, 179, 0.521);
+  border-radius: 6px;
+  background-color: white;
+}
+
+/* Título estilizado (caso queira usar depois) */
+.texto {
+  background-color: #0d91f7;
+  text-align: center;
+  margin: 30px auto;
+  padding: 12px 40px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+/* Caixa de controles superiores */
+.main > .caixa {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.caixa2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Botões padrão */
+button {
+  padding: 8px 20px;
+  margin: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border: none;
+}
+
+/* Estilos dos botões */
+.btn-azul {
+  background-color: #0d91f7;
+  color: white;
+}
+
+.btn-preto {
+  background-color: black;
+  color: white;
+}
+
+/* Campos de entrada */
+textarea {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+input, select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+  margin: 5px 0;
+  font-size: 1rem;
+}
+
+/* ====================== */
+/* RESPONSIVIDADE COMPLETA */
+/* ====================== */
+
+/* Telas médias (notebooks/tablets) */
+@media (max-width: 1024px) {
   .main {
-    margin: 50px auto;
-    width: 60%;
-    min-height: 400px;
-    padding: 20px;
-    border: 1px solid rgba(179, 179, 179, 0.521);
-    border-radius: 6px;
-    background-color: white;
+    width: 80%;
   }
-  
+
   .texto {
-    background-color: #0d91f7;
-    text-align: center;
-    margin: 30px auto;
-    padding: 12px 40px;
-    border-radius: 30px;
-    color: white;
-    font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    padding: 10px 30px;
   }
-  
-  .main > .caixa {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
+}
+
+/* Telas pequenas (tablets pequenos, smartphones grandes) */
+@media (max-width: 768px) {
+  .main-wrapper {
+    margin-left: 0;
     width: 100%;
+    padding-top: 60px;
+    align-items: center;
   }
-  
-  button {
-    padding: 8px 20px;
-    margin: 6px;
-    border-radius: 6px;
-    cursor: pointer;
+
+  .main {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .texto {
     font-size: 0.95rem;
+    padding: 10px 25px;
   }
+<<<<<<< HEAD
   
   .btn-azul {
     background-color: #0d91f7;
     color: white;
     border: none;
+=======
+
+  button {
+    font-size: 0.85rem;
+    padding: 6px 14px;
+>>>>>>> d173b7f1356cac5774517fbeff8b5ee0bd7662bf
     width: 100%;
   }
-  
-  .btn-preto {
-    background-color: black;
-    color: white;
-    border: none;
+
+  .main > .caixa {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
+
+  .caixa2 {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Telas muito pequenas (celulares ≤ 480px) */
+@media (max-width: 480px) {
+  .main {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .texto {
+    font-size: 0.85rem;
+    padding: 8px 18px;
+  }
+
   textarea {
-    width: 100%;
-    padding: 20px;
-    border-radius: 6px;
-    resize: vertical;
+    padding: 15px;
+    font-size: 0.9rem;
   }
-  
+
   input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    width: 100%;
-    margin: 5px 0;
+    font-size: 0.9rem;
   }
-  
-  /* Responsivo para tablets e smartphones */
-  @media (max-width: 1024px) {
-    .main {
-      width: 80%;
-    }
+
+  button {
+    padding: 10px;
+    font-size: 0.9rem;
   }
-  
-  @media (max-width: 768px) {
-    .main-wrapper {
-      margin-left: 0;
-      width: 100%;
-      padding-top: 60px;
-      align-items: center;
-    }
-  
-    .main {
-      width: 90%;
-      margin: 20px auto;
-      padding: 15px;
-    }
-  
-    .texto {
-      font-size: 0.95rem;
-      padding: 10px 25px;
-    }
-  
-    button {
-      font-size: 0.85rem;
-      padding: 6px 14px;
-    }
-  
-    .main > .caixa {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .main {
-      width: 95%;
-      padding: 10px;
-    }
-  
-    .texto {
-      font-size: 0.85rem;
-      padding: 8px 18px;
-    }
-  
-    button {
-      width: 100%;
-      text-align: center;
-    }
-  
-    textarea {
-      padding: 15px;
-    }
-  }
-  
+}
