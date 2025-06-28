@@ -27,18 +27,18 @@
         </div>
         <div
           class="error-message"
-          *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('email')"
+          *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.hasError('required')"
         >
           Email inválido!
         </div>
       </div>
 
       <div class="input-group">
-        <label for="password">Senha</label>
+        <label for="senha">Senha</label>
         <input
-          id="password"
+          id="senha"
           type="password"
-          formControlName="password"
+          formControlName="senha"
           placeholder="Digite sua senha"
         />
         <div
@@ -73,8 +73,8 @@
       <form [formGroup]="recuperarForm" (ngSubmit)="continuarRecuperacao()">
         <input
           type="email"
-          formControlName="gmail"
-          placeholder="Digite seu Gmail"
+          formControlName="email"
+          placeholder="Digite seu email"
         />
         <div
           class="error-message"

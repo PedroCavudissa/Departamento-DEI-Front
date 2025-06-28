@@ -100,6 +100,7 @@
 /* Responsivo: telas pequenas */
 @media (max-width: 768px) {
   .sidebar {
+    display: block;
     width: 140px;
     padding: 8px;
   }
@@ -112,7 +113,7 @@
   .sidebar ul li {
     margin: 10px 0;
     color: white;
-
+  }
   .menu-link {
     font-size: 16px;
     padding: 8px;
@@ -133,5 +134,4 @@
     margin-left: 140px;
     padding-top: 80px;
   }
-}
 }

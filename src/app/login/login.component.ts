@@ -54,10 +54,11 @@ recuperarForm!: FormGroup;
       senha: ['', Validators.required]
     });
 
-  this.recuperarForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    senha: ['', [Validators.required, Validators.minLength(6)]]
-  });
+    this.recuperarForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]]
+    });
+    
 }
   
 // Senha esquecida
@@ -101,22 +102,18 @@ entrar() {
   if (this.loginForm.valid) {
     const usuario = {
       email: this.loginForm.get('email')?.value,
-      senha: this.loginForm.get('senha')?.value
+      password: this.loginForm.get('senha')?.value
     };
 
     this.loginService.entrar(usuario).subscribe({
       next: (res: any) => {
         this.notyf.success('Login realizado com sucesso!');
-
-        // Salvar o token e o usuário
         localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res.usuario));
+        localStorage.setItem('usuario', res.email);
 
-        // Redirecionar conforme o role
-        const role = res.usuario.role;
-
+        const role = res.role;
         switch (role) {
-          case 'adminMaster':
+          case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
           case 'admin':
@@ -129,7 +126,7 @@ entrar() {
             this.router.navigate(['/tela-estudante']);
             break;
           default:
-         
+            this.router.navigate(['/']);
         }
       },
       error: (error) => {

@@ -34,7 +34,7 @@ export class BarralateralComponent {
         {this.router.navigate(['/menu-estudantes']);
         break;}
       case 'Funcionários':
-        {this.router.navigate(['funcionarios']);
+        {this.router.navigate(['cadastro-funcionario']);
         break;}
      
 

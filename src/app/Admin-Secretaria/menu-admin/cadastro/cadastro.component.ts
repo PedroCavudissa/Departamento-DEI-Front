@@ -4,35 +4,40 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { EstudanteService, Estudante } from '../../../services/estudante.service';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-
+import { Notyf } from 'notyf';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [CommonModule,FormsModule, BarralateralComponent],
+  imports: [CommonModule, FormsModule, BarralateralComponent],
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent {
+  notyf = new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
+
   estudante: Estudante = {
     nome: '',
     dataNascimento: '',
-    bi: '',
+    numIdentificacao: '',
+    tipoDocumento: '',
     endereco: '',
-    telefone: '',
-    email: ''
+    contacto: '',
+    anoAcademico: 1,
+    dataIngresso: '',
+    email: '',
+    instituicaoAnterior: '',
+    notaExameAcesso: 0,
+    notaEnsinoMedio: 0,
+    regimeIngresso: 'EXAME_ACESSO',
+    dataConclusao: '',
+    statusEstudante: 'ACTIVO'
   };
 
   constructor(
     private router: Router,
     private estudanteService: EstudanteService
   ) {}
-
-  avancar(): void {
-    this.estudanteService.setDados(this.estudante);
-    localStorage.setItem('cadastro', JSON.stringify(this.estudante));
-    this.router.navigate(['/anolectivo']);
-  }
 
   formatarData(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -41,5 +46,18 @@ export class CadastroComponent {
     if (valor.length > 5) valor = valor.slice(0, 5) + '/' + valor.slice(5, 9);
     input.value = valor;
     this.estudante.dataNascimento = valor;
+  }
+
+  avancar(): void {
+    this.estudanteService.cadastrar(this.estudante).subscribe({
+      next: () => {
+        this.notyf.success('Estudante cadastrado com sucesso!');
+        this.router.navigate(['/menu-admin']); 
+      },
+      error: (error) => {
+        console.error(error);
+        this.notyf.error('Erro ao cadastrar estudante.');
+      }
+    });
   }
 }

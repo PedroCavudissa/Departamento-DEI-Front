@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AnolectivoComponent } from './anolectivo.component';
+import { NotaTabelaComponent } from './nota-tabela.component';
 
-describe('AnolectivoComponent', () => {
-  let component: AnolectivoComponent;
-  let fixture: ComponentFixture<AnolectivoComponent>;
+describe('NotaTabelaComponent', () => {
+  let component: NotaTabelaComponent;
+  let fixture: ComponentFixture<NotaTabelaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AnolectivoComponent]
+      imports: [NotaTabelaComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(AnolectivoComponent);
+
+    fixture = TestBed.createComponent(NotaTabelaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
