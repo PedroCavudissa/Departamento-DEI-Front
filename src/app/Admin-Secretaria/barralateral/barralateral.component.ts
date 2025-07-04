@@ -47,8 +47,8 @@ export class BarralateralComponent {
                 {this.router.navigate(['/chat']);
                 break;}
 
-                case 'Matrículas':
-                {this.router.navigate(['/cadastro']);
+                case 'Funcionários':
+                {this.router.navigate(['/funcionarios']);
                 break;}
 
 

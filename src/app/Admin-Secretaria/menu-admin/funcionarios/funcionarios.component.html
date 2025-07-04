@@ -1,21 +1,52 @@
+<div class="supbar">
+  <h2>Funcionários</h2>
+</div>
 
-<div style="margin-left:220px;margin-top: 100px; padding:20px;">
-    <h2 style="text-align:center;">Total de Funcionários: <span></span></h2>
-  
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 120px; gap: 10px;">
-      <select name="Funções" id="funções">
-        <option value="Professores"></option>
-        <option value="Secretários"></option>
-      </select>
-      <div>
-        <label for="search">Pesquisar Funcionários</label><br>
-        <input type="text" id="search" placeholder="Escreva aqui..." style="padding: 5px; width: 550px;">
-        <button style="padding: 6px 10px; background-color: #333; color: white; border: none;">Buscar</button>
-      </div>
+<div class="main-wrapper">
+  <h2 class="titulo-principal">
+    Total de Funcionários: <span>{{ funcionarios.length }}</span>
+  </h2>
+
+  <div class="graficos">
+    <div class="grafico-box">
+      <canvas id="graficoDI"></canvas>
     </div>
-  
-    <div class="scroll-container" style="background-color:white; margin-top: 20px; ;margin-left: 225px;border:1px solid #333; height: 300px; width: 800px;">
-      <!-- Conteúdo dinâmico vai aqui -->
+    <div class="grafico-box">
+      <canvas id="graficoProfessores"></canvas>
     </div>
+  </div>
+
+  <div class="filtros-wrapper">
+    <select class="select-funcao" [(ngModel)]="filtroFuncao" (change)="onBuscar()">
+      <option value="">Todas as funções</option>
+      <option value="Secretária">Secretária</option>
+      <option value="Professor">Professor</option>
+    </select>
+
+    <input type="text" [(ngModel)]="pesquisaNome" placeholder="Pesquisar Funcionários" />
+    <button (click)="onBuscar()" class="buscar-btn">Buscar</button>
+  </div>
+
+  <div class="scroll-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Apelido</th>
+          <th>Função</th>
+          <th>Documento</th>
+          <th>Nível Acadêmico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionario of funcionarios">
+          <td>{{ funcionario.nome }}</td>
+          <td>{{ funcionario.apelido }}</td>
+          <td>{{ funcionario.role.role }}</td>
+          <td>{{ funcionario.tipo_doc }} - {{ funcionario.num_doc }}</td>
+          <td>{{ funcionario.nivel_acad }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <app-barralateral></app-barralateral>

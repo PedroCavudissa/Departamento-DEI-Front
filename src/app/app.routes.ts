@@ -15,7 +15,7 @@ import { DetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/detal
 import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
 import { CalendarioComponent } from './Admin-Secretaria/menu-admin/calendario/calendario.component';
 import { PautaComponent } from './Admin-Secretaria/menu-admin/pauta/pauta.component';
-import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
+
 import { TelaProfessorComponent } from './Professor/tela-professor/tela-professor.component';
 import { DadoProfessorComponent } from './Professor/dado-professor/dado-professor.component';
 import { PerfilProfessorComponent } from './Professor/perfil-professor/perfil-professor.component';
@@ -46,6 +46,7 @@ import { CalendarioProfessorComponent } from './Professor/calendario-professor/c
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 import { CadastroFuncionarioComponent } from './Admin-Secretaria/menu-admin/cadastro-funcionario/cadastro-funcionario.component';
+import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
