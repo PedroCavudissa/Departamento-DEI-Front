@@ -122,7 +122,7 @@ entrar() {
           case 'professor':
             this.router.navigate(['/tela-professor']);
             break;
-          case 'estudante':
+          case 'ESTUDANTE':
             this.router.navigate(['/tela-estudante']);
             break;
           default:

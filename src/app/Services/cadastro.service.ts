@@ -17,7 +17,7 @@ export interface Funcionario {
 @Injectable({ providedIn: 'root' })
 
   export class FuncionarioService {
-    private baseUrl = 'https://cef3-102-214-36-154.ngrok-free.app/api/auth/register/staff';
+    private baseUrl = 'https://f7df-102-214-36-117.ngrok-free.app/api/auth/register/staff';
   
     constructor(private http: HttpClient) {}
   

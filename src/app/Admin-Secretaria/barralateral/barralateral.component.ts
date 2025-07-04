@@ -33,10 +33,8 @@ export class BarralateralComponent {
         case 'Estudantes':
         {this.router.navigate(['/menu-estudantes']);
         break;}
-      case 'Funcionários':
-        {this.router.navigate(['cadastro-funcionario']);
-        break;}
      
+
 
         case 'Disciplinas':
           {this.router.navigate(['/detalhes-cadeiras']);
@@ -51,6 +49,9 @@ export class BarralateralComponent {
                 {this.router.navigate(['/funcionarios']);
                 break;}
 
+                case 'Matrículas':
+                {this.router.navigate(['/cadastro']);
+                break;}
 
                 
                 case 'Calendário':
