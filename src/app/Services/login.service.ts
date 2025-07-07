@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  private apiUrl = 'https://f7df-102-214-36-117.ngrok-free.app/api/auth/login';
+  private apiUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/auth/login';
 
   constructor(private http: HttpClient) {}
 

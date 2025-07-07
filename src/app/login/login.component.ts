@@ -110,16 +110,18 @@ entrar() {
         this.notyf.success('Login realizado com sucesso!');
         localStorage.setItem('token', res.token);
         localStorage.setItem('usuario', res.email);
+        console.log('Usuário logado:', res.email);
+        console.log('Token recebido:', res.token);
 
         const role = res.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
-          case 'admin':
-            this.router.navigate(['/menu-secretaria']);
+          case 'SECRETARIA':
+            this.router.navigate(['/menu-admin']);
             break;
-          case 'professor':
+          case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
             break;
           case 'ESTUDANTE':

@@ -35,7 +35,13 @@ export class CadastroFuncionarioComponent {
   ) {}
 
   cadastrar(): void {
-    this.funcionarioService.cadastrar(this.funcionario).subscribe({
+    const funcionarioCorrigido = {
+      ...this.funcionario,
+      dataNascimento: new Date(this.funcionario.dataNascimento),
+      dataIngresso: new Date(this.funcionario.dataIngresso)
+    };
+  
+    this.funcionarioService.cadastrar(funcionarioCorrigido).subscribe({
       next: () => {
         this.notyf.success('Funcionário cadastrado com sucesso!');
         this.router.navigate(['/menu-admin']);
@@ -46,4 +52,8 @@ export class CadastroFuncionarioComponent {
       }
     });
   }
+  
+
+
+  
 }

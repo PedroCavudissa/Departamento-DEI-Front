@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
 export interface DisciplinaEmAtraso {
   id: number;
@@ -25,7 +25,7 @@ export interface Disciplina {
 
 @Injectable({ providedIn: 'root' })
 export class DisciplinaService {
-  private baseUrl = '/api/subject/atrasadas';
+  private baseUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/subject/atrasadas';
 
   constructor(private http: HttpClient) {}
 
@@ -36,4 +36,26 @@ export class DisciplinaService {
   getDisciplinas(estudanteId: number): Observable<DisciplinaEmAtraso[]> {
     return this.http.get<DisciplinaEmAtraso[]>(`${this.baseUrl}/${estudanteId}`);
   }
+
+
+
+
+getTotalCadeiras(): Observable<number> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/json'
+  });
+
+  const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/subject/total';
+
+  return this.http.get<number>(url, { headers }).pipe(
+    map(res => {
+      console.log('✅ Resposta da API (getCadeiras):', res);
+      return res ?? 0;
+    })
+  );
+}
+
 }

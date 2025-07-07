@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 export interface Estudante {
   nome: string;
-  dataNascimento: string;
+  dataNascimento: string; 
   numIdentificacao: string;
   tipoDocumento: string;
   endereco: string;
@@ -16,28 +16,50 @@ export interface Estudante {
   notaExameAcesso: number;
   notaEnsinoMedio: number;
   regimeIngresso: string;
-  dataConclusao: string;
+  dataConclusao:  string;
   statusEstudante: string;
 }
+
+@Injectable({ providedIn: 'root' })
+export class EstudanteService {
+  private apiUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/departamento/students';
+
+  constructor(private http: HttpClient) {}
+
+  cadastrar(estudante: Estudante): Observable<any> {
+    const token = localStorage.getItem('token');
+    console.log('Token JWT comparar:', localStorage.getItem('token'));
+    console.log('Estudante a ser cadastrado:', estudante);
+
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer${token}`,
+      'Accept': 'application/json'
+
+    });
+
+    return this.http.post(this.apiUrl, estudante, { headers });
+  }
+ 
+  getTotalEstudantes(): Observable<number> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json'
+    });
   
-  @Injectable({ providedIn: 'root' })
-  export class EstudanteService {
-    private apiUrl = 'https://cef3-102-214-36-154.ngrok-free.app/api/departamento/students';
+    const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/departamento/students/total';
   
-    constructor(private http: HttpClient) {}
-  
-    cadastrar(estudante: any) {
-      const token = localStorage.getItem('token');
-     
-console.log('Token usado:', token); 
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      });
-  
-      return this.http.post(this.apiUrl, estudante, { headers });
-    }
-  
+    return this.http.get<number>(url, { headers }).pipe(
+      map(res => {
+        console.log('✅ Resposta da API (getTotalEstudantes):', res);
+        return res ?? 0;
+      })
+    );
   }
   
+  
 
+}

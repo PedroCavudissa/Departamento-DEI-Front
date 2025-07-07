@@ -28,7 +28,11 @@
   </select><br />
 
   <label>Cargo:</label>
-  <input type="text" [(ngModel)]="funcionario.cargo" name="cargo" required /><br />
+  <select [(ngModel)]="funcionario.cargo" name="cargo" required>
+    <option value="PROFESSOR">Docente</option>
+    <option value="SECRETARIA">Secretária</option>
+    <option value="ADMINISTRADOR">Administrador</option>
+  </select><br />
 
   <label>Email:</label>
   <input type="email" [(ngModel)]="funcionario.email" name="email" required /><br />

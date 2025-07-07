@@ -3,7 +3,7 @@
 
   <form (ngSubmit)="avancar()" #form="ngForm" class="formulario-estudante">
 
-<!-- ... dentro do formulário ... -->
+
 
 <!-- SEÇÃO: DADOS PESSOAIS -->
 <h3>Dados Pessoais</h3>
@@ -15,7 +15,8 @@
 
   <div class="form-group">
     <label for="dataNascimento">Data de Nascimento:</label>
-    <input type="date" id="dataNascimento" name="dataNascimento" [(ngModel)]="estudante.dataNascimento" (input)="formatarData($event)" maxlength="10" placeholder="DD/MM/AAAA" required>
+    <input type="date" id="dataNascimento" name="dataNascimento" [(ngModel)]="estudante.dataNascimento" required>
+
   </div>
 
   <div class="form-group">
@@ -83,19 +84,19 @@
 
   <div class="form-group">
     <label for="dataIngresso">Data de Ingresso:</label>
-    <input type="date" id="dataIngresso" name="dataIngresso" [(ngModel)]="estudante.dataIngresso" placeholder="AAAA-MM-DD" required>
+    <input type="date" id="dataIngresso" name="dataIngresso" [(ngModel)]="estudante.dataIngresso"  required>
   </div>
 
   <div class="form-group">
     <label for="dataConclusao">Data de Conclusão (opcional):</label>
-    <input type="date" id="dataConclusao" name="dataConclusao" [(ngModel)]="estudante.dataConclusao" placeholder="AAAA-MM-DD">
+    <input type="date" id="dataConclusao" name="dataConclusao" [(ngModel)]="estudante.dataConclusao" >
   </div>
 
   <div class="form-group">
     <label for="statusEstudante">Status:</label>
     <select id="statusEstudante" name="statusEstudante" [(ngModel)]="estudante.statusEstudante" required>
       <option value="">Selecione</option>
-      <option value="ACTIVO">Ativo</option>
+      <option value="ACTIVO">Activo</option>
       <option value="SUSPENSO">Inactivo</option>
       
     </select>
