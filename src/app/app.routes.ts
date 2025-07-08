@@ -1,4 +1,4 @@
-/*
+
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MenuAdminComponent } from './Admin-Secretaria/menu-admin/menu-admin.component';
@@ -19,7 +19,7 @@ import { CalendarioComponent } from './Admin-Secretaria/menu-admin/calendario/ca
 import { PautaComponent } from './Admin-Secretaria/menu-admin/pauta/pauta.component';
 import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
 import { TelaProfessorComponent } from './Professor/tela-professor/tela-professor.component';
-import { DadoProfessorComponent } from './Professor/dado-professor/dado-professor.component';
+import { DadoProfessorComponent } from '../../../Departamento-DEI-Front-Dev/dado-professor/dado-professor.component';
 
 import { PerfilProfessorComponent } from './Professor/perfil-professor/perfil-professor.component';
 
@@ -46,11 +46,12 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
-//import { CadastroComponent } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
+ //import { CadastroComponent } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 import { CadastroFuncionarioComponent } from './Admin-Secretaria/menu-admin/cadastro-funcionario/cadastro-funcionario.component';
+import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudante.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -85,7 +86,7 @@ export const routes: Routes = [
   // Estudante
 
   { path: 'tela-notas', component: TelaNotasComponent },
- // { path: 'tela-estudante', component: TelaEstudanteComponent },
+  { path: 'tela-estudante', component: TelaEstudanteComponent },
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
@@ -119,7 +120,8 @@ export const routes: Routes = [
   { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent },
   { path: 'horario-secretaria', component: HorarioSecretariaComponent },
 
-];*/
+];
+/*
 import { Routes } from '@angular/router';
 
 // Importações agrupadas por módulo/funcionalidade
@@ -257,4 +259,4 @@ export const routes: Routes = [
 
   // Rota de fallback (404)
   { path: '**', redirectTo: 'login' }
-];
+];*/

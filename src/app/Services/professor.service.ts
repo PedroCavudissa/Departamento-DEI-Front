@@ -1,56 +1,50 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
-
-export interface Professor {
- 
-    nome: string;
-    userDetails: {
-    id: number;
-    dataNascimento: string;
-    numIdentificacao: string;
-    tipoDocumento: string;
-    endereco: string;
-    contacto: string;
-    anoAcademico: number;
-    dataIngresso: string;
-    dataConclusao: string;
-    statusEstudante: string;
-  };
-
-
+// Defina interfaces mais flexíveis
+interface UserDetails {
+  id: number;
+  dataNascimento?: string;
+  numIdentificacao?: string;
+  tipoDocumento?: string;
+  endereco?: string;
+  contacto?: string;
+  anoAcademico?: number;
+  dataIngresso?: string;
+  dataConclusao?: string;
+  statusEstudante?: string;
+  [key: string]: any; // Permite propriedades adicionais
 }
 
+export interface Professor {
+  nome?: string;
+  userDetails: UserDetails;
+  [key: string]: any; // Permite propriedades adicionais
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ProfessorService {
-  cadastrar(Professor:Professor) {
+
+  cadastrar(estudante: Professor) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://d7f0-2a09-bac5-63-46e-00-71-47.ngrok-free.app/api'; // URL da API
+  private apiUrl = 'https://14f411305204.ngrok-free.app/api'; // URL da API
 
 
-  constructor(private http: HttpClient) { }
-
-  private getHeaders(acceptJson: boolean = true): HttpHeaders {
-  const token = localStorage.getItem('token') || '';
-  const base = {
-    'Authorization': `Bearer ${token}`
-  };
-
-  if (acceptJson) {
+  
+ constructor(private http: HttpClient) { }
+private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token') || '';
     return new HttpHeaders({
-      ...base,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true' // Adicione esta linha para evitar avisos do ngrok
     });
   }
-
-  return new HttpHeaders(base);
-}
-
   private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {
     // Erro do lado do cliente
@@ -98,4 +92,31 @@ getProfessor(): Observable<Professor> {
   );
 }
 
+
+atualizarPerfil(id: number, dadosAtualizados: Partial<Professor>): Observable<Professor> {
+
+  //professor rota
+  return this.http.patch<Professor>(`${this.apiUrl}/departamento/students/${id}`, dadosAtualizados, {
+    headers: this.getHeaders()
+  });
 }
+
+}
+/*
+  private getHeaders(acceptJson: boolean = true): HttpHeaders {
+  const token = localStorage.getItem('token') || '';
+  const base = {
+    'Authorization': `Bearer ${token}`
+  };
+
+  if (acceptJson) {
+    return new HttpHeaders({
+      ...base,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+  }
+
+  return new HttpHeaders(base);
+}
+*/

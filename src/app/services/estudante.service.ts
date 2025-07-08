@@ -37,24 +37,7 @@ export class EstudanteService {
 
 
   constructor(private http: HttpClient) { }
-/*
-  private getHeaders(acceptJson: boolean = true): HttpHeaders {
-  const token = localStorage.getItem('token') || '';
-  const base = {
-    'Authorization': `Bearer ${token}`
-  };
 
-  if (acceptJson) {
-    return new HttpHeaders({
-      ...base,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
-  }
-
-  return new HttpHeaders(base);
-}
-*/
 private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token') || '';
     return new HttpHeaders({
@@ -118,7 +101,24 @@ atualizarPerfil(id: number, dadosAtualizados: Partial<Estudante>): Observable<Es
 
 }
 
+/*
+  private getHeaders(acceptJson: boolean = true): HttpHeaders {
+  const token = localStorage.getItem('token') || '';
+  const base = {
+    'Authorization': `Bearer ${token}`
+  };
 
+  if (acceptJson) {
+    return new HttpHeaders({
+      ...base,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    });
+  }
+
+  return new HttpHeaders(base);
+}
+*/
 
 
 

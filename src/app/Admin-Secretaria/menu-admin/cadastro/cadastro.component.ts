@@ -34,7 +34,8 @@ export class CadastroComponent {
     notaEnsinoMedio: 0,
     regimeIngresso: 'EXAME_ACESSO',
     dataConclusao: '',
-    statusEstudante: 'ACTIVO'
+    statusEstudante: 'ACTIVO',
+    userDetails: undefined
   };
 
   constructor(
