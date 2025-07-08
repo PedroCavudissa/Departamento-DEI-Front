@@ -1,42 +1,39 @@
-
-// estudante.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
-// Defina interfaces mais flexíveis
-interface UserDetails {
-  id: number;
-  dataNascimento?: string;
-  numIdentificacao?: string;
-  tipoDocumento?: string;
-  endereco?: string;
-  contacto?: string;
-  anoAcademico?: number;
-  dataIngresso?: string;
-  dataConclusao?: string;
-  statusEstudante?: string;
-  [key: string]: any; // Permite propriedades adicionais
-}
 
-export interface Estudante {
-  nome?: string;
-  userDetails: UserDetails;
-  [key: string]: any; // Permite propriedades adicionais
+export interface Professor {
+ 
+    nome: string;
+    userDetails: {
+    id: number;
+    dataNascimento: string;
+    numIdentificacao: string;
+    tipoDocumento: string;
+    endereco: string;
+    contacto: string;
+    anoAcademico: number;
+    dataIngresso: string;
+    dataConclusao: string;
+    statusEstudante: string;
+  };
+
+
 }
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstudanteService {
-  cadastrar(estudante: Estudante) {
+export class ProfessorService {
+  cadastrar(Professor:Professor) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://14f411305204.ngrok-free.app/api'; // URL da API
+  private apiUrl = 'https://d7f0-2a09-bac5-63-46e-00-71-47.ngrok-free.app/api'; // URL da API
 
 
   constructor(private http: HttpClient) { }
-/*
+
   private getHeaders(acceptJson: boolean = true): HttpHeaders {
   const token = localStorage.getItem('token') || '';
   const base = {
@@ -53,16 +50,7 @@ export class EstudanteService {
 
   return new HttpHeaders(base);
 }
-*/
-private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token') || '';
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'ngrok-skip-browser-warning': 'true' // Adicione esta linha para evitar avisos do ngrok
-    });
-  }
+
   private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {
     // Erro do lado do cliente
@@ -84,7 +72,7 @@ private getHeaders(): HttpHeaders {
   }
 }
 
-getEstudante(): Observable<Estudante> {
+getProfessor(): Observable<Professor> {
   return this.http.get(`${this.apiUrl}/auth/me`, {
     responseType: 'text',
     headers: new HttpHeaders({
@@ -99,7 +87,7 @@ getEstudante(): Observable<Estudante> {
       if (response.startsWith('<!DOCTYPE html>')) {
         throw new Error('Servidor retornou HTML em vez de JSON');
       }
-      return JSON.parse(response) as Estudante;
+      return JSON.parse(response) as Professor;
     }),
     catchError(error => {
       if (error.status === 0) {
@@ -109,14 +97,5 @@ getEstudante(): Observable<Estudante> {
     })
   );
 }
-atualizarPerfil(id: number, dadosAtualizados: Partial<Estudante>): Observable<Estudante> {
-  return this.http.patch<Estudante>(`${this.apiUrl}/departamento/students/${id}`, dadosAtualizados, {
-    headers: this.getHeaders()
-  });
-}
 
 }
-
-
-
-

@@ -7,13 +7,13 @@ import {
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
-import { LoginService } from './services/login.service';
-import { LancamentoService } from './services/lacamento-notas.service';
-import { DisciplinaService } from './services/disciplina.service';
+import { LoginService } from './Services/login.service';
+import { LancamentoService } from './Services/lacamento-notas.service';
+import { DisciplinaService } from './Services/disciplina.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MenuService } from './services/menu.service';
+import { MenuService } from './Services/menu.service';
 
 
 export interface LoginResponse {

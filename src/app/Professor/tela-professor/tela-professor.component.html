@@ -1,10 +1,41 @@
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-<body>
-    <div class="container">
-      
-        <div class="card">
-          
-          <div class="aluno-dados">
+
+ <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<div class="container">
+
+<div class="card">
+  <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
+  <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+  </div>
+
+  <div *ngIf="professorSelecionado; else noProfessores">
+ 
+        <p><strong>Nome:</strong> {{ professorSelecionado.nome}}</p>
+        
+        <p><strong>Data Nasc:</strong>{{professorSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
+        <p><strong>Identificação:</strong>{{ professorSelecionado.userDetails.numIdentificacao}}</p>
+        <p><strong>Contacto:</strong>{{ professorSelecionado.userDetails.contacto}}</p>
+        <p><strong>Data Ingresso:</strong>{{professorSelecionado.userDetails.dataIngresso| date:'shortDate' }} </p>
+    
+    </div>
+
+  <ng-template #noProfessores>
+    <p>Nenhum estudante encontrado.</p>
+  </ng-template>
+  </div>
+
+</div>
+
+<app-lateral-professor></app-lateral-professor>
+
+
+
+
+<!--
+
+
+
+  <div class="aluno-dados">
             <h3>Dados</h3>
             <p><strong>Nome:</strong> Vivaldo Vieira</p>
             <p><strong>Contacto:</strong> 20231234 </p>
@@ -13,7 +44,5 @@
             <p><strong>Nivel na instituição:</strong> contratado</p>
 
           </div>
-        </div>
-      </div>
-</body>
-<app-lateral-professor></app-lateral-professor>
+
+-->

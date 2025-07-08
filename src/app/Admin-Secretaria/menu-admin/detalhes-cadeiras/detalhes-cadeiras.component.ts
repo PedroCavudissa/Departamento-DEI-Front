@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DisciplinaEmAtraso, DisciplinaService } from '../../../services/disciplina.service';
+import { DisciplinaEmAtraso, DisciplinaService } from '../../../Services/disciplina.service';
 import { CommonModule } from '@angular/common';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { FormsModule } from '@angular/forms';

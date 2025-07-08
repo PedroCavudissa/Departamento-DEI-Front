@@ -1,8 +1,11 @@
+/*
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { EstudanteService, Estudante } from '../../../services/estudante.service';
+import { EstudanteService, Estudante } from '../../../Services/estudante.service';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { Notyf } from 'notyf';
 
@@ -54,10 +57,10 @@ export class CadastroComponent {
         this.notyf.success('Estudante cadastrado com sucesso!');
         this.router.navigate(['/menu-admin']); 
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error(error);
         this.notyf.error('Erro ao cadastrar estudante.');
       }
     });
   }
-}
+// */

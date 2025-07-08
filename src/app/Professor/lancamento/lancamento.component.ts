@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
-import { LancamentoService, Nota } from '../../services/lacamento-notas.service';
+import { LancamentoService, Nota } from '../../Services/lacamento-notas.service';
 
 @Component({
   selector: 'app-lancamento',

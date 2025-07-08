@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuAdminService } from '../../services/relatorio.service';
+import { MenuAdminService } from '../../Services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Route, Router } from '@angular/router';
 import {

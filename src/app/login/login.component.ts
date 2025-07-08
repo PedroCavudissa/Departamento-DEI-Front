@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import {  NavigationEnd } from '@angular/router';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css'; 
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../Services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -39,9 +39,9 @@ export class LoginComponent implements OnInit {
   
   mostrarSidebar = true;
   mensagemLogin = '';
-tipoMensagem: 'erro' | 'sucesso' | '' = '';
-mostrarModal = false;
-recuperarForm!: FormGroup;
+  tipoMensagem: 'erro' | 'sucesso' | '' = '';
+  mostrarModal = false;
+  recuperarForm!: FormGroup;
 
 
   loginForm!: FormGroup;
@@ -69,34 +69,7 @@ recuperarForm!: FormGroup;
 fecharModal() {
   this.mostrarModal = false;
 }
-/*
-alterarSenha() {
-  if (this.recuperarForm.valid) {
-    const email = this.recuperarForm.get('gmail')?.value;
-    const senha = this.recuperarForm.get('senha')?.value;
 
-    const dados = { email, senha };
-
-    this.loginService.recuperarSenha().subscribe({
-      next: () => {
-        this.mostrarModal = false;
-        notyf.success('Senha alterada com sucesso!');
-        this.mensagemLogin = 'Senha alterada com sucesso!';
-        this.tipoMensagem = 'sucesso';
-      },
-      error: () => {
-        this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
-        this.tipoMensagem = 'erro';
-       
-      }
-    });
-  } else {
-    notyf.error('Usuário não encontrado ou erro ao alterar a senha.');
-    this.recuperarForm.markAllAsTouched();
-  }
-}
-
-*/
 alterarSenha(){}
 entrar() {
   if (this.loginForm.valid) {
@@ -119,10 +92,10 @@ entrar() {
           case 'admin':
             this.router.navigate(['/menu-secretaria']);
             break;
-          case 'professor':
+          case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
             break;
-          case 'estudante':
+          case 'ESTUDANTE':
             this.router.navigate(['/tela-estudante']);
             break;
           default:
