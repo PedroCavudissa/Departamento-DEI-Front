@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +10,14 @@ interface Evento {
   tipo: string;
   link?: string;
 }
+=======
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { BarralateralComponent } from '../../barralateral/barralateral.component';
+import { CalendarioService, Evento } from '../../../Services/calendario.service';
+
+>>>>>>> Dev
 
 @Component({
   selector: 'app-calendario',
@@ -17,6 +26,7 @@ interface Evento {
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
 })
+<<<<<<< HEAD
 export class CalendarioComponent {
   mostrarFormulario = false;
 
@@ -51,6 +61,35 @@ fecharFormulario() {
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
       alert('Por favor, preencha todos os campos obrigatórios.');
+=======
+export class CalendarioComponent implements OnInit {
+  mostrarFormulario = false;
+  mostrarToast = false;
+
+  data = '';
+  titulo = '';
+  tipo = '';
+  link? = '';
+
+  eventos: Evento[] = [];
+
+  constructor(private calendarioService: CalendarioService) {}
+
+  ngOnInit(): void {
+    this.carregarEventos();
+  }
+
+  carregarEventos() {
+    this.calendarioService.obterEventos().subscribe({
+      next: (res) => (this.eventos = res),
+      error: (err) => console.error('Erro ao carregar eventos:', err)
+    });
+  }
+
+  salvarEvento() {
+    if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
+      alert('Preencha todos os campos obrigatórios.');
+>>>>>>> Dev
       return;
     }
 
@@ -61,9 +100,29 @@ fecharFormulario() {
       link: this.link?.trim() || ''
     };
 
+<<<<<<< HEAD
     this.eventos.push(novoEvento);
     this.mostrarFormulario = false;
     this.limparCampos();
+=======
+    this.calendarioService.salvarEvento(novoEvento).subscribe({
+      next: evento => {
+        this.eventos.push(evento);
+        this.fecharFormulario();
+        this.limparCampos();
+        this.exibirToast();
+      },
+      error: err => console.error('Erro ao salvar evento:', err)
+    });
+  }
+
+  toggleFormulario() {
+    this.mostrarFormulario = !this.mostrarFormulario;
+  }
+
+  fecharFormulario() {
+    this.mostrarFormulario = false;
+>>>>>>> Dev
   }
 
   limparCampos() {
@@ -72,4 +131,16 @@ fecharFormulario() {
     this.tipo = '';
     this.link = '';
   }
+<<<<<<< HEAD
 }
+=======
+
+  exibirToast() {
+    this.mostrarToast = true;
+    setTimeout(() => {
+      this.mostrarToast = false;
+    }, 3000);
+  }
+
+}
+>>>>>>> Dev

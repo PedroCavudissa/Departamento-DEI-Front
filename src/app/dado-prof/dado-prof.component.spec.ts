@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HorarioComponent } from './horario.component';
 
-import { DadoProfComponent } from './dado-prof.component';
-
-describe('DadoProfComponent', () => {
-  let component: DadoProfComponent;
-  let fixture: ComponentFixture<DadoProfComponent>;
+describe('HorarioComponent', () => {
+  let component: HorarioComponent;
+  let fixture: ComponentFixture<HorarioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DadoProfComponent]
+      imports: [HorarioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DadoProfComponent);
+    fixture = TestBed.createComponent(HorarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

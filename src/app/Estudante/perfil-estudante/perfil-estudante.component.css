@@ -87,10 +87,18 @@
     @media (max-width: 768px) {
 .card {
   flex-direction: column;
+<<<<<<< HEAD
   padding: 20px;
   width: 300px;
 }
 
+=======
+  padding: 10px;
+  width: 300px;
+}
+
+
+>>>>>>> Dev
 .card h3 {
   font-size: 18px;
 }
@@ -105,17 +113,31 @@
     }
 
     .button {
+<<<<<<< HEAD
       width: 90%;
+=======
+      width: 70%;
+      justify-content: center;
+>>>>>>> Dev
     }
 }
  /*Mensagem e*/ 
 
+<<<<<<< HEAD
 .error-message {
 
 color: red;
 font-size: 0.9em;
 margin-top: 5px;
 color: red !important;
+=======
+
+.error-message {
+  color: red !important;
+  font-size: 0.9em;
+  margin-top: 4px;
+  display: block;
+>>>>>>> Dev
 }
 
 /* Estilo do modal */

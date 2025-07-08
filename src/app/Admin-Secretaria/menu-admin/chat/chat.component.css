@@ -1,8 +1,21 @@
 .chat-layout {
   display: flex;
+<<<<<<< HEAD
   height: 120vh;
   background-color: #f4f6f8;
   margin-left: 210px;
+=======
+  flex-direction: row;
+  height: 100vh;
+  background-color: #f4f6f8;
+  margin-left: 210px;
+
+  max-width: 100%;
+  overflow: hidden;
+
+  transition: margin 0.3s ease;
+
+>>>>>>> Dev
 }
 
 .chat-area {
@@ -10,16 +23,25 @@
   display: flex;
   flex-direction: column;
   padding: 2rem;
+<<<<<<< HEAD
   overflow: hidden;
+=======
+  box-sizing: border-box;
+>>>>>>> Dev
 }
 
 .chat-header {
   margin-bottom: 2rem;
+<<<<<<< HEAD
+=======
+  text-align: center;
+>>>>>>> Dev
 }
 
 .chat-header h2 {
   margin: 0;
   color: #333;
+<<<<<<< HEAD
   font-size: 1.5rem;
 }
 
@@ -31,6 +53,20 @@
   max-width: 800px;
   margin: 0 auto;
   width: 100%;
+=======
+  font-size: 1.8rem;
+}
+
+.message-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+>>>>>>> Dev
 }
 
 .form-field {
@@ -40,28 +76,53 @@
 .form-field label {
   display: flex;
   margin-bottom: 0.5rem;
+<<<<<<< HEAD
   font-weight: 500;
   color: #333;
+=======
+  font-weight: 600;
+  color: #222;
+>>>>>>> Dev
 }
 
 .form-field input,
 .form-field textarea {
   width: 100%;
+<<<<<<< HEAD
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1rem;
+=======
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: #3aaaf3;
+  outline: none;
+>>>>>>> Dev
 }
 
 .form-field textarea {
   resize: vertical;
+<<<<<<< HEAD
   min-height: 200px;
+=======
+  min-height: 160px;
+>>>>>>> Dev
 }
 
 .send-message-btn {
   background-color: #000000;
   color: white;
   border: none;
+<<<<<<< HEAD
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   font-size: 1rem;
@@ -75,3 +136,93 @@
 .send-message-btn:hover {
   background-color: #0056b3;
 }
+=======
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  display: block;
+  margin: 1rem auto 0 auto;
+  width: 100%;  
+}
+
+.send-message-btn:hover {
+background-color: #3aaaf3;
+  transform: scale(1.03);
+}
+
+/* Responsivo para tablets e celulares */
+@media (max-width: 768px) {
+  .chat-layout {
+    flex-direction: column;
+    margin-left: 0;
+    height: auto;
+  transition: background-color 0.3s;
+  width: fit-content;
+  margin: 1rem auto 0 auto;
+  display: block;
+}
+
+.send-message-btn:hover {
+  background-color: #333;
+}}
+
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) {
+  .chat-layout {
+    margin-left: 0;
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+
+  }
+
+  .chat-area {
+    padding: 1rem;
+  }
+
+
+  .message-form {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .chat-header h2 {
+    font-size: 1.4rem;
+
+  .chat-header h2 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  .message-form {
+    padding: 1.5rem;
+
+  }
+
+  .form-field input,
+  .form-field textarea {
+    font-size: 0.95rem;
+
+    padding: 0.65rem;
+  }
+}
+}
+@media (max-width: 600px) {
+  .message-form {
+    padding: 1rem;
+  }
+
+  .chat-header h2 {
+    font-size: 1.1rem;
+
+  }
+
+  .send-message-btn {
+    width: 100%;
+
+    font-size: 1rem;
+    padding: 0.75rem;
+  }}
+>>>>>>> Dev

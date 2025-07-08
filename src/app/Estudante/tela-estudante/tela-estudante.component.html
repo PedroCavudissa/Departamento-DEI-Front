@@ -1,7 +1,11 @@
 <div class="container">
  
 <div class="card">
+<<<<<<< HEAD
   <img src="assets/icones/perfil.png" alt="Perfil" />
+=======
+  <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
+>>>>>>> Dev
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
@@ -9,6 +13,7 @@
   <div *ngIf="estudanteSelecionado; else noEstudantes">
  
 
+<<<<<<< HEAD
         
         <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
         <p><strong>Apelido:</strong>{{ estudanteSelecionado.apelido}}</p>
@@ -16,6 +21,14 @@
         <p><strong>Identificação:</strong>{{ estudanteSelecionado.numIdentificacao}}</p>
         <p><strong>Contacto:</strong>{{ estudanteSelecionado.contacto}}</p>
         <p><strong>Data Ingresso:</strong>{{estudanteSelecionado.dataIngresso| date:'shortDate' }} </p>
+=======
+        <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
+        
+        <p><strong>Data Nasc:</strong>{{estudanteSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
+        <p><strong>Identificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
+        <p><strong>Contacto:</strong>{{ estudanteSelecionado.userDetails.contacto}}</p>
+        <p><strong>Data Ingresso:</strong>{{estudanteSelecionado.userDetails.dataIngresso| date:'shortDate' }} </p>
+>>>>>>> Dev
     
     </div>
   <ng-template #noEstudantes>
@@ -26,6 +39,7 @@
 
 <app-lateral></app-lateral>
      
+<<<<<<< HEAD
 
 
 
@@ -133,3 +147,8 @@
     <p>Nenhum estudante encontrado.</p>
   </ng-template>
 </div>-->
+=======
+    
+    
+    
+>>>>>>> Dev

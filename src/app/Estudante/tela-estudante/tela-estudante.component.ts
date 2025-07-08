@@ -1,7 +1,12 @@
 // tela-estudante.component.ts
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { EstudanteService } from '../../services/estudante.service';
 import { Estudante } from '../../interface/estudante.interface';
+=======
+import { Estudante, EstudanteService } from '../../Services/estudante.service';
+
+>>>>>>> Dev
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
 
@@ -15,6 +20,7 @@ export class TelaEstudanteComponent implements OnInit {
   estudantes: Estudante[] = [];
   errorMessage: string | null = null;
   estudanteSelecionado: Estudante | undefined;
+<<<<<<< HEAD
 
   constructor(private estudanteService: EstudanteService) {}
   // Método ngOnInit para inicializar o componente
@@ -31,11 +37,48 @@ export class TelaEstudanteComponent implements OnInit {
       this.errorMessage = null;
     },
     error: (err) => {
+=======
+  mensagem: string | undefined;
+
+  constructor(private estudanteService: EstudanteService) {}
+  // Método ngOnInit para inicializar o componente
+ 
+ ngOnInit(): void {
+    // Substitua '1' pelo ID real do estudante que deseja buscar
+    this.buscarEstudante();
+  }
+   buscarEstudante(): void {
+    this.estudanteService.getEstudante().subscribe({
+      next: (data: Estudante) => {
+        this.estudanteSelecionado = data;
+        this.errorMessage = null;
+      },
+      error: (err: { message: string }) => {
+        console.error('Erro ao buscar estudante:', err);
+        this.errorMessage = err.message || 'Erro desconhecido ao buscar estudante.';
+        this.estudanteSelecionado = undefined;
+      }
+    });
+
+
+  }
+
+}
+  /*
+buscarEstudantePorId(): void {
+  this.estudanteService.getEstudante.subscribe({
+    next: (data: Estudante | undefined) => {
+      this.estudanteSelecionado = data;
+      this.errorMessage = null;
+    },
+    error: (err: { message: string; }) => {
+>>>>>>> Dev
       console.error('Erro ao buscar estudante por ID:', err);
       this.errorMessage = err.message || 'Erro desconhecido ao buscar estudante por ID.';
       this.estudanteSelecionado = undefined;
     }
   });
+<<<<<<< HEAD
 }
 
 
@@ -70,3 +113,6 @@ export class TelaEstudanteComponent implements OnInit {
   }
     
 
+=======
+} */
+>>>>>>> Dev

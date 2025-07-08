@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 <body>
+=======
+
+   <app-lateral></app-lateral>   
+   <!--
+   <body>
+>>>>>>> Dev
   <form [formGroup]="formulario">
   <div class="card">
     <h3>Dados Pessoais</h3>
@@ -34,10 +41,17 @@
   </div>
 </form>
 
+<<<<<<< HEAD
 <!-- Modal -->
 <div class="modal" *ngIf="mostrarModal">
   <div class="modal-conteudo">
     <h4>Alterar Senha</h4>
+=======
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-conteudo">
+    <h4>Alterar Senha</h4>
+    <input type="password" placeholder="Senha antiga" /><br /><br />
+>>>>>>> Dev
     <input type="password" placeholder="Nova Senha" /><br /><br />
     <input type="password" placeholder="Confirmar Nova Senha" />
     <div class="modal-botoes">
@@ -47,6 +61,76 @@
   </div>
 </div>
 
+<<<<<<< HEAD
  
 </body>
    <app-lateral></app-lateral>   
+=======
+</body>
+ <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" placeholder="Digite seu email" />
+        <div class="error-message" *ngIf="formulario.get('email')?.touched">
+          <span *ngIf="formulario.get('email')?.errors?.['required']">Campo obrigatório</span>
+          <span *ngIf="formulario.get('email')?.errors?.['email']">Email inválido</span>
+        </div>
+      </div>
+-->
+
+<body>
+  <div *ngIf="mensagemSucesso" class="alert alert-success">
+  {{ mensagemSucesso }}
+</div>
+
+<div *ngIf="mensagemErro" class="alert alert-danger">
+  {{ mensagemErro }}
+</div>
+  <form [formGroup]="formulario">
+
+    <div class="card">
+      <h3>Dados Pessoais</h3>
+
+      <div class="form-group">
+        <label for="contato">Contacto</label>
+        <input id="contato" type="tel" formControlName="contato" placeholder="(XX) XXXXX-XXXX" />
+        <div class="error-message" *ngIf="formulario.get('contato')?.touched">
+          <span *ngIf="formulario.get('contato')?.invalid">Campo obrigatório</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+  <label for="endereco">Endereço</label>
+  <input id="endereco" type="text" formControlName="endereco" placeholder="Digite seu endereço " />
+  <div class="error-message" *ngIf="formulario.get('endereco')?.touched">
+    <span *ngIf="formulario.get('endereco')?.errors?.['required']">Campo obrigatório</span>
+    <span *ngIf="formulario.get('endereco')?.errors?.['minlength']">O endereço deve ter pelo menos 5 caracteres</span>
+  </div>
+</div>
+
+      <div class="buttons">
+        <button type="button" (click)="accao()">Atualizar dados</button>
+      </div>
+
+      <br /><br />
+
+      <div class="buttons">
+        <button type="button" (click)="abrirModal()">Alterar Senha</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="modal" *ngIf="mostrarModal">
+    <div class="modal-conteudo">
+      <h4>Alterar Senha</h4>
+      <input type="password" placeholder="Senha antiga" /><br /><br />
+      <input type="password" placeholder="Nova Senha" /><br /><br />
+      <input type="password" placeholder="Confirmar Nova Senha" />
+      <div class="modal-botoes">
+        <button (click)="salvarSenha()">Salvar</button>
+        <button (click)="fecharModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+>>>>>>> Dev

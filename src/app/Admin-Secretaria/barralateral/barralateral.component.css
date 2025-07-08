@@ -1,5 +1,6 @@
 /* Layout geral */
 :host {
+<<<<<<< HEAD
     display: flex;
    height: 100%;
     font-family: Arial, sans-serif;
@@ -225,5 +226,140 @@
 
   #nome{
     margin-left: 20px;
+=======
+  display: flex;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Barra lateral */
+.sidebar {
+  width: 200px;
+  background-color: #47B5FF;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: width 0.3s ease;
+}
+
+.sidebar img {
+  width: 85%;
+  margin-left: 8%;
+}
+
+.sidebar h2 {
+  margin-top: 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  font-size: 19px; /* AUMENTADO de 17px para 19px */
+  text-decoration: none;
+  color: white;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.menu-link img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hover nos links da barra lateral */
+.menu-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Lista do menu */
+.sidebar ul {
+ list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 80px;
+}
+
+.sidebar ul li {
+  margin: 12px 0;
+}
+
+/* Barra superior (supbar) centralizada */
+.supbar {
+  background-color: #47B5FF;
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.supbar h2 {
+  color: white;
+  font-size: 22px;
+  margin: 0;
+  text-align: center;
+}
+
+/* Espaçamento do conteúdo para não colar na supbar */
+.conteudo-principal {
+  margin-left: 200px; /* para dar espaço à sidebar fixa */
+  padding-top: 80px; /* para afastar do topo (supbar = 60px) */
+  padding: 20px;
+}
+
+/* Responsivo: telas pequenas */
+@media (max-width: 768px) {
+  .sidebar {
+    display: block;
+    width: 140px;
+    padding: 8px;
+  }
+
+  .sidebar h2 {
+    font-size: 18px;
+  }
+
+
+  .sidebar ul li {
+    margin: 10px 0;
+    color: white;
+  }
+  .menu-link {
+    font-size: 16px;
+    padding: 8px;
+    gap: 6px;
+
+  }
+
+  .menu-link img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .supbar h2 {
+    font-size: 18px;
+  }
+
+  .conteudo-principal {
+    margin-left: 140px;
+    padding-top: 80px;
+>>>>>>> Dev
   }
 }

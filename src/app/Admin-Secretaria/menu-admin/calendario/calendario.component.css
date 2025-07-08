@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* formataçao do titulo e conteudo principal*/
 .titulo-container {
   width: 100%;
@@ -66,12 +67,62 @@
   position: absolute;
   top: 2px;  
   right: 10px;   
+=======
+/* Cabeçalho */
+.titulo-container {
+  text-align: center;
+  background-color: #44b1f0;
+  padding: 16px;
+  border-radius: 8px;
+  color: #fff;
+  margin: 140px auto 20px;
+  max-width: 380px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.titulo {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+/* Quadro principal */
+.quadro {
+  max-width: 700px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  transition: filter 0.3s ease;
+}
+
+/* Área de ações */
+.acoes-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Botões e links */
+.botao {
+  background-color: #44b1f0;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+>>>>>>> Dev
 }
 
 .botao:hover {
   background-color: #3498db;
 }
 
+<<<<<<< HEAD
 /* formataçao do formulário */
 .form-container {
   width: 300px;
@@ -84,26 +135,105 @@
   background-color: white;
   box-shadow: 0 0 6px rgba(0,0,0,0.1);
   font-family: 'Poppins', sans-serif;
+=======
+
+.ver-provas {
+  text-decoration: none;
+  font-weight: bold;
+  color: #007bff;
+  font-size: 15px;
+}
+
+.ver-provas:hover {
+  text-decoration: underline;
+}
+
+/* Lista de eventos */
+.lista-eventos {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.lista-eventos li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.lista-eventos li .titulo-evento {
+  font-weight: 500;
+}
+
+.lista-eventos li .tipo {
+  color: #888;
+  margin-left: 4px;
+}
+
+/* Formulário flutuante */
+.overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.form-titulo {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+>>>>>>> Dev
 }
 
 label {
   display: block;
+<<<<<<< HEAD
   margin-top: 12px;
   font-weight: bold;
+=======
+  margin: 10px 0 4px;
+  font-weight: 500;
+  font-size: 14px;
+>>>>>>> Dev
 }
 
 input[type="text"] {
   width: 100%;
+<<<<<<< HEAD
   padding: 6px 10px;
   margin-top: 4px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
+=======
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+>>>>>>> Dev
 }
 
 .btn-salvar {
   margin-top: 16px;
+<<<<<<< HEAD
   background-color: #4db8ff;
   color: white;
   font-weight: bold;
@@ -113,10 +243,27 @@ input[type="text"] {
   width: 100%;
   cursor: pointer;
   font-size: 16px;
+=======
+  background-color: #44b1f0;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-salvar:hover {
+  background-color: #3498db;
+>>>>>>> Dev
 }
 
 .close-btn {
   position: absolute;
+<<<<<<< HEAD
   right: 10px;
   top: 10px;
   background-color: #4db8ff;
@@ -129,10 +276,23 @@ input[type="text"] {
 }
 
 /* Efeito de desfoque e opacidade no fundo quando o formulário está ativo */
+=======
+  right: 12px;
+  top: 10px;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Blur */
+>>>>>>> Dev
 .blur {
   filter: blur(4px);
   opacity: 0.4;
   pointer-events: none;
+<<<<<<< HEAD
   transition: all 0.3s ease;
 }
 
@@ -174,3 +334,60 @@ input[type="text"] {
     margin: 10px 0 20px auto;
   }
 }
+=======
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .quadro, .titulo-container {
+    margin: 20px;
+    width: auto;
+
+  }
+
+  .acoes-topo {
+    flex-direction: column;
+    gap: 10px;
+
+  }
+
+  .botao {
+    width: 100%;
+
+  }
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* TOAST DE SUCESSO */
+.toast {
+  position: fixed;
+  top: 80px;
+  right: 30px;
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  z-index: 2000;
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+>>>>>>> Dev
