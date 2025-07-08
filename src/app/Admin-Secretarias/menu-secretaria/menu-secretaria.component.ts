@@ -1,21 +1,17 @@
 import { Router } from '@angular/router';
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
-<<<<<<< HEAD
-import { BarralateralSecretariaComponent } from '../barralateral-secretaria/barralateral-secretaria.component';
-=======
+
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
 import { MenuService } from '../../Services/menu.service';
->>>>>>> Dev
+
 
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
-<<<<<<< HEAD
-  imports: [ BarralateralSecretariaComponent],
-=======
+
   imports: [BarralateralSecretariaComponent],
->>>>>>> Dev
+
   templateUrl: './menu-secretaria.component.html',
   styleUrls: ['./menu-secretaria.component.css'],
 })
@@ -32,17 +28,14 @@ export class MenuSecretariaComponent implements AfterViewInit {
     responsive: true,
     maintainAspectRatio: false,
   };
-<<<<<<< HEAD
 
-  ngAfterViewInit(): void {
-=======
   async ngAfterViewInit(): Promise<void> {
     const funcionarios = await this.menuService.getTotalFuncionarios();
     const estudantes = await this.menuService.getTotalEstudantes();
     const cadeiras = await this.menuService.getTotalCadeiras();; // Substitua se tiver endpoint
     const salas = 70;    // Substitua se tiver endpoint
   
->>>>>>> Dev
+
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     new Chart(pieCtx, {
       type: 'doughnut',
@@ -50,11 +43,11 @@ export class MenuSecretariaComponent implements AfterViewInit {
         labels: ['Funcionários', 'Estudantes', 'Cadeiras', 'Salas'],
         datasets: [
           {
-<<<<<<< HEAD
-            data: [27, 97, 52, 70],
-=======
+
+            
             data: [funcionarios, estudantes, cadeiras, salas],
->>>>>>> Dev
+
+            
             backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
           },
         ],
@@ -74,10 +67,11 @@ export class MenuSecretariaComponent implements AfterViewInit {
         },
       },
     });
-<<<<<<< HEAD
-=======
+
+    
   
->>>>>>> Dev
+
+    
     const barLabels = Object.keys(this.colors);
     const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
     new Chart(barCtx, {
@@ -86,11 +80,11 @@ export class MenuSecretariaComponent implements AfterViewInit {
         labels: barLabels,
         datasets: [
           {
-<<<<<<< HEAD
-            data: [100, 68, 38, 25, 10],
-=======
+
+            
             data: [100, 68, 38, 25, 10], // substitua se quiser também via API
->>>>>>> Dev
+
+            
             backgroundColor: barLabels.map((label) => this.colors[label]),
           },
         ],
@@ -106,10 +100,8 @@ export class MenuSecretariaComponent implements AfterViewInit {
       },
     });
   }
-<<<<<<< HEAD
 
-  constructor(private router: Router) {}
-=======
+  
   
 
   constructor(
@@ -117,7 +109,6 @@ export class MenuSecretariaComponent implements AfterViewInit {
     private menuService: MenuService
   ) {}
   
->>>>>>> Dev
 
   verDetalhes(nome: string): void {
     switch (nome) {

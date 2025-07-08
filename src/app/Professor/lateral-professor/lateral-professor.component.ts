@@ -28,12 +28,7 @@ export class LateralProfessorComponent {
         break;}
        
         case 'Perfil':
-<<<<<<< HEAD
-          {this.router.navigate(['dado-professor']);
-          break;}
-         
-      
-=======
+
           {this.router.navigate(['/dado-professor']);
           break;}
           case 'Horários':
@@ -50,7 +45,7 @@ export class LateralProfessorComponent {
               case 'Lançamento':
                 {this.router.navigate(['/lancamento']);
                 break;}
->>>>>>> Dev
+
         case 'Sair':
           {const confirmacao = window.confirm('Tem certeza que deseja sair?');
           if (confirmacao) {

@@ -108,32 +108,7 @@ overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário
 overflow-x: hidden; /* oculta a barra de rolagem horizontal */
 }
 
-<<<<<<< HEAD
-.supbar .icons {
-  display: flex;
-  gap: 5px;
-  position: absolute;
-  right: 5%;
-  top: 10%;
 
-}
-.icon {
-  text-align: center;
-  position: relative;
-  cursor: pointer;
-  
-}
-
-.icon img {
-  width: 32px;
-  height: 32px;
-   margin-bottom: -15px;
-}
-
-.icon p {
-
-  font-size: 14px;
-=======
 
 .icons {
   display: flex;
@@ -162,20 +137,12 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
   margin: 5px 0 0;
   font-size: 14px;
   color: #444;
->>>>>>> Dev
+
 }
 
 .badge {
   position: absolute;
-<<<<<<< HEAD
-  top: 10%;
-  right: 28%;
-  background-color: white;
-  color: black;
-  border-radius: 50%;
-  font-size: 12px;
-  font-weight: bold;
-=======
+
   top: 2px;
   right: 15px;
   background: red;
@@ -184,7 +151,8 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
   font-weight: bold;
   padding: 2px 5px;
   border-radius: 10px;
->>>>>>> Dev
+
+  
 }
 /*RESPONSIVIDADE*/
 

@@ -1,16 +1,12 @@
 
-<<<<<<< HEAD
-*{
-  margin: 0;
-  padding: 0;
-=======
+
 
 
 *{
   margin: 0;
   padding: 0;
 
->>>>>>> Dev
+
 }.card {
     background-color: white;
     border-radius: 8px;
@@ -24,12 +20,10 @@
   
   }
   .card.blue {
-<<<<<<< HEAD
-    border-left: 5px solid blue;
-=======
+
     border-left: 5px solid gray;
   
->>>>>>> Dev
+
   }
   .card h3 {
     font-size: 14px;
@@ -37,25 +31,20 @@
     margin: 0;
    
   }
-<<<<<<< HEAD
-=======
+
   
->>>>>>> Dev
+
   .card .number {
     font-size: 32px;
     font-weight: bold;
     margin-top: 8px;
    
   }
-<<<<<<< HEAD
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-=======
+
  body {
     font-family: Arial, sans-serif;
     background: #f5f5f5;
->>>>>>> Dev
+
     padding: 20px;
     width: 100%;
     overflow-y: hidden;
@@ -71,8 +60,6 @@ body {
   .btn-search { background:#222; color:#fff; }
   .results { background:#fff; border-radius:8px; height:200px; }
 
-<<<<<<< HEAD
-=======
   .results table {
     width: 100%;
     border-collapse: collapse;
@@ -124,7 +111,7 @@ body {
   .results tbody td:nth-child(6) {
     width: 13%;  /* Ano Acadêmico, Semestre, Precedência */
   }
->>>>>>> Dev
+
   
   @media (max-width: 768px) {
     body {
@@ -150,8 +137,7 @@ body {
   }
 
   }
-<<<<<<< HEAD
-=======
+
   
 
 
@@ -170,5 +156,5 @@ body {
 }
 
   }
->>>>>>> Dev
+
   

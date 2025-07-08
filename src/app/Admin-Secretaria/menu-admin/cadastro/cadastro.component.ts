@@ -62,5 +62,5 @@ export class CadastroComponent {
         this.notyf.error('Erro ao cadastrar estudante.');
       }
     });
-  }
-// */
+  }}*/
+

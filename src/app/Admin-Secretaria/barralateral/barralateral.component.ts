@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-barralateral',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './barralateral.component.html',
 
   styleUrls: ['./barralateral.component.css']
 
 })
 export class BarralateralComponent {
-  constructor( private router: Router) {}
+
+  constructor( private router: Router) {};
   titulo = 'Dados Gerais';
   menuAtivo = false;
 

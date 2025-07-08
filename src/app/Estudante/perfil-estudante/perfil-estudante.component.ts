@@ -1,44 +1,21 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-=======
+
 import { Component, OnInit } from '@angular/core';
->>>>>>> Dev
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LateralComponent } from '../lateral/lateral.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< HEAD
 
-import { EstudanteService } from '../../services/estudante.service';
-=======
 import { PerfilestudanteService } from '../../Services/perfilestudante.service';
 import { Estudante, EstudanteService } from '../../Services/estudante.service';
 import { HttpErrorResponse } from '@angular/common/http';
->>>>>>> Dev
+
 
 @Component({
   selector: 'app-perfil-estudante',
   standalone: true,
   imports: [LateralComponent, CommonModule, ReactiveFormsModule],
-<<<<<<< HEAD
-  providers: [EstudanteService,],
-  templateUrl: './perfil-estudante.component.html',
-  styleUrl: './perfil-estudante.component.css'
-})
-export class PerfilEstudanteComponent {
-  mostrarModal = false;
-  formulario: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.formulario = this.fb.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      contato: ['', Validators.required],
-      idade: ['', Validators.required]
-    });
-  }
-
-=======
   templateUrl: './perfil-estudante.component.html',
   styleUrl: './perfil-estudante.component.css',
   providers: [EstudanteService, PerfilestudanteService] // Adicione os serviços aqui
@@ -85,7 +62,8 @@ export class PerfilEstudanteComponent implements OnInit {
     endereco: ['', [Validators.required, Validators.minLength(5)]]
   });
 }
->>>>>>> Dev
+
+
   abrirModal() {
     this.mostrarModal = true;
   }
@@ -95,52 +73,7 @@ export class PerfilEstudanteComponent implements OnInit {
   }
 
   salvarSenha() {
-<<<<<<< HEAD
-    alert('Senha alterada!');
-    this.fecharModal();
-  }
 
-  accao() {
-    if (this.formulario.valid) {
-      alert("Dados atualizados com sucesso!");
-      console.log(this.formulario.value);
- this.formulario.reset();
-      
-    } else {
-      this.formulario.markAllAsTouched();
-    }
-  }
-}
-
-    
- 
- 
-
- 
-
-
- 
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-/*altera senha 
-    mostrarModal = false;
-
-=======
     // Implemente conforme necessário
   }
 
@@ -311,32 +244,7 @@ export class PerfilEstudanteComponent implements OnInit {
   }
 
   salvarSenha() {
-<<<<<<< HEAD
-    // lógica de salvar a nova senha
-   /// console.log
-   alert ('Senha alterada!');
-    this.fecharModal();
-  }
-  // actualizar dados 
-  accao(){
 
-    alert("dados actualizados")
-  }
-
-
-
-
-   constructor(private fb: FormBuilder) {
-    this.formulario = this.fb.group({
-      nome: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      contato: ['', Validators.required],
-      numeroestudante: ['', Validators.required]
-    });
-  }
-    */
- 
-=======
     // Implemente conforme necessário
   }
 
@@ -462,16 +370,7 @@ accao(): void {
 
 
 
-   /* this.estudanteService.alterarSenha('novaSenha').subscribe({
-      next: () => {
-        alert('Senha alterada com sucesso!');
-        this.fecharModal();
-      },
-      error: (erro) => {
-        console.error('Erro ao alterar senha:', erro);
-        alert('Erro ao alterar senha');
-      }
-    });*/
+  
 
 
 
@@ -485,4 +384,3 @@ accao(): void {
 
 
 
->>>>>>> Dev

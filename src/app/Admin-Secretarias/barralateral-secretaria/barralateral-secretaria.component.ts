@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-barralateral-secretaria',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './barralateral-secretaria.component.html',
 
   styleUrls: ['./barralateral-secretaria.component.css']

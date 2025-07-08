@@ -1,11 +1,8 @@
 <div class="container">
  
 <div class="card">
-<<<<<<< HEAD
-  <img src="assets/icones/perfil.png" alt="Perfil" />
-=======
+
   <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
->>>>>>> Dev
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
@@ -13,22 +10,14 @@
   <div *ngIf="estudanteSelecionado; else noEstudantes">
  
 
-<<<<<<< HEAD
-        
-        <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
-        <p><strong>Apelido:</strong>{{ estudanteSelecionado.apelido}}</p>
-        <p><strong>Data Nasc:</strong>{{estudanteSelecionado.dataNascimento| date:'shortDate' }}  </p>
-        <p><strong>Identificação:</strong>{{ estudanteSelecionado.numIdentificacao}}</p>
-        <p><strong>Contacto:</strong>{{ estudanteSelecionado.contacto}}</p>
-        <p><strong>Data Ingresso:</strong>{{estudanteSelecionado.dataIngresso| date:'shortDate' }} </p>
-=======
+
         <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
         
         <p><strong>Data Nasc:</strong>{{estudanteSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
         <p><strong>Identificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
         <p><strong>Contacto:</strong>{{ estudanteSelecionado.userDetails.contacto}}</p>
         <p><strong>Data Ingresso:</strong>{{estudanteSelecionado.userDetails.dataIngresso| date:'shortDate' }} </p>
->>>>>>> Dev
+
     
     </div>
   <ng-template #noEstudantes>
@@ -39,116 +28,6 @@
 
 <app-lateral></app-lateral>
      
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-
-
-<div class="card">
-  <img src="assets/icones/perfil.png" alt="Perfil" />
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-
-  <div *ngIf="studanteSelecionado.length > 0; else noStudanteSelecionado">
- 
-
-      <div *ngFor="let estudante of estudantes">
-        
-        <p><strong>Nome:</strong> {{ estudante.nome}}</p>
-        <p><strong>Apelido:</strong>{{ estudante.apelido}}</p>
-        <p><strong>Data Nasc:</strong>{{estudante.dataNascimento| date:'shortDate' }}  </p>
-        <p><strong>Identificação:</strong>{{ estudante.numIdentificacao}}</p>
-        <p><strong>Contacto:</strong>{{ estudante.contacto}}</p>
-        <p><strong>Data Ingresso:</strong>{{estudante.dataIngresso| date:'shortDate' }} </p>
-        
-      </div>
-    </div>
-  <ng-template #noEstudantes>
-    <p>Nenhum estudante encontrado.</p>
-  </ng-template>
-  </div>
-</div>
-<div>
-  <h2>Lista de Estudantes</h2>
-
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-
-  <table *ngIf="estudantes.length > 0; else noEstudantes">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome Completo</th>
-        <th>Data Nasc.</th>
-        <th>Identificação</th>
-        <th>Contacto</th>
-        <th>Data Ingresso</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let estudante of estudantes">
-        <td>{{ estudante.id }}</td>
-        <td>{{ estudante.nome }} </td>
-        <td>{{ estudante. createdAt }} </td>
-        
-        
-      </tr>
-    </tbody>
-  </table>
-
-  <ng-template #noEstudantes>
-    <p>Nenhum estudante encontrado.</p>
-  </ng-template>
-</div>-->
-=======
     
     
     
->>>>>>> Dev
