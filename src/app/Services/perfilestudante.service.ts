@@ -40,10 +40,10 @@ alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
 
 
 
-atualizarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
+alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
   const body = {
-    current_password: senhaAtual,
-    new_password: novaSenha
+    currentPassword: senhaAtual,
+    newPassword: novaSenha
   };
 
   // Solução 1: Usando request() diretamente
