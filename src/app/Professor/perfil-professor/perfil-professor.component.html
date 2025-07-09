@@ -42,6 +42,9 @@
 
   <div class="modal" *ngIf="mostrarModal">
     <div class="modal-conteudo">
+      <form [formGroup]="formulario">
+
+        
       <h4>Alterar Senha</h4>
       <input type="password" placeholder="Senha antiga" /><br /><br />
       <input type="password" placeholder="Nova Senha" /><br /><br />
@@ -50,6 +53,8 @@
         <button (click)="salvarSenha()">Salvar</button>
         <button (click)="fecharModal()">Cancelar</button>
       </div>
+
+      </form>
     </div>
   </div>
 </body>

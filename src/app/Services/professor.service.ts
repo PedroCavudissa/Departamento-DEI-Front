@@ -31,10 +31,10 @@ export class ProfessorService {
   cadastrar(estudante: Professor) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://14f411305204.ngrok-free.app/api'; // URL da API
+  private apiUrl = 'https://fd04630eeda8.ngrok-free.app/api'; // URL da API
 
 
-  
+
  constructor(private http: HttpClient) { }
 private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token') || '';

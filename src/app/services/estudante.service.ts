@@ -33,7 +33,7 @@ export class EstudanteService {
   cadastrar(estudante: Estudante) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://14f411305204.ngrok-free.app/api'; // URL da API
+  private apiUrl = 'https://fd04630eeda8.ngrok-free.app/api'; // URL da API
 
 
   constructor(private http: HttpClient) { }
