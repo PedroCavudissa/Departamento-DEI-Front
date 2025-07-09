@@ -181,6 +181,41 @@
     overflow-y: auto;
     padding: 10px;
   }
+
+  /* start: Tabela estilizada */
+.tabela-funcionarios {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela-funcionarios thead {
+  background-color: #47B5FF;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.tabela-funcionarios th,
+.tabela-funcionarios td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabela-funcionarios tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.tabela-funcionarios tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tabela-funcionarios td {
+  color: #333;
+}
+/*end*/
   
   /* Responsividade */
   @media (max-width: 768px) {

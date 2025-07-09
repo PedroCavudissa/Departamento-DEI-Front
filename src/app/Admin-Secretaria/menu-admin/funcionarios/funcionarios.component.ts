@@ -1,24 +1,10 @@
 import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import Chart from 'chart.js/auto';
-import { BarralateralComponent } from "../../barralateral/barralateral.component";
-
-interface Funcionario {
-  id: number;
-  nome: string;
-  apelido: string;
-  num_doc: string;
-  tipo_doc: string;
-  nivel_acad: string;
-  role: {
-    id: number;
-    role: string;
-    descricao: string;
-    createdAt: string;
-  };
-}
+import { FuncionarioService, Funcionario } from './Services/funcionario.service';
+import { BarralateralComponent } from '../../barralateral/barralateral.component';
 
 @Component({
   selector: 'app-tela-funcionario',
@@ -32,9 +18,7 @@ export class FuncionariosComponent implements OnInit, AfterViewInit {
   filtroFuncao: string = '';
   pesquisaNome: string = '';
 
-  private apiUrl = 'https://4915-154-118-198-44.ngrok-free.app/api/funcionario/listar';
-
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(private funcionarioService: FuncionarioService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.carregarFuncionarios();
@@ -46,56 +30,74 @@ export class FuncionariosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  carregarFuncionarios(): void {
-    let params = new HttpParams();
-
-    if (this.filtroFuncao) {
-      params = params.set('funcao', this.filtroFuncao);
-    }
-
-    if (this.pesquisaNome) {
-      params = params.set('nome', this.pesquisaNome.trim());
-    }
-
-    this.http.get(this.apiUrl, { params, responseType: 'text' }).subscribe({
-      next: res => {
-        try {
-          const json = JSON.parse(res);
-          console.log('JSON válido recebido:', json);
-
-          this.funcionarios = json.data || [];
-          this.cdr.detectChanges();
-          this.atualizarGraficos();
-        } catch (e) {
-          console.error('❌ Resposta inválida ou em HTML:', res);
-          alert('Erro ao carregar funcionários: resposta inesperada do servidor.');
+  // carregarFuncionarios(): void {
+  //   this.funcionarioService.listarFuncionarios(this.filtroFuncao, this.pesquisaNome)
+  //     .subscribe({
+  //       next: (res) => {
+  //         this.funcionarios = res.content;
+  //         this.cdr.detectChanges();
+  //         this.atualizarGraficos();
+  //         console.log('Dados recebidos:', res.content);
+  //       },
+  //       error: (erro) => {
+  //         console.error('Erro completo:', erro);
+  //         if (erro.status === 0) {
+  //           alert('Erro de conexão com o servidor. Verifique sua internet ou ngrok.');
+  //         } else if (erro.status === 404) {
+  //           alert('Endpoint não encontrado. Verifique a URL da API.');
+  //         } else {
+  //           alert(`Erro ${erro.status}: ${erro.message || 'Erro no servidor'}`);
+  //         }
+  //       }
+  //     });
+  // }
+carregarFuncionarios(): void {
+  this.funcionarioService.listarFuncionarios(this.filtroFuncao, this.pesquisaNome)
+    .subscribe({
+      next: (res: any) => {
+        if (!res?.content) {
+          throw new Error('Estrutura de dados inválida');
         }
+        this.funcionarios = res.content;
+        this.cdr.detectChanges();
+        this.atualizarGraficos();
       },
-      error: erro => {
-        console.error('❌ Erro de rede ou servidor:', erro);
-        alert('Erro ao comunicar com a API.');
+      error: (erro: Error) => {
+        console.error('Erro completo:', erro);
+        
+        let mensagem = 'Erro ao carregar dados';
+        if (erro.message.includes('JSON')) {
+          mensagem = 'O servidor retornou dados inválidos (não é JSON)';
+        } else if (erro.message.includes('conexão')) {
+          mensagem = 'Verifique sua conexão com a internet';
+        } else if (erro.message.includes('formato inválido')) {
+          mensagem = 'O servidor está retornando HTML em vez de JSON';
+        }
+        
+        alert(`${mensagem}\n\nDetalhes técnicos: ${erro.message}`);
       }
     });
-  }
+}
+
 
   onBuscar(): void {
     this.carregarFuncionarios();
   }
 
   atualizarGraficos(): void {
-    const totalPorFuncao = this.funcionarios.reduce((acc: Record<string, number>, func) => {
-      const funcao = func.role?.role || 'Desconhecido';
-      acc[funcao] = (acc[funcao] || 0) + 1;
+    const totalPorCargo = this.funcionarios.reduce((acc: Record<string, number>, func) => {
+      const cargo = func.cargo || 'Desconhecido';
+      acc[cargo] = (acc[cargo] || 0) + 1;
       return acc;
     }, {});
 
-    const labels = Object.keys(totalPorFuncao);
-    const valores = Object.values(totalPorFuncao);
+    const labels = Object.keys(totalPorCargo);
+    const valores = Object.values(totalPorCargo);
 
-    this.renderGrafico('graficoDI', labels, valores, 'Distribuição por Função');
+    this.renderGrafico('graficoDI', labels, valores, 'Distribuição por Cargo');
     this.renderGrafico('graficoProfessores', ['Professores', 'Outros'], [
-      totalPorFuncao['Professor'] || 0,
-      this.funcionarios.length - (totalPorFuncao['Professor'] || 0)
+      totalPorCargo['PROFESSOR'] || 0,
+      this.funcionarios.length - (totalPorCargo['PROFESSOR'] || 0)
     ], 'Professores vs Outros');
   }
 
