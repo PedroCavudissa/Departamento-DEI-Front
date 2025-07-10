@@ -14,15 +14,15 @@ import { PerfiprofService } from '../../Services/perfiprof.service';
   providers: [ProfessorService, PerfiprofService] // Adicione os serviços aqui
 })
 export class PerfilProfessorComponent {
-  mostrarModal = false;
-   mostrarMensagens = false; 
-   formulario: FormGroup;
-   mensagemErro = '';
-   mensagemSucesso = '';
-    mensagemErroSenha = '';
-   mensagemSucessoSenha = '';
-   professor?: Professor;
-   formularioSenha: FormGroup; // Novo formulário para senha
+ mostrarModal = false;
+  mostrarMensagens = false; 
+  formulario: FormGroup;
+  mensagemErro = '';
+  mensagemSucesso = '';
+  mensagemErroSenha = '';
+  mensagemSucessoSenha = '';
+  professor?: Professor;
+  formularioSenha: FormGroup;
 
  
 
@@ -32,28 +32,28 @@ export class PerfilProfessorComponent {
     private perfiprofService: PerfiprofService
   ) {
     this.professor = {
+     email: '', 
       nome: '',
       userDetails: {
         id: 0,
         dataNascimento: '',
-        numIdentificacao: '',
+        numDocumento: '',
         tipoDocumento: '',
         endereco: '',
-        contacto: '',
+        cargo: '',
         anoAcademico: 0,
+        curriculo: '',
         dataIngresso: '',
-        dataConclusao: '',
-        statusEstudante: ''
+        
       }
     };
+
+
     
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      contato: ['', Validators.required],
       endereco: ['', [Validators.required, Validators.minLength(5)]],
-      anoAcademico: [0, [Validators.required, Validators.min(1), Validators.max(10)]],
-      dataIngresso: ['', [Validators.required, this.validarDataNaoFutura]],
-      dataNascimento: ['', [Validators.required, this.validarDataNaoFutura, this.validarIdadeMinima(16)]]
+     
     });
 
     this.formularioSenha = this.fb.group({
@@ -141,23 +141,22 @@ export class PerfilProfessorComponent {
             nome: resposta.nome || '',
             userDetails: {
               id: resposta.userDetails?.id || resposta.id || 0,
-              contacto: resposta.userDetails?.contacto || resposta.contacto || '',
               endereco: resposta.userDetails?.endereco || resposta.endereco || '',
               dataNascimento: resposta.userDetails?.dataNascimento || '',
-              numIdentificacao: resposta.userDetails?.numIdentificacao || '',
+              numDocumento: resposta.userDetails?.numIdentificacao || '',
               tipoDocumento: resposta.userDetails?.tipoDocumento || '',
-              anoAcademico: resposta.userDetails?.anoAcademico || 0,
+              nivelAcademico: resposta.userDetails?.nivelAcademico || '',
               dataIngresso: resposta.userDetails?.dataIngresso || '',
-              dataConclusao: resposta.userDetails?.dataConclusao || '',
-              statusEstudante: resposta.userDetails?.statusEstudante || ''
+              cargo: resposta.userDetails?.cargo || '',
+              curriculo: resposta.userDetails?.curriculo || '',
             }
           };
           
           this.formulario.patchValue({
             email: resposta.email || '',
-            contato: this.professor.userDetails.contacto,
             endereco: this.professor.userDetails.endereco,
-            anoAcademico: this.professor.userDetails.anoAcademico,
+            cargo: this.professor.userDetails.cargo,
+            nivelAcademico: this.professor.userDetails.nivelAcademico,
             dataIngresso: this.professor.userDetails.dataIngresso,
             dataNascimento: this.professor.userDetails.dataNascimento
           });
@@ -172,65 +171,78 @@ export class PerfilProfessorComponent {
     });
   }
 
-  accao(): void {
-    this.mostrarMensagens = false;
-    this.mensagemSucesso = '';
-    this.mensagemErro = '';
+accao(): void {
+  if (this.formulario.invalid) {
+    this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
+    this.formulario.markAllAsTouched();
+    return;
+  }
 
-    if (this.formulario.invalid) {
-      this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
-      this.mostrarMensagens = true;
-      this.formulario.markAllAsTouched();
-      return;
-    }
+  if (!this.professor) {
+    alert('Dados atualizados com sucesso!');
+    return;
+  }
 
-    if (!this.professor) {
-      this.mensagemSucesso = 'Dados atualizados com sucesso!';
-      this.mostrarMensagens = true;
-      return;
-    }
+  // Prepara os dados alterados
+  const dadosAlterados: any = {};
+  
+  // Verifica cada campo para ver se foi alterado
+  
+  
+  if (this.formulario.value.endereco !== this.professor.userDetails.endereco) {
+    dadosAlterados.endereco = this.formulario.value.endereco;
+  }
+  
+  // Adiciona verificação para o email (assumindo que this.estudante.email contém o valor atual)
+  if (this.formulario.value.email !== this.professor['email']) {
+    dadosAlterados.email = this.formulario.value.email;
+  }
 
-    const dadosAlterados: any = {};
-    const campos = ['email', 'contato', 'endereco', 'anoAcademico', 'dataIngresso', 'dataNascimento'];
-    
-    campos.forEach(campo => {
-      if (this.formulario.value[campo] !== this.professor?.userDetails[campo as keyof typeof this.professor.userDetails]) {
-        dadosAlterados[campo] = this.formulario.value[campo];
+  // Adiciona outros campos se necessário
+  if (this.formulario.value.nivelAcademico !== this.professor.userDetails.nivelAcademico) {
+    dadosAlterados.anoAcademico = this.formulario.value.anoAcademico;
+  }
+  
+  if (this.formulario.value.dataIngresso !== this.professor.userDetails.dataIngresso) {
+    dadosAlterados.dataIngresso = this.formulario.value.dataIngresso;
+  }
+  
+  if (this.formulario.value.dataNascimento !== this.professor.userDetails.dataNascimento) {
+    dadosAlterados.dataNascimento = this.formulario.value.dataNascimento;
+  }
+
+  // Verifica se há algo para atualizar
+  if (Object.keys(dadosAlterados).length === 0) {
+    this.mensagemErro = 'Nenhum dado foi alterado';
+    return;
+  }
+
+  this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados)
+    .subscribe({
+      next: (resposta: any) => {
+        console.log('Resposta da atualização:', resposta);
+        
+        // Atualiza localmente os campos alterados
+        if (this.professor) {
+          
+          if (dadosAlterados.endereco) this.professor.userDetails.endereco = dadosAlterados.endereco;
+          if (dadosAlterados.email) this.professor['email'] = dadosAlterados.email;
+          if (dadosAlterados.anoAcademico) this.professor.userDetails.nivelAcademico = dadosAlterados.anoAcademico;
+          if (dadosAlterados.dataIngresso) this.professor.userDetails.dataIngresso = dadosAlterados.dataIngresso;
+          if (dadosAlterados.dataNascimento) this.professor.userDetails.dataNascimento = dadosAlterados.dataNascimento;
+        }
+        
+        this.mensagemSucesso = 'Dados atualizados com sucesso!';
+        
+        setTimeout(() => this.carregarDadosProfessor(), 1000);
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('Erro completo:', err);
+        this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
       }
     });
+}}
 
-    this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados)
-      .subscribe({
-        next: (resposta: any) => {
-          if (this.professor) {
-            campos.forEach(campo => {
-              if (dadosAlterados[campo] !== undefined) {
-                (this.professor!.userDetails as any)[campo] = dadosAlterados[campo];
-              }
-            });
-          }
-          
-          this.mensagemSucesso = 'Dados atualizados com sucesso!';
-          this.mostrarMensagens = true;
-          
-          setTimeout(() => {
-            this.mostrarMensagens = false;
-          }, 5000);
-          
-          setTimeout(() => this.carregarDadosProfessor(), 1000);
-        },
-        error: (err: HttpErrorResponse) => {
-          console.error('Erro completo:', err);
-          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-          this.mostrarMensagens = true;
-          
-          setTimeout(() => {
-            this.mostrarMensagens = false;
-          }, 5000);
-        }
-      });
-  }
-}
 
 
 

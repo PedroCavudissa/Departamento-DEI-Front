@@ -9,7 +9,7 @@
 
   <div *ngIf="estudanteSelecionado; else noEstudantes">
  
-
+        <h3 > Dados academicos</h3>
 
         <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
         <p><strong>Data Nasc:</strong>{{estudanteSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>

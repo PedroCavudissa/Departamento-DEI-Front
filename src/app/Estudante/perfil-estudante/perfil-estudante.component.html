@@ -1,8 +1,9 @@
 
    <app-lateral></app-lateral>   
-<body>
 
- <form [formGroup]="formulario">
+   
+<body>
+<form [formGroup]="formulario">
   <!-- Mensagens que só aparecem após a ação (atualização) -->
   <div *ngIf="mostrarMensagens">
     <div *ngIf="mensagemSucesso" class="alert alert-success">
@@ -21,24 +22,22 @@
       <label for="email">Email</label>
       <input id="email" type="email" formControlName="email" placeholder="Digite seu email" />
       <div class="error-message" *ngIf="formulario.get('email')?.touched">
-        <span *ngIf="formulario.get('email')?.errors?.['required']">Campo obrigatório</span>
         <span *ngIf="formulario.get('email')?.errors?.['email']">Email inválido</span>
+        <!-- Removido o required -->
       </div>
     </div>
 
     <div class="form-group">
       <label for="contato">Contacto</label>
       <input id="contato" type="tel" formControlName="contato" placeholder="(XX) XXXXX-XXXX" />
-      <div class="error-message" *ngIf="formulario.get('contato')?.touched">
-        <span *ngIf="formulario.get('contato')?.invalid">Campo obrigatório</span>
-      </div>
+      <!-- Removida toda a validação para contato -->
     </div>
 
     <div class="form-group">
       <label for="endereco">Endereço</label>
       <input id="endereco" type="text" formControlName="endereco" placeholder="Digite seu endereço" />
       <div class="error-message" *ngIf="formulario.get('endereco')?.touched">
-        <span *ngIf="formulario.get('endereco')?.errors?.['required']">Campo obrigatório</span>
+        <!-- Removido o required, mantido apenas minlength -->
         <span *ngIf="formulario.get('endereco')?.errors?.['minlength']">O endereço deve ter pelo menos 5 caracteres</span>
       </div>
     </div>
@@ -55,37 +54,50 @@
   </div>
 </form>
 
+
 <!-- Modal para alteração de senha -->
-  <div class="modal" *ngIf="mostrarModal">
+<div class="modal" *ngIf="mostrarModal">
   <div class="modal-conteudo">
+    <span class="fechar-modal" (click)="fecharModal()">&times;</span>
     <h4>Alterar Senha</h4>
+    
+    <!-- Mensagens de feedback -->
+    <div *ngIf="mensagemSucessoSenha" class="alert alert-success">
+      {{ mensagemSucessoSenha }}
+    </div>
+    <div *ngIf="mensagemErroSenha" class="alert alert-danger">
+      {{ mensagemErroSenha }}
+    </div>
+
     <form [formGroup]="formularioSenha">
-      <input type="password" formControlName="senhaAtual" placeholder="Senha atual" />
-      <div class="error-message" *ngIf="formularioSenha.get('senhaAtual')?.touched && formularioSenha.get('senhaAtual')?.invalid">
-        Campo obrigatório
+      <div class="form-group">
+        <input type="password" formControlName="senhaAtual" placeholder="Senha atual" />
+        <div class="error-message" *ngIf="formularioSenha.get('senhaAtual')?.touched && formularioSenha.get('senhaAtual')?.invalid">
+          Campo obrigatório
+        </div>
       </div>
       
-      <br/><br/>
-      
-      <input type="password" formControlName="novaSenha" placeholder="Nova Senha" />
-      <div class="error-message" *ngIf="formularioSenha.get('novaSenha')?.touched && formularioSenha.get('novaSenha')?.invalid">
-        <span *ngIf="formularioSenha.get('novaSenha')?.errors?.['required']">Campo obrigatório</span>
-        <span *ngIf="formularioSenha.get('novaSenha')?.errors?.['minlength']">A senha deve ter pelo menos 6 caracteres</span>
+      <div class="form-group">
+        <input type="password" formControlName="novaSenha" placeholder="Nova Senha" />
+        <div class="error-message" *ngIf="formularioSenha.get('novaSenha')?.touched && formularioSenha.get('novaSenha')?.invalid">
+          <span *ngIf="formularioSenha.get('novaSenha')?.errors?.['required']">Campo obrigatório</span>
+          <span *ngIf="formularioSenha.get('novaSenha')?.errors?.['minlength']">A senha deve ter pelo menos 6 caracteres</span>
+        </div>
       </div>
       
-      <br/><br/>
-      
-      <input type="password" formControlName="confirmarSenha" placeholder="Confirmar Nova Senha" />
-      <div class="error-message" *ngIf="formularioSenha.get('confirmarSenha')?.touched && formularioSenha.get('confirmarSenha')?.invalid">
-        <span *ngIf="formularioSenha.get('confirmarSenha')?.errors?.['required']">Campo obrigatório</span>
-      </div>
-      <div class="error-message" *ngIf="formularioSenha.errors?.['senhasNaoCoincidem'] && formularioSenha.get('confirmarSenha')?.touched">
-        As senhas não coincidem
+      <div class="form-group">
+        <input type="password" formControlName="confirmarSenha" placeholder="Confirmar Nova Senha" />
+        <div class="error-message" *ngIf="formularioSenha.get('confirmarSenha')?.touched && formularioSenha.get('confirmarSenha')?.invalid">
+          <span *ngIf="formularioSenha.get('confirmarSenha')?.errors?.['required']">Campo obrigatório</span>
+        </div>
+        <div class="error-message" *ngIf="formularioSenha.errors?.['senhasNaoCoincidem'] && formularioSenha.get('confirmarSenha')?.touched">
+          As senhas não coincidem
+        </div>
       </div>
       
       <div class="modal-botoes">
-        <button (click)="salvarSenha()">Salvar</button>
-        <button (click)="fecharModal()">Cancelar</button>
+        <button type="button" (click)="salvarSenha()">Salvar</button>
+        <button type="button" (click)="fecharModal()">Cancelar</button>
       </div>
     </form>
   </div>
