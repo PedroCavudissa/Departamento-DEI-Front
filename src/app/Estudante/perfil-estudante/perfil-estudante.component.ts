@@ -1,4 +1,5 @@
 
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { LateralComponent } from '../lateral/lateral.component';
@@ -20,8 +21,8 @@ export class PerfilEstudanteComponent implements OnInit {
   mostrarModal = false;
   mostrarMensagens = false; 
   formulario: FormGroup;
-  mensagemErro = '';
-  mensagemSucesso = '';
+mensagemSucesso: string = '';
+mensagemErro: string = '';
   mensagemErroSenha = '';
   mensagemSucessoSenha = '';
   estudante?: Estudante;
@@ -51,8 +52,8 @@ export class PerfilEstudanteComponent implements OnInit {
     
     this.formulario = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      contato: ['', Validators.required],
-      endereco: ['', [Validators.required, Validators.minLength(5)]],
+      contato: ['', ],
+      endereco: ['', [ Validators.minLength(5)]],
      
     });
 
@@ -173,8 +174,9 @@ export class PerfilEstudanteComponent implements OnInit {
   }
 
 accao(): void {
+  // Verifica apenas se os campos preenchidos são válidos (não verifica required)
   if (this.formulario.invalid) {
-    this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
+    this.mensagemErro = 'Por favor, corrija os campos inválidos';
     this.formulario.markAllAsTouched();
     return;
   }
@@ -184,10 +186,9 @@ accao(): void {
     return;
   }
 
-  // Prepara os dados alterados
+  // Prepara os dados alterados (mesmo código anterior)
   const dadosAlterados: any = {};
   
-  // Verifica cada campo para ver se foi alterado
   if (this.formulario.value.contato !== this.estudante.userDetails.contacto) {
     dadosAlterados.contacto = this.formulario.value.contato;
   }
@@ -196,22 +197,8 @@ accao(): void {
     dadosAlterados.endereco = this.formulario.value.endereco;
   }
   
-  // Adiciona verificação para o email (assumindo que this.estudante.email contém o valor atual)
   if (this.formulario.value.email !== this.estudante['email']) {
     dadosAlterados.email = this.formulario.value.email;
-  }
-
-  // Adiciona outros campos se necessário
-  if (this.formulario.value.anoAcademico !== this.estudante.userDetails.anoAcademico) {
-    dadosAlterados.anoAcademico = this.formulario.value.anoAcademico;
-  }
-  
-  if (this.formulario.value.dataIngresso !== this.estudante.userDetails.dataIngresso) {
-    dadosAlterados.dataIngresso = this.formulario.value.dataIngresso;
-  }
-  
-  if (this.formulario.value.dataNascimento !== this.estudante.userDetails.dataNascimento) {
-    dadosAlterados.dataNascimento = this.formulario.value.dataNascimento;
   }
 
   // Verifica se há algo para atualizar
@@ -220,32 +207,28 @@ accao(): void {
     return;
   }
 
-  this.estudanteService.atualizarPerfil(this.estudante.userDetails.id, dadosAlterados)
-    .subscribe({
-      next: (resposta: any) => {
-        console.log('Resposta da atualização:', resposta);
-        
-        // Atualiza localmente os campos alterados
-        if (this.estudante) {
-          if (dadosAlterados.contacto) this.estudante.userDetails.contacto = dadosAlterados.contacto;
-          if (dadosAlterados.endereco) this.estudante.userDetails.endereco = dadosAlterados.endereco;
-          if (dadosAlterados.email) this.estudante['email'] = dadosAlterados.email;
-          if (dadosAlterados.anoAcademico) this.estudante.userDetails.anoAcademico = dadosAlterados.anoAcademico;
-          if (dadosAlterados.dataIngresso) this.estudante.userDetails.dataIngresso = dadosAlterados.dataIngresso;
-          if (dadosAlterados.dataNascimento) this.estudante.userDetails.dataNascimento = dadosAlterados.dataNascimento;
+  // Restante do código permanece igual...
+  if (this.estudante && this.estudante.userDetails) {
+    this.estudanteService.atualizarPerfil(this.estudante.userDetails.id, dadosAlterados)
+      .subscribe({
+        next: (resposta: any) => {
+          // Atualiza os dados localmente
+          if (this.estudante) {
+            if (dadosAlterados.contacto) this.estudante.userDetails.contacto = dadosAlterados.contacto;
+            if (dadosAlterados.endereco) this.estudante.userDetails.endereco = dadosAlterados.endereco;
+            if (dadosAlterados.email) this.estudante['email'] = dadosAlterados.email;
+          }
+          
+          this.mensagemSucesso = 'Dados atualizados com sucesso!';
+          setTimeout(() => this.carregarDadosEstudante(), 1000);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
         }
-        
-        this.mensagemSucesso = 'Dados atualizados com sucesso!';
-        
-        setTimeout(() => this.carregarDadosEstudante(), 1000);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Erro completo:', err);
-        this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-      }
-    });
-}}
-
+      });
+  } 
+}
+}
 
 
 

@@ -7,14 +7,12 @@ import { Observable, catchError, map, tap, throwError } from 'rxjs';
 interface UserDetails {
   id: number;
   dataNascimento?: string;
-  numIdentificacao?: string;
+  numDocumento?: string;
   tipoDocumento?: string;
   endereco?: string;
-  contacto?: string;
-  anoAcademico: number;
+  cargo?: string;
   dataIngresso?: string;
-  dataConclusao?: string;
-  statusEstudante?: string;
+  nivelAcademico?: string;
   [key: string]: any; // Permite propriedades adicionais
 }
 
@@ -91,12 +89,13 @@ getProfessor(): Observable<Professor> {
 }
 
 atualizarPerfil(id: number, dadosAtualizados: Partial<Professor>): Observable<Professor> {
-  //professor rota
-  return this.http.patch<Professor>(`${this.apiUrl}/api/staff/{id}`, dadosAtualizados, {
+  // Corrigido: usando template literals corretamente
+  return this.http.patch<Professor>(`${this.apiUrl}/staff/${id}`, dadosAtualizados, {
     headers: this.getHeaders()
-  });
+  }).pipe(
+    catchError(this.handleError)
+  );
 }
-
 }
 
 

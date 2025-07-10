@@ -10,18 +10,17 @@
   </div>
 
   <div *ngIf="professorSelecionado; else noProfessores">
- 
+         <h3 > Dados academicos</h3>
         <p><strong>Nome:</strong> {{ professorSelecionado.nome}}</p>
-        
+        <p><strong>Cargo:</strong>{{professorSelecionado.userDetails.cargo }} </p>
+        <p><strong>Data Ingresso:</strong>{{professorSelecionado.userDetails.dataIngresso| date:'shortDate' }}</p>
+        <p><strong>NumDocumento:</strong>{{ professorSelecionado.userDetails.numDocumento}}</p>
+        <p><strong>Endereço:</strong>{{ professorSelecionado.userDetails.endereco}}</p>
         <p><strong>Data Nasc:</strong>{{professorSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
-        <p><strong>Identificação:</strong>{{ professorSelecionado.userDetails.numIdentificacao}}</p>
-        <p><strong>Contacto:</strong>{{ professorSelecionado.userDetails.contacto}}</p>
-        <p><strong>Data Ingresso:</strong>{{professorSelecionado.userDetails.dataIngresso| date:'shortDate' }} </p>
-    
     </div>
 
   <ng-template #noProfessores>
-    <p>Nenhum estudante encontrado.</p>
+    <p>Nenhum Professpor encontrado.</p>
   </ng-template>
   </div>
 
@@ -32,19 +31,4 @@
 
 
 
-<!--
 
-
-
-  <div class="aluno-dados">
-            <h3>Dados</h3>
-            <p><strong>Nome:</strong> Vivaldo Vieira</p>
-            <p><strong>Contacto:</strong> 20231234 </p>
-            <p><strong>Cadeira(s) a lecionar:</strong> Analise /Fisica</p>
-            <p><strong>Grau:</strong> Engenheiro</p>
-            <p><strong>Nivel na instituição:</strong> contratado</p>
-
-          </div>
-
--->
->>>>>>> Dev
