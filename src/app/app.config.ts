@@ -9,7 +9,7 @@ import { routes } from './app.routes';
 
 import { LoginService } from './services/login.service';
 import { LancamentoService } from './services/lacamento-notas.service';
-import { DisciplinaService } from './services/disciplina.service';
+import { DisciplinaService } from './Services/disciplina.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';

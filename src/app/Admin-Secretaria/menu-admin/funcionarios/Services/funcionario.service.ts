@@ -34,7 +34,7 @@ export interface FuncionarioPage {
   providedIn: 'root'
 })
 export class FuncionarioService {
-  private apiUrl = 'https://fd04630eeda8.ngrok-free.app/api/staff';
+  private apiUrl = 'https://81b1776c3cd8.ngrok-free.app/api/staff';
 
   constructor(private http: HttpClient) {}
 

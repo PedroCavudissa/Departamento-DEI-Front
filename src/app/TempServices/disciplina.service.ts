@@ -10,6 +10,7 @@ export interface Disciplina {
   id: number;
   sigla: string;
   nome: string;
+  ano: number;
   ano_academico: string;
   precedencia: string;
   semestre: string;

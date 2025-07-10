@@ -4,11 +4,11 @@ import { LateralComponent } from '../lateral/lateral.component';
 import { CalendarioService, Evento } from '../../services/calendario.service';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-calendario-estudante',
   standalone: true,
-  imports: [LateralComponent, CommonModule,FormsModule],
+  // ⚠️  se usar Angular ≥17, "imports" é correto; em versões mais antigas use "imports: [...]" em @NgModule
+  imports: [LateralComponent, CommonModule, FormsModule],
   templateUrl: './calendario-estudante.component.html',
   styleUrl: './calendario-estudante.component.css',
 })
@@ -22,9 +22,9 @@ export class CalendarioEstudanteComponent implements OnInit {
   }
 
   carregarEventos(): void {
-    this.calendarioService.listarEventos().subscribe({
-      next: (dados) => (this.eventos = dados),
-      error: (erro) => console.error('Erro ao carregar eventos:', erro)
+    this.calendarioService.obterEventos().subscribe({
+      next: (dados: Evento[]) => (this.eventos = dados),
+      error: (erro: any) => console.error('Erro ao carregar eventos:', erro),
     });
   }
 }

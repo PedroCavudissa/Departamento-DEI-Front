@@ -1,0 +1,154 @@
+.tela-principal {
+    font-family: Arial, sans-serif;
+  }
+  
+  .cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4db8ff;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .bem-vindo{
+    
+  margin: 0 auto; 
+  }
+  
+  .icones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .notificacao {
+    position: relative;
+  }
+  
+  .contador {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: white;
+    color: black;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+  }
+  
+  .menu-lateral {
+    width: 250px;
+    background: #33aaff;
+    color: white;
+    padding: 20px;
+    height: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+  
+  .menu-lateral ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu-lateral li {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .menu-lateral li.ativo {
+    font-weight: lighter;
+    text-decoration: none;
+  }
+  
+  .conteudo {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .painel {
+    flex-grow: 1;
+    padding: 30px;
+    background: #fff5f5;
+  }
+
+  
+  .container-principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #f8f0f0;
+    min-height: 100vh;
+    overflow-y: auto;
+    
+  }
+  
+  .caixa-branca {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    width: 700px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .titulo {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .filtro {
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    padding-bottom: 5px;
+    width: 650px;
+
+  }
+
+  .filtro-box {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: fit-content;
+  }
+  
+  .botao-filtro {
+    border: 1px solid #999;
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .tabela {
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    margin: 0 auto;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
+  }
+
+  .logo {
+    height: 50px; 
+    width: 14em;  
+  }
+  
+  
