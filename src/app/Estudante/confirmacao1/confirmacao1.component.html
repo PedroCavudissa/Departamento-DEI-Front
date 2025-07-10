@@ -1,0 +1,51 @@
+<div class="container">
+  
+    <section class="form-section">   
+    <div class="table-section">
+      <h3 class="secao-titulo">Disciplinas a Fazer</h3>
+      <table>
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nome da Disciplina</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let disciplina of disciplinasfaze; let i = index">
+                <td>{{ disciplina.codigo }}</td>
+                <td>{{ disciplina.nome }}</td>
+              </tr>
+            </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="table-section">
+          <h3  class="secao-titulo">Disciplinas em Atraso</h3>
+      <table>
+        <thead>
+          <tr>  
+            <th>Código</th>
+            <th>Nome da Disciplina</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let disciplina of disciplinasAtrasadas; let i = index">
+            <td>{{ disciplina.codigo }}</td>
+            <td>{{ disciplina.nome }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+        <div class="pagination">
+          <span class="page active">1</span>
+          <span class="page">2</span>
+          <span class="page">3</span>
+        </div>
+        <button class="confirm-btn" (click)="confi2()">Continuar</button>
+       </div>
+
+<app-lateral></app-lateral>

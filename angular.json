@@ -20,24 +20,13 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
-           "assets": [
-  "src/assets",
-  "src/favicon.ico"
-],
-
-"styles": [
- 
-  "src/styles.css"
-
-
-],
-
-
-
-
-
-
-            "scripts": []
+            "assets": [
+              "src/assets"
+            ],
+            "scripts": [],
+            "styles": [
+              "src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -54,6 +43,7 @@
                 }
               ],
               "outputHashing": "all"
+              
             },
             "development": {
               "optimization": false,
@@ -65,12 +55,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          " options": {
+             "proxyConfig": "proxy.conf.json"
+            },
           "configurations": {
             "production": {
               "buildTarget": "DepartamentoDEI:build:production"
             },
             "development": {
-              "buildTarget": "DepartamentoDEI:build:development"
+              "buildTarget": "DepartamentoDEI:build:development" 
             }
           },
           "defaultConfiguration": "development"
@@ -89,7 +82,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/assets/"
               }
             ],
             "styles": [
@@ -97,11 +91,28 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
   },
   "cli": {
-    "analytics": "54b3101e-5ea5-4e1b-9a44-9222f26104a2"
+    "analytics": "54b3101e-5ea5-4e1b-9a44-9222f26104a2",
+    "schematicCollections": [
+      "angular-eslint"
+      
+    ]
   }
+  
 }

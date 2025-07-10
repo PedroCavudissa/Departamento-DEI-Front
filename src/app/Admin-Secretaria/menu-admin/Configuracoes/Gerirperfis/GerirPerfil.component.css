@@ -1,0 +1,169 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.content-box {
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 80px auto 0 auto;
+}
+
+/* ===========================
+   BOTÃO DE AÇÃO
+=========================== */
+.action-button {
+  background-color: #4DB8FF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  margin: 20px auto;
+  display: block;
+  width: 400px;
+  cursor: pointer;
+}
+
+/* ===========================
+   FILTROS E SELECTS
+=========================== */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.filtros select {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  min-width: 180px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.filtros select:focus {
+  border-color: #4DB8FF;
+  box-shadow: 0 0 5px rgba(77, 184, 255, 0.6);
+}
+
+/* ===========================
+   TABELA
+=========================== */
+.table-box {
+  margin-top: 0;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.tabela th,
+.tabela td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.table-box h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.tabela thead {
+  background-color: #4DB8FF;
+  color: white;
+}
+
+.tabela a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===========================
+   BOTÃO MENU (Hamburguer)
+=========================== */
+.menu-toggle {
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #4DB8FF;
+  color: white;
+  font-size: 24px;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+/* ===========================
+   RESPONSIVIDADE
+=========================== */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    display: block;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .supbar,
+  .main-content {
+    margin-left: 0;
+  }
+
+  .action-button {
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
+  }
+
+  .content-box {
+    padding: 10px;
+  }
+
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .filtros select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}

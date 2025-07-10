@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Layout principal */
+.main-wrapper {
+  margin-left: 210px;
+  width: calc(100% - 250px);
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Caixa principal de conteúdo */
+.main {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid rgba(179, 179, 179, 0.521);
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+/* Caixa de descrição */
+.caixa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border: 1px solid rgba(179, 179, 179, 0.521);
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #fdfdfd;
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Telas grandes (desktop ≥ 1200px): layout normal */
+@media (min-width: 1200px) {
+  .main-wrapper {
+    margin-left: 210px;
+    width: calc(100% - 250px);
+  }
+}
+
+/* Telas médias (tablets e notebooks ≤ 1199px) */
+@media (max-width: 1199px) {
+  .main-wrapper {
+    margin-left: 0;
+    width: 100%;
+    padding: 60px 15px 20px 15px;
+  }
+
+  .main {
+    margin-top: 30px;
+    padding: 15px;
+  }
+
+  .caixa {
+    flex-direction: column;
+    font-size: 14px;
+  }
+}
+
+/* Telas pequenas (smartphones ≤ 767px) */
+@media (max-width: 767px) {
+  .main-wrapper {
+    padding: 60px 10px 20px 10px;
+  }
+
+  .main {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .caixa {
+    font-size: 13px;
+    flex-direction: column;
+  }
+
+  .top-bar p,
+  .menu-link {
+    font-size: 12px;
+  }
+
+  button {
+    padding: 6px 10px;
+  }
+
+  img {
+    height: 28px;
+  }
+}
+
+/* Telas muito pequenas (≤ 580px): ajustes extras para sidebar colapsável */
+@media (max-width: 580px) {
+  .side-bar {
+    position: absolute;
+    left: 0;
+    top: 30px;
+    width: 100%;
+    height: calc(100dvh - 110px);
+    background-color: white;
+    z-index: 1000;
+    margin-bottom: -50px;
+  }
+
+  .side-interior {
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: white;
+    height: calc(100dvh - 110px);
+    width: 100%;
+  }
+
+  .side-interior h2 {
+    color: black;
+  }
+
+  .caixa2 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  input, select {
+    width: 100%;
+  }
+}

@@ -1,34 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
+import { DisciplinaService, Disciplina } from "../../Services/disciplina.service";
 
 @Component({
   selector: 'app-cadeira',
   standalone: true,
   imports: [CommonModule, FormsModule, LateralComponent],
   templateUrl: './cadeira.component.html',
-  styleUrls: ['./cadeira.component.css'] 
+  styleUrls: ['./cadeira.component.css']
 })
-export class CadeiraComponent {
-  anoSelecionado: number = 1;
+export class CadeiraComponent implements OnInit {
+  estudanteId = 1;
+  disciplinas: Disciplina[] = [];
 
-  anosDisponiveis: number[]= [1, 2, 3, 4, 5];
+  anoSelecionado: string = '';
+  anosDisponiveis: string[] = [];
 
-  disciplinas: { id: number; nome: string; ano: number }[] = [
-    { id: 1, nome: 'Análise Matemática I', ano: 1 },
-    { id: 2, nome: 'Fundamentos de Programação', ano: 1 },
-    { id: 3, nome: 'Álgebra Linear', ano: 2 },
-    { id: 4, nome: 'Estruturas de Dados', ano: 2 },
-    { id: 5, nome: 'Redes de Computadores', ano: 3 },
-    { id: 6, nome: 'Comunicação de Dados', ano: 3 },
-    { id: 7, nome: 'Computação Multimedia', ano: 4 },
-    { id: 8, nome: 'Sistema de Segurança de informação', ano: 4 },
-    { id: 9, nome: 'Projecto Final I', ano: 5 },
-    { id: 10, nome: 'Projecto final II', ano: 5 }  
-  ];
+  constructor(private disciplinaService: DisciplinaService) {}
 
-  get disciplinasFiltradas() {
-    return this.disciplinas.filter(d => d.ano === this.anoSelecionado);
+  ngOnInit(): void {
+    this.disciplinaService.getDisciplinas().subscribe({
+      next: (dados: Disciplina[]) => {
+        this.disciplinas = dados.filter(d => d.id === this.estudanteId);
+        this.anosDisponiveis = [...new Set(this.disciplinas.map(d => d.ano_academico))];
+      },
+      error: (err) => console.error('Erro ao buscar disciplinas', err)
+    });
+  }
+
+  get disciplinasFiltradas(): Disciplina[] {
+    if (!this.anoSelecionado) return this.disciplinas;
+    return this.disciplinas.filter(d => d.ano_academico === this.anoSelecionado);
   }
 }

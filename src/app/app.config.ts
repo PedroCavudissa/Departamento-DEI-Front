@@ -1,13 +1,33 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
+
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './Admin-Secretaria/login/login.component';
 
-// Definindo o appConfig com o tipo ApplicationConfig corretamente configurado
+import { LoginService } from './services/login.service';
+import { LancamentoService } from './services/lacamento-notas.service';
+import { DisciplinaService } from './Services/disciplina.service';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MenuService } from './services/menu.service';
+
+
+export interface LoginResponse {
+  token: string;
+  role: 'admin' | 'secretaria' | 'estudante' | 'professor';
+}
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-  ],
+
+    importProvidersFrom(HttpClientModule),LoginService,LancamentoService,DisciplinaService,MenuService
+  ]
+
+
 };
