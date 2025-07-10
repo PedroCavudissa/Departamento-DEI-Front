@@ -1,31 +1,57 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { filter, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PerfiprofService {
 
-   private apiUrl = 'https://fd04630eeda8.ngrok-free.app'; // Substitua pela sua URL
-
-  constructor(private http: HttpClient) { }
-
-  private getHeaders(): HttpHeaders {
+ private apiUrl = 'https://d9dd79742edf.ngrok-free.app'; //URL
+  
+ constructor(private http: HttpClient) { }
+    private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token') || '';
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'ngrok-skip-browser-warning': 'true' // Adicione esta linha para evitar avisos do ngrok
+      'ngrok-skip-browser-warning': 'true'
     });
   }
-atualizarSenha(senhaAtual:string,novaSenha:string): Observable<any> {
-  return this.http.post<any>(`${this.apiUrl}/api/auth/me/update-password`,{
-    headers: this.getHeaders()
-  });
+
+
+
+
+alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
+  const body = {
+    currentPassword: senhaAtual,
+    newPassword: novaSenha
+  };
+
+  // request() diretamente
+  const req = new HttpRequest(
+    'PUT',
+    `${this.apiUrl}/api/auth/me/update-password`,
+    body,
+    {
+      headers: this.getHeaders(),
+      responseType: 'text'
+    }
+  );
+
+  return this.http.request(req).pipe(
+    map(event => {
+      if (event instanceof HttpResponse) {
+        return event.body;
+      }
+      return null;
+    }),
+    filter(Boolean)
+  );
+}
 }
 
 
-}
+
 

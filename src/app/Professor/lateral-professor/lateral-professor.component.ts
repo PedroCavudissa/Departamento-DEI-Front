@@ -29,7 +29,7 @@ export class LateralProfessorComponent {
        
         case 'Perfil':
 
-          {this.router.navigate(['/dado-professor']);
+          {this.router.navigate(['/perfil-professor']);
           break;}
           case 'Horários':
             {this.router.navigate(['/horario-professor']);

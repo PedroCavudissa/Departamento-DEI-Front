@@ -8,7 +8,7 @@ import { filter, map, Observable } from 'rxjs';
 })
 export class PerfilestudanteService {
 
- private apiUrl = 'https://fd04630eeda8.ngrok-free.app'; // Substitua pela sua URL
+ private apiUrl = 'https://d9dd79742edf.ngrok-free.app'; //URL
   
  constructor(private http: HttpClient) { }
     private getHeaders(): HttpHeaders {
@@ -17,26 +17,10 @@ export class PerfilestudanteService {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'ngrok-skip-browser-warning': 'true' // Adicione esta linha para evitar avisos do ngrok
+      'ngrok-skip-browser-warning': 'true'
     });
   }
-  /*
-alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
-  const body = {
-    currentPassword: senhaAtual,  // ou "senhaAtual" dependendo do que sua API espera
-    newPassword: novaSenha       // ou "novaSenha" dependendo do que sua API espera
-  };
 
-  return this.http.put<any>(
-    `${this.apiUrl}/api/auth/me/update-password`, 
-    body,  // Corpo da requisição com as senhas
-    { headers: this.getHeaders(),
-
-         responseType: 'text' as ResponseType
-    }  // Configuração dos headers
-
-  );
-}*/
 
 
 
@@ -46,7 +30,7 @@ alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
     newPassword: novaSenha
   };
 
-  // Solução 1: Usando request() diretamente
+  // request() diretamente
   const req = new HttpRequest(
     'PUT',
     `${this.apiUrl}/api/auth/me/update-password`,
@@ -69,3 +53,20 @@ alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
 }
 }
 
+  /*
+alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
+  const body = {
+    currentPassword: senhaAtual,  // ou "senhaAtual" dependendo do que sua API espera
+    newPassword: novaSenha       // ou "novaSenha" dependendo do que sua API espera
+  };
+
+  return this.http.put<any>(
+    `${this.apiUrl}/api/auth/me/update-password`, 
+    body,  // Corpo da requisição com as senhas
+    { headers: this.getHeaders(),
+
+         responseType: 'text' as ResponseType
+    }  // Configuração dos headers
+
+  );
+}*/

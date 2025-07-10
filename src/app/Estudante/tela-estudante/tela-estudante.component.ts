@@ -41,20 +41,5 @@ export class TelaEstudanteComponent implements OnInit {
   }
 
 }
-  /*
-buscarEstudantePorId(): void {
-  this.estudanteService.getEstudante.subscribe({
-    next: (data: Estudante | undefined) => {
-      this.estudanteSelecionado = data;
-      this.errorMessage = null;
-    },
-    error: (err: { message: string; }) => {
->>>>>>> Dev
-      console.error('Erro ao buscar estudante por ID:', err);
-      this.errorMessage = err.message || 'Erro desconhecido ao buscar estudante por ID.';
-      this.estudanteSelecionado = undefined;
-    }
-  });
 
-} */
 

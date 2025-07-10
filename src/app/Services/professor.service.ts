@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
-// Defina interfaces mais flexíveis
+// Defina interfaces 
 interface UserDetails {
   id: number;
   dataNascimento?: string;
@@ -11,7 +11,7 @@ interface UserDetails {
   tipoDocumento?: string;
   endereco?: string;
   contacto?: string;
-  anoAcademico?: number;
+  anoAcademico: number;
   dataIngresso?: string;
   dataConclusao?: string;
   statusEstudante?: string;
@@ -28,15 +28,13 @@ export interface Professor {
 })
 export class ProfessorService {
 
-  cadastrar(estudante: Professor) {
+  cadastrar(professor: Professor) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://fd04630eeda8.ngrok-free.app/api'; // URL da API
-
-
+  private apiUrl = 'https://d9dd79742edf.ngrok-free.app/api'; // URL da API
 
  constructor(private http: HttpClient) { }
-private getHeaders(): HttpHeaders {
+   private getHeaders(): HttpHeaders {
     const token = localStorage.getItem('token') || '';
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
@@ -92,31 +90,22 @@ getProfessor(): Observable<Professor> {
   );
 }
 
-
 atualizarPerfil(id: number, dadosAtualizados: Partial<Professor>): Observable<Professor> {
-
   //professor rota
-  return this.http.patch<Professor>(`${this.apiUrl}/departamento/students/${id}`, dadosAtualizados, {
+  return this.http.patch<Professor>(`${this.apiUrl}/api/staff/{id}`, dadosAtualizados, {
     headers: this.getHeaders()
   });
 }
 
 }
-/*
-  private getHeaders(acceptJson: boolean = true): HttpHeaders {
-  const token = localStorage.getItem('token') || '';
-  const base = {
-    'Authorization': `Bearer ${token}`
-  };
 
-  if (acceptJson) {
-    return new HttpHeaders({
-      ...base,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
-  }
 
-  return new HttpHeaders(base);
-}
-*/
+
+
+
+
+
+
+
+
+

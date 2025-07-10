@@ -12,16 +12,15 @@
 
 
         <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
-        
         <p><strong>Data Nasc:</strong>{{estudanteSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
-        <p><strong>Identificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
+        <p><strong>NumIdentificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
         <p><strong>Contacto:</strong>{{ estudanteSelecionado.userDetails.contacto}}</p>
-        <p><strong>Data Ingresso:</strong>{{estudanteSelecionado.userDetails.dataIngresso| date:'shortDate' }} </p>
-
+        <p><strong>StatusEstudante:</strong>{{ estudanteSelecionado.userDetails.statusEstudante}}</p>
+        <p><strong>AnoAcademico:</strong>{{ estudanteSelecionado.userDetails.anoAcademico}}</p>
     
     </div>
   <ng-template #noEstudantes>
-    <p>Nenhum estudante encontrado.</p>
+    <p>Nenhum estudante encontrado.</p> 
   </ng-template>
   </div>
 </div>

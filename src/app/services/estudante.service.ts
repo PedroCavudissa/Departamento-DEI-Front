@@ -33,7 +33,7 @@ export class EstudanteService {
   cadastrar(estudante: Estudante) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://fd04630eeda8.ngrok-free.app/api'; // URL da API
+  private apiUrl = 'https://d9dd79742edf.ngrok-free.app/api'; // URL da API
 
 
   constructor(private http: HttpClient) { }
@@ -101,24 +101,7 @@ atualizarPerfil(id: number, dadosAtualizados: Partial<Estudante>): Observable<Es
 
 }
 
-/*
-  private getHeaders(acceptJson: boolean = true): HttpHeaders {
-  const token = localStorage.getItem('token') || '';
-  const base = {
-    'Authorization': `Bearer ${token}`
-  };
 
-  if (acceptJson) {
-    return new HttpHeaders({
-      ...base,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    });
-  }
-
-  return new HttpHeaders(base);
-}
-*/
 
 
 
