@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MenuAdminService } from '../../services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Route, Router } from '@angular/router';
 import {
@@ -9,15 +8,13 @@ import {
 } from 'chart.js';
 
 Chart.register(...registerables);
-
-
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
-  providers: [MenuAdminService],
+
 })
 export class MenuAdminComponent {
   colors: Record<string, string> = {
@@ -37,7 +34,7 @@ export class MenuAdminComponent {
   totalEstudantes = 0;
   totalFuncionarios = 0;
 
-  constructor(private router: Router, private service: MenuAdminService) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     const savedTheme = localStorage.getItem('theme');
@@ -46,7 +43,7 @@ export class MenuAdminComponent {
     }
   }
 
-  async ngAfterViewInit(): Promise<void> {
+  /*async ngAfterViewInit(): Promise<void> {
     try {
       const [estudantes, funcionarios] = await Promise.all([
         this.service.getTotalEstudantes(),
@@ -88,21 +85,33 @@ export class MenuAdminComponent {
     }
   }
 
-  verDetalhes(item: string){
-   switch(item){
-    case'salas':
-    this.router.navigate(['/detalhes-cadeiras'])
-    break;
-    case'Funcionários':
-    this.router.navigate(['/detalhes-funcionários'])
-    break;
-    case'Estudantes':
-    this.router.navigate(['/detalhes-estudantes'])
-    break;
-    
-   }
+  verDetalhes(nome: string): void {
+    switch (nome) {
+      case 'funcionarios':
+        this.router.navigate(['/detalhes-funcionarios']);
+        break;
+      case 'estudantes':
+        this.router.navigate(['/detalhes-estudantes']);
+        break;
+      case 'cadeiras':
+        this.router.navigate(['/detalhes-cadeiras']);
+        break;
+      case 'salas':
+        alert('Dados Indisponíveis');
+        break;
+      default:
+        alert('Dados não disponíveis');
+    }
   }
 
-  
+  toggleTheme(): void {
+    const isDark = document.body.classList.contains('dark-theme');
+    if (isDark) {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    }*/
 
-}
+  }

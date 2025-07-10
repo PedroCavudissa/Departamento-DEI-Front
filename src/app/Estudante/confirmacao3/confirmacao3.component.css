@@ -1,13 +1,9 @@
-
-
-
-.container {
-    max-width: 600px;
+.matricula-container {
+  max-width: 600px;
   margin: 80px auto;
   padding: 8px;
 }
-
-.form-section {
+.secao {
   position: relative;
   border: 1px solid #ccc;
   border-radius: 20px;
@@ -16,12 +12,10 @@
   background-color: #fff;
    overflow: hidden;
    padding-top: 40px;
-  
 }
 
-
 .secao-titulo {
-   position: absolute;
+  position: absolute;
   top: 0;
   left: 0;
   background-color: #47B5FF;
@@ -33,45 +27,26 @@
   width: 98%;
 }
 
-.table-section table {
-  width: 100%;
-  border-collapse: separate;
-  margin-bottom: 20px;
-  border-radius: 20px;
-  border-spacing: 0;
-  overflow: hidden;
+.grid-dados {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 13px;
 }
 
-.table-section table thead tr:first-child th:first-child {
-  border-top-left-radius: 20px;
+.mensagem {
+  margin-top: 15px;
+  color: #333;
+  font-weight: bold;
 }
 
- .table-section table thead tr:first-child th:last-child {
-  border-top-right-radius: 20px;
-}
-
-.table-section table tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 20px;
-}
-
-.table-section table tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 20px;
-}
-
-.table-section table th, .table-section table td {
-  border: 1px solid #ddd;
-  padding: 8px 10px;
-  text-align: center;
-  font-size: 14px;
-  background-color: white; 
-}
+/* Paginação */
 .pagination {
-  display: flex;
+ display: flex;
   justify-content: center;
   gap: 8px;
   margin-bottom: 20px;
 }
-
 .page {
   width: 28px;
   height: 28px;
@@ -90,6 +65,20 @@
   color: white;
 }
 
+/* Botão */
+.back-btn{
+  display: block;
+  margin: 0 auto;
+  padding: 10px 16px;
+  background-color: #47B5FF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-left: 210px;
+}
 .confirm-btn {
   display: block;
   margin: 0 auto;
@@ -100,99 +89,143 @@
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+  transition: background 0.3s ease;
+  margin-right: 210px;
+  }
+  .print-btn {
+  background-color: #47B5FF;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
 }
-.confirm-btn:hover {
+
+.print-btn:hover {
   background-color: #0056b3;
 }
 
-    /* Responsividade */
-  
-@media screen and (width: 375px) and (height: 667px){
-  .container  {
-    padding: 16px;
-    margin-top: 91px;
-  }
+
+.button-container {
+  display: flex;  
 }
 
-@media screen and (width: 414px) and (height: 896px) {
-      .container {
-        margin-top: 100px;
-      }
+.confirm-btn:hover {
+  background-color: #0056b3;
+}
+.back-btn:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Responsividade */
+@media screen and (width: 375px) and (height: 667px){
+  .matricula-container {
+    margin-top: 91px;
+
+    .back-btn{
+      margin-left: 85px;
     }
-    @media screen and (width: 390px) and (height: 844px) {
-      .container  {
-        margin-top: 100px;
+  }
+}
+@media screen and (width: 414px) and (height: 896px) {
+      .matricula-container {
+        margin-top: 105px;
+        padding: 18px;
       }
+      .back-btn{
+      margin-left: 95px;
+    }
+
+    }
+   @media screen and (width: 390px) and (height: 844px) {
+      .back-btn{
+      margin-left: 90px;
+    }
     }
 
  @media screen and (width: 430px) and (height: 932px) {
-      .container  {
+      .matricula-container {
         margin-top: 100px;
+        padding: 18px;
       }
+      .back-btn{
+      margin-left: 95px;
+    }
     }
      @media screen and (width: 412px) and (height: 914px) {
-      .container {
+     .matricula-container {
         margin-top: 100px;
       }
+      .back-btn{
+      margin-left: 110px;
     }
 
+    }
   @media screen and (width: 412px) and (height: 915px) {
-      .container {
+       .matricula-container {
         margin-top: 100px;
+        padding: 18px;
       }
+      .back-btn{
+      margin-left: 95px;
+    }
     }
 
  @media screen and (width: 360px) and (height: 740px) {
-      .container  {
+      .matricula-container {
         margin-top: 80px;
       }
+      .back-btn{
+      margin-left: 80px;
+    }
     }
      @media screen and (width: 768px) and (height: 1024px) {
-      .container  {
-        margin-top: 100px;
+      .matricula-container{
+        margin-top: 105px;
       }
     }
      @media screen and (width: 820px) and (height: 1180px) {
-      .container {
+      .matricula-container {
         margin-top: 150px;
       }
+
     }
      @media screen and (width: 1024px) and (height: 1366px) {
-      .container  {
-        margin-top: 180px;
+      .matricula-container {
+        margin-top: 130px;
       }
     }
 
  @media screen and (width: 912px) and (height: 1368px) {
-     .container  {
+      .matricula-container {
         margin-top: 180px;
       }
     }
  @media screen and (width: 540px) and (height: 720px) {
-      .container {
-        margin-top: 100px;
-      }
+    .back-btn{
+      margin-left: 170px;
+    }
     }
 
  @media screen and (width: 344px) and (height: 882px) {
-      .container  {
-        margin-top: 100px;
+      .matricula-container {
+        margin-top: 130px;
+     margin-left: 05px;
       }
-    }
- @media screen and (width: 853px) and (height: 1280px) {
-      .container {
-        margin-top: 150px;
-      }
-    }
- @media screen and (width: 1024px) and (height: 600px) {
-      .container  {
-        margin-top: 80px;
-      }
+
+      .back-btn{
+      margin-left: 80px;
     }
 
- @media screen and (width: 1280px) and (height: 800px) {
-      .container  {
-        margin-top: 100px;
-        
+    }
+ @media screen and (width: 853px) and (height: 1280px) {
+      .matricula-container {
+        margin-top: 150px;
       }
     }
