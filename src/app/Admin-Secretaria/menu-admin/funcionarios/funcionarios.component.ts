@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import Chart from 'chart.js/auto';
 import { FuncionarioService, Funcionario } from './Services/funcionario.service';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tela-funcionario',
@@ -14,117 +15,172 @@ import { BarralateralComponent } from '../../barralateral/barralateral.component
   imports: [CommonModule, FormsModule, HttpClientModule, BarralateralComponent]
 })
 export class FuncionariosComponent implements OnInit, AfterViewInit {
+  todosFuncionarios: Funcionario[] = [];
   funcionarios: Funcionario[] = [];
   filtroFuncao: string = '';
   pesquisaNome: string = '';
+  loading: boolean = true;
+  graficoDI: any;
+  graficoProfessores: any;
+  
+  private pesquisaSubject = new Subject<string>();
 
-  constructor(private funcionarioService: FuncionarioService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private funcionarioService: FuncionarioService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.carregarFuncionarios();
+    
+    this.pesquisaSubject.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(termo => {
+      this.pesquisaNome = termo;
+      this.aplicarFiltros();
+    });
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      this.atualizarGraficos();
+      if (this.funcionarios.length > 0) {
+        this.atualizarGraficos();
+      }
     });
   }
 
-  // carregarFuncionarios(): void {
-  //   this.funcionarioService.listarFuncionarios(this.filtroFuncao, this.pesquisaNome)
-  //     .subscribe({
-  //       next: (res) => {
-  //         this.funcionarios = res.content;
-  //         this.cdr.detectChanges();
-  //         this.atualizarGraficos();
-  //         console.log('Dados recebidos:', res.content);
-  //       },
-  //       error: (erro) => {
-  //         console.error('Erro completo:', erro);
-  //         if (erro.status === 0) {
-  //           alert('Erro de conexão com o servidor. Verifique sua internet ou ngrok.');
-  //         } else if (erro.status === 404) {
-  //           alert('Endpoint não encontrado. Verifique a URL da API.');
-  //         } else {
-  //           alert(`Erro ${erro.status}: ${erro.message || 'Erro no servidor'}`);
-  //         }
-  //       }
-  //     });
-  // }
-carregarFuncionarios(): void {
-  this.funcionarioService.listarFuncionarios(this.filtroFuncao, this.pesquisaNome)
-    .subscribe({
-      next: (res: any) => {
-        if (!res?.content) {
-          throw new Error('Estrutura de dados inválida');
-        }
-        this.funcionarios = res.content;
-        this.cdr.detectChanges();
+  carregarFuncionarios(): void {
+    this.loading = true;
+    this.funcionarioService.carregarTodosFuncionarios().subscribe({
+      next: (funcionarios) => {
+        this.todosFuncionarios = this.ordenarPorNome(funcionarios);
+        this.funcionarios = [...this.todosFuncionarios];
+        this.loading = false;
         this.atualizarGraficos();
+        this.cdr.detectChanges();
       },
-      error: (erro: Error) => {
-        console.error('Erro completo:', erro);
-        
-        let mensagem = 'Erro ao carregar dados';
-        if (erro.message.includes('JSON')) {
-          mensagem = 'O servidor retornou dados inválidos (não é JSON)';
-        } else if (erro.message.includes('conexão')) {
-          mensagem = 'Verifique sua conexão com a internet';
-        } else if (erro.message.includes('formato inválido')) {
-          mensagem = 'O servidor está retornando HTML em vez de JSON';
-        }
-        
-        alert(`${mensagem}\n\nDetalhes técnicos: ${erro.message}`);
+      error: (erro) => {
+        console.error('Erro:', erro);
+        this.loading = false;
+        alert(erro.message);
       }
     });
-}
+  }
 
+  private ordenarPorNome(funcionarios: Funcionario[]): Funcionario[] {
+    return [...funcionarios].sort((a, b) => 
+      a.nome.localeCompare(b.nome, 'pt-BR', { sensitivity: 'base' })
+    );
+  }
+
+  onPesquisaChange(termo: string): void {
+    this.pesquisaSubject.next(termo);
+  }
 
   onBuscar(): void {
-    this.carregarFuncionarios();
+    this.aplicarFiltros();
+  }
+
+  aplicarFiltros(): void {
+    let resultados = this.todosFuncionarios.filter(func => {
+      const cargoMatch = !this.filtroFuncao || func.cargo === this.filtroFuncao;
+      const termo = this.pesquisaNome.toLowerCase();
+      const pesquisaMatch = !termo || 
+                          func.nome.toLowerCase().includes(termo) ||
+                          (func.numDocumento && func.numDocumento.toLowerCase().includes(termo));
+      return cargoMatch && pesquisaMatch;
+    });
+
+    resultados = this.ordenarPorNome(resultados);
+    this.funcionarios = resultados;
+    this.atualizarGraficos();
+    this.cdr.detectChanges();
   }
 
   atualizarGraficos(): void {
-    const totalPorCargo = this.funcionarios.reduce((acc: Record<string, number>, func) => {
-      const cargo = func.cargo || 'Desconhecido';
-      acc[cargo] = (acc[cargo] || 0) + 1;
+    if (this.funcionarios.length === 0) return;
+
+    // Gráfico de Distribuição por Cargo
+    const totalPorCargo = this.funcionarios.reduce((acc: any, func) => {
+      acc[func.cargo] = (acc[func.cargo] || 0) + 1;
       return acc;
     }, {});
 
-    const labels = Object.keys(totalPorCargo);
-    const valores = Object.values(totalPorCargo);
-
-    this.renderGrafico('graficoDI', labels, valores, 'Distribuição por Cargo');
-    this.renderGrafico('graficoProfessores', ['Professores', 'Outros'], [
-      totalPorCargo['PROFESSOR'] || 0,
-      this.funcionarios.length - (totalPorCargo['PROFESSOR'] || 0)
-    ], 'Professores vs Outros');
-  }
-
-  renderGrafico(id: string, labels: string[], data: number[], titulo: string): void {
-    const canvas = document.getElementById(id) as HTMLCanvasElement;
-    if (!canvas) return;
-
-    if (Chart.getChart(canvas)) {
-      Chart.getChart(canvas)?.destroy();
+    const ctxDI = document.getElementById('graficoDI') as HTMLCanvasElement;
+    if (ctxDI) {
+      if (this.graficoDI) this.graficoDI.destroy();
+      this.graficoDI = new Chart(ctxDI, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(totalPorCargo),
+          datasets: [{
+            label: 'Distribuição por Cargo',
+            data: Object.values(totalPorCargo),
+            backgroundColor: '#47B5FF'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => `${context.parsed.y} funcionário(s)`
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                precision: 0
+              }
+            }
+          }
+        }
+      });
     }
 
-    new Chart(canvas, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: titulo,
-          data: data,
-          backgroundColor: ['#47B5FF', '#007bff', '#1e90ff', '#005f99']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: { display: false }
+    // Gráfico Professores/Secretaria vs Outros
+    const totalProfessores = totalPorCargo['PROFESSOR'] || 0;
+    const totalSecretaria = totalPorCargo['SECRETARIA'] || 0;
+    const totalOutros = this.funcionarios.length - totalProfessores - totalSecretaria;
+    
+    const ctxProfessores = document.getElementById('graficoProfessores') as HTMLCanvasElement;
+    if (ctxProfessores) {
+      if (this.graficoProfessores) this.graficoProfessores.destroy();
+      this.graficoProfessores = new Chart(ctxProfessores, {
+        type: 'pie',
+        data: {
+          labels: ['Professores', 'Secretaria', 'Outros'],
+          datasets: [{
+            data: [totalProfessores, totalSecretaria, totalOutros],
+            backgroundColor: ['#47B5FF', '#1363DF', '#06283D']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => {
+                  const label = context.label || '';
+                  const value = context.raw || 0;
+                  return `${label}: ${value} funcionário(s)`;
+                }
+              }
+            }
+          }
         }
-      }
-    });
+      });
+    }
   }
 }

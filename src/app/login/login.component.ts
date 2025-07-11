@@ -116,10 +116,10 @@ entrar() {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
-          case 'admin':
+          case 'SECRETARIA':
             this.router.navigate(['/menu-secretaria']);
             break;
-          case 'professor':
+          case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
             break;
           case 'ESTUDANTE':

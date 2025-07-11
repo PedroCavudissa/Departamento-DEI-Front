@@ -9,10 +9,14 @@
 
   <div class="graficos">
     <div class="grafico-box">
-      <canvas id="graficoDI"></canvas>
+      <div class="grafico-container">
+        <canvas id="graficoDI"></canvas>
+      </div>
     </div>
     <div class="grafico-box">
-      <canvas id="graficoProfessores"></canvas>
+      <div class="grafico-container">
+        <canvas id="graficoProfessores"></canvas>
+      </div>
     </div>
   </div>
 
@@ -25,17 +29,32 @@
       <option value="MONITOR">Monitor</option>
     </select>
 
-    <input type="text" [(ngModel)]="pesquisaNome" placeholder="Pesquisar Funcionários" />
+    <input 
+  type="text" 
+  [(ngModel)]="pesquisaNome" 
+  (input)="onPesquisaChange($any($event.target).value)"
+  placeholder="Pesquisar por nome ou documento" 
+  class="campo-pesquisa-func"
+  />
     <button (click)="onBuscar()" class="buscar-btn">Buscar</button>
   </div>
 
-  <!-- <div class="scroll-container">
-    <table>
+  <div *ngIf="loading" class="loading-message">
+    <div class="spinner"></div>
+    Carregando dados...
+  </div>
+
+  <div *ngIf="!loading && funcionarios.length === 0" class="no-results">
+    Nenhum funcionário encontrado com esses dados!
+  </div>
+
+  <div *ngIf="!loading && funcionarios.length > 0" class="scroll-container">
+    <table class="tabela-funcionarios">
       <thead>
         <tr>
           <th>Nome</th>
           <th>Função</th>
-           <th>Tipo de Documento</th>
+          <th>Tipo de Documento</th>
           <th>ID Documento</th>
           <th>Nível Acadêmico</th>
         </tr>
@@ -44,36 +63,13 @@
         <tr *ngFor="let funcionario of funcionarios">
           <td>{{ funcionario.nome }}</td>
           <td>{{ funcionario.cargo }}</td>
-          <td>{{ funcionario.tipoDocumento }} - {{ funcionario.numDocumento }}</td>
+          <td>{{ funcionario.tipoDocumento }}</td>
+          <td>{{ funcionario.numDocumento }}</td>
           <td>{{ funcionario.nivelAcademico }}</td>
         </tr>
       </tbody>
     </table>
   </div>
-
-  <app-barralateral></app-barralateral>
-</div> -->
-
-<div class="scroll-container">
-  <table class="tabela-funcionarios">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Função</th>
-        <th>Tipo de Documento</th>
-        <th>ID Documento</th>
-        <th>Nível Acadêmico</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let funcionario of funcionarios">
-        <td>{{ funcionario.nome }}</td>
-        <td>{{ funcionario.cargo }}</td>
-        <td>{{ funcionario.tipoDocumento }}</td>
-        <td>{{ funcionario.numDocumento }}</td>
-        <td>{{ funcionario.nivelAcademico }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <app-barralateral></app-barralateral>
 </div>
+
+<app-barralateral></app-barralateral>

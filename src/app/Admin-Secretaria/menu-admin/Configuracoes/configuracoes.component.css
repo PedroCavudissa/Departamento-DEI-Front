@@ -1,62 +1,174 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Container principal */
 .main-content {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px;
   margin-left: 650px;
   margin-top: 80px;
+  transition: all 0.3s ease;
 }
 
 .button-section {
   display: flex;
-  gap: 2px;
-  padding: 1px;
-
+  gap: 20px;
+  padding: 10px;
   flex-wrap: wrap;
   width: 80%;
+  justify-content: center;
 }
 
-/* Botões */
+/* Botões - Estilo aprimorado mantendo a identidade */
 .action-button {
   background-color: #47B5FF;
-    border-radius: 30px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 15px;
-    border: 1px solid #333;
-    transition: transform 0.2s ease;
-    width: 450px;
-    height: 60px;
-    margin-bottom: 30px;
-    color: #fff;
-    font-size: 20px;
-  
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 15px 25px;
+  border: none;
+  transition: all 0.3s ease;
+  width: 450px;
+  height: 60px;
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .action-button:hover {
-  background-color: #134cc8; 
+  background-color: #1363DF;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsividade */
+.action-button:active {
+  transform: translateY(1px);
+}
+
+/* Efeito de onda ao clicar */
+.action-button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.action-button:focus:not(:active)::after {
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* ======================
+   RESPONSIVIDADE AVANÇADA
+   ====================== */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 300px;
+    padding: 25px;
+  }
+  
+  .button-section {
+    width: 90%;
+    gap: 15px;
+  }
+  
+  .action-button {
+    width: 380px;
+    height: 55px;
+    font-size: 18px;
+  }
+}
+
+/* Tablets pequenos e celulares grandes (576px - 768px) */
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
+    padding: 20px;
+    margin-top: 60px;
+    align-items: center;
   }
-
-
-
+  
   .button-section {
     width: 100%;
+    gap: 12px;
+    padding: 5px;
+  }
+  
+  .action-button {
+    width: 100%;
+    max-width: 350px;
+    height: 50px;
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Celulares pequenos (até 576px) */
+@media (max-width: 576px) {
+  .main-content {
+    padding: 15px;
+    margin-top: 50px;
+  }
+  
+  .action-button {
+    height: 48px;
+    font-size: 16px;
+    padding: 12px 20px;
+    margin-bottom: 12px;
+    border-radius: 25px;
+  }
+}
+
+/* Muito pequenos (até 400px) */
+@media (max-width: 400px) {
+  .action-button {
+    height: 45px;
+    font-size: 15px;
+    padding: 10px 15px;
+  }
+}
+
+/* Orientação paisagem */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-content {
+    padding: 15px;
+    margin-top: 40px;
+  }
+  
+  .action-button {
+    height: 40px;
+    font-size: 15px;
+    margin-bottom: 10px;
   }
 }

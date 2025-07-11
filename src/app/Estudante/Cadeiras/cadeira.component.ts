@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
-import { DisciplinaService, Disciplina } from "../../Services/disciplina.service";
+import { DisciplinaService, Disciplina } from "../../services/disciplina.service";
 
 @Component({
   selector: 'app-cadeira',

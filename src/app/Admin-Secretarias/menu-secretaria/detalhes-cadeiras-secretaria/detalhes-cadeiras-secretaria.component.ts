@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { Disciplina, DisciplinaService } from '../../../Services/disciplina.service';
+import { Disciplina, DisciplinaService } from '../../../services/disciplina.service';
 
 const estudanteId = 1;
 
