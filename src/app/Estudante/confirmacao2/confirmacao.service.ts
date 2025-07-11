@@ -28,7 +28,7 @@ export interface DadosAcademicos {
 
 export interface Disciplina {
   id: number;
-  sigla: string; // antes: codigo
+  sigla: string;
   nome: string;
   anoAcademico: number;
   semestre: number;
@@ -83,7 +83,12 @@ export class ConfirmacaoService {
     return this.http.get<Rupe[]>(`${this.baseUrl}/payments/rupe/myRupes`, this.getHeaders());
   }
 
-  finalizarConfirmacao(payload: { estado: string, estudanteId: number }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/departamento/confirmation`, payload, this.getHeaders());
-  }
+ finalizarConfirmacao(estudanteId: number, disciplinasIds: number[]): Observable<any> {
+  return this.http.post(
+    `${this.baseUrl}/departamento/students/confirmar/${estudanteId}`,
+    disciplinasIds, // deve ser tipo: number[]
+    this.getHeaders()
+  );
+}
+
 }

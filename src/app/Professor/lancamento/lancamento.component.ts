@@ -18,7 +18,7 @@ export class LancamentoComponent implements OnInit {
   tipos: TipoPauta[] = [
     { codigo: 1, descricao: 'Notas Da AC1 e PF1' },
     { codigo: 2, descricao: 'Notas Da AC2 e PF2' },
-    { codigo: 3, descricao: 'Notas Do Exame Epóca Especial' },
+    { codigo: 3, descricao: 'Notas Do Exame Epóca Normal' },
     { codigo: 4, descricao: 'Notas Do Exame Epóca De Recurso' },
     { codigo: 5, descricao: 'Notas Da Oral' }
   ];

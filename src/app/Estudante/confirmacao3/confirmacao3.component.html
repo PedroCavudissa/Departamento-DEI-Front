@@ -10,7 +10,6 @@
       <p><strong>Valor:</strong> {{ rupe.amount | currency:'AOA':'symbol' }}</p>
       <p><strong>Data de Emissão:</strong> {{ rupe.emissionDate | date }}</p>
       <p><strong>Data de Vencimento:</strong> {{ rupe.expirationDate| date }}</p>
-      
       <p>
         <strong>Status:</strong>
         <span [ngStyle]="{ color: rupe.status === 'PAID' ? 'green' : 'red' }">{{ rupe.status}}</span></p>
