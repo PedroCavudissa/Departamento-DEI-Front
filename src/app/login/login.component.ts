@@ -69,34 +69,7 @@ recuperarForm!: FormGroup;
 fecharModal() {
   this.mostrarModal = false;
 }
-/*
-alterarSenha() {
-  if (this.recuperarForm.valid) {
-    const email = this.recuperarForm.get('gmail')?.value;
-    const senha = this.recuperarForm.get('senha')?.value;
 
-    const dados = { email, senha };
-
-    this.loginService.recuperarSenha().subscribe({
-      next: () => {
-        this.mostrarModal = false;
-        notyf.success('Senha alterada com sucesso!');
-        this.mensagemLogin = 'Senha alterada com sucesso!';
-        this.tipoMensagem = 'sucesso';
-      },
-      error: () => {
-        this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
-        this.tipoMensagem = 'erro';
-       
-      }
-    });
-  } else {
-    notyf.error('Usuário não encontrado ou erro ao alterar a senha.');
-    this.recuperarForm.markAllAsTouched();
-  }
-}
-
-*/
 alterarSenha(){}
 entrar() {
   if (this.loginForm.valid) {

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, OnInit, OnDestroy } from '@angular/core';
+=======
+import { Component } from '@angular/core';
+>>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Router } from '@angular/router';
 import {
@@ -12,18 +16,26 @@ import { FuncionarioService } from '../../services/cadastro.service';
 import { forkJoin } from 'rxjs';
 
 Chart.register(...registerables);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 })
 export class MenuAdminComponent implements OnInit, OnDestroy {
   totalFuncionarios = 0;
   totalCadeiras = 0;
   totalEstudantes = 0;
+
 
   private pieChart!: Chart;
 
@@ -34,6 +46,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
     private serviceFuncionario: FuncionarioService
   ) {}
 
+
   ngOnInit(): void {
     this.carregarDadosGrafico();
   }
@@ -41,6 +54,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
   carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     if (!pieCtx) return;
+
 
     if (this.pieChart) {
       this.pieChart.destroy(); // destrói se existir
@@ -109,9 +123,41 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
     }
   }
 
+
   ngOnDestroy(): void {
     if (this.pieChart) {
       this.pieChart.destroy();
     }
   }
 }
+
+  verDetalhes(nome: string): void {
+    switch (nome) {
+      case 'funcionarios':
+        this.router.navigate(['/detalhes-funcionarios']);
+        break;
+      case 'estudantes':
+        this.router.navigate(['/detalhes-estudantes']);
+        break;
+      case 'cadeiras':
+        this.router.navigate(['/detalhes-cadeiras']);
+        break;
+      case 'salas':
+        alert('Dados Indisponíveis');
+        break;
+      default:
+        alert('Dados não disponíveis');
+    }
+  }
+
+  toggleTheme(): void {
+    const isDark = document.body.classList.contains('dark-theme');
+    if (isDark) {
+      document.body.classList.remove('dark-theme');
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.body.classList.add('dark-theme');
+      localStorage.setItem('theme', 'dark');
+    }*/
+
+  }

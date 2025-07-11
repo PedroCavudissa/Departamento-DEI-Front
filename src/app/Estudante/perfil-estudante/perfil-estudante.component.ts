@@ -51,45 +51,5 @@ export class PerfilEstudanteComponent {
 }
 
 
- 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*altera senha 
-    mostrarModal = false;
-
-  abrirModal() {
-    this.mostrarModal = true;
-  }
-
-  fecharModal() {
-    this.mostrarModal = false;
-  }
-
-  salvarSenha() {
-    // lógica de salvar a nova senha
-   /// console.log
-   alert ('Senha alterada!');
-    this.fecharModal();
-  }
-  // actualizar dados 
-  accao(){
-
-    alert("dados actualizados")
-  }
-    */
  

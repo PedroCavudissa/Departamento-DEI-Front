@@ -6,6 +6,7 @@ import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudant
 import { CadeiraComponent } from './Estudante/Cadeiras/cadeira.component';
 import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.component';
 import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
+import { Confirmacao3Component } from './Estudante/confirmacao3/confirmacao3.component';
 import { AprovarComunicadoComponent } from './Admin-Secretaria/menu-admin/Configuracoes/aprovar-comunicado/aprovar-comunicado.component';
 import { ComunicadoComponent } from './Admin-Secretaria/menu-admin/comunicado/comunicado.component';
 import { MenuEstudantesComponent } from './Admin-Secretaria/menu-admin/estudantes/menu-estudantes.component';
@@ -83,6 +84,7 @@ export const routes: Routes = [
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
+  { path: 'confirmacao3', component: Confirmacao3Component },
   { path: 'perfil-estudante', component: PerfilEstudanteComponent },
   { path: 'horario-estudante', component: HorarioEstudanteComponent },
   { path: 'chat-estudante', component: ChatEstudanteComponent },
