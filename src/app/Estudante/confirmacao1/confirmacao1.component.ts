@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
+import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../Services/confirmacao.service'; // <== Adicione 'Disciplina'
 
 @Component({
   selector: 'app-confirmacao1',
@@ -10,26 +11,40 @@ import { LateralComponent } from "../lateral/lateral.component";
   styleUrl: './confirmacao1.component.css'
 })
 export class Confirmacao1Component {
-  constructor(private router: Router) {}
+  disciplinasfaze: Disciplina[] = []; // <== Adicione esta linha
 
-   disciplinasfaze = [
-    { codigo: 'MAT101', nome: 'Matemática Básica' },
-    { codigo: 'FIS102', nome: 'Física I' },
-    { codigo: 'QUI103', nome: 'Química Geral' },
-    { codigo: 'BIO104', nome: 'Biologia Celular' },
-    { codigo: 'HIS105', nome: 'História Moderna' },
-    { codigo: 'GEO106', nome: 'Geografia Física' },
-    { codigo: 'POR107', nome: 'Português Instrumental' },
-  ];
+  constructor(
+    private router: Router,
+    private confirmacaoService: ConfirmacaoService
+  ) {}
 
-   disciplinasAtrasadas = [
-  { codigo: 'MAT202', nome: 'Cálculo II' },
-  { codigo: 'FIS203', nome: 'Física II' },
-   { codigo: 'FIS203', nome: 'Física II' }
-];
+ngOnInit(): void {
+  this.confirmacaoService.getDadosAcademicos().subscribe({
+    next: (dados) => {
+      const estudanteId = dados.userDetails.id;
+      const ano = dados.userDetails.anoAcademico; // ← pegando o ano diretamente
+      const semestre = this.getSemestre(); // ← define conforme necessário (ex: selecionável na UI ou fixo)
 
-confi2() {
-  this.router.navigate(['/confirmacao2']);
+      this.confirmacaoService.getDisciplinasFazer(estudanteId, ano, semestre).subscribe({
+        next: (disciplinas) => {
+          this.disciplinasfaze = disciplinas;
+        },
+        error: (err) => {
+          console.error('❌ Erro ao carregar disciplinas a fazer:', err);
+          this.disciplinasfaze = [];
+        }
+      });
+    },
+    error: (err) => {
+      console.error('❌ Erro ao obter dados acadêmicos:', err);
+    }
+  });
 }
-
+getSemestre(): number {
+  const mes = new Date().getMonth() + 1;
+  return mes <= 6 ? 1 : 2;
+}
+  confi2() {
+    this.router.navigate(['/confirmacao2']);
+  }
 }

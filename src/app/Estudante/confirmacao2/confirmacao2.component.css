@@ -3,8 +3,6 @@
   margin: 80px auto;
   padding: 8px;
 }
-
-
 .secao {
   position: relative;
   border: 1px solid #ccc;
@@ -14,6 +12,8 @@
   background-color: #fff;
    overflow: hidden;
    padding-top: 40px;
+    min-height: auto;
+  height: auto;
 }
 
 .secao-titulo {
@@ -34,13 +34,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   font-size: 13px;
-}
-
-.confirmacao {
-  margin-top: 10px;
-  font-size: 13px;
-  padding: 8px;
-  border-radius: 3px;
 }
 
 ul {
@@ -71,7 +64,6 @@ li {
   font-weight: bold;
   font-size: 14px;
   color: #47B5FF;
-  cursor: pointer;
   background-color: white;
 }
 
@@ -119,11 +111,26 @@ li {
   background-color: #0056b3;
 }
 .button-container {
-  display: flex;
-
-  
+  display: flex;  
+}
+.alert {
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
+.alert-success {
+  background-color: #e9f8ef;
+  color: #2c7a4b;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+  background-color: #fbeaea;
+  color: #c0392b;
+  border: 1px solid #e0b4b4;
+}
 
 /* RESPONSIVIDADE*/
 @media screen and (width: 375px) and (height: 667px){
