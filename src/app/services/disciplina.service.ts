@@ -1,39 +1,71 @@
+
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface DisciplinaEmAtraso {
+ano: any;
+semestre: any;
   id: number;
   nome: string;
-  sigla?: string;
-  ano_academico?: string;
-  semestre?: string | number;
-  precedencia?: string;
-  ano?: number; // usado por cadeira.component.html
+  status: string;
+  // Adicione outros campos conforme necessário
 }
 
 
 export interface Disciplina {
+  ano: string;
+  status: string;
   id: number;
-  nome: string;
   sigla: string;
+  nome: string;
   ano_academico: string;
   precedencia: string;
   semestre: string;
-  detalhes: string;
 }
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class DisciplinaService {
-  private baseUrl = '/api/subject/atrasadas';
+  private apiUrl = 'https://5df5-102-214-36-223.ngrok-free.app/api/disciplina/list';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  /**
-   * Retorna as disciplinas em atraso para um determinado estudante.
-   * @param estudanteId ID do estudante logado.
-   */
-  getDisciplinas(estudanteId: number): Observable<DisciplinaEmAtraso[]> {
-    return this.http.get<DisciplinaEmAtraso[]>(`${this.baseUrl}/${estudanteId}`);
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      return throwError(() => new Error('Erro de conexão com o servidor'));
+    } else if (error.status === 200) {
+      // Verifica se a resposta é HTML quando deveria ser JSON
+      if (typeof error.error === 'string' && error.error.startsWith('<!DOCTYPE html>')) {
+        return throwError(() => new Error('O servidor retornou uma página HTML em vez de dados JSON'));
+      }
+      return throwError(() => new Error('Resposta inesperada do servidor'));
+    } else {
+      return throwError(() => new Error(`Erro ${error.status}: ${error.message}`));
+
+    }
   }
+  getDisciplinas(estudanteId: number): Observable<Disciplina[]> {
+    return this.http.get(this.apiUrl, {
+      responseType: 'text', // Primeiro recebe como texto
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true' // Adiciona header para bypass do ngrok
+      })
+    }).pipe(
+      map(response => {
+        // Tenta converter para JSON
+        try {
+          return JSON.parse(response);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (e) {
+          throw new Error('Resposta não é um JSON válido');
+        }
+      }),
+      catchError(this.handleError)
+// eslint-disable-next-line no-irregular-whitespace
+    );
+// eslint-disable-next-line no-irregular-whitespace
+  }
 }
