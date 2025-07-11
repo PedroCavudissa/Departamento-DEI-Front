@@ -8,7 +8,7 @@ import { filter, map, Observable } from 'rxjs';
 })
 export class PerfilestudanteService {
 
- private apiUrl = 'https://d9dd79742edf.ngrok-free.app'; //URL
+ private apiUrl = 'https://5e457bae9840.ngrok-free.app'; //URL
   
  constructor(private http: HttpClient) { }
     private getHeaders(): HttpHeaders {

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
-import { DisciplinaService, DisciplinaEmAtraso } from "../../Services/disciplina.service";
+import { DisciplinaEmAtraso, DisciplinaService } from "../../Services/disciplina.service";
+// Defina a interface DisciplinaEmAtraso localmente caso não exista no service
 
 @Component({
   selector: 'app-cadeira',
@@ -19,7 +20,12 @@ export class CadeiraComponent implements OnInit {
 
   ngOnInit(): void {
     this.disciplinaService.getDisciplinas(this.estudanteId).subscribe({
-      next: (dados) => this.disciplinas = dados,
+      next: (dados) => this.disciplinas = dados.map(d => ({
+        ...d,
+        ano: d.ano ?? d.ano_academico ?? '', // Ajuste conforme a origem do campo
+        semestre: d.semestre ?? '', // Garante que semestre exista
+        status: d.status ?? 'desconhecido' // ou defina um valor padrão apropriado
+      })),
       error: (err) => console.error('Erro ao buscar disciplinas', err)
     });
   }

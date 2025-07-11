@@ -29,7 +29,7 @@ export class ProfessorService {
   cadastrar(professor: Professor) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'https://d9dd79742edf.ngrok-free.app/api'; // URL da API
+  private apiUrl = 'https://5e457bae9840.ngrok-free.app/api'; // URL da API
 
  constructor(private http: HttpClient) { }
    private getHeaders(): HttpHeaders {

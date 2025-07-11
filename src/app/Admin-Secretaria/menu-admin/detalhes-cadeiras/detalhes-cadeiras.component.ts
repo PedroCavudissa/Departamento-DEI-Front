@@ -1,9 +1,23 @@
 
 import { Component, OnInit } from '@angular/core';
-import { DisciplinaEmAtraso, DisciplinaService } from '../../../Services/disciplina.service';
+import { DisciplinaService } from '../../../Services/disciplina.service';
 import { CommonModule } from '@angular/common';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { FormsModule } from '@angular/forms';
+// Add the correct import for DisciplinaEmAtraso if it exists, or define it below
+// Example import (uncomment and adjust the path if needed):
+// import { DisciplinaEmAtraso } from '../../../models/disciplina-em-atraso.model';
+
+interface DisciplinaEmAtraso {
+precedencia: any;
+semestre: any;
+ano_academico: any;
+sigla: any;
+  // Define the properties according to your application needs
+  id: number;
+  nome: string;
+  status: string;
+}
 
 const estudanteId = 1;
 @Component({
@@ -28,7 +42,10 @@ export class DetalhesCadeirasComponent implements OnInit {
       this.disciplinaService.getDisciplinas(estudanteId)
 .subscribe({
         next: (data) => {
-          this.disciplinas = data;
+          this.disciplinas = data.map((disciplina: any) => ({
+            ...disciplina,
+            status: disciplina.status ?? 'indefinido' // Use a default or derive as needed
+          }));
           this.errorMessage = null;
         },
         error: (err) => {
