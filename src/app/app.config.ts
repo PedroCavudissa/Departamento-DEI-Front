@@ -8,7 +8,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 import { LoginService } from './services/login.service';
-import { LancamentoService } from './services/lacamento-notas.service';
+import { LacamentoNotasService } from './Services/lacamento-notas.service';
 import { DisciplinaService } from './services/disciplina.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +26,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
 
-    importProvidersFrom(HttpClientModule),LoginService,LancamentoService,DisciplinaService,MenuService
+    importProvidersFrom(HttpClientModule),LoginService,LacamentoNotasService,DisciplinaService,MenuService
   ]
 
 
