@@ -1,0 +1,49 @@
+<div class="content">
+  <main class="principal">
+    <h3>Minhas Notas</h3>
+
+    <div class="caixa">
+      <select [(ngModel)]="filtroDisciplina" (change)="scrollTabela()">
+        <option value="">-- Selecione a disciplina --</option>
+        <option *ngFor="let d of disciplinas" [value]="d">{{ d }}</option>
+      </select>
+
+      <select [(ngModel)]="filtroSemestre" (change)="scrollTabela()">
+        <option value="">-- Selecione o semestre --</option>
+        <option *ngFor="let s of semestres" [value]="s">{{ s }}</option>
+      </select>
+
+      <button (click)="limparFiltros()" class="btn-limpar">Limpar Filtro</button>
+    </div>
+
+    <div class="table-wrapper" id="tabela">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Cadeira</th>
+            <th>Semestre</th>
+            <th>AC1</th>
+            <th>AC2</th>
+            <th>P1</th>
+            <th>P2</th>
+            <th>MS</th>
+            <th>Exame</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let nota of notasFiltradas">
+            <td>{{ nota.cadeira }}</td>
+            <td>{{ nota.semestre }}</td>
+            <td>{{ nota.ac1 }}</td>
+            <td>{{ nota.ac2 }}</td>
+            <td>{{ nota.p1 }}</td>
+            <td>{{ nota.p2 }}</td>
+            <td>{{ nota.ms }}</td>
+            <td>{{ nota.exame }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<app-lateral>

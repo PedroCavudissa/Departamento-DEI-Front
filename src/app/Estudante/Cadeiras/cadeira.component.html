@@ -1,0 +1,34 @@
+<div class="conteudo">
+  <main class="painel">
+    <div class="container-principal">
+      <div class="caixa-branca">
+        <h3 class="titulo">Disciplinas em Atraso</h3>
+
+        <div class="tabela" *ngIf="disciplinas.length > 0; else semDados">
+          <table>
+            <thead>
+              <tr>
+                <th>Cadeira</th>
+                <th>Ano Acadêmico</th>
+                <th>Semestre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let disciplina of disciplinas">
+                <td>{{ disciplina.nome }}</td>
+                <td>{{ disciplina.ano }}º</td>
+                <td>{{ disciplina.semestre }}º</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <ng-template #semDados>
+          <p>Nenhuma disciplina em atraso encontrada.</p>
+        </ng-template>
+      </div>
+    </div>
+  </main>
+</div>
+
+<app-lateral></app-lateral>

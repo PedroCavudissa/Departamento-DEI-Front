@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+  font-family: sans-serif;
+}
+
+.conteudo {
+  padding: 60px 20px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.conteudo h2 {
+  margin-bottom: 24px;
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: #333;
+  text-align: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 10px;
+  border-left: 5px solid #333;
+  border: 1px solid #333;
+  transition: transform 0.2s ease;
+  width: min(180px, 45%);
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.card.orange { border-left-color: orange; }
+.card.blue { border-left-color: #007bff; }
+.card.gray { border-left-color: gray; }
+.card.yellow { border-left-color: gold; }
+
+.card h3 {
+  font-size: clamp(12px, 2vw, 14px);
+  color: #444;
+  margin: 0;
+  word-break: break-word;
+}
+
+.card .number {
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.cards-graficos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.caixa {
+  width: 100%;
+  max-width: 500px;
+  height: 450px; /* Define altura fixa */
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Evita vazamento */
+  position: relative;
+}
+
+
+.cards-graficos canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .conteudo {
+    padding: 40px 16px;
+  }
+
+  .card {
+    width: min(45%, 180px);
+  }
+}
+
+@media (max-width: 768px) {
+  .conteudo {
+    padding: 30px 10px;
+    margin-top: 0;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .caixa {
+    width: 90%;
+  }
+}

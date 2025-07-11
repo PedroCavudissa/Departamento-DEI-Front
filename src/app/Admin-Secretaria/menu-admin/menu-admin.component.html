@@ -1,0 +1,42 @@
+
+<body>
+  
+
+    <main class="conteudo">
+        
+        <div class="cards-container">
+
+           
+            <div class="card orange" (click)="verDetalhes('Estudantes')">
+              <h3>Estudantes</h3>
+              <p class="number">{{ totalEstudantes }}</p>
+            </div>
+            
+          
+          <div class="card blue">
+            <h3  (click)="verDetalhes('funcionarios')"  tabindex="" (keyup)="verDetalhes('')">Funcionários</h3>
+            <p class="number">{{ totalFuncionarios }}</p>
+          </div>
+      
+          <div class="card gray" (click)="verDetalhes('Cadeiras')">
+            <h3>Cadeiras</h3>
+            <p class="number">{{ totalCadeiras }}</p>
+          </div>
+      
+       
+        </div>
+        <div class="cards-graficos">
+            <div class="caixa">
+            <h3>Estatística Geral</h3>
+            <canvas id="pie-chart" width="400" height="400"></canvas>
+
+            
+        </div>
+       
+        </div>
+      </main>
+      
+      
+    </body>
+
+ <app-barralateral></app-barralateral>

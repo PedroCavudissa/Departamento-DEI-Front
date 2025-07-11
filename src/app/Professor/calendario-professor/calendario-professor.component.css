@@ -1,0 +1,146 @@
+/* Estilos globais */
+* {
+  padding: 0;
+  margin: 0;
+
+}
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+/* formataçao do titulo e conteudo principal*/
+.titulo-container {
+    width: 100%;
+    text-align: center;
+    background-color: #44b1f0; 
+    padding: 12px 0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 670px; 
+    margin-top: 150px;
+    max-width: 350px; 
+    position: relative;
+
+
+/* Quadro principal do estudante */
+.quadro {
+  background: #fff;
+  padding: 28px;
+  border-radius: 12px;
+  margin: 30px auto;
+  margin-top: 15%;
+  width: calc(100% - 280px);
+  max-width: 700px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+/* Link para provas */
+.ver-provas {
+  text-decoration: none;
+  font-weight: bold;
+  color: #007bff;
+  font-size: 15px;
+}
+
+.ver-provas:hover {
+  text-decoration: underline;
+}
+
+/* Lista de eventos */
+.lista-eventos {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 25px;
+}
+
+.lista-eventos li {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.lista-eventos li strong {
+  color: #444;
+  margin-right: 6px;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .titulo-container {
+    margin-left: 220px;
+    width: calc(100% - 300px);
+    max-width: 520px;
+
+  }
+
+  .quadro {
+    margin-left: 230px;
+    width: calc(100% - 260px);
+    max-width: 660px;
+  }
+}
+
+@media (max-width: 768px) {
+  .titulo-container {
+    margin-left: 180px;
+    width: calc(100% - 240px);
+    max-width: 480px;
+  }
+
+  .quadro {
+    margin-left: 180px;
+    width: calc(100% - 220px);
+    max-width: 580px;
+  }
+
+  .ver-provas {
+    font-size: 14px;
+  }
+
+  .lista-eventos li {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 120px; /* Sidebar mais fina */
+  }
+
+  .quadro {
+    margin-left: 42%; 
+    margin-top: 30%;   
+    width: calc(100% - 140px); /* Espaço restante após sidebar */
+    max-width: 54%;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+
+  .ver-provas {
+    font-size: 14px;
+  }
+
+  .lista-eventos li {
+    font-size: 14px;
+  }
+}
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .titulo-container,
+    .quadro {
+      width: 80%;
+      margin: 120px auto;
+    }
+  
+    .botao {
+      width: 40%;
+      position: static;
+      display: block;
+      margin: 10px 0 20px auto;
+    }
+  
+}
+}

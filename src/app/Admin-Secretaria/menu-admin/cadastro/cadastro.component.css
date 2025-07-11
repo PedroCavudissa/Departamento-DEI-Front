@@ -1,0 +1,97 @@
+.container h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+  color: #333;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #f0f8ff;
+}
+
+.formulario-container {
+  position: relative;
+  max-width: 850px;
+  width: 100%;
+  margin: auto;
+}
+
+.formulario-estudante {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  gap: 1.5rem;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 45%;
+  min-width: 200px;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #47b5ff;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+  align-self: center;
+}
+
+button:disabled {
+  background-color: #cce4f7;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #1f87c2;
+}
+
+@media (max-width: 768px) {
+  .form-wrapper {
+    flex-direction: column;
+  }
+
+  .formulario-estudante {
+    padding: 20px;
+  }
+}

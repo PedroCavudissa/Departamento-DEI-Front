@@ -1,0 +1,52 @@
+<div class="supbar">
+  <h2>Funcionários</h2>
+</div>
+
+<div class="main-wrapper">
+  <h2 class="titulo-principal">
+    Total de Funcionários: <span>{{ funcionarios.length }}</span>
+  </h2>
+
+  <div class="graficos">
+    <div class="grafico-box">
+      <canvas id="graficoDI"></canvas>
+    </div>
+    <div class="grafico-box">
+      <canvas id="graficoProfessores"></canvas>
+    </div>
+  </div>
+
+  <div class="filtros-wrapper">
+    <select class="select-funcao" [(ngModel)]="filtroFuncao" (change)="onBuscar()">
+      <option value="">Todas as funções</option>
+      <option value="Secretária">Secretária</option>
+      <option value="Professor">Professor</option>
+    </select>
+
+    <input type="text" [(ngModel)]="pesquisaNome" placeholder="Pesquisar Funcionários" />
+    <button (click)="onBuscar()" class="buscar-btn">Buscar</button>
+  </div>
+
+  <div class="scroll-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Apelido</th>
+          <th>Função</th>
+          <th>Documento</th>
+          <th>Nível Acadêmico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionario of funcionarios">
+          <td>{{ funcionario.nome }}</td>
+          <td>{{ funcionario.apelido }}</td>
+          <td>{{ funcionario.role.role }}</td>
+          <td>{{ funcionario.tipo_doc }} - {{ funcionario.num_doc }}</td>
+          <td>{{ funcionario.nivel_acad }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-barralateral></app-barralateral>
