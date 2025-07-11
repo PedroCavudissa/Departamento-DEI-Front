@@ -1,25 +1,21 @@
-
 import { Component, OnInit } from '@angular/core';
 import { DisciplinaService } from '../../../Services/disciplina.service';
 import { CommonModule } from '@angular/common';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { FormsModule } from '@angular/forms';
-// Add the correct import for DisciplinaEmAtraso if it exists, or define it below
-// Example import (uncomment and adjust the path if needed):
-// import { DisciplinaEmAtraso } from '../../../models/disciplina-em-atraso.model';
 
-interface DisciplinaEmAtraso {
-precedencia: any;
-semestre: any;
-ano_academico: any;
-sigla: any;
-  // Define the properties according to your application needs
-  id: number;
+export interface DisciplinaEmAtraso {
+  sigla: string;
+  ano_academico: string | number;
+  precedencia: string;
+  semestre: string;
   nome: string;
-  status: string;
+  id?: string;
+  status?: string; // Adicionei status pois você está usando no mapeamento
 }
 
 const estudanteId = 1;
+
 @Component({
   selector: 'app-detalhes-cadeiras',
   standalone: true,
@@ -28,43 +24,43 @@ const estudanteId = 1;
   styleUrl: './detalhes-cadeiras.component.css',
 })
 export class DetalhesCadeirasComponent implements OnInit {
- 
-    disciplinas: DisciplinaEmAtraso[] = [];
-    errorMessage: string | null = null;
-  
-    constructor(private disciplinaService: DisciplinaService) {}
-  
-    ngOnInit(): void {
-      this.carregarEstudantes();
-    }
-  
-    carregarEstudantes(): void {
-      this.disciplinaService.getDisciplinas(estudanteId)
-.subscribe({
-        next: (data) => {
-          this.disciplinas = data.map((disciplina: any) => ({
-            ...disciplina,
-            status: disciplina.status ?? 'indefinido' // Use a default or derive as needed
-          }));
-          this.errorMessage = null;
-        },
-        error: (err) => {
-          console.error('Erro detalhado:', err);
-          this.errorMessage = this.getErrorMessage(err);
-          this.disciplinas = [];
-        }
-      });
-    }
-  
-    private getErrorMessage(err: Error): string {
-      if (err.message.includes('HTML em vez de dados JSON')) {
-        return 'O servidor está retornando uma página HTML. Verifique:';
-      } else if (err.message.includes('JSON válido')) {
-        return 'Os dados recebidos não estão no formato correto.';
+  disciplinas: DisciplinaEmAtraso[] = [];
+  errorMessage: string | null = null;
+
+  constructor(private disciplinaService: DisciplinaService) {}
+
+  ngOnInit(): void {
+    this.carregarDisciplinas(); // Mudei o nome do método para refletir o que ele realmente faz
+  }
+
+  carregarDisciplinas(): void {
+    this.disciplinaService.getDisciplinas(estudanteId).subscribe({
+      next: (data) => {
+        this.disciplinas = data.map((disciplina: any) => ({
+          sigla: disciplina.sigla || disciplina.codigo || '',
+          ano_academico: disciplina.ano_academico || disciplina.ano || '',
+          precedencia: disciplina.precedencia || disciplina.requisitos || '',
+          semestre: disciplina.semestre || '',
+          nome: disciplina.nome || disciplina.designacao || '',
+          id: disciplina.id || '',
+          status: disciplina.status || 'indefinido'
+        }));
+        this.errorMessage = null;
+      },
+      error: (err) => {
+        console.error('Erro detalhado:', err);
+        this.errorMessage = this.getErrorMessage(err);
+        this.disciplinas = [];
       }
-      return err.message;
-  // eslint-disable-next-line no-irregular-whitespace
-    }
+    });
+  }
 
+  private getErrorMessage(err: Error): string {
+    if (err.message.includes('HTML em vez de dados JSON')) {
+      return 'O servidor está retornando uma página HTML. Verifique:';
+    } else if (err.message.includes('JSON válido')) {
+      return 'Os dados recebidos não estão no formato correto.';
+    }
+    return err.message;
+  }
 }
-

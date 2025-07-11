@@ -22,7 +22,9 @@ export class CadeiraComponent implements OnInit {
     this.disciplinaService.getDisciplinas(this.estudanteId).subscribe({
       next: (dados) => this.disciplinas = dados.map(d => ({
         ...d,
-        ano: d.ano ?? d.ano_academico ?? '', // Ajuste conforme a origem do campo
+        ano: typeof d.ano === 'number' ? d.ano
+          : (typeof d.ano_academico === 'number' ? d.ano_academico
+            : (d.ano_academico ? Number(d.ano_academico) : undefined)),
         semestre: d.semestre ?? '', // Garante que semestre exista
         status: d.status ?? 'desconhecido' // ou defina um valor padrão apropriado
       })),
