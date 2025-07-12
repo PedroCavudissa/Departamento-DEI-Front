@@ -15,7 +15,7 @@ import { DetalhesFuncionariosComponent } from './Admin-Secretaria/menu-admin/det
 import { DetalhesCadeirasComponent } from './Admin-Secretaria/menu-admin/detalhes-cadeiras/detalhes-cadeiras.component';
 import { DetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/detalhes-estudantes/detalhes-estudantes.component';
 import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
-import { CalendarioComponent } from './Admin-Secretaria/menu-admin/calendario/calendario.component';
+//import { CalendarioComponent } from './Admin-Secretaria/menu-admin/calendario/calendario.component';
 import { PautaComponent } from './Admin-Secretaria/menu-admin/pauta/pauta.component';
 import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
 import { TelaProfessorComponent } from './Professor/tela-professor/tela-professor.component';
@@ -74,7 +74,7 @@ export const routes: Routes = [
   { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent },
 
   { path: 'funcionarios', component: FuncionariosComponent },
-  { path: 'calendario', component: CalendarioComponent },
+ // { path: 'calendario', component: CalendarioComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'pautas', component: PautaComponent },
 
