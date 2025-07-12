@@ -9,8 +9,9 @@ import { routes } from './app.routes';
 
 
 import { LoginService } from './Services/login.service';
-import { LancamentoService } from './Services/lacamento-notas.service';
-//import { DisciplinaService } from './Services/disciplina.service';
+import { LacamentoNotasService } from './Services/lacamento-notas.service';
+
+import { EstudanteService} from './Services/estudante.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
 
 
-    importProvidersFrom(HttpClientModule),LoginService,LancamentoService,DisciplinaService,MenuService
+    importProvidersFrom(HttpClientModule),LoginService,LacamentoNotasService,DisciplinaService,MenuService
 
   ]
 

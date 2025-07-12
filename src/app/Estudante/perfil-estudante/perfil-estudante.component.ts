@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilestudanteService } from '../../Services/perfilestudante.service';
 import { Estudante, EstudanteService } from '../../Services/estudante.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Viestudante, ViestudanteService } from '../../Services/viestudante.service';
 
 @Component({
   selector: 'app-perfil-estudante',
@@ -25,15 +26,15 @@ mensagemSucesso: string = '';
 mensagemErro: string = '';
   mensagemErroSenha = '';
   mensagemSucessoSenha = '';
-  estudante?: Estudante;
+  viestudante?: Viestudante
   formularioSenha: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private estudanteService: EstudanteService,
+    private viestudanteService: ViestudanteService,
     private perfilestudanteService: PerfilestudanteService
   ) {
-    this.estudante = {
+    this.viestudante = {
       email: '', 
       nome: '',
       userDetails: {
@@ -135,10 +136,10 @@ mensagemErro: string = '';
   }
 
   carregarDadosEstudante(): void {
-    this.estudanteService.getEstudante().subscribe({
+    this.viestudanteService.getEstudante().subscribe({
       next: (resposta: any) => {
         if (resposta && (resposta.userDetails || resposta.contacto)) {
-          this.estudante = {
+          this.viestudante = {
             nome: resposta.nome || '',
             userDetails: {
               id: resposta.userDetails?.id || resposta.id || 0,
@@ -156,11 +157,11 @@ mensagemErro: string = '';
           
           this.formulario.patchValue({
             email: resposta.email || '',
-            contato: this.estudante.userDetails.contacto,
-            endereco: this.estudante.userDetails.endereco,
-            anoAcademico: this.estudante.userDetails.anoAcademico,
-            dataIngresso: this.estudante.userDetails.dataIngresso,
-            dataNascimento: this.estudante.userDetails.dataNascimento
+            contato: this.viestudante.userDetails.contacto,
+            endereco: this.viestudante.userDetails.endereco,
+            anoAcademico: this.viestudante.userDetails.anoAcademico,
+            dataIngresso: this.viestudante.userDetails.dataIngresso,
+            dataNascimento: this.viestudante.userDetails.dataNascimento
           });
         } else {
           this.mensagemErro = 'Estrutura de dados inválida da API';
@@ -181,7 +182,7 @@ accao(): void {
     return;
   }
 
-  if (!this.estudante) {
+  if (!this.viestudante) {
     alert('Dados atualizados com sucesso!');
     return;
   }
@@ -189,15 +190,15 @@ accao(): void {
   // Prepara os dados alterados (mesmo código anterior)
   const dadosAlterados: any = {};
   
-  if (this.formulario.value.contato !== this.estudante.userDetails.contacto) {
+  if (this.formulario.value.contato !== this.viestudante.userDetails.contacto) {
     dadosAlterados.contacto = this.formulario.value.contato;
   }
   
-  if (this.formulario.value.endereco !== this.estudante.userDetails.endereco) {
+  if (this.formulario.value.endereco !== this.viestudante.userDetails.endereco) {
     dadosAlterados.endereco = this.formulario.value.endereco;
   }
   
-  if (this.formulario.value.email !== this.estudante['email']) {
+  if (this.formulario.value.email !== this.viestudante['email']) {
     dadosAlterados.email = this.formulario.value.email;
   }
 
@@ -208,15 +209,15 @@ accao(): void {
   }
 
   // Restante do código permanece igual...
-  if (this.estudante && this.estudante.userDetails) {
-    this.estudanteService.atualizarPerfil(this.estudante.userDetails.id, dadosAlterados)
+  if (this.viestudante&& this.viestudante.userDetails) {
+    this.viestudanteService.atualizarPerfil(this.viestudante.userDetails.id, dadosAlterados)
       .subscribe({
         next: (resposta: any) => {
           // Atualiza os dados localmente
-          if (this.estudante) {
-            if (dadosAlterados.contacto) this.estudante.userDetails.contacto = dadosAlterados.contacto;
-            if (dadosAlterados.endereco) this.estudante.userDetails.endereco = dadosAlterados.endereco;
-            if (dadosAlterados.email) this.estudante['email'] = dadosAlterados.email;
+          if (this.viestudante) {
+            if (dadosAlterados.contacto) this.viestudante.userDetails.contacto = dadosAlterados.contacto;
+            if (dadosAlterados.endereco) this.viestudante.userDetails.endereco = dadosAlterados.endereco;
+            if (dadosAlterados.email) this.viestudante['email'] = dadosAlterados.email;
           }
           
           this.mensagemSucesso = 'Dados atualizados com sucesso!';

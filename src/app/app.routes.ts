@@ -7,6 +7,7 @@ import { CadeiraComponent } from './Estudante/Cadeiras/cadeira.component';
 import { Confirmacao1Component } from './Estudante/confirmacao1/confirmacao1.component';
 import { Confirmacao2Component } from './Estudante/confirmacao2/confirmacao2.component';
 
+import { Confirmacao3Component } from './Estudante/confirmacao3/confirmacao3.component';
 import { AprovarComunicadoComponent } from './Admin-Secretaria/menu-admin/Configuracoes/aprovar-comunicado/aprovar-comunicado.component';
 
 import { ComunicadoComponent } from './Admin-Secretaria/menu-admin/comunicado/comunicado.component';
@@ -15,9 +16,9 @@ import { DetalhesFuncionariosComponent } from './Admin-Secretaria/menu-admin/det
 import { DetalhesCadeirasComponent } from './Admin-Secretaria/menu-admin/detalhes-cadeiras/detalhes-cadeiras.component';
 import { DetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/detalhes-estudantes/detalhes-estudantes.component';
 import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
-//import { CalendarioComponent } from './Admin-Secretaria/menu-admin/calendario/calendario.component';
+import { CalendarioComponent } from './Admin-Secretaria/menu-admin/calendario/calendario.component';
 import { PautaComponent } from './Admin-Secretaria/menu-admin/pauta/pauta.component';
-import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
+
 import { TelaProfessorComponent } from './Professor/tela-professor/tela-professor.component';
 import { DadoProfessorComponent } from '../../../Departamento-DEI-Front-Dev/dado-professor/dado-professor.component';
 
@@ -46,12 +47,15 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
- //import { CadastroComponent } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
+ import { CadastroComponent } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 import { CadastroFuncionarioComponent } from './Admin-Secretaria/menu-admin/cadastro-funcionario/cadastro-funcionario.component';
+
+import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
 import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudante.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -74,13 +78,13 @@ export const routes: Routes = [
   { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent },
 
   { path: 'funcionarios', component: FuncionariosComponent },
- // { path: 'calendario', component: CalendarioComponent },
+  { path: 'calendario', component: CalendarioComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'pautas', component: PautaComponent },
 
   { path: 'ver-pauta', component: VerPautaComponent },
   { path: 'horario', component: HorarioComponent },
- // { path: 'cadastro', component: CadastroComponent },
+ { path: 'cadastro', component: CadastroComponent },
  
 
   // Estudante
@@ -90,6 +94,7 @@ export const routes: Routes = [
   { path: 'cadeira', component: CadeiraComponent },
   { path: 'confirmacao1', component: Confirmacao1Component },
   { path: 'confirmacao2', component: Confirmacao2Component },
+  { path: 'confirmacao3', component: Confirmacao3Component },
   { path: 'perfil-estudante', component: PerfilEstudanteComponent },
   { path: 'horario-estudante', component: HorarioEstudanteComponent },
   { path: 'chat-estudante', component: ChatEstudanteComponent },
@@ -97,7 +102,6 @@ export const routes: Routes = [
 
   // Professor
   { path: 'tela-professor', component: TelaProfessorComponent },
-  { path: 'dado-professor', component: DadoProfessorComponent },
   { path: 'perfil-professor', component: PerfilProfessorComponent },
   { path: 'horario-professor', component: HorarioProfessorComponent },
   { path: 'chat-professor', component: ChatProfessorComponent },

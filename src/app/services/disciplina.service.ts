@@ -1,9 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
-
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 
 export interface Disciplina {
@@ -14,11 +13,29 @@ export interface Disciplina {
   precedencia: string;
   semestre: string;
 }
+
+export interface DisciplinaEmAtraso {
+  id: number;
+  sigla: string;
+  nome: string;
+  precedencia: number;
+  semestre: string;
+  ano_academico: string;
+  ano:number
+}
+
+
 @Injectable({
   providedIn: 'root'
+
 })
+
+
+
 export class DisciplinaService {
-  private apiUrl = 'https://5df5-102-214-36-223.ngrok-free.app/api/disciplina/list';
+
+  private baseUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/subject/atrasadas';
+
 
   constructor(private http: HttpClient) { }
 
@@ -36,26 +53,31 @@ export class DisciplinaService {
 
     }
   }
-  getDisciplinas(): Observable<Disciplina[]> {
-    return this.http.get(this.apiUrl, {
-      responseType: 'text', // Primeiro recebe como texto
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'ngrok-skip-browser-warning': 'true' // Adiciona header para bypass do ngrok
-      })
-    }).pipe(
-      map(response => {
-        // Tenta converter para JSON
-        try {
-          return JSON.parse(response);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        } catch (e) {
-          throw new Error('Resposta não é um JSON válido');
-        }
-      }),
-      catchError(this.handleError)
-// eslint-disable-next-line no-irregular-whitespace
-    );
-// eslint-disable-next-line no-irregular-whitespace
-  }
+
+
+
+
+
+getTotalCadeiras(): Observable<number> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+    'Accept': 'application/json'
+  });
+
+  const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/subject/total';
+
+  return this.http.get<number>(url, { headers }).pipe(
+    map(res => {
+      console.log('✅ Resposta da API (getCadeiras):', res);
+      return res ?? 0;
+    })
+  );
+}
+getDisciplinas(estudanteId: number): Observable<any[]> {
+    return this.http.get<any[]>('sua-api-url/disciplinas');
+  }
+
+
 }

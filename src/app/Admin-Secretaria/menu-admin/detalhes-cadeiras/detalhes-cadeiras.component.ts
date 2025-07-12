@@ -35,7 +35,7 @@ export class DetalhesCadeirasComponent implements OnInit {
 
   carregarDisciplinas(): void {
     this.disciplinaService.getDisciplinas(estudanteId).subscribe({
-      next: (data) => {
+      next: (data: any[]) => {
         this.disciplinas = data.map((disciplina: any) => ({
           sigla: disciplina.sigla || disciplina.codigo || '',
           ano_academico: disciplina.ano_academico || disciplina.ano || '',
@@ -47,7 +47,7 @@ export class DetalhesCadeirasComponent implements OnInit {
         }));
         this.errorMessage = null;
       },
-      error: (err) => {
+      error: (err: Error) => {
         console.error('Erro detalhado:', err);
         this.errorMessage = this.getErrorMessage(err);
         this.disciplinas = [];

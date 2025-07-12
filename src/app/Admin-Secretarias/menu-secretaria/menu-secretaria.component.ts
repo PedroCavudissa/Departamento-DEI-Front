@@ -81,10 +81,8 @@ export class MenuSecretariaComponent implements AfterViewInit {
         datasets: [
           {
 
-            
-            data: [100, 68, 38, 25, 10], // substitua se quiser também via API
+            data: [100, 68, 38, 25, 10], 
 
-            
             backgroundColor: barLabels.map((label) => this.colors[label]),
           },
         ],

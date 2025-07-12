@@ -13,6 +13,7 @@ import { CalendarioService, Evento } from '../../../Services/calendario.service'
   imports: [CommonModule, FormsModule, BarralateralComponent],
   templateUrl: './calendario.component.html',
   styleUrls: ['./calendario.component.css']
+
 })
 export class CalendarioComponent implements OnInit {
   mostrarFormulario = false;
