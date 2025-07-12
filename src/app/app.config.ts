@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
+       provideHttpClient(),
 
     importProvidersFrom(HttpClientModule),LoginService,LacamentoNotasService,DisciplinaService,MenuService
 
@@ -37,3 +37,5 @@ export const appConfig: ApplicationConfig = {
 
 
 };
+
+
