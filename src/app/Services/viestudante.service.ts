@@ -71,8 +71,7 @@ getEstudante(): Observable<Viestudante> {
     headers: new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
       'Accept': 'application/json',
-      // Remova o header do ngrok se estiver causando problemas CORS
-      // 'ngrok-skip-browser-warning': 'true'
+     
     }),
     withCredentials: true // Importante para CORS em alguns casos
   }).pipe(
