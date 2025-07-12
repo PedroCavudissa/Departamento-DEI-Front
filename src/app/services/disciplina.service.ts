@@ -54,10 +54,6 @@ export class DisciplinaService {
     }
   }
 
-
-
-
-
 getTotalCadeiras(): Observable<number> {
   const token = localStorage.getItem('token');
   const headers = new HttpHeaders({
