@@ -27,6 +27,7 @@ interface Funcionario {
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, BarralateralComponent]
 })
+
 export class FuncionariosComponent implements OnInit, AfterViewInit {
   funcionarios: Funcionario[] = [];
   filtroFuncao: string = '';
@@ -125,4 +126,5 @@ export class FuncionariosComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  
 }

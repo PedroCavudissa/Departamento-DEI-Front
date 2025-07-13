@@ -1,30 +1,24 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FuncionarioService {
 
-  constructor(http: HttpClient) { }
+  constructor(private http: HttpClient) { } // ✅ Injeção CORRETA (com 'private')
 
-
-
-   getTotalFuncionario(){
-    const token=localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+  getTotalFuncionarios(): Observable<number> {
+    const url = "https://7fa0-102-218-85-74..."; // Substitua pela URL real
+    const headers = new HttpHeaders({ 
+      // Adicione headers se necessário
+      // Exemplo: 'Authorization': 'Bearer token'
     });
-  
-    const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/staff/count';
-  
+
     return this.http.get<number>(url, { headers }).pipe(
-      map(res => {
-        console.log(' Resposta da API (getTotalFuncionáios):', res);
-        return res ?? 0;
-      })
+      map(res => res ?? 0) // Caso res seja null/undefined, retorna 0
     );
-   }
+  }
 }

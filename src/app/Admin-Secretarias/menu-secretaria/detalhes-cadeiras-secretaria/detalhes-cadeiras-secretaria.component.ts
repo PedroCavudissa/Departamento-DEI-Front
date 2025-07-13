@@ -1,6 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { DisciplinaEmAtraso, DisciplinaService } from '../../../services/disciplina.service';
+import {  DisciplinaEmAtraso, DisciplinaService } from '../../../Services/disciplina.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -49,3 +50,4 @@ export class DetalhesCadeirasSecretariaComponent implements OnInit {
   }
 
 }
+
