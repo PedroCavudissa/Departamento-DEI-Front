@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { generate, map, Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 export interface Funcionario {
   nome: string;
@@ -17,7 +18,7 @@ export interface Funcionario {
 @Injectable({ providedIn: 'root' })
 
   export class FuncionarioService {
-    private baseUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/staff';
+    private baseUrl = `${environment.apiUrl}/api/staff`;
   
     constructor(private http: HttpClient) {}
   

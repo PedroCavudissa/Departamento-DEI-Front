@@ -18,7 +18,7 @@ export class FuncionarioService {
       'Accept': 'application/json'
     });
   
-    const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/staff/count';
+    const url = `${environment.apiUrl}/api/staff/count`;
   
     return this.http.get<number>(url, { headers }).pipe(
       map(res => {

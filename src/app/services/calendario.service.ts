@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 export interface Evento {
   data: string;
@@ -15,7 +16,7 @@ export interface Evento {
   providedIn: 'root'
 })
 export class CalendarioService {
-  private apiUrl = '/api/calendary'; 
+  private apiUrl = `${environment.apiUrl}/api/calendary`; 
 
   constructor(private http: HttpClient) {}
 

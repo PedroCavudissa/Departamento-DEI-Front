@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 export interface Estudante {
   nome: string;
@@ -22,7 +23,7 @@ export interface Estudante {
 
 @Injectable({ providedIn: 'root' })
 export class EstudanteService {
-  private apiUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/departamento/students';
+  private apiUrl = `${environment.apiUrl}/api/departamento/students`;
 
   constructor(private http: HttpClient) {}
 
@@ -50,7 +51,7 @@ export class EstudanteService {
       'Accept': 'application/json'
     });
   
-    const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/departamento/students/total';
+    const url = `${environment.apiUrl}/api/departamento/students/total`;
   
     return this.http.get<number>(url, { headers }).pipe(
       map(res => {

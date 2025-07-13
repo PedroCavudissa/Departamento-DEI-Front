@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-  private apiUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/auth/login';
+  private apiUrl = ` ${environment.apiUrl}/api/auth/login`;
 
   constructor(private http: HttpClient) {}
 

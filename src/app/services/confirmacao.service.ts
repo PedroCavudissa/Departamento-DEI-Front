@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 export interface UserDetails {
   id: number;
@@ -48,7 +49,7 @@ export interface Rupe {
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
-  private baseUrl = 'https://922bf80d48fa.ngrok-free.app/api';
+  private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 

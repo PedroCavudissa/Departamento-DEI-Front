@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../enviroments/environment';
 
 export interface Disciplina {
   disciplinaId: number;
@@ -32,7 +33,7 @@ export interface TipoPauta {
   providedIn: 'root'
 })
 export class LacamentoNotasService {
-  private baseUrl = 'https://922bf80d48fa.ngrok-free.app/api';
+  private baseUrl = ` ${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 

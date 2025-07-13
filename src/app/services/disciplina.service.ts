@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 export interface DisciplinaEmAtraso {
   id: number;
@@ -25,7 +26,7 @@ export interface Disciplina {
 
 @Injectable({ providedIn: 'root' })
 export class DisciplinaService {
-  private baseUrl = 'https://7fa0-102-218-85-74.ngrok-free.app/api/subject/atrasadas';
+  private baseUrl = `${environment.apiUrl}/api/subject/atrasadas`;
 
   constructor(private http: HttpClient) {}
 
@@ -48,7 +49,7 @@ getTotalCadeiras(): Observable<number> {
     'Accept': 'application/json'
   });
 
-  const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/subject/total';
+  const url = `${environment.apiUrl}/api/subject/total`;
 
   return this.http.get<number>(url, { headers }).pipe(
     map(res => {

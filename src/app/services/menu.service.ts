@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({ providedIn: 'root' }) 
 export class MenuService {
-  private baseUrl = 'https://ec5f-105-172-62-238.ngrok-free.app/api/relatorios';
+  private baseUrl = ` ${environment.apiUrl}/api/relatorios`;
 
   constructor(private http: HttpClient) {}
 
