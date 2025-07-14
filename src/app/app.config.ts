@@ -7,13 +7,17 @@ import {
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
-import { LoginService } from './services/login.service';
+
+import { LoginService } from './Services/login.service';
 import { LacamentoNotasService } from './Services/lacamento-notas.service';
-import { DisciplinaService } from './services/disciplina.service';
+
+import { EstudanteService} from './Services/estudante.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { MenuService } from './services/menu.service';
+import { MenuService } from './Services/menu.service';
+import { DisciplinaService } from './Services/disciplina.service';
+
 
 
 export interface LoginResponse {
@@ -25,9 +29,13 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+       provideHttpClient(),
 
     importProvidersFrom(HttpClientModule),LoginService,LacamentoNotasService,DisciplinaService,MenuService
+
   ]
 
 
 };
+
+

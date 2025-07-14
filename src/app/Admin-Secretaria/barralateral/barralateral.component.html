@@ -1,6 +1,10 @@
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
     <!-- Botão hambúrguer visível apenas em telas pequenas -->
+
 <div class="hamburger" (click)="toggleMenu()" tabindex="0" (keyup.enter)="toggleMenu()">☰</div>
+
 
 <!-- Barra superior -->
 <div class="supbar">
@@ -13,7 +17,7 @@
     <div class="scroll-container">
       <li> <a  class="menu-link"> <i class='bx bx-home'></i>
         <span (click)="selecionarMenu('Dados Gerais','Dados Gerais')"tabindex="0" (keydown)="selecionarMenu('Dados Gerais','Dados Gerais')">Geral</span> </a></li>
-      
+
         <li><a  class="menu-link"> <i class='bx bx-group'></i>
          <span  (click)="selecionarMenu('Estudantes','Estudantes')"tabindex="0" (keyup.enter)="selecionarMenu('Estudantes','Estudantes')" >Estudantes </span></a> </li>
          

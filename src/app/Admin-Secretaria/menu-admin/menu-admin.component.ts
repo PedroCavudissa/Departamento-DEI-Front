@@ -1,4 +1,6 @@
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Router } from '@angular/router';
 import {
@@ -6,9 +8,9 @@ import {
   ChartConfiguration,
   registerables
 } from 'chart.js';
-import { EstudanteService } from '../../services/estudante.service';
-import { DisciplinaService } from '../../services/disciplina.service';
-import { FuncionarioService } from '../../services/cadastro.service';
+import { EstudanteService } from '../../Services/estudante.service';
+import { DisciplinaService } from '../../Services/disciplina.service';
+import { FuncionarioService } from '../../Services/cadastro.service';
 import { forkJoin } from 'rxjs';
 
 Chart.register(...registerables);
@@ -16,11 +18,14 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
+
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
 })
+
 export class MenuAdminComponent implements OnInit, OnDestroy {
+
   totalFuncionarios = 0;
   totalCadeiras = 0;
   totalEstudantes = 0;
@@ -34,13 +39,16 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
     private serviceFuncionario: FuncionarioService
   ) {}
 
+
   ngOnInit(): void {
     this.carregarDadosGrafico();
   }
 
+
   carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     if (!pieCtx) return;
+
 
     if (this.pieChart) {
       this.pieChart.destroy(); // destrói se existir
@@ -114,4 +122,6 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       this.pieChart.destroy();
     }
   }
+
+
 }

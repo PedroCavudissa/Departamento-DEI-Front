@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-barralateral-secretaria',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './barralateral-secretaria.component.html',
 
   styleUrls: ['./barralateral-secretaria.component.css']
@@ -22,7 +22,9 @@ export class BarralateralSecretariaComponent {
   
   }
 
+
   selecionarMenu(novoTitulo: string,item: string,) {
+
     this.titulo = novoTitulo;
     this.menuAtivo = false;
 
@@ -54,11 +56,13 @@ export class BarralateralSecretariaComponent {
                 break;}
                 
                 case 'Pautas':
+
                 {this.router.navigate(['/ver-pauta-secretaria']);
                 break;}
                    
                 case 'Horários':
                 {this.router.navigate(['/horario-secretaria']);
+
                 break;}
 
                 case 'Comunicados':
