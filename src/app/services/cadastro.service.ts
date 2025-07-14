@@ -28,7 +28,7 @@ export interface Funcionario {
     const headers = new HttpHeaders({
      
       'Content-Type': 'application/json',
-      'Authorization': `Bearer${token}`,
+      'Authorization': `Bearer ${token}`,
       'Accept': 'application/json'
 
     });
@@ -37,6 +37,7 @@ export interface Funcionario {
 
 
     getTotalFuncionario(){
+      const ur = `${this.baseUrl}/staff/count`;
       const token=localStorage.getItem('token');
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -44,9 +45,9 @@ export interface Funcionario {
         'Accept': 'application/json'
       });
     
-      const url = 'https://7fa0-102-218-85-74.ngrok-free.app/api/staff/count';
     
-      return this.http.get<number>(url, { headers }).pipe(
+    
+      return this.http.get<number>(ur, { headers }).pipe(
         map(res => {
           console.log(' Resposta da API (getTotalFuncionáios):', res);
           return res ?? 0;

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HorarioComponent } from './horario.component';
 
 describe('HorarioComponent', () => {
@@ -13,6 +12,7 @@ describe('HorarioComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(HorarioComponent);
+
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

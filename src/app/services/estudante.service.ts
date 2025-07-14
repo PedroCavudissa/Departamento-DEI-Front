@@ -1,4 +1,7 @@
+
+// estudante.service.ts
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../enviroments/environment';
@@ -19,6 +22,7 @@ export interface Estudante {
   regimeIngresso: string;
   dataConclusao:  string;
   statusEstudante: string;
+   userDetails?: any; 
 }
 
 @Injectable({ providedIn: 'root' })
@@ -35,7 +39,7 @@ export class EstudanteService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer${token}`,
+      'Authorization': `Bearer ${token}`,
       'Accept': 'application/json'
 
     });
@@ -53,14 +57,17 @@ export class EstudanteService {
   
     const url = `${environment.apiUrl}/api/departamento/students/total`;
   
-    return this.http.get<number>(url, { headers }).pipe(
-      map(res => {
-        console.log('✅ Resposta da API (getTotalEstudantes):', res);
-        return res ?? 0;
-      })
-    );
+    return this.http.get(url, { headers, responseType: 'text' }).pipe(map(res => {
+      console.log('📦 Resposta bruta (estudantes):', res); // ← Adicione esse log em todos
+      const num = Number(res);
+      return isNaN(num) ? 0 : num;
+    }));
+    
+    
+    
   }
   
   
+
 
 }

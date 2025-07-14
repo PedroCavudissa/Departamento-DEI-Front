@@ -1,4 +1,6 @@
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
+
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Router } from '@angular/router';
 import {
@@ -6,72 +8,63 @@ import {
   ChartConfiguration,
   registerables
 } from 'chart.js';
-import { EstudanteService } from '../../services/estudante.service';
-import { DisciplinaService } from '../../services/disciplina.service';
-import { FuncionarioService } from '../../services/cadastro.service';
 import { forkJoin } from 'rxjs';
+import { RelatorioService } from '../../services/relatorio.service';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
+
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
 })
+
 export class MenuAdminComponent implements OnInit, OnDestroy {
+
   totalFuncionarios = 0;
-  totalCadeiras = 0;
+  totalCadeiras = 10;
   totalEstudantes = 0;
 
   private pieChart!: Chart;
 
   constructor(
     private router: Router,
-    private serviceEstudante: EstudanteService,
-    private serviceDisciplina: DisciplinaService,
-    private serviceFuncionario: FuncionarioService
+    private resumo: RelatorioService
   ) {}
+
 
   ngOnInit(): void {
     this.carregarDadosGrafico();
   }
 
+
   carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     if (!pieCtx) return;
-
+  
     if (this.pieChart) {
-      this.pieChart.destroy(); // destrói se existir
+      this.pieChart.destroy();
     }
-
-    forkJoin({
-      estudantes: this.serviceEstudante.getTotalEstudantes(),
-      cadeiras: this.serviceDisciplina.getTotalCadeiras(),
-      funcionarios: this.serviceFuncionario.getTotalFuncionario()
-    }).subscribe({
-      next: ({ estudantes, cadeiras, funcionarios }) => {
+  
+    this.resumo.getTotais().subscribe({
+      next: ({ estudantes, funcionarios, cadeiras }) => {
         this.totalEstudantes = estudantes;
-        this.totalCadeiras = cadeiras;
         this.totalFuncionarios = funcionarios;
-
-        console.log(' Totais recebidos:', {
-          estudantes,
-          cadeiras,
-          funcionarios
-        });
-
+        this.totalCadeiras = cadeiras;
+  
+        console.log('Totais recebidos:', { estudantes, funcionarios, cadeiras });
+  
         this.pieChart = new Chart(pieCtx, {
           type: 'bar',
           data: {
             labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
-            datasets: [
-              {
-                data: [funcionarios, estudantes, cadeiras],
-                backgroundColor: ['#009cff', 'orange', 'gray'],
-              },
-            ],
+            datasets: [{
+              data: [funcionarios, estudantes, cadeiras],
+              backgroundColor: ['#009cff', 'orange', 'gray'],
+            }],
           },
           options: {
             responsive: true,
@@ -90,10 +83,11 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
         });
       },
       error: (err) => {
-        console.error(' Erro ao carregar totais:', err);
+        console.error('Erro ao carregar totais:', err);
       }
     });
   }
+  
 
   verDetalhes(item: string) {
     switch (item) {
@@ -114,4 +108,6 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       this.pieChart.destroy();
     }
   }
+
+
 }

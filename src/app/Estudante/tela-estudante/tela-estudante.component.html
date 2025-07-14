@@ -1,27 +1,32 @@
+<div class="container">
+ 
+<div class="card">
+
+  <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <div *ngIf="estudanteSelecionado; else noEstudantes">
+ 
+        <h3 > Dados academicos</h3>
+
+        <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
+        <p><strong>Data Nasc:</strong>{{estudanteSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
+        <p><strong>NumIdentificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
+        <p><strong>Contacto:</strong>{{ estudanteSelecionado.userDetails.contacto}}</p>
+        <p><strong>StatusEstudante:</strong>{{ estudanteSelecionado.userDetails.statusEstudante}}</p>
+        <p><strong>AnoAcademico:</strong>{{ estudanteSelecionado.userDetails.anoAcademico}}</p>
+    
+    </div>
+  <ng-template #noEstudantes>
+    <p>Nenhum estudante encontrado.</p> 
+  </ng-template>
+  </div>
+</div>
+
 <app-lateral></app-lateral>
-<body>
-  
-  
-        <div class="container">
-          
-            <div class="card">
-          
-              <div class="aluno-dados">
-                <h3>Dados Acadêmicos</h3>
-                <p><strong>Nome:</strong> Pedro José Cavudissa</p>
-                <p><strong>Contacto:</strong> 20231234 </p>
-                <p><strong>Número de estudante:</strong> 3º Ano B</p>
-                <p><strong>Email:</strong> pedrogmail.com</p>
-                <p><strong>Comfirmado:</strong> 3º Ano 2 semestre</p>
-                <p><strong>Sala:</strong> C23</p>
-    
-              </div>
-            </div>
-          </div>
-    
-    
-       
-    </body>
+     
     
     
     

@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
+
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css'; 
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../Services/login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,7 @@ import { LoginService } from '../services/login.service';
 
 })
 export class LoginComponent implements OnInit {
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -24,10 +27,12 @@ export class LoginComponent implements OnInit {
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+
         this.mostrarSidebar = event.url !== '/login';
       }
     });
   }
+
   
  notyf = new Notyf({
   duration: 3000, 
@@ -39,9 +44,9 @@ export class LoginComponent implements OnInit {
   
   mostrarSidebar = true;
   mensagemLogin = '';
-tipoMensagem: 'erro' | 'sucesso' | '' = '';
-mostrarModal = false;
-recuperarForm!: FormGroup;
+  tipoMensagem: 'erro' | 'sucesso' | '' = '';
+  mostrarModal = false;
+  recuperarForm!: FormGroup;
 
 
   loginForm!: FormGroup;
@@ -59,6 +64,7 @@ recuperarForm!: FormGroup;
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
     
+
 }
   
 // Senha esquecida
@@ -69,34 +75,7 @@ recuperarForm!: FormGroup;
 fecharModal() {
   this.mostrarModal = false;
 }
-/*
-alterarSenha() {
-  if (this.recuperarForm.valid) {
-    const email = this.recuperarForm.get('gmail')?.value;
-    const senha = this.recuperarForm.get('senha')?.value;
 
-    const dados = { email, senha };
-
-    this.loginService.recuperarSenha().subscribe({
-      next: () => {
-        this.mostrarModal = false;
-        notyf.success('Senha alterada com sucesso!');
-        this.mensagemLogin = 'Senha alterada com sucesso!';
-        this.tipoMensagem = 'sucesso';
-      },
-      error: () => {
-        this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
-        this.tipoMensagem = 'erro';
-       
-      }
-    });
-  } else {
-    notyf.error('Usuário não encontrado ou erro ao alterar a senha.');
-    this.recuperarForm.markAllAsTouched();
-  }
-}
-
-*/
 alterarSenha(){}
 entrar() {
   if (this.loginForm.valid) {
@@ -157,6 +136,7 @@ entrar() {
       this.router.navigate(['/recuperar-senha']);
     } else {
       this.recuperarForm.markAllAsTouched();
+
     }
   }
 

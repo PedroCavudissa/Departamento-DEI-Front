@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../enviroments/environment';
-
-export interface DisciplinaEmAtraso {
-  id: number;
-  nome: string;
-  sigla?: string;
-  ano_academico?: string;
-  semestre?: string | number;
-  precedencia?: string;
-  ano?: number; // usado por cadeira.component.html
-}
 
 
 export interface Disciplina {
   id: number;
-  nome: string;
   sigla: string;
+  nome: string;
   ano_academico: string;
   precedencia: string;
   semestre: string;
-  detalhes: string;
 }
 
-@Injectable({ providedIn: 'root' })
+export interface DisciplinaEmAtraso {
+  id: number;
+  sigla: string;
+  nome: string;
+  precedencia: number;
+  semestre: string;
+  ano_academico: string;
+  ano:number
+}
+
+
+@Injectable({
+  providedIn: 'root'
+
+})
+
+
+
 export class DisciplinaService {
+
   private baseUrl = `${environment.apiUrl}/api/subject/atrasadas`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  /**
-   * Retorna as disciplinas em atraso para um determinado estudante.
-   * @param estudanteId ID do estudante logado.
-   */
-  getDisciplinas(estudanteId: number): Observable<DisciplinaEmAtraso[]> {
-    return this.http.get<DisciplinaEmAtraso[]>(`${this.baseUrl}/${estudanteId}`);
+  private handleError(error: HttpErrorResponse) {
+ 
   }
-
-
-
 
 getTotalCadeiras(): Observable<number> {
   const token = localStorage.getItem('token');
@@ -51,12 +52,25 @@ getTotalCadeiras(): Observable<number> {
 
   const url = `${environment.apiUrl}/api/subject/total`;
 
-  return this.http.get<number>(url, { headers }).pipe(
+  return this.http.get(url, { headers, responseType: 'text' }).pipe(
     map(res => {
-      console.log('✅ Resposta da API (getCadeiras):', res);
-      return res ?? 0;
+      const num = Number(res);
+      return isNaN(num) ? 0 : num;
     })
   );
+  
+}  
+getDisciplinas(): Observable<any[]> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  });
+
+  const url = `${environment.apiUrl}/api/subject/list`;
+  return this.http.get<any[]>(url, { headers });
 }
+
 
 }
