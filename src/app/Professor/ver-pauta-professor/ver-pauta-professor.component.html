@@ -1,1 +1,52 @@
-<p>ver-pauta-professor works!</p>
+<div class="container">
+  <h2>Visualizar Pauta</h2>
+
+  <div class="form-group">
+    <label for="disciplina">Disciplina</label>
+    <select id="disciplina" (change)="visualizarPauta()" [(ngModel)]="disciplinaSelecionadaNome" class="form-control">
+      <option value="">-- Selecione --</option>
+      <option *ngFor="let d of disciplinas" [value]="d.disciplinaNome">{{ d.disciplinaNome }}</option>
+    </select>
+  </div>
+
+  <table *ngIf="pauta.length > 0" class="table table-bordered mt-4">
+    <thead>
+      <tr>
+        <th>Estudante</th>
+        <th>AC1</th>
+        <th>AC2</th>
+        <th>P1</th>
+        <th>P2</th>
+        <th>MS</th>
+        <th>Exame</th>
+        <th>Recurso</th>
+        <th>Oral</th>
+        <th>Especial</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let linha of pauta; let i = index">
+        <td>{{ linha.estudanteNome }}</td>
+<ng-container *ngFor="let campo of camposNota">
+  <td>
+    <ng-container *ngIf="linha.editando && campoTemNota(linha[campo]); else modoLeitura">
+      <input type="number" [(ngModel)]="linha[campo]" style="width: 60px;" />
+    </ng-container>
+    <ng-template #modoLeitura>
+      {{ linha[campo] ?? '-' }}
+    </ng-template>
+  </td>
+</ng-container>
+
+<td>
+  <button class="btn-vermelho" (click)="editarLinha(i)" *ngIf="!linha.editando">Editar</button>
+  <button class="btn-vermelho" (click)="salvarLinha(i)" *ngIf="linha.editando">Salvar</button>
+</td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-lateral-professor></app-lateral-professor>

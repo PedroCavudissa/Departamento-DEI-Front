@@ -48,7 +48,7 @@ export interface Rupe {
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
-  private baseUrl = 'https://922bf80d48fa.ngrok-free.app/api';
+  private baseUrl = 'https://8e1bd9648a47.ngrok-free.app/api';
 
   constructor(private http: HttpClient) {}
 
@@ -83,12 +83,11 @@ export class ConfirmacaoService {
     return this.http.get<Rupe[]>(`${this.baseUrl}/payments/rupe/myRupes`, this.getHeaders());
   }
 
- finalizarConfirmacao(estudanteId: number, disciplinasIds: number[]): Observable<any> {
-  return this.http.post(
-    `${this.baseUrl}/departamento/students/confirmar/${estudanteId}`,
-    disciplinasIds, // deve ser tipo: number[]
-    this.getHeaders()
-  );
-}
+ confirmarDisciplina(estudanteId: number, disciplinaId: number): Observable<any> {
+    const payload = { estudanteId, disciplinaId };
+    const url = `${this.baseUrl}/departamento/studentsubject/confirmar`;
+    return this.http.post(url, payload, this.getHeaders());
+  }
+
 
 }

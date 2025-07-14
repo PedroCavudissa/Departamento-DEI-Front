@@ -20,7 +20,8 @@ export class LancamentoComponent implements OnInit {
     { codigo: 2, descricao: 'Notas Da AC2 e PF2' },
     { codigo: 3, descricao: 'Notas Do Exame Epóca Normal' },
     { codigo: 4, descricao: 'Notas Do Exame Epóca De Recurso' },
-    { codigo: 5, descricao: 'Notas Da Oral' }
+    { codigo: 5, descricao: 'Notas Da Oral' },
+    { codigo: 6, descricao: 'Notas Do Exame Especial' }
   ];
 
   disciplinaSelecionadaId: number | null = null;
@@ -29,14 +30,15 @@ export class LancamentoComponent implements OnInit {
   carregando: boolean = false;
   mensagem: string = '';
   erro: string = '';
-  progressoTipos: { [disciplinaId: number]: number } = {}; // controle local
+  progressoTipos: { [disciplinaId: number]: number } = {};
 
   constructor(private lacamentoNotasService: LacamentoNotasService) {}
 
   ngOnInit(): void {
-    this.carregarProgressoDoLocalStorage(); // carregar progresso salvo
+    this.carregarProgressoDoLocalStorage();
 
     this.carregando = true;
+
     this.lacamentoNotasService.getDadosDoProfessor().subscribe({
       next: (dados) => this.professorNome = dados.nome,
       error: () => this.professorNome = ''
@@ -63,12 +65,6 @@ export class LancamentoComponent implements OnInit {
     this.tipoSelecionado = null;
     this.mensagem = '';
     this.erro = '';
-  }
-
-  isTipoPermitido(disciplinaId: number | null, tipoCodigo: number): boolean {
-    if (!disciplinaId) return false;
-    const progresso = this.progressoTipos[disciplinaId] ?? 0;
-    return tipoCodigo <= progresso + 1;
   }
 
   onFileSelected(event: Event): void {
@@ -100,15 +96,19 @@ export class LancamentoComponent implements OnInit {
         .subscribe({
           next: () => {
             this.mensagem = 'Ficheiro Enviado Com Sucesso!';
-            
+
             const atual = this.progressoTipos[this.disciplinaSelecionadaId!] ?? 0;
             if (this.tipoSelecionado! > atual) {
               this.progressoTipos[this.disciplinaSelecionadaId!] = this.tipoSelecionado!;
-              this.salvarProgressoNoLocalStorage(); // salvar no localStorage
+              this.salvarProgressoNoLocalStorage();
             }
 
             this.tipoSelecionado = null;
             this.excelFile = undefined;
+
+            const inputFile = document.getElementById('fileInput') as HTMLInputElement;
+            if (inputFile) inputFile.value = '';
+
             this.limparMensagensDepoisDeTempo();
           },
           error: (err: HttpErrorResponse) => {
@@ -163,6 +163,13 @@ export class LancamentoComponent implements OnInit {
     }
   }
 
+  limparProgresso(): void {
+    this.progressoTipos = {};
+    localStorage.removeItem('progressoTipos');
+    this.mensagem = 'Progresso apagado com sucesso!';
+    this.limparMensagensDepoisDeTempo();
+  }
+
   private limparMensagensDepoisDeTempo(): void {
     setTimeout(() => {
       this.mensagem = '';
@@ -181,4 +188,3 @@ export class LancamentoComponent implements OnInit {
     localStorage.setItem('progressoTipos', JSON.stringify(this.progressoTipos));
   }
 }
-

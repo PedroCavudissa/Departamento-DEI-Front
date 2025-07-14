@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,  OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
@@ -10,7 +10,7 @@ import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../Services/
   templateUrl: './confirmacao1.component.html',
   styleUrl: './confirmacao1.component.css'
 })
-export class Confirmacao1Component {
+export class Confirmacao1Component implements OnInit {
   disciplinasfaze: Disciplina[] = []; // <== Adicione esta linha
 
   constructor(

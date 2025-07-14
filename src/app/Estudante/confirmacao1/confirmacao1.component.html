@@ -16,7 +16,7 @@
             <td>{{ disciplina.nome }}</td>
             <td>
               <span *ngIf="disciplina.precedenciasDisciplinaNome && disciplina.precedenciasDisciplinaNome.length > 0; else semPreReq">
-                {{ disciplina.precedenciasDisciplinaNome }}
+                {{ disciplina.precedenciasDisciplinaNome}}
               </span>
               <ng-template #semPreReq>
                 <span style="color: gray;">Nenhum</span>

@@ -28,7 +28,7 @@
   <option 
     *ngFor="let tipo of tipos" 
     [ngValue]="tipo.codigo"
-    [disabled]="!isTipoPermitido(disciplinaSelecionadaId, tipo.codigo)">
+   >
     {{ tipo.descricao }}
   </option>
 </select>

@@ -45,9 +45,10 @@ import { ChatProfessorComponent } from './Professor/chat-professor/chat-professo
 import { CadastroComponent } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
-import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 import { CadastroFuncionarioComponent } from './Admin-Secretaria/menu-admin/cadastro-funcionario/cadastro-funcionario.component';
 import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
+import { VerPautaProfessorComponent } from './Professor/ver-pauta-professor/ver-pauta-professor.component';
+import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -96,6 +97,7 @@ export const routes: Routes = [
   { path: 'chat-professor', component: ChatProfessorComponent },
   { path: 'lancamento', component: LancamentoComponent },
   { path: 'calendario-professor', component: CalendarioProfessorComponent },
+   { path: 'ver-pauta-professor', component: VerPautaProfessorComponent },
 
   // Secretaria
   { path: 'menu-secretaria', component: MenuSecretariaComponent },
