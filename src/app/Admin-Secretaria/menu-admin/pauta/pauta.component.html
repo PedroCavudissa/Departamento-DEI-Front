@@ -1,4 +1,18 @@
+<div class="pauta-container">
+  <div class="conteudo-exato">
+    <div class="cabecalho-azul">
+      <strong>Gestão de Pautas</strong>
+    </div>
+    <div class="titulo-caixa">
+      <div class="titulo-principal">Visualização da Pauta</div>
+    </div>
 
+    <div class="controle-acoes">
+      <div class="seletor-categoria">
+        <label for="disciplinaSelect">Selecione a disciplina:</label>
+        <select id="disciplinaSelect" [(ngModel)]="disciplinaSelecionada" (change)="onDisciplinaChange()">
+          <option *ngFor="let d of disciplinas" [ngValue]="d">{{ d.nome }}</option>
+        </select>
 
 <body>
   
@@ -64,8 +78,50 @@
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
+
+    <div class="info-cadeira">
+      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada?.nome }}</p>
+    </div>
+
+    <div class="tabela-container">
+      <table class="tabela-pauta">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>AC1</th>
+            <th>AC2</th>
+            <th>PF1</th>
+            <th>PF2</th>
+            <th>Exame Época Normal</th>
+            <th>Exame de Recurso</th>
+
+            <th>Exame Oral</th>
+             <th>Exame Especial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of estudantes">
+            <td>{{ e.estudanteNome }}</td>
+            <td>{{ e.ac1 }}</td>
+            <td>{{ e.ac2 }}</td>
+            <td>{{ e.p1 }}</td>
+            <td>{{ e.p2 }}</td>
+            <td>{{ e.exame }}</td>
+            <td>{{ e.exameRecurso }}</td>
+            <td>{{ e.exameOral }}</td>
+            <td>{{ e.exameEspecial }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="botoes">
+      <button class="btn-azul" (click)="aprovar()">✅ Aprovar Edição de Pauta</button>
+      <button class="btn-vermelho" (click)="rejeitar()">❌ Rejeitar Edição Pauta</button>
+    </div>
   </div>
+</div>
 
 </body>
 

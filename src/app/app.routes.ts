@@ -80,6 +80,11 @@ export const routes: Routes = [
   { path: 'funcionarios', component: FuncionariosComponent },
   { path: 'calendario', component: CalendarioComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'ver-pauta', component: VerPautaComponent },
+  { path: 'horario', component: HorarioComponent },
+  { path: 'cadastro', component: CadastroComponent },
+  { path: 'pauta', component: PautaComponent},
+
   { path: 'pautas', component: PautaComponent },
 
   { path: 'ver-pauta', component: VerPautaComponent },

@@ -13,52 +13,70 @@ body{
 
 .pauta-container {
   display: flex;
+  flex-direction: row;
   min-height: 100vh;
-  flex-direction: column;
-  margin-top: 100px;
+  font-family: Arial, sans-serif;
+}
+
+.btn-vermelho {
+  background-color: #e74c3c;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-vermelho:hover {
+  background-color: #c0392b;
+}
+
+.btn-azul {
+  background-color: #3aaaf3;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-azul:hover {
+  background-color: #3498db;
 }
 
 .conteudo-exato {
   flex: 1;
-  margin-left: 200px;
+  margin-left: 250px;
   background-color: white;
-  padding-bottom: 40px;
-
 }
 
-
-
-.btn-principal {
-  background-color: white;
-  color: #3aaaf3;
-  border: none;
-  padding: 0.6rem 1.8rem;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.btn-principal:hover {
-  background-color: #e4f1fc;
+.cabecalho-azul {
+  background-color: #3aaaf3;
+  padding: 15px 20px;
+  text-align: right;
 }
 
-/* Título */
 .titulo-caixa {
   display: flex;
   justify-content: center;
-  margin: 2rem 0 1.5rem;
+  margin: 20px 0;
 }
 
+.titulo-principal {
+  background-color: #3aaaf3;
+  color: white;
+  padding: 10px 40px;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-
-/* Controles */
 .controle-acoes {
   display: flex;
   justify-content: space-between;
+  padding: 20px;
   align-items: center;
-  padding: 1.5rem 2rem;
   flex-wrap: wrap;
-  gap: 1rem;
 }
 
 .seletor-categoria label {
@@ -69,7 +87,7 @@ body{
 
 .seletor-categoria select {
   padding: 6px;
-  min-width: 180px;
+  width: 180px;
   border-radius: 4px;
   border: 1px solid #ccc;
 }
@@ -77,109 +95,138 @@ body{
 .botoes {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
-}
-
-.btn-azul {
-  background-color: #3aaaf3;
-  color: white;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.btn-azul:hover {
-  background-color: #1e8edf;
+  margin-top: 10px;
 }
 
 .btn-preto {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
   background-color: black;
   color: white;
-  padding: 8px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
-/* Info cadeira */
 .info-cadeira {
-  padding: 0 2rem;
+  padding: 0 20px;
   margin-bottom: 15px;
   color: #444;
 }
 
-/* Tabela */
 .tabela-container {
-  padding: 0 2rem 2.5rem;
+  padding: 0 20px 40px;
   overflow-x: auto;
 }
 
 .tabela-pauta {
   width: 100%;
-  max-width: 1200px;
-  margin: auto;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: 13px;
+}
+
+.tabela-pauta thead {
+  background-color: #e1e1e1;
 }
 
 .tabela-pauta th {
   background-color: #f2f2f2;
-  padding: 10px;
-  text-align: left;
+  padding: 8px;
+  text-align: center;
   border-bottom: 2px solid #ccc;
+  border-left: 1px solid #ccc;
 }
 
 .tabela-pauta td {
-  padding: 10px;
+  padding: 2px;
+  text-align: center;
   border-bottom: 1px solid #eee;
+  border-left: 1px solid #eee;
 }
 
-/* RESPONSIVIDADE */
+.tabela-pauta th:first-child,
+.tabela-pauta td:first-child {
+  border-left: none;
+}
+
+/* Responsividade até 1024px */
 @media (max-width: 1024px) {
+  .pauta-container {
+    flex-direction: column;
+  }
+
   .conteudo-exato {
     margin-left: 0;
+    padding: 10px;
   }
 
   .controle-acoes {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: stretch;
+    gap: 10px;
   }
 
-  .btn-principal {
-    font-size: 0.95rem;
-    padding: 0.5rem 1.2rem;
-  }
-
-  .titulo-principal {
-    font-size: 1.1rem;
-    padding: 0.7rem 1.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .titulo-principal {
-    font-size: 1rem;
-    padding: 0.6rem 1.2rem;
-  }
-
-  .btn-principal, .btn-azul, .btn-preto {
+  .botoes {
+    flex-direction: column;
     width: 100%;
-    text-align: center;
+  }
+
+  .btn-azul,
+  .btn-preto,
+  .btn-vermelho {
+    width: 100%;
+  }
+
+  .titulo-caixa {
+    padding: 0 10px;
   }
 
   .seletor-categoria select {
     width: 100%;
   }
 
-  .botoes {
-    width: 100%;
-    flex-direction: column;
+  .tabela-container {
+    overflow-x: auto;
+  }
+
+  .tabela-pauta {
+    font-size: 12px;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .tabela-pauta th,
+  .tabela-pauta td {
+    text-align: left;
+    padding: 6px;
+  }
+}
+
+/* Responsividade para celulares (até 480px) */
+@media (max-width: 480px) {
+  .titulo-principal {
+    font-size: 16px;
+    padding: 8px 20px;
+  }
+
+  .cabecalho-azul {
+    text-align: center;
+    padding: 10px;
   }
 
   .info-cadeira {
-    margin-left: 0;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .seletor-categoria select {
+    font-size: 14px;
+  }
+
+  .btn-azul,
+  .btn-preto,
+  .btn-vermelho {
+    font-size: 14px;
   }
 }
 
