@@ -1,9 +1,12 @@
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
 <!--Barra -Superior-->
 <button class="hamburger" (click)="toggleMenu()">☰</button>
 <div class="supbar">
   <h2 id="nome">{{titulo}}</h2>
   <div class="icons">
+
     <div class="icon" (click)="selecionarMenu('Notificação','Notificação')"  tabindex="0" (keyup.enter)="selecionarMenu('','')">
       <i class="bx bx-bell"></i>
       <span class="badge">1</span>
@@ -12,12 +15,15 @@
     <div class="icon" (click)="selecionarMenu('Perfil','Perfil')"  tabindex="0" (keyup.enter)="selecionarMenu('','')">
       <i class="bx bx-user" ></i>
       <p > Perfil</p>
+
+      
     </div>
   </div>
 </div>
 
 <!-- Barra-Lateral -->
 <nav class="sidebar" [class.active]="menuAtivo">
+
     
    
     <ul>
@@ -51,6 +57,7 @@
      <li><a  class="menu-link"> <i class='bx bx-log-out'></i>
       <span (click)="selecionarMenu('Sair','Sair')" tabindex="0" (keyup.enter)="selecionarMenu('Sair','Sair')">Sair</span> </a> </li>
   
+      
   </div>
         </ul>
       

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DadoProfessorComponent } from './dado-professor.component';
+import { CalendarioComponent } from './calendario.component';
 
-describe('DadoProfessorComponent', () => {
-  let component: DadoProfessorComponent;
-  let fixture: ComponentFixture<DadoProfessorComponent>;
+describe('CalendarioComponent', () => {
+  let component: CalendarioComponent;
+  let fixture: ComponentFixture<CalendarioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DadoProfessorComponent]
+      imports: [CalendarioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DadoProfessorComponent);
+    fixture = TestBed.createComponent(CalendarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

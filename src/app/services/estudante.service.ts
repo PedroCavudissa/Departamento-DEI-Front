@@ -1,4 +1,7 @@
+
+// estudante.service.ts
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
@@ -18,6 +21,7 @@ export interface Estudante {
   regimeIngresso: string;
   dataConclusao:  string;
   statusEstudante: string;
+   userDetails?: any; 
 }
 
 @Injectable({ providedIn: 'root' })
@@ -61,5 +65,6 @@ export class EstudanteService {
   }
   
   
+
 
 }

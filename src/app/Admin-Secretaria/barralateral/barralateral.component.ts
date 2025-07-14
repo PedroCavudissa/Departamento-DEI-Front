@@ -1,18 +1,19 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-barralateral',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './barralateral.component.html',
 
   styleUrls: ['./barralateral.component.css']
 
 })
 export class BarralateralComponent {
-  constructor( private router: Router) {}
+
+  constructor( private router: Router) {};
   titulo = 'Dados Gerais';
   menuAtivo = false;
 
@@ -33,9 +34,7 @@ export class BarralateralComponent {
         case 'Estudantes':
         {this.router.navigate(['/menu-estudantes']);
         break;}
-     
-
-
+        
         case 'Disciplinas':
           {this.router.navigate(['/detalhes-cadeiras']);
           break;}
@@ -59,10 +58,12 @@ export class BarralateralComponent {
                 break;}
                 
                 case 'Pautas':
+
                 {this.router.navigate(['/ver-pauta']);
                 break;}
                 case 'Horários':
                 {this.router.navigate(['/horario']);
+
                 break;}
 
                 case 'Comunicados':
@@ -72,6 +73,7 @@ export class BarralateralComponent {
                   case 'Definições':
                     {this.router.navigate(['/Configuracoes']);
                     break;}
+
 
         case 'Sair':
          { const confirmacao = window.confirm('Tem certeza que deseja sair?');

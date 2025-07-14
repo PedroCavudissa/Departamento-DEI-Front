@@ -28,7 +28,8 @@ export class LateralProfessorComponent {
         break;}
        
         case 'Perfil':
-          {this.router.navigate(['/dado-professor']);
+
+          {this.router.navigate(['/perfil-professor']);
           break;}
           case 'Horários':
             {this.router.navigate(['/horario-professor']);
@@ -47,6 +48,7 @@ export class LateralProfessorComponent {
           case 'Pautas':
               {this.router.navigate(['/ver-pauta-professor']);
                 break;}
+
         case 'Sair':
           {const confirmacao = window.confirm('Tem certeza que deseja sair?');
           if (confirmacao) {

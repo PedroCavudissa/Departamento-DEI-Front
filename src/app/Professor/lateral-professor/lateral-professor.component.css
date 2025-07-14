@@ -109,6 +109,7 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
 }
 
 
+
 .icons {
   display: flex;
   position: absolute; 
@@ -136,10 +137,12 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
   margin: 5px 0 0;
   font-size: 14px;
   color: #444;
+
 }
 
 .badge {
   position: absolute;
+
   top: 2px;
   right: 15px;
   background: red;
@@ -148,6 +151,8 @@ overflow-x: hidden; /* oculta a barra de rolagem horizontal */
   font-weight: bold;
   padding: 2px 5px;
   border-radius: 10px;
+
+  
 }
 /*RESPONSIVIDADE*/
 
