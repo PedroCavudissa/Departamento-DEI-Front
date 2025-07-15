@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LacamentoNotasService, Disciplina, PautaEstudante } from '../../Services/lacamento-notas.service';
+import { LacamentoNotasService, Disciplina, PautaEstudante, PedidoEdicaoNota} from '../../Services/lacamento-notas.service';
 import { LateralProfessorComponent } from "../lateral-professor/lateral-professor.component";
 
 // Tipos adicionais
@@ -23,6 +23,8 @@ export class VerPautaProfessorComponent implements OnInit {
   disciplinaSelecionadaNome!: string;
   carregando = false;
   pauta: PautaEstudanteEditavel[] = [];
+  tipoSelecionado: number | null = null;
+  mensagem: string = ''
 
   // Campos que podem ser editados
   camposNota: CampoNota[] = [
@@ -34,8 +36,46 @@ export class VerPautaProfessorComponent implements OnInit {
   return valor !== null && valor !== undefined;
 }
 
+ mostrarModal = false;
+
+  pedidosPendentes: PedidoEdicaoNota[] = [];
+  pedidosAprovados: PedidoEdicaoNota[] = [];
+  pedidosRejeitados: PedidoEdicaoNota[] = [];
+
+  abaSelecionada: 'pendentes' | 'aprovados' | 'rejeitados' = 'pendentes';
 
   constructor(private notasService: LacamentoNotasService) {}
+
+abrirModal(): void {
+  const disciplinaSelecionada = this.disciplinas.find(d => d.disciplinaNome === this.disciplinaSelecionadaNome);
+  if (!disciplinaSelecionada) {
+    alert("Disciplina inválida.");
+    return;
+  }
+
+  const disciplinaId = disciplinaSelecionada.disciplinaId;
+  this.mostrarModal = true;
+
+  this.notasService.getPedidosPendentes(disciplinaId).subscribe({
+    next: (res) => this.pedidosPendentes = res,
+    error: () => alert('Erro ao buscar pedidos pendentes.')
+  });
+
+  this.notasService.getPedidosAprovados(disciplinaId).subscribe({
+    next: (res) => this.pedidosAprovados = res,
+    error: () => alert('Erro ao buscar pedidos aprovados.')
+  });
+
+  this.notasService.getPedidosRejeitados(disciplinaId).subscribe({
+    next: (res) => this.pedidosRejeitados = res,
+    error: () => alert('Erro ao buscar pedidos rejeitados.')
+  });
+}
+
+fecharModal(): void {
+  this.mostrarModal = false;
+}
+
 
   ngOnInit(): void {
     this.notasService.getDisciplinasDoProfessor().subscribe(dados => {

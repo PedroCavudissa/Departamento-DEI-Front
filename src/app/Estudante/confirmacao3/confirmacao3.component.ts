@@ -5,6 +5,7 @@ import { ConfirmacaoService, Rupe, DadosAcademicos, Disciplina } from '../../Ser
 import { LateralComponent } from '../lateral/lateral.component';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-confirmacao3',
@@ -29,32 +30,31 @@ export class Confirmacao3Component implements OnInit {
   ngOnInit(): void {
     this.carregarDados();
   }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
   carregarDados(): void {
-    this.confirmacaoService.getDadosAcademicos().subscribe({
-      next: (data) => {
-        this.dadosAcademicos = data;
-        const estudanteId = data.userDetails.id;
-        const ano = data.userDetails.anoAcademico;
-        this.carregarRupe();
-        this.carregarDisciplinasPorFazer(estudanteId, ano, 1); // <- semestre fixo ou dinâmico
-      },
-      error: (err) => console.error('Erro ao carregar dados:', err)
-    });
-  }
+  this.confirmacaoService.getDadosAcademicos().subscribe({
+    next: (data) => {
+      this.dadosAcademicos = data;
+      this.carregarRupe();
+      this.carregarDisciplinasPorFazer(); // ✅ sem parâmetros
+    },
+    error: (err) => console.error('Erro ao carregar dados:', err)
+  });
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+  carregarDisciplinasPorFazer(): void {
+  this.confirmacaoService.getDisciplinasFazer().subscribe({
+    next: (disciplinas) => {
+      this.disciplinasPorFazer = disciplinas;
+    },
+    error: (err) => {
+      console.error('Erro ao carregar disciplinas por fazer:', err);
+      this.mensagem = 'Erro ao carregar disciplinas.';
+    }
+  });
+}
 
-  carregarDisciplinasPorFazer(estudanteId: number, ano: number, semestre: number): void {
-    this.confirmacaoService.getDisciplinasFazer(estudanteId, ano, semestre).subscribe({
-      next: (disciplinas) => {
-        this.disciplinasPorFazer = disciplinas;
-      },
-      error: (err) => {
-        console.error('Erro ao carregar disciplinas por fazer:', err);
-        this.mensagem = 'Erro ao carregar disciplinas.';
-      }
-    });
-  }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////
   carregarRupe(): void {
     this.confirmacaoService.getRupeDoEstudante().subscribe({
       next: (listaRupes) => {
@@ -74,7 +74,7 @@ export class Confirmacao3Component implements OnInit {
       }
     });
   }
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////
   imprimirRupe(): void {
     const elemento = document.querySelector('.grid-dados');
     if (!elemento) {
@@ -82,7 +82,9 @@ export class Confirmacao3Component implements OnInit {
       return;
     }
 
-    html2canvas(elemento as HTMLElement, { scale: 2 } as any).then(canvas => {
+ html2canvas(elemento as HTMLElement, {
+  scale: 2
+} as any).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgProps = pdf.getImageProperties(imgData);
@@ -93,42 +95,47 @@ export class Confirmacao3Component implements OnInit {
       pdf.save(`RUPE-${this.rupe?.rupeNumber || 'documento'}.pdf`);
     });
   }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
 
   finalizarConfirmacao(): void {
-    if (this.finalizando) return;
+  if (this.finalizando) return;
 
-    const estudanteId = this.dadosAcademicos?.userDetails?.id;
-    if (!estudanteId) {
-      this.mensagem = 'ID do estudante não encontrado.';
-      return;
+  const estudanteId = this.dadosAcademicos?.userDetails?.id;
+  if (!estudanteId) {
+    this.mensagem = 'ID do estudante não encontrado.';
+    return;
+  }
+
+  // ✅ Usa disciplinaId conforme definido na interface Disciplina
+  const disciplinasIds = this.disciplinasPorFazer.map(d => d.disciplinaId);
+
+  if (disciplinasIds.length === 0) {
+    this.mensagem = 'Nenhuma disciplina para confirmar.';
+    return;
+  }
+
+  this.finalizando = true;
+
+  this.confirmacaoService.finalizarConfirmacao(disciplinasIds).subscribe({
+    next: () => {
+      this.mensagem = 'Pedido de confirmação enviado com sucesso!';
+      this.finalizando = false;
+    },
+    error: (error: HttpErrorResponse) => {
+      console.error('❌ Erro ao confirmar disciplinas:', error);
+      this.mensagem = 'Erro ao confirmar disciplinas.';
+      this.finalizando = false;
     }
+  });
+}
 
-    const disciplinasIds = this.disciplinasPorFazer.map(d => d.id);
-    if (disciplinasIds.length === 0) {
-      this.mensagem = 'Nenhuma disciplina disponível para confirmar.';
-      return;
-    }
+///////////////////////////////////////////////////////////////////////////////////////////////////
+    confi1() {
+    this.router.navigate(['/confirmacao1']);
+  }
 
-    console.log('Enviando matrícula do estudante', estudanteId, 'com disciplinas:', disciplinasIds);
-
-    this.finalizando = true;
-
-    this.confirmacaoService.finalizarConfirmacao(estudanteId, disciplinasIds).subscribe({
-      next: () => {
-        this.mensagem = 'Confirmação Finalizada Com Sucesso!';
-        this.finalizando = false;
-      },
-      error: (err) => {
-        console.error('Erro Ao Finalizar Confirmação:', err);
-        this.finalizando = false;
-
-        if (err.status === 409) {
-          this.mensagem = err.error?.message || 'Confirmação Já Foi Realizada.';
-        } else {
-          this.mensagem = 'Erro Ao Finalizar Confirmação.';
-        }
-      }
-    });
+  confi3() {
+    this.router.navigate(['/confirmacao3']);
   }
 
   confi2(): void {

@@ -27,12 +27,8 @@ export interface DadosAcademicos {
 }
 
 export interface Disciplina {
-  id: number;
-  sigla: string;
-  nome: string;
-  anoAcademico: number;
-  semestre: number;
-  precedenciasDisciplinaNome: string[];
+   disciplinaId: number;
+   nome: string;
 }
 
 export interface Rupe {
@@ -48,7 +44,7 @@ export interface Rupe {
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
-  private baseUrl = 'https://8e1bd9648a47.ngrok-free.app/api';
+  private baseUrl = 'https://42f235bb2128.ngrok-free.app/api';
 
   constructor(private http: HttpClient) {}
 
@@ -68,12 +64,12 @@ export class ConfirmacaoService {
     return this.http.get<DadosAcademicos>(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
 
-  getDisciplinasFazer(estudanteId: number, ano: number, semestre: number): Observable<Disciplina[]> {
-    return this.http.get<Disciplina[]>(
-      `${this.baseUrl}/subject/disciplinas/disponiveis/${estudanteId}?ano=${ano}&semestre=${semestre}`,
-      this.getHeaders()
-    );
-  }
+  getDisciplinasFazer(): Observable<Disciplina[]> {
+  return this.http.get<Disciplina[]>(
+    `${this.baseUrl}/departamento/students/disciplinas`,
+    this.getHeaders()
+  );
+}
 
   getDisciplinasAtrasadas(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/departamento/students/list/disciplinasemetraso`, this.getHeaders());
@@ -83,11 +79,18 @@ export class ConfirmacaoService {
     return this.http.get<Rupe[]>(`${this.baseUrl}/payments/rupe/myRupes`, this.getHeaders());
   }
 
- confirmarDisciplina(estudanteId: number, disciplinaId: number): Observable<any> {
-    const payload = { estudanteId, disciplinaId };
-    const url = `${this.baseUrl}/departamento/studentsubject/confirmar`;
-    return this.http.post(url, payload, this.getHeaders());
-  }
+finalizarConfirmacao(disciplinasIds: number[]): Observable<any> {
+  return this.http.post(
+    `${this.baseUrl}/departamento/students/confirmar`,
+    disciplinasIds,
+    this.getHeaders()
+  );
+}
 
-
+getDisciplinasInscritas(): Observable<Disciplina[]> {
+  return this.http.get<Disciplina[]>(
+    `${this.baseUrl}/departamento/studentsubject/disciplinas-inscritas`,
+    this.getHeaders()
+  );
+}
 }

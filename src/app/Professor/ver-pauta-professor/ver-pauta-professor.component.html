@@ -1,52 +1,179 @@
 <div class="container">
-  <h2>Visualizar Pauta</h2>
+  <section class="form-section"> 
+    <div class="table-section">
+        <h3 class="secao-titulo">Visualizar Pauta</h3>
 
-  <div class="form-group">
-    <label for="disciplina">Disciplina</label>
-    <select id="disciplina" (change)="visualizarPauta()" [(ngModel)]="disciplinaSelecionadaNome" class="form-control">
-      <option value="">-- Selecione --</option>
-      <option *ngFor="let d of disciplinas" [value]="d.disciplinaNome">{{ d.disciplinaNome }}</option>
-    </select>
+        <label for="disciplina"><strong>Disciplina</strong></label><br>
+
+        <select  id="disciplina" (change)="visualizarPauta()" [(ngModel)]="disciplinaSelecionadaNome" class="form-control">
+          <option [ngValue]="null">-- Selecione a Disciplina --</option>
+          <option *ngFor="let d of disciplinas" [value]="d.disciplinaNome">{{ d.disciplinaNome }}</option>
+        </select><br><br><br>
+
+        <table *ngIf="pauta.length > 0" class="table table-bordered mt-4">
+          <thead>
+            <tr>
+              <th>Estudante</th>
+              <th>AC1</th>
+              <th>AC2</th>
+              <th>P1</th>
+              <th>P2</th>
+              <th>MS</th>
+              <th>Exame</th>
+              <th>Recurso</th>
+              <th>Oral</th>
+              <th>Especial</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+            
+          <tbody>
+            <tr *ngFor="let linha of pauta; let i = index">
+              <td>{{ linha.estudanteNome }}</td>
+              <ng-container *ngFor="let campo of camposNota">
+                <td>
+                    <ng-container *ngIf="linha.editando && campoTemNota(linha[campo]); else modoLeitura">
+                    <input type="number" [(ngModel)]="linha[campo]" style="width: 60px;" />
+                    </ng-container>
+
+                    <ng-template #modoLeitura>
+                      {{ linha[campo] ?? '-' }}
+                    </ng-template>
+                </td>
+              </ng-container>
+              <td>
+                  <button class="confirm-btn" (click)="editarLinha(i)" *ngIf="!linha.editando">Editar</button>
+                  <button class="confirm-btn" (click)="salvarLinha(i)" *ngIf="linha.editando">Salvar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </section>  
+</div>
+
+
+
+<!-- Botão para abrir o modal -->
+<button class="confirm-btn" (click)="abrirModal()" [disabled]="!disciplinaSelecionadaNome">
+  Ver Pedidos de Edição de Nota
+</button>
+
+<!-- Modal -->
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <button class="btn-fechar" (click)="fecharModal()">X</button>
+    <h2 style="text-align: center;">Pedidos de Edição de Nota</h2>
+
+    <div class="tabs">
+      <button class="confirm-btn" (click)="abaSelecionada = 'pendentes'">Pendentes</button>
+      <button class="confirm-btn" (click)="abaSelecionada = 'aprovados'">Aprovados</button>
+      <button class="confirm-btn" (click)="abaSelecionada = 'rejeitados'">Rejeitados</button>
+    </div>
+
+    <!-- Seção Pendentes -->
+    <div class="modal-section" *ngIf="abaSelecionada === 'pendentes'">
+      <h3>Pedidos Pendentes</h3>
+      <table class="tabela-notas" *ngIf="pedidosPendentes.length > 0">
+        <thead>
+          <tr>
+            <th>Estudante</th>
+            <th>AC1</th>
+            <th>P1</th>
+            <th>AC2</th>
+            <th>P2</th>
+            <th>Exame</th>
+            <th>Recurso</th>
+            <th>Oral</th>
+            <th>Especial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pedidosPendentes">
+            <td>{{ p.estudanteNome }}</td>
+            <td>{{ p.ac1 }}</td>
+            <td>{{ p.p1 }}</td>
+            <td>{{ p.ac2 }}</td>
+            <td>{{ p.p2 }}</td>
+            <td>{{ p.exame }}</td>
+            <td>{{ p.exameRecurso }}</td>
+            <td>{{ p.exameOral }}</td>
+            <td>{{ p.exameEspecial }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="pedidosPendentes.length === 0">Nenhum pedido pendente.</div>
+    </div>
+
+    <!-- Seção Aprovados -->
+    <div class="modal-section" *ngIf="abaSelecionada === 'aprovados'">
+      <h3>Pedidos Aprovados</h3>
+      <table class="tabela-notas" *ngIf="pedidosAprovados.length > 0">
+        <thead>
+          <tr>
+            <th>Estudante</th>
+            <th>AC1</th>
+            <th>P1</th>
+            <th>AC2</th>
+            <th>P2</th>
+            <th>Exame</th>
+            <th>Recurso</th>
+            <th>Oral</th>
+            <th>Especial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pedidosAprovados">
+            <td>{{ p.estudanteNome }}</td>
+            <td>{{ p.ac1 }}</td>
+            <td>{{ p.p1 }}</td>
+            <td>{{ p.ac2 }}</td>
+            <td>{{ p.p2 }}</td>
+            <td>{{ p.exame }}</td>
+            <td>{{ p.exameRecurso }}</td>
+            <td>{{ p.exameOral }}</td>
+            <td>{{ p.exameEspecial }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="pedidosAprovados.length === 0">Nenhum pedido aprovado.</div>
+    </div>
+
+    <!-- Seção Rejeitados -->
+    <div class="modal-section" *ngIf="abaSelecionada === 'rejeitados'">
+      <h3>Pedidos Rejeitados</h3>
+      <table class="tabela-notas" *ngIf="pedidosRejeitados.length > 0">
+        <thead>
+          <tr>
+            <th>Estudante</th>
+            <th>AC1</th>
+            <th>P1</th>
+            <th>AC2</th>
+            <th>P2</th>
+            <th>Exame</th>
+            <th>Recurso</th>
+            <th>Oral</th>
+            <th>Especial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of pedidosRejeitados">
+            <td>{{ p.estudanteNome }}</td>
+            <td>{{ p.ac1 }}</td>
+            <td>{{ p.p1 }}</td>
+            <td>{{ p.ac2 }}</td>
+            <td>{{ p.p2 }}</td>
+            <td>{{ p.exame }}</td>
+            <td>{{ p.exameRecurso }}</td>
+            <td>{{ p.exameOral }}</td>
+            <td>{{ p.exameEspecial }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="pedidosRejeitados.length === 0">Nenhum pedido rejeitado.</div>
+    </div>
+
   </div>
-
-  <table *ngIf="pauta.length > 0" class="table table-bordered mt-4">
-    <thead>
-      <tr>
-        <th>Estudante</th>
-        <th>AC1</th>
-        <th>AC2</th>
-        <th>P1</th>
-        <th>P2</th>
-        <th>MS</th>
-        <th>Exame</th>
-        <th>Recurso</th>
-        <th>Oral</th>
-        <th>Especial</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let linha of pauta; let i = index">
-        <td>{{ linha.estudanteNome }}</td>
-<ng-container *ngFor="let campo of camposNota">
-  <td>
-    <ng-container *ngIf="linha.editando && campoTemNota(linha[campo]); else modoLeitura">
-      <input type="number" [(ngModel)]="linha[campo]" style="width: 60px;" />
-    </ng-container>
-    <ng-template #modoLeitura>
-      {{ linha[campo] ?? '-' }}
-    </ng-template>
-  </td>
-</ng-container>
-
-<td>
-  <button class="btn-vermelho" (click)="editarLinha(i)" *ngIf="!linha.editando">Editar</button>
-  <button class="btn-vermelho" (click)="salvarLinha(i)" *ngIf="linha.editando">Salvar</button>
-</td>
-
-    </tr>
-    </tbody>
-  </table>
 </div>
 
 <app-lateral-professor></app-lateral-professor>

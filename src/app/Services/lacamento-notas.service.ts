@@ -3,6 +3,20 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+export interface PedidoEdicaoNota {
+   disciplinaNome: string;
+  estudanteNome: string;
+  ac1: number;
+  p1: number;
+  ac2: number;
+  p2: number;
+  exame: number;
+  exameRecurso: number;
+  exameOral: number;
+  exameEspecial: number;
+}
+
+
 export interface PautaEstudante {
   id: number;
   estudanteNome: string;
@@ -47,7 +61,7 @@ export interface TipoPauta {
   providedIn: 'root'
 })
 export class LacamentoNotasService {
-  private baseUrl = 'https://17fe91c7e605.ngrok-free.app/api';
+  private baseUrl = 'https://42f235bb2128.ngrok-free.app/api';
 
   constructor(private http: HttpClient) {}
 
@@ -117,4 +131,29 @@ atualizarNotas(id: number, payload: any): Observable<any> {
   const headers = this.getHeaders().headers;
   return this.http.patch(`${this.baseUrl}/departamento/studentsubject/${id}`, payload, { headers });
 }
+
+/////////////////////////////////////////////////////////////////////
+
+getPedidosPendentes(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
+  return this.http.get<PedidoEdicaoNota[]>(
+    `${this.baseUrl}/departamento/StudentSubjectEdit/${disciplinaId}`,
+    this.getHeaders()
+  );
+}
+
+getPedidosAprovados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
+  return this.http.get<PedidoEdicaoNota[]>(
+    `${this.baseUrl}/departamento/StudentSubjectEdit/aprovadas/${disciplinaId}`,
+    this.getHeaders()
+  );
+}
+
+getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
+  return this.http.get<PedidoEdicaoNota[]>(
+    `${this.baseUrl}/departamento/StudentSubjectEdit/rejeitadas/${disciplinaId}`,
+    this.getHeaders()
+  );
+}
+
+
 }
