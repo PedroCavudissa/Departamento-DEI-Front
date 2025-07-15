@@ -4,9 +4,11 @@ import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
+
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { LoginService } from '../Services/login.service';
+
 
 
 @Component({
@@ -18,6 +20,7 @@ import { LoginService } from '../Services/login.service';
 
 })
 export class LoginComponent implements OnInit {
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -25,11 +28,16 @@ export class LoginComponent implements OnInit {
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+
         this.mostrarSidebar = event.url !== '/login';
       }
     });
   }
 
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
  notyf = new Notyf({
   duration: 3000,
   position: {
@@ -40,9 +48,9 @@ export class LoginComponent implements OnInit {
 
   mostrarSidebar = true;
   mensagemLogin = '';
-tipoMensagem: 'erro' | 'sucesso' | '' = '';
-mostrarModal = false;
-recuperarForm!: FormGroup;
+  tipoMensagem: 'erro' | 'sucesso' | '' = '';
+  mostrarModal = false;
+  recuperarForm!: FormGroup;
 
 
   loginForm!: FormGroup;
@@ -59,6 +67,10 @@ recuperarForm!: FormGroup;
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
 }
 
@@ -70,12 +82,8 @@ recuperarForm!: FormGroup;
 fecharModal() {
   this.mostrarModal = false;
 }
-/*
-alterarSenha() {
-  if (this.recuperarForm.valid) {
-    const email = this.recuperarForm.get('gmail')?.value;
-    const senha = this.recuperarForm.get('senha')?.value;
 
+<<<<<<< HEAD
     const dados = { email, senha };
 
     this.loginService.recuperarSenha().subscribe({
@@ -99,6 +107,9 @@ alterarSenha() {
 
 */
 
+=======
+alterarSenha(){}
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -110,18 +121,25 @@ entrar() {
       next: (res: unknown) => {
         const response = res as { token: string; email: string; role: string };
         this.notyf.success('Login realizado com sucesso!');
+<<<<<<< HEAD
         localStorage.setItem('token', response.token);
         localStorage.setItem('usuario', response.email);
+=======
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('usuario', res.email);
+        console.log('Usuário logado:', res.email);
+        console.log('Token recebido:', res.token);
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
         const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
-          case 'admin':
-            this.router.navigate(['/menu-secretaria']);
+          case 'SECRETARIA':
+            this.router.navigate(['/menu-admin']);
             break;
-          case 'professor':
+          case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
             break;
           case 'ESTUDANTE':
@@ -144,6 +162,7 @@ entrar() {
 }
 
 
+<<<<<<< HEAD
   cadastro(){
 
     this.router.navigate(['/cadastro']);
@@ -158,7 +177,24 @@ entrar() {
     } else {
       this.recuperarForm.markAllAsTouched();
     }
+=======
+recuperar(): void {
+  if (this.recuperarForm.invalid) {
+    this.recuperarForm.markAllAsTouched();
+    this.notyf.success('Verifique a sua caixa de email!');
+      this.fecharModal();
+    return;
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
   }
+  const email = this.recuperarForm.get('email')?.value;
+ 
+ 
 
+<<<<<<< HEAD
 
 }
+=======
+  
+}
+}
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5

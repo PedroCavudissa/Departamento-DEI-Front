@@ -7,13 +7,17 @@ import {
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
-import { LoginService } from './Services/login.service';
-import { LancamentoService } from './Services/lacamento-notas.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DisciplinaService } from './services/disciplina.service';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MenuService } from './Services/menu.service';
+import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { LoginService } from './services/login.service';
+import { MenuService } from './services/menu.service';
 
-import { AuthInterceptor } from './interceptors/auth.interceptor'; // ajuste o caminho conforme seu projeto
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
 
 // Interface de resposta de login
 export interface LoginResponse {
@@ -25,9 +29,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(),
     importProvidersFrom(HttpClientModule),
     LoginService,
-    LancamentoService,
+    LacamentoNotasService,
     DisciplinaService,
     MenuService,
     {

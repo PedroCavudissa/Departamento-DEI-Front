@@ -1,66 +1,65 @@
+<div class="pauta-container">
+  <div class="conteudo-exato">
+    <div class="cabecalho-azul">
+      <strong>Gestão de Pautas</strong>
+    </div>
+    <div class="titulo-caixa">
+      <div class="titulo-principal">Visualização da Pauta</div>
+    </div>
+
+    <div class="controle-acoes">
+      <div class="seletor-categoria">
+        <label for="disciplinaSelect">Selecione a disciplina:</label>
+        <select id="disciplinaSelect" [(ngModel)]="disciplinaSelecionada" (change)="onDisciplinaChange()">
+          <option *ngFor="let d of disciplinas" [ngValue]="d">{{ d.nome }}</option>
+        </select>
 
 <body>
-  
-<div class="pauta-container"> 
-  
-    <main class="conteudo-exato">
-      <!-- Cabeçalho azul com botão -->
-      <div class="cabecalho-azul"></div>
-  
-      <!-- Controles -->
-      <div class="controle-acoes">
-        <div class="seletor-categoria">
-         
-          <select [(ngModel)]="categoriaSelecionada">
-            <option>1º ano</option>
-            <option>2º ano</option>
-            <option>3º ano</option>
-            <option>4º ano</option>
-            <option>5º ano</option>
-          </select>
-        </div>
-  
-        <div class="botoes">
-          <button class="btn-azul">Aprovar Pauta</button>
-          <button class="btn-preto" (click)="pedirRevisao()">Pedir Revisão</button>
-        </div>
-      </div>
-  
-      <!-- Informações da cadeira -->
-      <div class="info-cadeira">
-        <strong>Cadeira:</strong> IHC
-        &nbsp;&nbsp;&nbsp;
-        <strong>Docente:</strong> Ms. Panzo Rafael Chiló
-      </div>
-  
-      <!-- Tabela -->
-      <div class="tabela-container">
-        <table class="tabela-pauta">
-          <thead>
-            <tr>
-              <th>NOME</th>
-              <th>AC1</th>
-              <th>AC2</th>
-              <th>PT</th>
-              <th>PE</th>
-              <th>MS</th>
-              <th>RS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let aluno of alunos">
-              <td>{{ aluno.nome }}</td>
-              <td>{{ aluno.ac1 }}</td>
-              <td>{{ aluno.ac2 }}</td>
-              <td>{{ aluno.pt }}</td>
-              <td>{{ aluno.pe }}</td>
-              <td>{{ aluno.ms }}</td>
-              <td>{{ aluno.rs }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+ 
+
+    <div class="info-cadeira">
+      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada }}</p>
+    </div>
+
+    <div class="tabela-container">
+      <table class="tabela-pauta">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>AC1</th>
+            <th>AC2</th>
+            <th>PF1</th>
+            <th>PF2</th>
+            <th>Exame Época Normal</th>
+            <th>Exame de Recurso</th>
+
+            <th>Exame Oral</th>
+             <th>Exame Especial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of estudantes">
+            <td>{{ e.estudanteNome }}</td>
+            <td>{{ e.ac1 }}</td>
+            <td>{{ e.ac2 }}</td>
+            <td>{{ e.p1 }}</td>
+            <td>{{ e.p2 }}</td>
+            <td>{{ e.exame }}</td>
+            <td>{{ e.exameRecurso }}</td>
+            <td>{{ e.exameOral }}</td>
+            <td>{{ e.exameEspecial }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="botoes">
+      <button class="btn-azul" (click)="aprovar()">✅ Aprovar Edição de Pauta</button>
+      <button class="btn-vermelho" (click)="rejeitar()">❌ Rejeitar Edição Pauta</button>
+    </div>
+
+
+
 </body>
+
   <app-barralateral></app-barralateral>

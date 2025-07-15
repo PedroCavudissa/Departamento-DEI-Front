@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+=======
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Layout principal */
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 .main-wrapper {
   display: flex;
   min-height: 100vh;
@@ -100,3 +117,4 @@
 .error-state button:hover {
   background-color: blue;
 }
+

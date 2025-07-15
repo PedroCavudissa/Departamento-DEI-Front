@@ -9,6 +9,11 @@
   min-height: 100vh;
   font-family: Arial, sans-serif;
 }
+.menu-link.ativo {
+  background-color: rgba(255, 255, 255, 0.35);
+  font-weight: bold;
+  box-shadow: inset 3px 0 0 white;
+}
 
 
 .sidebar {
@@ -150,11 +155,13 @@
 
   /* O conteúdo ocupa 100% da largura */
   .conteudo-principal {
+
     margin-left: 0;
   }
 
   /* Botão hambúrguer visível no mobile */
   .hamburger {
     display: block;
+
   }
 }
