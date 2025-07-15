@@ -3,7 +3,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
-import { MenuService } from '../../services/menu.service';
+import { MenuService } from '../../Services/menu.service';
 
 
 @Component({
@@ -35,7 +35,10 @@ export class MenuSecretariaComponent implements AfterViewInit {
     const estudantes = 23;
     const cadeiras = 21; // Substitua se tiver endpoint
     const salas = 70;    // Substitua se tiver endpoint
+<<<<<<< HEAD
+=======
   
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     new Chart(pieCtx, {
@@ -69,10 +72,13 @@ export class MenuSecretariaComponent implements AfterViewInit {
       },
     });
 
+<<<<<<< HEAD
+=======
     
   
 
     
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
     const barLabels = Object.keys(this.colors);
     const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
     new Chart(barCtx, {
@@ -100,9 +106,18 @@ export class MenuSecretariaComponent implements AfterViewInit {
     });
   }
 
+<<<<<<< HEAD
+
+  constructor(
+    private router: Router,
+    private menuService: MenuService
+  ) {}
+
+=======
   
   
 
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
   verDetalhes(nome: string): void {
     switch (nome) {

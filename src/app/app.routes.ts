@@ -51,6 +51,30 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   //Rotas para o Admin-Master(Acesso Geral)
+
+
+
+{path:'cadastro-funcionario', component: CadastroFuncionarioComponent},
+  { path: 'menu-admin', component: MenuAdminComponent },
+  { path: 'aprovar-comunicado', component: AprovarComunicadoComponent },
+  { path: 'comunicado', component: ComunicadoComponent },
+  { path: 'menu-estudantes', component: MenuEstudantesComponent },
+  { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent },
+  { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent },
+  { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent },
+  { path: 'Configuracoes', component: ConfiguracoesComponent },
+  { path: 'Gerirperfis', component: GerirPerfilComponent },
+  { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent },
+  { path: 'funcionarios', component: FuncionariosSecretariaComponent},
+  { path: 'calendario', component: CalendarioComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'pautas', component: PautaComponent },
+  { path: 'ver-pauta', component: VerPautaComponent },
+  { path: 'horario', component: HorarioComponent },
+  { path: 'cadastro', component: CadastroComponent },
+
+
+
 {path:'cadastro-funcionario', component: CadastroFuncionarioComponent,  canActivate: [AuthGuard] },
   { path: 'menu-admin', component: MenuAdminComponent , canActivate: [AuthGuard]},
   { path: 'aprovarComunicado', component: AprovarComunicadoComponent , canActivate: [AuthGuard] },
@@ -72,6 +96,7 @@ export const routes: Routes = [
   { path: 'ver-pauta', component: VerPautaComponent , canActivate: [AuthGuard]},
   { path: 'horario', component: HorarioComponent , canActivate: [AuthGuard]},
  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
+
   // Estudante
   { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard] },
   { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] },

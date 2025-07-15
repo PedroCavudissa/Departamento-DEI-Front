@@ -6,8 +6,9 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css'; 
-import { LoginService } from '../services/login.service';
+import 'notyf/notyf.min.css';
+import { LoginService } from '../Services/login.service';
+
 
 
 @Component({
@@ -33,15 +34,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
+=======
   
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
  notyf = new Notyf({
-  duration: 3000, 
+  duration: 3000,
   position: {
     x: 'right',
-    y: 'top',     
+    y: 'top',
   },
 });
-  
+
   mostrarSidebar = true;
   mensagemLogin = '';
   tipoMensagem: 'erro' | 'sucesso' | '' = '';
@@ -51,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
- 
+
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -63,10 +67,13 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
+<<<<<<< HEAD
+=======
     
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
 }
-  
+
 // Senha esquecida
   abrirModal(event: Event) {
       event.preventDefault();
@@ -76,7 +83,33 @@ fecharModal() {
   this.mostrarModal = false;
 }
 
+<<<<<<< HEAD
+    const dados = { email, senha };
+
+    this.loginService.recuperarSenha().subscribe({
+      next: () => {
+        this.mostrarModal = false;
+        notyf.success('Senha alterada com sucesso!');
+        this.mensagemLogin = 'Senha alterada com sucesso!';
+        this.tipoMensagem = 'sucesso';
+      },
+      error: () => {
+        this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
+        this.tipoMensagem = 'erro';
+
+      }
+    });
+  } else {
+    notyf.error('Usuário não encontrado ou erro ao alterar a senha.');
+    this.recuperarForm.markAllAsTouched();
+  }
+}
+
+*/
+
+=======
 alterarSenha(){}
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -85,14 +118,20 @@ entrar() {
     };
 
     this.loginService.entrar(usuario).subscribe({
-      next: (res: any) => {
+      next: (res: unknown) => {
+        const response = res as { token: string; email: string; role: string };
         this.notyf.success('Login realizado com sucesso!');
+<<<<<<< HEAD
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.email);
+=======
         localStorage.setItem('token', res.token);
         localStorage.setItem('usuario', res.email);
         console.log('Usuário logado:', res.email);
         console.log('Token recebido:', res.token);
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
-        const role = res.role;
+        const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
@@ -110,7 +149,7 @@ entrar() {
             this.router.navigate(['/']);
         }
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Erro ao logar:', error);
         this.notyf.error('E-mail ou senha inválidos');
       }
@@ -123,17 +162,39 @@ entrar() {
 }
 
 
+<<<<<<< HEAD
+  cadastro(){
+
+    this.router.navigate(['/cadastro']);
+  }
+
+  continuarRecuperacao() {
+    if (this.recuperarForm.valid) {
+      const email = this.recuperarForm.get('gmail')?.value;
+      console.log('Redirecionar com email:', email);
+      this.mostrarModal = false;
+      this.router.navigate(['/recuperar-senha']);
+    } else {
+      this.recuperarForm.markAllAsTouched();
+    }
+=======
 recuperar(): void {
   if (this.recuperarForm.invalid) {
     this.recuperarForm.markAllAsTouched();
     this.notyf.success('Verifique a sua caixa de email!');
       this.fecharModal();
     return;
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
   }
   const email = this.recuperarForm.get('email')?.value;
  
  
 
+<<<<<<< HEAD
+
+}
+=======
   
 }
 }
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5

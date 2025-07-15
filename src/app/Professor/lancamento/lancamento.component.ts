@@ -3,9 +3,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
+<<<<<<< HEAD
+import { LancamentoService, Nota } from '../../Services/lacamento-notas.service';
+=======
 
 import { LacamentoNotasService, Disciplina, TipoPauta } from '../../services/lacamento-notas.service';
 
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
 @Component({
   selector: 'app-lancamento',
@@ -75,6 +79,36 @@ export class LancamentoComponent implements OnInit {
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
+<<<<<<< HEAD
+    if (!input?.files?.length) return;
+
+    const file = input.files[0];
+    const disciplinaId = Number(this.disciplinaSelecionada);
+    const tipoId = Number(this.tipoSelecionado);
+
+    if (!disciplinaId || !tipoId) {
+      alert('Selecione a disciplina e o tipo de avaliação antes de importar.');
+      return;
+    }
+
+    this.lancamentoService.importarExcel(disciplinaId, tipoId, file).subscribe({
+      next: (notasImportadas: Nota[]) => {
+        this.notas = notasImportadas;
+        alert('Arquivo importado com sucesso!');
+      },
+      error: (err) => alert('Erro ao importar arquivo: ' + (err.message || err)),
+    });
+  }
+
+
+  salvar(): void {
+    if (!this.tipoSelecionado || !this.disciplinaSelecionada) return;
+
+    this.lancamentoService.salvarNotas(this.disciplinaSelecionada as number, this.notas, this.tipoSelecionado as number).subscribe({
+      next: () => alert('Notas salvas com sucesso!'),
+      error: (err: HttpErrorResponse) => alert('Erro ao salvar notas: ' + this.getErrorMessage(err)),
+    });
+=======
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       const fileName = file.name.toLowerCase();
@@ -91,6 +125,7 @@ export class LancamentoComponent implements OnInit {
         this.limparMensagensDepoisDeTempo();
       }
     }
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
   }
 
   enviarExcel(): void {
@@ -124,6 +159,12 @@ export class LancamentoComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
+  private getErrorMessage(err: HttpErrorResponse): string {
+    return err?.error?.message || err.message || 'Erro desconhecido';
+  }
+
+=======
   baixarModelo(): void {
     if (this.disciplinaSelecionadaId && this.tipoSelecionado != null) {
       this.lacamentoNotasService
@@ -133,6 +174,7 @@ export class LancamentoComponent implements OnInit {
             const blob = response.body!;
             const contentDisposition = response.headers.get('Content-Disposition');
             let filename = 'modelo_notas.xlsx';
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
             if (contentDisposition) {
               const utf8Match = contentDisposition.match(/filename\*\=UTF-8''(.+)/);
