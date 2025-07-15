@@ -53,11 +53,11 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   //Rotas para o Admin-Master(Acesso Geral)
- 
+
 
 {path:'cadastro-funcionario', component: CadastroFuncionarioComponent},
   { path: 'menu-admin', component: MenuAdminComponent },
-  { path: 'aprovarComunicado', component: AprovarComunicadoComponent },
+  { path: 'aprovar-comunicado', component: AprovarComunicadoComponent },
   { path: 'comunicado', component: ComunicadoComponent },
   { path: 'menu-estudantes', component: MenuEstudantesComponent },
   { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent },
@@ -73,7 +73,7 @@ export const routes: Routes = [
   { path: 'ver-pauta', component: VerPautaComponent },
   { path: 'horario', component: HorarioComponent },
   { path: 'cadastro', component: CadastroComponent },
- 
+
 
   // Estudante
   { path: 'tela-notas', component: TelaNotasComponent },

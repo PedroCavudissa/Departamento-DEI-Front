@@ -1,49 +1,104 @@
-<div class="content">
-  <main class="principal">
-    <h3>Minhas Notas</h3>
+<!-- src/app/Estudante/tela-notas/tela-notas.component.html -->
+<div class="container">
+  <!-- Seção de Busca por Disciplina -->
+  <section>
+    <h2>🔍 Buscar Nota por Disciplina</h2>
 
-    <div class="caixa">
-      <select [(ngModel)]="filtroDisciplina" (change)="scrollTabela()">
-        <option value="">-- Selecione a disciplina --</option>
-        <option *ngFor="let d of disciplinas" [value]="d">{{ d }}</option>
+    <div class="form-group">
+      <select
+        [ngModel]="disciplina()"
+        (ngModelChange)="disciplina.set($event)"
+        [disabled]="isLoading()"
+      >
+        <option value="">Selecione uma disciplina</option>
+        <option
+          *ngFor="let d of disciplinas()"
+          [value]="d.nome"
+        >
+          {{ d.nome }}
+        </option>
       </select>
 
-      <select [(ngModel)]="filtroSemestre" (change)="scrollTabela()">
-        <option value="">-- Selecione o semestre --</option>
-        <option *ngFor="let s of semestres" [value]="s">{{ s }}</option>
+      <input
+        type="number"
+        [ngModel]="anoLetivo()"
+        (ngModelChange)="anoLetivo.set($event)"
+        [disabled]="isLoading()"
+        placeholder="Ano Letivo"
+      />
+
+      <select
+        [ngModel]="modelo()"
+        (ngModelChange)="modelo.set($event)"
+        [disabled]="isLoading()"
+      >
+        <option *ngFor="let m of ['A', 'B', 'C', 'D', 'E', 'F']" [value]="m">
+          Modelo {{ m }}
+        </option>
       </select>
 
-      <button (click)="limparFiltros()" class="btn-limpar">Limpar Filtro</button>
+      <button (click)="buscarNota()" [disabled]="isLoading() || !disciplina()">
+        <span *ngIf="isLoading(); else buscarTexto" class="spinner"></span>
+        <ng-template #buscarTexto>Buscar Nota</ng-template>
+      </button>
     </div>
 
-    <div class="table-wrapper" id="tabela">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Cadeira</th>
-            <th>Semestre</th>
-            <th>AC1</th>
-            <th>AC2</th>
-            <th>P1</th>
-            <th>P2</th>
-            <th>MS</th>
-            <th>Exame</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let nota of notasFiltradas">
-            <td>{{ nota.cadeira }}</td>
-            <td>{{ nota.semestre }}</td>
-            <td>{{ nota.ac1 }}</td>
-            <td>{{ nota.ac2 }}</td>
-            <td>{{ nota.p1 }}</td>
-            <td>{{ nota.p2 }}</td>
-            <td>{{ nota.ms }}</td>
-            <td>{{ nota.exame }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="resultadoNota() as nota" class="resultado">
+      <h3>Resultado:</h3>
+      <p><strong>Disciplina:</strong> {{ nota.disciplina || nota.cadeira || 'N/A' }}</p>
+      <p><strong>Nota:</strong> {{ nota.nota }}</p>
     </div>
-  </main>
+  </section>
+
+  <!-- Seção de Listagem de Notas -->
+  <section>
+    <h2>📋 Listar Todas as Notas</h2>
+
+    <div class="form-group">
+      <input
+        type="number"
+        [ngModel]="anoLetivo()"
+        (ngModelChange)="anoLetivo.set($event)"
+        [disabled]="isLoading()"
+        placeholder="Ano Letivo"
+      />
+
+      <select
+        [ngModel]="modelo()"
+        (ngModelChange)="modelo.set($event)"
+        [disabled]="isLoading()"
+      >
+        <option *ngFor="let m of ['A', 'B', 'C', 'D', 'E', 'F']" [value]="m">
+          Modelo {{ m }}
+        </option>
+      </select>
+
+      <button (click)="listarNotas()" [disabled]="isLoading()">
+        <span *ngIf="isLoading(); else listarTexto" class="spinner"></span>
+        <ng-template #listarTexto>Listar Todas</ng-template>
+      </button>
+    </div>
+
+    <div *ngIf="notas().length > 0" class="resultado">
+      <h3>Notas Encontradas:</h3>
+      <ul>
+        <li *ngFor="let nota of notas()">
+          {{ nota.disciplina || nota.cadeira || 'Disciplina desconhecida' }}:
+          <strong>{{ nota.nota }}</strong>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mensagens de Status -->
+  <div *ngIf="errorMessage()" class="error-message">
+    ⚠️ {{ errorMessage() }}
+  </div>
+
+  <div *ngIf="isLoading()" class="loading-message">
+    ⌛ Carregando...
+  </div>
+
+  <!-- Sidebar -->
+  <app-barralateral></app-barralateral>
 </div>
-<app-lateral>
