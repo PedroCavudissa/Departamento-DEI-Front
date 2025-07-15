@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { EstudanteService, Estudante } from '../../../Services/estudante.service';
+import { EstudanteService, Estudante } from '../../../services/estudante.service';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { Notyf } from 'notyf';
 

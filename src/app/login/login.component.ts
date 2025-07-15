@@ -7,7 +7,7 @@ import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css'; 
-import { LoginService } from '../Services/login.service';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -123,22 +123,17 @@ entrar() {
 }
 
 
-  cadastro(){
-   
-    this.router.navigate(['/cadastro']);
+recuperar(): void {
+  if (this.recuperarForm.invalid) {
+    this.recuperarForm.markAllAsTouched();
+    this.notyf.success('Verifique a sua caixa de email!');
+      this.fecharModal();
+    return;
   }
-
-  continuarRecuperacao() {
-    if (this.recuperarForm.valid) {
-      const email = this.recuperarForm.get('gmail')?.value;
-      console.log('Redirecionar com email:', email);
-      this.mostrarModal = false;
-      this.router.navigate(['/recuperar-senha']);
-    } else {
-      this.recuperarForm.markAllAsTouched();
-
-    }
-  }
+  const email = this.recuperarForm.get('email')?.value;
+ 
+ 
 
   
+}
 }

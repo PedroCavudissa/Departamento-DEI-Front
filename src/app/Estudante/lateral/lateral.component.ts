@@ -61,8 +61,9 @@ export class LateralComponent {
       case 'Sair':
         const confirmacao: boolean = window.confirm('Tem certeza que deseja sair?');
         if (confirmacao) {
+          localStorage.removeItem('token');
           this.router.navigate(['/login']);
-          localStorage.removeItem('token')
+          
         }
         break;
 

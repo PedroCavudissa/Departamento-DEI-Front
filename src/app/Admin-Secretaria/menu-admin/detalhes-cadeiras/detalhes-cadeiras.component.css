@@ -1,160 +1,51 @@
-
-
-
-
-*{
-  margin: 0;
-  padding: 0;
-
-
-}.card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 5px;
-    border: 1px solid #333;
-    transition: transform 0.2s ease;
-    width: 180px;
-    height: 80px;
-    margin-bottom: 2%;
-  
-  }
-  .card.blue {
-
-    border-left: 5px solid gray;
-  
-
-  }
-  .card h3 {
-    font-size: 14px;
-    color: #444;
-    margin: 0;
-   
-  }
-
-  
-
-  .card .number {
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 8px;
-   
-  }
-
- body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
-
-    padding: 20px;
-    width: 100%;
-    overflow-y: hidden;
-    height: 100vh;
-  }
-  .container { max-width:1000px; margin:0 auto;margin-top: 7%; margin-left: 22%;}
-  
-  h2 { margin:24px 0 12px; font-size:16px; text-transform:uppercase; color:#333; }
-  .form-search { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-  .form-search select, .form-search input { flex:1; min-width:120px; padding:8px 12px; font-size:14px; border:1px solid #ccc; border-radius:4px; }
-  .form-search button { padding:8px 12px; font-size:14px; border:none; border-radius:4px; cursor:pointer; }
-  .btn-new { background:#009cff; color:#fff; }
-  .btn-search { background:#222; color:#fff; }
-  .results { background:#fff; border-radius:8px; height:200px; }
-
-  .results table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .results thead {
-    background-color: #009cff;
-    color: white;
-  }
-  
-  .results thead th {
-    padding: 12px 10px;
-    text-align: left;
-    border-bottom: 2px solid #0077cc;
-  }
-  
-  .results tbody tr {
-    border-bottom: 1px solid #ddd;
-    transition: background-color 0.2s ease;
-  }
-  
-  .results tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .results tbody tr:hover {
-    background-color: #d6eaff;
-  }
-  
-  .results tbody td {
-    padding: 10px 12px;
-    vertical-align: middle;
-  }
-  
-  /* Ajusta a largura de colunas específicas para melhor proporção */
-  .results tbody td:nth-child(1) {
-    width: 5%;   /* ID */
-  }
-  .results tbody td:nth-child(2) {
-    width: 15%;  /* Sigla */
-  }
-  .results tbody td:nth-child(3) {
-    width: 40%;  /* Nome */
-  }
-  .results tbody td:nth-child(4),
-  .results tbody td:nth-child(5),
-  .results tbody td:nth-child(6) {
-    width: 13%;  /* Ano Acadêmico, Semestre, Precedência */
-  }
-
-  
-  @media (max-width: 768px) {
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    
-    }
-    .container {
-      margin: 30% auto 0 auto;  /* Centraliza horizontalmente e dá espaço superior */
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      overflow-x: hidden;
-      
-    }
-    .results { background: #fff; 
-      border-radius: 8px; padding: 16px;
-       box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-       width: 100%;
-       height: 85%;
-  }
-
-  }
-
-  
-
-
-  @media (max-width: 568px) {
-
-  .results table th  {  
-    width: 100%;
-    height: 100%;
-    font-size: 8px;
+.container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  background-color: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
 }
 
-.results table td { 
-       
+.form-search {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.form-search select,
+.form-search input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 150px;
+}
+
+.styled-table {
   width: 100%;
-  height: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-  }
+.styled-table thead {
+  background-color: #007BFF;
+  color: white;
+}
 
-  
+.styled-table th,
+.styled-table td {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #f1f1f1;
+}

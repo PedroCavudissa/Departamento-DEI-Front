@@ -49,6 +49,7 @@ export class LateralProfessorComponent {
         case 'Sair':
           {const confirmacao = window.confirm('Tem certeza que deseja sair?');
           if (confirmacao) {
+            localStorage.removeItem('token');
             this.router.navigate(['/login']);
           }
           break;}

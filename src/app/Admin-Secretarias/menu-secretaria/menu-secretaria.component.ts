@@ -3,7 +3,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
-import { MenuService } from '../../Services/menu.service';
+import { MenuService } from '../../services/menu.service';
 
 
 @Component({

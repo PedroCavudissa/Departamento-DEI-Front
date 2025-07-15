@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { generate, map, Observable } from 'rxjs';
+import { catchError, generate, map, Observable, of } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 
 export interface Funcionario {
@@ -14,6 +14,7 @@ export interface Funcionario {
   email: string;
   dataIngresso: Date;
 }
+
 
 @Injectable({ providedIn: 'root' })
 
@@ -34,24 +35,26 @@ export interface Funcionario {
     });
       return this.http.post(url, funcionario, { headers });
     }
-
-
-    getTotalFuncionario(){
-      const ur = `${this.baseUrl}/staff/count`;
-      const token=localStorage.getItem('token');
+    getFuncionarios(): Observable<Funcionario[]> {
+      const token = localStorage.getItem('token') || '';
       const headers = new HttpHeaders({
-        'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
       });
     
+      const url = `${environment.apiUrl}/api/staff`;
     
-    
-      return this.http.get<number>(ur, { headers }).pipe(
-        map(res => {
-          console.log(' Resposta da API (getTotalFuncionáios):', res);
-          return res ?? 0;
+      return this.http.get<any>(url, { headers }).pipe(
+        map(res => res.content || []), 
+        catchError(err => {
+          console.error('Erro ao buscar funcionários:', err);
+          return of([]);
         })
       );
-     }
-  }
+      
+    }
+    
+}
+  
+  

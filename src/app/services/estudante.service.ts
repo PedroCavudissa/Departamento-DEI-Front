@@ -3,7 +3,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 
 export interface Estudante {
@@ -47,27 +47,29 @@ export class EstudanteService {
     return this.http.post(this.apiUrl, estudante, { headers });
   }
  
-  getTotalEstudantes(): Observable<number> {
-    const token = localStorage.getItem('token');
+  getEstudantesPorAno(ano: number): Observable<Estudante[]> {
+    const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
     });
   
-    const url = `${environment.apiUrl}/api/departamento/students/total`;
+    const url = `${environment.apiUrl}/api/departamento/students/academic-year/${ano}`;
   
-    return this.http.get(url, { headers, responseType: 'text' }).pipe(map(res => {
-      console.log('📦 Resposta bruta (estudantes):', res); // ← Adicione esse log em todos
-      const num = Number(res);
-      return isNaN(num) ? 0 : num;
-    }));
-    
-    
-    
+    return this.http.get<Estudante[]>(url, { headers }).pipe(
+      map(res => res || []), 
+      catchError(err => {
+        console.error('❌ Erro ao buscar estudantes:', err);
+        return of([]);
+      })
+    );
+  }
+  
+  
+
   }
   
   
 
 
-}

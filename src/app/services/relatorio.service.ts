@@ -1,60 +1,67 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, map, catchError, of } from 'rxjs';
 import { environment } from '../../enviroments/environment';
-
-export interface TotaisResumo {
-  estudantes: number;
-  funcionarios: number;
-  cadeiras: number;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class RelatorioService {
-  private baseUrl = environment.apiUrl;
+  private api = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  private getHeaders(): HttpHeaders {
+  //  Gera os headers para cada requisição
+  private getHeaders(): { headers: HttpHeaders } {
     const token = localStorage.getItem('token') || '';
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    });
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
+      })
+    };
   }
 
-  private parseResponseToNumber(res: string, label: string): number {
-    const cleaned = res.replace(/[^\d]/g, ''); // Remove tudo que não for número
-    const num = Number(cleaned);
-    console.log(`✅ ${label}: '${res}' → ${num}`);
-    return isNaN(num) ? 0 : num;
+  //  Total de funcionários
+  getTotalFuncionarios(): Observable<number> {
+    const url = `${this.api}/api/departamento/reports/staff/total`;
+    return this.getTotal(url);
   }
 
-  getTotais(): Observable<TotaisResumo> {
-    const headers = this.getHeaders();
+  // ✅ Total de cadeiras
+  getTotalCadeiras(): Observable<number> {
+    const url = `${this.api}/api/departamento/reports/subjects/total`;
+    return this.getTotal(url);
+  }
 
-    const estudantes$ = this.http.get(`${this.baseUrl}/api/departamento/students/total`, {
-      headers,
-      responseType: 'text'
-    }).pipe(map(res => this.parseResponseToNumber(res, 'Estudantes')));
+  //  Total de estudantes
+  getTotalEstudantes(): Observable<number> {
+    const url = `${this.api}/api/departamento/reports/students/total`;
+    return this.getTotal(url);
+  }
 
-    const funcionarios$ = this.http.get(`${this.baseUrl}/api/staff/count`, {
-      headers,
-      responseType: 'text'
-    }).pipe(map(res => this.parseResponseToNumber(res, 'Funcionários')));
+  // ✅ Total de estudantes por ano
+  getTotalEstudantesPorAno(ano: number): Observable<number> {
+    const url = `${this.api}/api/student/total-by-year/${ano}`;
+    return this.getTotal(url);
+  }
 
-    const cadeiras$ = this.http.get(`${this.baseUrl}/api/subject/total`, {
-      headers,
-      responseType: 'text'
-    }).pipe(map(res => this.parseResponseToNumber(res, 'Cadeiras')));
-
-    return forkJoin({
-      estudantes: estudantes$,
-      funcionarios: funcionarios$,
-      cadeiras: cadeiras$
-    });
+  private getTotal(url: string): Observable<number> {
+    return this.http.get<any>(url, this.getHeaders()).pipe(
+      map((res: any) => {
+        const total = Number(res?.total ?? res);
+        if (isNaN(total)) {
+          console.warn(' Resposta inválida:', res);
+          return 0;
+        }
+        return total;
+      }),
+      catchError(err => {
+        console.error(` Erro ao buscar total (${url}):`, err);
+        return of(0);
+      })
+    );
   }
 }

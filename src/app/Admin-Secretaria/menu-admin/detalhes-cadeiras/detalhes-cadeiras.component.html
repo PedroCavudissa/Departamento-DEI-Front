@@ -1,55 +1,55 @@
 
 <div class="container">
-  <div class="card blue">
-    <h3>Cadeiras</h3>
-    <p class="number">{{disciplinas.length }}</p>
-  </div>
-
-  <form class="form-search" onsubmit="return false;">
-    <select id="category-select"  name="ano" class="form-control">
-      <option value="">Selecionar Ano</option>
-      <option value="1º">1º Ano</option>
-      <option value="2º">2º Ano</option>
-      <option value="3º">3º Ano</option>
-      <option value="4">4º Ano</option>
-      <option value="5º">5º Ano</option>
+  <form class="form-search" (submit)="false">
+    <select [(ngModel)]="anoSelecionado" name="anoSelecionado" class="form-control">
+      <option [ngValue]="''">Selecionar Ano</option>
+      <option [ngValue]="1">1º Ano</option>
+      <option [ngValue]="2">2º Ano</option>
+      <option [ngValue]="3">3º Ano</option>
+      <option [ngValue]="4">4º Ano</option>
+      <option [ngValue]="5">5º Ano</option>
     </select>
-    
- 
-    <input type="text" id="search-input" placeholder="Escreva aqui..." />
-    <button type="button" class="btn-search" id="search-btn">Buscar</button>
+  
+    <input [(ngModel)]="textoBusca" name="textoBusca" type="text" placeholder="Escreva aqui..." />
   </form>
+  
 
+<table>
+  <thead>
+    <tr>
+ 
+      <th>Sigla</th>
+      <th>Nome</th>
+      <th>Ano Acadêmico</th>
+      <th>Semestre</th>
+      <th>Precedências</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="disciplinasFiltradas.length > 0; else semDados">
+    <tr *ngFor="let d of disciplinasFiltradas">
 
-  <div class="results" id="results">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-        <th>Sigla</th>
-        <th>Nome</th>
-        <th>Ano Acadêmico</th>
-        <th>Semestre</th>
-        <th>Precedência</th>
-        <th>Detalhes</th> 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let d of disciplinas" >
-          <td>{{ d.id }}</td>
-          <td>{{ d.sigla }}</td>
-          <td>{{ d.nome }}</td>
-          <td>{{ d.ano_academico }}</td>
-          <td>{{ d.semestre }}</td>
-          <td>{{ d.precedencia }}</td>
-          <td>
-            <a  class="link-detalhes" style="color:blue">Ver detalhes</a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <td>{{ d.sigla }}</td>
+      <td>{{ d.nome }}</td>
+      <td>{{ d.anoAcademico }}</td>
+      <td>{{ d.semestre }}</td>
+      <td>
+        {{
+          d.precedencia?.length
+            ? d.precedencia.split(',').join(', ')
+            : 'Nenhuma'
+        }}
+      </td>
+      
+      
+    </tr>
+  </tbody>
+  <ng-template #semDados>
+    <tr>
+      <td colspan="6">Nenhuma disciplina encontrada.</td>
+    </tr>
+  </ng-template>
+  
+</table>
+
 </div>
-
 <app-barralateral></app-barralateral>
-

@@ -1,6 +1,4 @@
-
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Router } from '@angular/router';
 import {
@@ -8,6 +6,7 @@ import {
   ChartConfiguration,
   registerables
 } from 'chart.js';
+
 import { forkJoin } from 'rxjs';
 import { RelatorioService } from '../../services/relatorio.service';
 
@@ -16,55 +15,60 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
-
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
 })
-
 export class MenuAdminComponent implements OnInit, OnDestroy {
-
   totalFuncionarios = 0;
-  totalCadeiras = 10;
+  totalCadeiras = 0;
   totalEstudantes = 0;
 
   private pieChart!: Chart;
 
   constructor(
     private router: Router,
-    private resumo: RelatorioService
+    private relatorioService: RelatorioService
   ) {}
-
 
   ngOnInit(): void {
     this.carregarDadosGrafico();
   }
 
-
   carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     if (!pieCtx) return;
-  
+
     if (this.pieChart) {
-      this.pieChart.destroy();
+      this.pieChart.destroy(); // destrói se existir
     }
-  
-    this.resumo.getTotais().subscribe({
-      next: ({ estudantes, funcionarios, cadeiras }) => {
+
+    forkJoin({
+      estudantes: this.relatorioService.getTotalEstudantes(),
+      cadeiras: this.relatorioService.getTotalCadeiras(),
+      funcionarios: this.relatorioService.getTotalFuncionarios()
+    }).subscribe({
+      next: ({ estudantes, cadeiras, funcionarios }) => {
         this.totalEstudantes = estudantes;
-        this.totalFuncionarios = funcionarios;
         this.totalCadeiras = cadeiras;
-  
-        console.log('Totais recebidos:', { estudantes, funcionarios, cadeiras });
-  
+        this.totalFuncionarios = funcionarios;
+
+        console.log('Totais recebidos:', {
+          estudantes,
+          cadeiras,
+          funcionarios
+        });
+
         this.pieChart = new Chart(pieCtx, {
-          type: 'bar',
+          type: 'doughnut',
           data: {
             labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
-            datasets: [{
-              data: [funcionarios, estudantes, cadeiras],
-              backgroundColor: ['#009cff', 'orange', 'gray'],
-            }],
+            datasets: [
+              {
+                data: [funcionarios, estudantes, cadeiras],
+                backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
+              },
+            ],
           },
           options: {
             responsive: true,
@@ -87,15 +91,14 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
 
   verDetalhes(item: string) {
     switch (item) {
-      case 'salas':
+      case 'Cadeiras':
         this.router.navigate(['/detalhes-cadeiras']);
         break;
       case 'Funcionários':
-        this.router.navigate(['/detalhes-funcionários']);
+        this.router.navigate(['/detalhes-funcionarios']);
         break;
       case 'Estudantes':
         this.router.navigate(['/detalhes-estudantes']);
@@ -108,6 +111,4 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       this.pieChart.destroy();
     }
   }
-
-
 }

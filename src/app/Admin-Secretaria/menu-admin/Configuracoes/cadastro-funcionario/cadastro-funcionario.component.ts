@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Notyf } from 'notyf';
-import { FuncionarioService } from '../../../Services/cadastro.service';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
+import { FuncionarioService } from '../../../../services/cadastro.service';
+import { BarralateralComponent } from '../../../barralateral/barralateral.component';
 
 @Component({
   selector: 'app-cadastro-funcionario',
