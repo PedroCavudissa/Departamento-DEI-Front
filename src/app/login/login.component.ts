@@ -5,8 +5,9 @@ import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
 import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css'; 
-import { LoginService } from '../services/login.service';
+import 'notyf/notyf.min.css';
+import { LoginService } from '../Services/login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -28,15 +29,15 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-  
+
  notyf = new Notyf({
-  duration: 3000, 
+  duration: 3000,
   position: {
     x: 'right',
-    y: 'top',     
+    y: 'top',
   },
 });
-  
+
   mostrarSidebar = true;
   mensagemLogin = '';
 tipoMensagem: 'erro' | 'sucesso' | '' = '';
@@ -46,7 +47,7 @@ recuperarForm!: FormGroup;
 
   loginForm!: FormGroup;
 
- 
+
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -58,9 +59,9 @@ recuperarForm!: FormGroup;
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
-    
+
 }
-  
+
 // Senha esquecida
   abrirModal(event: Event) {
       event.preventDefault();
@@ -87,7 +88,7 @@ alterarSenha() {
       error: () => {
         this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
         this.tipoMensagem = 'erro';
-       
+
       }
     });
   } else {
@@ -97,7 +98,7 @@ alterarSenha() {
 }
 
 */
-alterarSenha(){}
+
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -106,12 +107,13 @@ entrar() {
     };
 
     this.loginService.entrar(usuario).subscribe({
-      next: (res: any) => {
+      next: (res: unknown) => {
+        const response = res as { token: string; email: string; role: string };
         this.notyf.success('Login realizado com sucesso!');
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', res.email);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.email);
 
-        const role = res.role;
+        const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
@@ -129,7 +131,7 @@ entrar() {
             this.router.navigate(['/']);
         }
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Erro ao logar:', error);
         this.notyf.error('E-mail ou senha inválidos');
       }
@@ -143,7 +145,7 @@ entrar() {
 
 
   cadastro(){
-   
+
     this.router.navigate(['/cadastro']);
   }
 
@@ -158,5 +160,5 @@ entrar() {
     }
   }
 
-  
+
 }

@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import { MenuAdminService } from '../../services/relatorio.service';
+import { MenuAdminService } from '../../Services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
-import { Route, Router } from '@angular/router';
-import {
-  Chart,
-  ChartConfiguration,
-  registerables
-} from 'chart.js';
+import { Router } from '@angular/router';
+import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
 Chart.register(...registerables);
-
 
 @Component({
   selector: 'app-menu-admin',
@@ -88,21 +83,17 @@ export class MenuAdminComponent {
     }
   }
 
-  verDetalhes(item: string){
-   switch(item){
-    case'salas':
-    this.router.navigate(['/detalhes-cadeiras'])
-    break;
-    case'Funcionários':
-    this.router.navigate(['/detalhes-funcionários'])
-    break;
-    case'Estudantes':
-    this.router.navigate(['/detalhes-estudantes'])
-    break;
-    
-   }
+  verDetalhes(item: string) {
+    switch (item) {
+      case 'salas':
+        this.router.navigate(['/detalhes-cadeiras']);
+        break;
+      case 'Funcionários':
+        this.router.navigate(['/detalhes-funcionários']);
+        break;
+      case 'Estudantes':
+        this.router.navigate(['/detalhes-estudantes']);
+        break;
+    }
   }
-
-  
-
 }
