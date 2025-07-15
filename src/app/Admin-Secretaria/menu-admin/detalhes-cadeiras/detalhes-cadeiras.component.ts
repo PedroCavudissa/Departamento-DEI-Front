@@ -15,7 +15,16 @@ export class DetalhesCadeirasComponent implements OnInit {
   disciplinas: Disciplina[] = [];
   anoSelecionado: string = '';
   textoBusca: string = '';
+  disciplinaSelecionada: any = null;
 
+  verDetalhes(disciplina: any) {
+    this.disciplinaSelecionada = disciplina;
+  }
+  
+  fecharModal() {
+    this.disciplinaSelecionada = null;
+  }
+  
   constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {
@@ -30,7 +39,7 @@ export class DetalhesCadeirasComponent implements OnInit {
       },
       error: (err) => {
         console.error(' Erro ao carregar disciplinas:', err);
-        alert('Erro ao carregar disciplinas. Por favor, tente novamente mais tarde.');
+      
       }
       
     });

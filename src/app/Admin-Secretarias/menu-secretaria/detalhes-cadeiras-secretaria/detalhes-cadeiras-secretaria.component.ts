@@ -17,7 +17,15 @@ export class DetalhesCadeirasSecretariaComponent  {
   disciplinas: Disciplina[] = [];
   anoSelecionado: string = '';
   textoBusca: string = '';
+  disciplinaSelecionada: any = null;
 
+  verDetalhes(disciplina: any) {
+    this.disciplinaSelecionada = disciplina;
+  }
+  
+  fecharModal() {
+    this.disciplinaSelecionada = null;
+  }
   constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {

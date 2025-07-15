@@ -1,78 +1,142 @@
 .chat-layout {
-    display: flex;
-    height: 120vh;
-    background-color: #f4f6f8;
-    margin-left: 210px;
-  }
-  
-  .chat-area {
-    flex: 1;
-    display: flex;
+  display: flex;
+  height: auto;
+  background-color: #f4f4f4;
+  margin-left: 210px;
+  margin-top: 60px;
+  padding: 2rem;
+}
+
+.chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.chat-header {
+  margin-bottom: 2rem;
+}
+
+.chat-header h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.message-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.form-field {
+  margin-bottom: 1.5rem;
+}
+
+.form-field label {
+  display: flex;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 200px;
+}
+
+.send-message-btn {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  margin: 1rem auto 0 auto;
+  display: block;
+}
+
+.send-message-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ======= RESPONSIVO ======= */
+
+@media (max-width: 1024px) {
+  .chat-layout {
     flex-direction: column;
-    padding: 2rem;
-    overflow: hidden;
+    margin: 60px auto 0 auto;
+    padding: 1.5rem;
+    width: 95%;
   }
-  
-  .chat-header {
-    margin-bottom: 2rem;
+
+  .chat-area {
+    padding: 1rem;
   }
-  
+
   .chat-header h2 {
-    margin: 0;
-    color: #333;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    text-align: center;
   }
-  
+
   .message-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
+    padding: 1.5rem;
     width: 100%;
   }
-  
-  .form-field {
-    margin-bottom: 1.5rem;
+
+  .form-field textarea {
+    min-height: 180px;
   }
-  
-  .form-field label {
-    display: flex;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #333;
+}
+
+@media (max-width: 600px) {
+  .chat-layout {
+    margin: 60px auto;
+    margin-right: 10%;
+    padding: 1rem;
+    width: 80%;
   }
-  
+
+  .chat-header h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+ 
+  .message-form {
+    padding: 1rem;
+    border: 1px solid #fff;
+    box-shadow: 2px 2px color(display-p3 red green blue);
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
   .form-field input,
   .form-field textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    width: 94%;
   }
-  
-  .form-field textarea {
-    resize: vertical;
-    min-height: 200px;
-  }
-  
+
   .send-message-btn {
-    background-color: #000000;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;           
-    margin: 1rem auto 0 auto;     
-    display: block;               
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
   }
-  
-  .send-message-btn:hover {
-    background-color: #0056b3;
-  }
-  
+}

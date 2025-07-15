@@ -19,9 +19,11 @@ interface UserDetails {
 
 export interface Professor {
   nome?: string;
+  email: string;
   userDetails: UserDetails;
-  [key: string]: any; // Permite propriedades adicionais
+  [key: string]: any;
 }
+
 @Injectable({
   providedIn: 'root'
 })

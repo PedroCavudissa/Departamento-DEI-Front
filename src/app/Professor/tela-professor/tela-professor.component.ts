@@ -3,11 +3,13 @@ import { Component,OnInit, TemplateRef } from '@angular/core';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component'; 
 import { CommonModule, NgIfContext } from '@angular/common';
 import { Professor, ProfessorService } from '../../Services/professor.service';
+import { PerfilProfessorComponent } from "../perfil-professor/perfil-professor.component";
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-tela-professor',
-  imports: [LateralProfessorComponent,CommonModule],
+  imports: [LateralProfessorComponent, CommonModule, PerfilProfessorComponent,FormsModule],
   templateUrl: './tela-professor.component.html',
   styleUrl: './tela-professor.component.css'
 })
@@ -19,7 +21,16 @@ export class TelaProfessorComponent implements OnInit  {
   professorSelecionado: Professor| undefined;
   mensagem: string | undefined;
 
-  
+  mostrarPerfilModal = false;
+
+abrirModalPerfil() {
+  this.mostrarPerfilModal = true;
+}
+
+fecharPerfilModal() {
+  this.mostrarPerfilModal = false;
+}
+
 
   constructor(private professorService: ProfessorService) {}
   // Método ngOnInit para inicializar o componente

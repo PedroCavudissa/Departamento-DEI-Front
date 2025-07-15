@@ -1,9 +1,11 @@
 import { Router } from '@angular/router';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
 import { MenuService } from '../../services/menu.service';
+import { RelatorioService } from '../../services/relatorio.service';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -15,117 +17,96 @@ import { MenuService } from '../../services/menu.service';
   templateUrl: './menu-secretaria.component.html',
   styleUrls: ['./menu-secretaria.component.css'],
 })
-export class MenuSecretariaComponent implements AfterViewInit {
-  colors: Record<string, string> = {
-    '1º Ano': '#009cff',
-    '2º Ano': '#ff9400',
-    '3º Ano': '#808080',
-    '4º Ano': '#ffe600',
-    '5º Ano': '#004080',
-  };
+export class MenuSecretariaComponent implements OnInit, OnDestroy {
+  totalFuncionarios = 0;
+  totalCadeiras = 0;
+  totalEstudantes = 0;
 
-  opts: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
+  private pieChart!: Chart;
 
-  constructor(private router: Router){}
-  async ngAfterViewInit(): Promise<void> {
-    const funcionarios = 12;
-    const estudantes = 23;
-    const cadeiras = 21; // Substitua se tiver endpoint
-    const salas = 70;    // Substitua se tiver endpoint
-  
+  constructor(
+    private router: Router,
+    private relatorioService: RelatorioService
+  ) {}
 
+  ngOnInit(): void {
+    this.carregarDadosGrafico();
+  }
+
+  carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
-    new Chart(pieCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
-        datasets: [
-          {
+    if (!pieCtx) return;
 
-            
-            data: [funcionarios, estudantes, cadeiras],
+    if (this.pieChart) {
+      this.pieChart.destroy(); // destrói se existir
+    }
 
-            
-            backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
+    forkJoin({
+      estudantes: this.relatorioService.getTotalEstudantes(),
+      cadeiras: this.relatorioService.getTotalCadeiras(),
+      funcionarios: this.relatorioService.getTotalFuncionarios()
+    }).subscribe({
+      next: ({ estudantes, cadeiras, funcionarios }) => {
+        this.totalEstudantes = estudantes;
+        this.totalCadeiras = cadeiras;
+        this.totalFuncionarios = funcionarios;
+
+        console.log('Totais recebidos:', {
+          estudantes,
+          cadeiras,
+          funcionarios
+        });
+
+        this.pieChart = new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
+            datasets: [
+              {
+                data: [funcionarios, estudantes, cadeiras],
+                backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
+              },
+            ],
           },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              boxWidth: 30,
-              padding: 10,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                align: 'start',
+                labels: {
+                  boxWidth: 30,
+                  padding: 10,
+                },
+              },
             },
           },
-        },
+        });
       },
-    });
-
-    
-  
-
-    
-    const barLabels = Object.keys(this.colors);
-    const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
-    new Chart(barCtx, {
-      type: 'bar',
-      data: {
-        labels: barLabels,
-        datasets: [
-          {
-
-            data: [100, 68, 38, 25, 10], 
-
-            backgroundColor: barLabels.map((label) => this.colors[label]),
-          },
-        ],
-      },
-      options: {
-        ...this.opts,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { beginAtZero: true },
-        },
-      },
+      error: (err) => {
+        console.error('Erro ao carregar totais:', err);
+      }
     });
   }
 
-  
-  
-
-
-  verDetalhes(nome: string): void {
-    switch (nome) {
-      case 'funcionarios': {
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-      }
-      case 'estudantes': {
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
-      }
-
-      case 'cadeiras': {
+  verDetalhes(item: string) {
+    switch (item) {
+      case 'Cadeiras':
         this.router.navigate(['/detalhes-cadeiras']);
         break;
-      }
-      case 'salas':
-        alert('Dados Indisponíveis');
+      case 'Funcionários':
+        this.router.navigate(['/detalhes-funcionarios']);
         break;
-      default:
-        alert('Dados não disponíveis');
+      case 'Estudantes':
+        this.router.navigate(['/detalhes-estudantes']);
+        break;
     }
   }
 
-
+  ngOnDestroy(): void {
+    if (this.pieChart) {
+      this.pieChart.destroy();
+    }
+  }
 }

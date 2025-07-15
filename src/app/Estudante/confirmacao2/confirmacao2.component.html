@@ -1,56 +1,48 @@
-
-
 <div class="matricula-container">
-
   <section class="secao">
-
-    <h3 class="secao-titulo">Dados Académicos </h3>
-    
-<div class="grid-dados" *ngIf="dadosAcademicos">
-  <p><strong>Nome:</strong> {{ dadosAcademicos.nome }}</p>
-  <p><strong>Email:</strong> {{ dadosAcademicos.email }}</p>
-  <p><strong>Nº Estudante (ID):</strong> {{ dadosAcademicos.userDetails.id }}</p>
-  <p><strong>Número do BI:</strong> {{ dadosAcademicos.userDetails.numIdentificacao }}</p>
-  <p><strong>Data de Nascimento:</strong> {{ dadosAcademicos.userDetails.dataNascimento }}</p>
-  <p><strong>Status do Estudante: </strong> {{ dadosAcademicos.userDetails.statusEstudante }}</p>
-  <p class="confirmacao"><strong>Confirmação a ser feita:</strong> {{ dadosAcademicos.confirmacao }}</p>
-</div>
+    <h3 class="secao-titulo">Dados Académicos</h3>
+    <div class="grid-dados" *ngIf="dadosAcademicos">
+      <p><strong>Nome:</strong> {{ dadosAcademicos.nome }}</p>
+      <p><strong>Email:</strong> {{ dadosAcademicos.email }}</p>
+      <p><strong>Nº Estudante (ID):</strong> {{ dadosAcademicos.userDetails.id }}</p>
+      <p><strong>Número do BI:</strong> {{ dadosAcademicos.userDetails.numIdentificacao }}</p>
+      <p><strong>Data de Nascimento:</strong> {{ dadosAcademicos.userDetails.dataNascimento }}</p>
+      <p><strong>Status do Estudante:</strong> {{ dadosAcademicos.userDetails.statusEstudante }}</p>
+      <p class="confirmacao"><strong>Confirmação a ser feita:</strong> {{ dadosAcademicos.confirmacao }}</p>
+    </div>
   </section>
 
- <section class="secao">  
-  <h3 class="secao-titulo">Disciplinas Do Próximo Semestre</h3>
-  <ul *ngIf="disciplinasfaze.length > 0">
-    <li *ngFor="let disciplina of disciplinasfaze">{{ disciplina.nome }}</li>
-  </ul>
-  <p *ngIf="disciplinasfaze.length === 0 && !loading">Nenhuma Disciplina Encontrada.</p>
-</section>
-
+  <section class="secao">
+    <h3 class="secao-titulo">Disciplinas Do Próximo Semestre</h3>
+    <ul *ngIf="disciplinasfaze.length > 0">
+      <li *ngFor="let disciplina of disciplinasfaze">{{ disciplina.nome }}</li>
+    </ul>
+    <p *ngIf="disciplinasfaze.length === 0 && !loading">Nenhuma Disciplina Encontrada.</p>
+  </section>
 
   <section class="secao">
     <h3 class="secao-titulo">Disciplinas em Atraso</h3>
     <ul *ngIf="disciplinasAtrasadas.length > 0; else semAtrasadas">
-       <li *ngFor="let disciplina of disciplinasAtrasadas">{{ disciplina }}</li>
+      <li *ngFor="let disciplina of disciplinasAtrasadas">{{ disciplina }}</li>
     </ul>
     <ng-template #semAtrasadas>
-    <p>Não Há Disciplinas Em Atraso.</p>
-  </ng-template>
-</section>
-  
-       <div class="pagination">
-          <span class="page active">1</span>
-          <span class="page active">2</span>
-          <span class="page">3</span>
-        </div>
+      <p>Não Há Disciplinas Em Atraso.</p>
+    </ng-template>
+  </section>
 
-      <div class="button-container">
-        <button class="back-btn" (click)="confi1()">Anterior</button>
-        <button class="confirm-btn" (click)="confi3()">Continuar</button>
-      </div>  
+  <div class="pagination">
+    <span class="page active">1</span>
+    <span class="page">2</span>
+    <span class="page">3</span>
+  </div>
 
-      <div *ngIf="mensagem" class="alert alert-success">
-      ✅ {{ mensagem }}
-    </div>
-    <p *ngIf="erro" style="color: red">{{ erro }}</p>
-    
+  <div class="button-container">
+    <button class="back-btn" (click)="confi1()"><i class="bx bx-arrow-from-right"></i></button>
+    <button class="confirm-btn" (click)="confi3()"><i class="bx bx-arrow-from-left"></i></button>
+  </div>
+
+  <div *ngIf="mensagem" class="alert alert-success">✅ {{ mensagem }}</div>
+  <p *ngIf="erro" class="alert alert-danger">{{ erro }}</p>
 </div>
+
 <app-lateral></app-lateral>

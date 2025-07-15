@@ -1,34 +1,29 @@
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-
- <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <div class="container">
+  <div class="card">
+    <img src="assets/imagens/estudante-masculino.png" alt="Perfil do Professor" />
 
-<div class="card">
-  <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
-  <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-  </div>
+    <div class="info">
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
 
-  <div *ngIf="professorSelecionado; else noProfessores">
-         <h3 > Dados academicos</h3>
-        <p><strong>Nome:</strong> {{ professorSelecionado.nome}}</p>
-        <p><strong>Cargo:</strong>{{professorSelecionado.userDetails.cargo }} </p>
-        <p><strong>Data Ingresso:</strong>{{professorSelecionado.userDetails.dataIngresso| date:'shortDate' }}</p>
-        <p><strong>NumDocumento:</strong>{{ professorSelecionado.userDetails.numDocumento}}</p>
-        <p><strong>Endereço:</strong>{{ professorSelecionado.userDetails.endereco}}</p>
-        <p><strong>Data Nasc:</strong>{{professorSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
+      <div *ngIf="professorSelecionado; else noProfessores">
+        <h3>Dados Acadêmicos</h3>
+        <p><strong>Nome:</strong> {{ professorSelecionado.nome }}</p>
+        <p><strong>Cargo:</strong> {{ professorSelecionado.userDetails.cargo }}</p>
+        <p><strong>Data de Ingresso:</strong> {{ professorSelecionado.userDetails.dataIngresso | date:'shortDate' }}</p>
+        <p><strong>Nº Documento:</strong> {{ professorSelecionado.userDetails.numDocumento }}</p>
+        <p><strong>Endereço:</strong> {{ professorSelecionado.userDetails.endereco }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ professorSelecionado.userDetails.dataNascimento | date:'shortDate' }}</p>
+      </div>
+
+      <ng-template #noProfessores>
+        <p>Nenhum professor encontrado.</p>
+      </ng-template>
     </div>
-
-  <ng-template #noProfessores>
-    <p>Nenhum Professpor encontrado.</p>
-  </ng-template>
   </div>
-
 </div>
 
 <app-lateral-professor></app-lateral-professor>
-
-
-
-
-
