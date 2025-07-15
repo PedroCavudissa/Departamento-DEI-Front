@@ -1,80 +1,68 @@
-<!-- Adicionando o componente de menu lateral do professor -->
-<app-lateral-professor></app-lateral-professor>
-
-<div class="container mt-4">
-  <h2>Lançamento de Notas</h2>
-
-  <div class="mb-3">
-    <button class="btn btn-secondary" (click)="resetar()">Limpar</button>
-  </div>
-
-  <div class="mb-3">
-    <label for="disciplinaSelecionada">Disciplina:</label>
-    <select [(ngModel)]="disciplinaSelecionada" id="disciplinaSelecionada" class="form-select">
-      <option [value]="''">-- Selecione a disciplina --</option>
-      <option *ngFor="let disc of disciplinas" [value]="disc.id">{{ disc.nome }}</option>
-    </select>
-  </div>
-
-  <div class="mb-3">
-    <label for="tipoSelecionado">Tipo de Nota:</label>
-    <select [(ngModel)]="tipoSelecionado" id="tipoSelecionado" class="form-select">
-      <option [value]="''">-- Selecione o tipo --</option>
-      <option *ngFor="let tipo of tipos" [value]="tipo.id">
-        {{ tipo.nome }}
-      </option>
-    </select>
-  </div>
-
-  <div class="botoes mb-4">
-    <button
-      (click)="gerarExcel()"
-      [disabled]="!tipoSelecionado || !disciplinaSelecionada"
-      class="btn btn-primary me-2">
-      Gerar Excel
-    </button>
-
-    <input
-      type="file"
-      (change)="onFileSelected($event)"
-      [disabled]="!tipoSelecionado || !disciplinaSelecionada" />
-  </div>
-
-  <div *ngIf="notas.length > 0">
-    <h3>Notas Carregadas</h3>
-
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Matrícula</th>
-          <th>Aluno</th>
-          <th *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">AC</th>
-          <th *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">PF</th>
-          <th>Nota Final</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let nota of notas; let i = index">
-          <td>{{ nota.matricula }}</td>
-          <td>{{ nota.nomeAluno }}</td>
-          <td *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">
-            <input [(ngModel)]="notas[i].ac" type="number" class="form-control" />
-          </td>
-          <td *ngIf="tipoSelecionado === 1 || tipoSelecionado === 2">
-            <input [(ngModel)]="notas[i].pf" type="number" class="form-control" />
-          </td>
-          <td>
-            <input [(ngModel)]="notas[i].notaFinal" type="number" class="form-control" />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="botoes mt-3">
-      <button (click)="salvar()" class="btn btn-success me-2">Salvar</button>
-      <button (click)="publicar()" class="btn btn-warning">Publicar</button>
+<div class="container">
+  <section class="secao">
+    <h3 class="secao-titulo">Lançamento de Notas</h3>
+<br>
+    <!-- SELEÇÃO DE DISCIPLINA -->
+    <div class="form-group mt-3">
+      <label for="disciplina"><strong>1. Disciplina</strong></label>
+      <select
+        id="disciplina"
+        class="form-control"
+        [(ngModel)]="disciplinaSelecionadaId"
+        (change)="onDisciplinaChange()">
+        <option [ngValue]="null">-- Selecione a Disciplina --</option>
+        <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina.disciplinaId">
+          {{ disciplina.disciplinaNome}}
+        </option>
+      </select>
     </div>
-  </div>
+    <!-- TIPO DE PAUTA -->
+    <div class="form-group mt-3" *ngIf="tipos.length > 0">
+      <label for="tipoPauta"><strong>2. Modelo Da Pauta</strong></label>
+      <select
+  id="tipoPauta"
+  class="form-control"
+  [(ngModel)]="tipoSelecionado"
+  [disabled]="!disciplinaSelecionadaId">
+  <option [ngValue]="null">-- Modelos --</option>
+  <option 
+    *ngFor="let tipo of tipos" 
+    [ngValue]="tipo.codigo"
+    [disabled]="!isTipoPermitido(disciplinaSelecionadaId, tipo.codigo)">
+    {{ tipo.descricao }}
+  </option>
+</select>
+    </div>
 
-  <div *ngIf="mensagem" class="alert alert-info mt-3">{{ mensagem }}</div>
+    <!-- BOTÃO DE BAIXAR MODELO -->
+    <div class="mt-4">
+      <button
+        class="btn btn-primary"
+        [disabled]="!disciplinaSelecionadaId || !tipoSelecionado"
+        (click)="baixarModelo()"
+      >
+        📥 Baixar Modelo Da Pauta
+      </button>
+    </div><br>
+
+    <!-- UPLOAD -->
+    <div class="form-group mt-3">
+      <label for="excelFile"><strong>3. Importe o ficheiro Excel com as notas preenchidas</strong></label>
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".xlsx,.xls" />
+<button (click)="enviarExcel()">Enviar</button>
+  </div>
+    <!-- ALERTAS -->
+    <div *ngIf="mensagem" class="alert alert-success">
+      ✅ {{ mensagem }}
+    </div>
+    <p *ngIf="erro" style="color: red">{{ erro }}</p>
+  </section>
+
+  <!-- MODAL DE CARREGAMENTO -->
+<div *ngIf="carregando" class="modal-overlay">
+  <div class="modal-content">
+    <p>🔄 Carregando a página, por favor aguarde...</p>
+  </div>
+</div> 
 </div>
+<app-lateral-professor></app-lateral-professor>

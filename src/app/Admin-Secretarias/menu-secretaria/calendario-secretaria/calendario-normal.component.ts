@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,14 +14,17 @@ import { CalendarioService, Evento } from '../../../Services/calendario.service'
   templateUrl: './calendario-normal.component.html',
   styleUrls: ['./calendario-normal.component.css'],
 })
+
 export class CalendarioNormalComponent implements OnInit {
   mostrarFormulario = false;
   mostrarToast = false;
+
 
   data = '';
   titulo = '';
   tipo = '';
   link? = '';
+
 
   eventos: Evento[] = [];
 
@@ -35,11 +39,14 @@ export class CalendarioNormalComponent implements OnInit {
       next: (res) => (this.eventos = res),
       error: (err) => console.error('Erro ao carregar eventos:', err)
     });
+
   }
 
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
+
       alert('Preencha todos os campos obrigatórios.');
+
       return;
     }
 
@@ -47,6 +54,7 @@ export class CalendarioNormalComponent implements OnInit {
       data: this.data.trim(),
       titulo: this.titulo.trim(),
       tipo: this.tipo.trim(),
+
       link: this.link?.trim() || ''
     };
 
@@ -67,6 +75,7 @@ export class CalendarioNormalComponent implements OnInit {
 
   fecharFormulario() {
     this.mostrarFormulario = false;
+
   }
 
   limparCampos() {
@@ -76,6 +85,7 @@ export class CalendarioNormalComponent implements OnInit {
     this.link = '';
   }
 
+
   exibirToast() {
     this.mostrarToast = true;
     setTimeout(() => {
@@ -83,4 +93,6 @@ export class CalendarioNormalComponent implements OnInit {
     }, 3000);
   }
 }
+
+
 

@@ -138,9 +138,15 @@ input, select {
     padding: 10px 25px;
   }
 
+  
+  .btn-azul {
+    background-color: #0d91f7;
+    color: white;
+    border: none;
   button {
     font-size: 0.85rem;
     padding: 6px 14px;
+
     width: 100%;
   }
 
@@ -180,4 +186,5 @@ input, select {
     padding: 10px;
     font-size: 0.9rem;
   }
+}
 }

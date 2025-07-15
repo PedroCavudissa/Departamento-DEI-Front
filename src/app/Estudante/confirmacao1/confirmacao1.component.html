@@ -1,53 +1,40 @@
-<body>
-  
-
 <div class="container">
-
-    <main class="main-content">
-  
-      <section class="form-section">
-        <div class="table-section">
-      <h3>Disciplinas a Fazer</h3>
-      <table>
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Nome da Disciplina</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let disciplina of disciplinasfaze; let i = index">
-                <td>{{ disciplina.codigo }}</td>
-                <td>{{ disciplina.nome }}</td>
-              </tr>
-            </tbody>
-      </table>
-          <br>
-          <h3>Disciplinas em Atraso</h3>
+  <section class="form-section">   
+    <div class="table-section">
+      <h3 class="secao-titulo">Disciplinas Do Próximo Semestre</h3>
       <table>
         <thead>
-          <tr>  
+          <tr>
             <th>Código</th>
             <th>Nome da Disciplina</th>
+            <th>Pré-requisito</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let disciplina of disciplinasAtrasadas; let i = index">
+          <tr *ngFor="let disciplina of disciplinasfaze">
+            <td>{{ disciplina.sigla }}</td>
             <td>{{ disciplina.nome }}</td>
-            <td>{{ disciplina.nome }}</td>
+            <td>
+              <span *ngIf="disciplina.precedenciasDisciplinaNome && disciplina.precedenciasDisciplinaNome.length > 0; else semPreReq">
+                {{ disciplina.precedenciasDisciplinaNome }}
+              </span>
+              <ng-template #semPreReq>
+                <span style="color: gray;">Nenhum</span>
+              </ng-template>
+            </td>
           </tr>
         </tbody>
-     </table>
-        </div>
-        <br>
-        <div class="pagination">
-          <span class="page active">1</span>
-          <span class="page">2</span>
-          <span class="page">3</span>
-        </div>
-        <button class="confirm-btn" (click)="confi2()">Continuar</button>
-      </section>
-    </main>
+      </table>
+    </div>
+  </section>
+
+  <div class="pagination">
+    <span class="page active">1</span>
+    <span class="page">2</span>
+    <span class="page">3</span>
   </div>
-</body>
+
+  <button class="confirm-btn" (click)="confi2()">Continuar</button>
+</div>
+
 <app-lateral></app-lateral>

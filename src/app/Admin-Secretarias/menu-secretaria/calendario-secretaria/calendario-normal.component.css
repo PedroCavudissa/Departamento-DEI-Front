@@ -1,3 +1,4 @@
+
 /* Cabeçalho */
 .titulo-container {
   background-color: #44b1f0;
@@ -52,11 +53,13 @@
   font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
 }
 
 .botao:hover {
   background-color: #3498db;
 }
+
 
 /* Links */
 .ver-provas {
@@ -123,26 +126,32 @@
   margin-bottom: 15px;
   font-size: 1.2rem;
   text-align: center;
+
 }
 
 label {
   display: block;
+
   margin: 10px 0 4px;
   font-weight: 500;
   font-size: 14px;
+
 }
 
 input[type="text"] {
   width: 100%;
+
   padding: 8px 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 14px;
   box-sizing: border-box;
+
 }
 
 .btn-salvar {
   margin-top: 16px;
+
   background-color: #44b1f0;
   color: #fff;
   font-weight: bold;
@@ -157,10 +166,12 @@ input[type="text"] {
 
 .btn-salvar:hover {
   background-color: #3498db;
+
 }
 
 .close-btn {
   position: absolute;
+
   right: 12px;
   top: 10px;
   background-color: transparent;
@@ -171,10 +182,12 @@ input[type="text"] {
 }
 
 /* Blur */
+
 .blur {
   filter: blur(4px);
   opacity: 0.4;
   pointer-events: none;
+
 }
 
 /* TOAST DE SUCESSO */
@@ -220,6 +233,10 @@ input[type="text"] {
   }
 
   .quadro {
+
+    width: 80%;
+    margin: 120px auto;
+
     margin-left: 230px;
     width: calc(100% - 260px);
     max-width: 660px;
@@ -249,6 +266,7 @@ input[type="text"] {
     flex-direction: column;
     gap: 12px;
     align-items: stretch;
+
   }
 
   .botao {
@@ -257,3 +275,4 @@ input[type="text"] {
     font-size: 14px;
   }
 }
+

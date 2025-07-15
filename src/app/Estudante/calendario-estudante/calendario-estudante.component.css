@@ -100,4 +100,22 @@
   .lista-eventos li {
     font-size: 14px;
   }
+
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .titulo-container,
+    .quadro {
+      width: 80%;
+      margin: 120px auto;
+    }
+  
+    .botao {
+      width: 40%;
+      position: static;
+      display: block;
+      margin: 10px 0 20px auto;
+    }
+  }
+
 }

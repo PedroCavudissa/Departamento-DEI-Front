@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BarralateralComponent } from "../../../../Departamento-DEI-Front-Chat-CORRIGIDO/src/app/barralateral/barralateral.component";
+import { LateralComponent } from '../lateral/lateral.component';
 
 @Component({
   selector: 'app-tela-notas',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarralateralComponent],
+  imports: [CommonModule, FormsModule, LateralComponent],
   templateUrl: './tela-notas.component.html',
   styleUrls: ['./tela-notas.component.css']
 })

@@ -1,5 +1,52 @@
 
 
+<body>
+  
+  <!-- CONTEÚDO PRINCIPAL COM BLUR CONDICIONAL -->
+  <main >
+    <div class="quadro" [class.blur]="mostrarFormulario">
+      <a class="ver-provas" href="/calendario/provas">Ver Calendário de Provas</a>
+     
+    
+      <ul class="lista-eventos">
+        <li *ngFor="let evento of eventos">
+          <strong>{{ evento.data }}</strong> — {{ evento.titulo }}
+          <a *ngIf="evento.link" [href]="evento.link" target="_blank">Mais informações</a>
+        </li>
+      </ul>
+  
+    <!-- FORMULÁRIO EM OVERLAY -->
+    <div *ngIf="mostrarFormulario" class="overlay">
+      <div class="form-container">
+        <form (ngSubmit)="salvarEvento()" #eventoForm="ngForm">
+          <button type="button" class="close-btn" (click)="fecharFormulario()">X</button>
+    
+          <label for="data">Data</label>
+          <input type="text" id="data" name="data" placeholder="dd/mm/aaaa" [(ngModel)]="data" required />
+    
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required />
+    
+          <label for="tipo">Tipo</label>
+          <input type="text" id="tipo" name="tipo" [(ngModel)]="tipo" required />
+    
+          <label for="link">Link (Opcional)</label>
+          <input type="text" id="link" name="link" [(ngModel)]="link" />
+    
+          <button type="submit" class="btn-salvar">Salvar</button>
+        </form>
+      </div>
+    </div>
+    </div>
+   
+    </main>
+    
+  
+  </body>
+  
+    
+
+
 <!-- TÍTULO -->
 <div class="titulo-container">
   <h2 class="titulo">📅 Calendário de Atividades</h2>
@@ -17,6 +64,7 @@
       <strong>{{ evento.data }}</strong> — <span class="titulo-evento">{{ evento.titulo }}</span>
       <span class="tipo">({{ evento.tipo }})</span>
       <a *ngIf="evento.link" [href]="evento.link" target="_blank">🔗 Mais informações</a>
+
     </li>
   </ul>
 </main>
@@ -25,6 +73,7 @@
 <div *ngIf="mostrarFormulario" class="overlay">
   <div class="form-container">
     <form (ngSubmit)="salvarEvento()" #eventoForm="ngForm">
+
       <button type="button" class="close-btn" (click)="fecharFormulario()">×</button>
 
       <h3 class="form-titulo">Novo Evento</h3>
@@ -39,6 +88,7 @@
       <input type="text" id="tipo" name="tipo" [(ngModel)]="tipo" required />
 
       <label for="link">🔗 Link (opcional)</label>
+
       <input type="text" id="link" name="link" [(ngModel)]="link" />
 
       <button type="submit" class="btn-salvar">Salvar</button>
@@ -50,6 +100,7 @@
 <div *ngIf="mostrarToast" class="toast">
   Evento salvo com sucesso!
 </div>
+
 
 
 <app-barralateral-secretaria></app-barralateral-secretaria>
