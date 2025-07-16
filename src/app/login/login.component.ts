@@ -6,8 +6,9 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css'; 
+import 'notyf/notyf.min.css';
 import { LoginService } from '../services/login.service';
+
 
 
 @Component({
@@ -33,15 +34,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  
  notyf = new Notyf({
-  duration: 3000, 
+  duration: 3000,
   position: {
     x: 'right',
-    y: 'top',     
+    y: 'top',
   },
 });
-  
+
   mostrarSidebar = true;
   mensagemLogin = '';
   tipoMensagem: 'erro' | 'sucesso' | '' = '';
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
- 
+
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -63,10 +63,10 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
-    
+
 
 }
-  
+
 // Senha esquecida
   abrirModal(event: Event) {
       event.preventDefault();
@@ -77,6 +77,7 @@ fecharModal() {
 }
 
 alterarSenha(){}
+
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -85,20 +86,20 @@ entrar() {
     };
 
     this.loginService.entrar(usuario).subscribe({
-      next: (res: any) => {
+      next: (res: unknown) => {
+        const response = res as { token: string; email: string; role: string };
         this.notyf.success('Login realizado com sucesso!');
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', res.email);
-        console.log('Usuário logado:', res.email);
-        console.log('Token recebido:', res.token);
 
-        const role = res.role;
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.email);
+
+        const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
           case 'SECRETARIA':
-            this.router.navigate(['/menu-admin']);
+            this.router.navigate(['/menu-secretaria']);
             break;
           case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
@@ -110,7 +111,7 @@ entrar() {
             this.router.navigate(['/']);
         }
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Erro ao logar:', error);
         this.notyf.error('E-mail ou senha inválidos');
       }
@@ -123,17 +124,19 @@ entrar() {
 }
 
 
+
 recuperar(): void {
   if (this.recuperarForm.invalid) {
     this.recuperarForm.markAllAsTouched();
     this.notyf.success('Verifique a sua caixa de email!');
       this.fecharModal();
     return;
+
   }
   const email = this.recuperarForm.get('email')?.value;
  
  
 
-  
+
 }
 }

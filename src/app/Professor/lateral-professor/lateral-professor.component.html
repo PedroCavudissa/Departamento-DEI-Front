@@ -49,6 +49,13 @@
       </li>
 
       <li>
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Comunicado' }" >
+          <i class='bx bx-message'></i>
+          <span (click)="selecionarMenu('Comunicado','Comunicado')" tabindex="0" (keyup.enter)="selecionarMenu('Comunicado','Comunicado')">Comunicados</span>
+        </a>
+      </li>
+
+      <li>
         <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Horários' }">
           <i class='bx bx-time-five'></i>
           <span (click)="selecionarMenu('Horários','Horários')" tabindex="0" (keyup.enter)="selecionarMenu('Horários','Horários')">Horários</span>

@@ -39,6 +39,7 @@ export class LateralComponent implements OnInit {
       case 'Chat': this.router.navigate(['/chat-estudante']); break;
       case 'Calendário': this.router.navigate(['/calendario-estudante']); break;
       case 'Perfil': this.router.navigate(['/perfil-estudante']); break;
+      case 'Comunicado': this.router.navigate(['/comunicado-estudante']); break;
       case 'Sair':
         const confirmacao = window.confirm('Tem certeza que deseja sair?');
         if (confirmacao) {

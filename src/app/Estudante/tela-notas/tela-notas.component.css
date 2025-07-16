@@ -1,157 +1,256 @@
-* {
-  margin: 0;
-  padding: 0;
+:host {
+  display: block;
+  width: 100%;
+  max-width: 1000px;
+  margin: 4rem auto;
+  margin-right: 5rem;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  overflow-x: hidden;
-  width: 100%;
-  height: 100vh;
-}
-
-.layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-.main-content {
-  margin-left: 200px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Conteúdo principal */
-main {
-  margin-top: 55px;
-  padding: 20px;
-  background-color: #fff;
+/* Estilos para Desktop (1024px pra cima) */
+section {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: #f8fafc;
   border-radius: 10px;
-  box-shadow: 0 0 0 1px #333;
-  width: 90%;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+  border: 1px solid #e2e8f0;
 }
 
-/* Bloco principal da tela */
-.principal {
+h2 {
+  color: #1e293b;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.form-group {
   display: flex;
-  flex-direction: column;
-  margin-top: 150px;
-  margin-left: 350px;
-}
-
-.principal h3 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Caixa de filtros */
-.caixa {
-  display: flex;
+  gap: 1rem;
   flex-wrap: wrap;
-  gap: 10px;
-  border: 1px solid #f1f1f1;
-  padding: 15px;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+select, input {
+  flex: 1 1 200px;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e1;
   border-radius: 8px;
-  justify-content: flex-start;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
 }
 
-.caixa select,
-.caixa button,
-.caixa input {
-  background-color: white;
-  border: 1px solid #ccc;
-  width: 150px;
-  height: 40px;
+select:focus, input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+button {
+  flex: 0 0 auto;
+  padding: 0.75rem 1.5rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
   border-radius: 8px;
-  padding: 5px;
-  font-size: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-/* Tabela */
-.table-wrapper {
-  overflow-x: auto;
-  margin-top: 20px;
+button:hover {
+  background: #4338ca;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
+button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
 }
 
-table th,
-table td {
-  border: 1px solid #ccc;
-  text-align: center;
-  padding: 8px;
-  white-space: nowrap;
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
 }
 
-/* === RESPONSIVIDADE === */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
-/* Média: tablets e notebooks */
-@media (max-width: 1200px) {
-  .main-content {
-    margin-left: 150px;
+.resultado {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.resultado h3 {
+  color: #1e293b;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.resultado p {
+  margin: 0.5rem 0;
+  color: #334155;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+.error-message {
+  padding: 1rem;
+  background: #fee2e2;
+  color: #dc2626;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.error-message::before {
+  content: "⚠️";
+}
+
+/* Estilos para Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  :host {
+    padding: 1.5rem;
+    max-width: 800px;
   }
 
-  .principal {
-    margin-left: 50px;
-    margin-top: 100px;
-
-
+  section {
+    padding: 1.25rem;
   }
 
-  .caixa select,
-  .caixa button,
-  .caixa input {
-    width: 120px;
-    height: 38px;
-    font-size: 13px;
+  h2 {
+    font-size: 1.3rem;
   }
 
-  table {
-    font-size: 13px;
+  .form-group {
+    gap: 0.8rem;
+  }
+
+  select, input {
+    flex: 1 1 150px;
+    padding: 0.65rem;
+  }
+
+  button {
+    padding: 0.65rem 1.25rem;
+  }
+
+  .resultado {
+    padding: 1.25rem;
   }
 }
 
-/* Pequena: smartphones */
+/* Estilos para Mobile (até 767px) */
 @media (max-width: 767px) {
-  .main-content {
-    margin-left: 0;
+  :host {
+    padding: 1rem;
+    margin: 1rem auto;
+    border-radius: 8px;
   }
 
-  .principal {
-    margin-left: 0;
-    margin-top: 70px;
-    padding: 10px;
-    width: 100%;
+  section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .caixa {
+  h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
     flex-direction: column;
-    align-items: stretch;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
   }
 
-  .caixa select,
-  .caixa button,
-  .caixa input {
+  select, input, button {
     width: 100%;
-    font-size: 14px;
+    padding: 0.75rem;
+    font-size: 0.95rem;
   }
 
-  table {
-    font-size: 12px;
+  button {
+    justify-content: center;
   }
 
-  main {
-    width: 95%;
-    padding: 10px;
+  .resultado {
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .resultado h3 {
+    font-size: 1.1rem;
+  }
+
+  .resultado p {
+    font-size: 0.95rem;
+  }
+
+  li {
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  .error-message {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Estilos para Telas Muito Pequenas (até 480px) */
+@media (max-width: 480px) {
+  :host {
+    padding: 0.75rem;
+  }
+
+  section {
+    padding: 0.75rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+
+  select, input {
+    padding: 0.65rem;
+  }
+
+  .resultado {
+    padding: 0.75rem;
   }
 }

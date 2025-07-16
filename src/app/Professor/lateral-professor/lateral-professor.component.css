@@ -38,6 +38,7 @@ height: 100%;
     padding: 12px;
   font-size: 20px;
   text-decoration: none;
+  margin-top: 10px;
  
 
 }
@@ -110,7 +111,7 @@ transform: translateX(-100%);
 
 .scroll-container {
 height: 600px; /* ou qualquer valor fixo que você desejar */
-overflow-y: auto; /* ativa a barra de rolagem vertical apenas quando necessário */
+overflow-y: hidden; /* ativa a barra de rolagem vertical apenas quando necessário */
 overflow-x: hidden; /* oculta a barra de rolagem horizontal */
 }
 

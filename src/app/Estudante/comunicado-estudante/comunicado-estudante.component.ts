@@ -1,19 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ComunicadoService } from '../../../services/comunicado.service';
-import { Comunicado } from '../../../models/comunicado.model';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
-import { RouterModule } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 
+import { Component, OnInit } from '@angular/core';
+
+import { ComunicadoService } from '../../services/comunicado.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+import { RouterModule } from '@angular/router';
+
+import { HttpErrorResponse } from '@angular/common/http';
+import { LateralComponent } from '../lateral/lateral.component';
+import { Comunicado } from '../../models/comunicado.model';
 @Component({
-  selector: 'app-comunicado',
+  selector: 'app-comunicado-estudante',
   standalone: true,
-  imports: [CommonModule, BarralateralComponent, RouterModule],
-  templateUrl: './comunicado.component.html',
-  styleUrls: ['./comunicado.component.css'],
+  imports: [FormsModule,CommonModule,LateralComponent,RouterModule],
+   templateUrl: './comunicado-estudante.component.html',
+  styleUrl: './comunicado-estudante.component.css'
 })
-export class ComunicadoComponent implements OnInit {
+
+
+
+
+export class ComunicadoEstudanteComponent implements OnInit {
   comunicados: Comunicado[] = [];
   isLoading = true;
   errorMessage: string | null = null;

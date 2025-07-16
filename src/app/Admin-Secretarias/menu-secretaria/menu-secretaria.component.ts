@@ -3,17 +3,15 @@ import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
+
 import { MenuService } from '../../services/menu.service';
 import { RelatorioService } from '../../services/relatorio.service';
 import { forkJoin } from 'rxjs';
 
-
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
-
   imports: [BarralateralSecretariaComponent],
-
   templateUrl: './menu-secretaria.component.html',
   styleUrls: ['./menu-secretaria.component.css'],
 })
@@ -23,6 +21,21 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
   totalEstudantes = 0;
 
   private pieChart!: Chart;
+
+  // Exemplo de cores para o gráfico de barras
+  colors: Record<string, string> = {
+    'Janeiro': '#009cff',
+    'Fevereiro': 'orange',
+    'Março': 'gray',
+    'Abril': 'gold',
+    'Maio': '#4caf50'
+  };
+
+  // Configurações comuns
+  opts: any = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
 
   constructor(
     private router: Router,
@@ -35,10 +48,12 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
 
   carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
-    if (!pieCtx) return;
+    const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
+
+    if (!pieCtx || !barCtx) return;
 
     if (this.pieChart) {
-      this.pieChart.destroy(); // destrói se existir
+      this.pieChart.destroy(); // Destrói gráfico anterior se existir
     }
 
     forkJoin({
@@ -57,6 +72,7 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
           funcionarios
         });
 
+        // Gráfico tipo "pizza"
         this.pieChart = new Chart(pieCtx, {
           type: 'doughnut',
           data: {
@@ -64,7 +80,7 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
             datasets: [
               {
                 data: [funcionarios, estudantes, cadeiras],
-                backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
+                backgroundColor: ['#009cff', 'orange', 'gray'],
               },
             ],
           },
@@ -81,7 +97,31 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
                 },
               },
             },
+          }
+        });
+
+        // Gráfico de barras
+        const barLabels = Object.keys(this.colors);
+        new Chart(barCtx, {
+          type: 'bar',
+          data: {
+            labels: barLabels,
+            datasets: [
+              {
+                data: [100, 68, 38, 25, 10], // Exemplo
+                backgroundColor: barLabels.map(label => this.colors[label]),
+              },
+            ],
           },
+          options: {
+            ...this.opts,
+            plugins: {
+              legend: { display: false },
+            },
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
         });
       },
       error: (err) => {
@@ -90,16 +130,16 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
     });
   }
 
-  verDetalhes(item: string) {
-    switch (item) {
-      case 'Cadeiras':
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-      case 'Funcionários':
+  verDetalhes(nome: string): void {
+    switch (nome) {
+      case 'funcionarios':
         this.router.navigate(['/detalhes-funcionarios']);
         break;
-      case 'Estudantes':
+      case 'estudantes':
         this.router.navigate(['/detalhes-estudantes']);
+        break;
+      case 'cadeiras':
+        this.router.navigate(['/detalhes-cadeiras']);
         break;
     }
   }

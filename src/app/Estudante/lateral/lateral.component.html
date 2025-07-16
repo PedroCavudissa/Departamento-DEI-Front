@@ -14,7 +14,7 @@
     <div class="scroll-container">
       <li><a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Página Inicial' }">
           <i class='bx bx-home'></i><span (click)="selecionarMenu('Página Inicial','Página Inicial')" tabindex="0" (keyup.enter)="selecionarMenu('Página Inicial','Olá, Pedro José Cavudissa')">Página Inicial</span></a></li>
-      <li><a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Perfil' }"><i class='bx bx-home'></i><span (click)="selecionarMenu('Perfil','Perfil')" tabindex="0" (keyup.enter)="selecionarMenu('Perfil','Perfil')">Perfil</span></a>
+      <li><a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Perfil' }"><i class='bx bx-user'></i><span (click)="selecionarMenu('Perfil','Perfil')" tabindex="0" (keyup.enter)="selecionarMenu('Perfil','Perfil')">Perfil</span></a>
       </li>
 
       <li>
@@ -28,6 +28,12 @@
         <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Minhas Notas' }" >
           <i class='bx bx-certification'></i>
           <span (click)="selecionarMenu('Minhas Notas','Minhas Notas')" tabindex="0" (keyup.enter)="selecionarMenu('Minhas Notas','Minhas Notas')">Minhas Notas</span>
+        </a>
+      </li>
+      <li>
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Comunicado' }" >
+          <i class='bx bx-message'></i>
+          <span (click)="selecionarMenu('Comunicado','Comunicado')" tabindex="0" (keyup.enter)="selecionarMenu('Comunicado','Comunicado')">Comunicados</span>
         </a>
       </li>
 

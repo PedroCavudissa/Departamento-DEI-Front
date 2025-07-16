@@ -5,13 +5,12 @@ import { environment } from '../../enviroments/environment';
 @Injectable({ providedIn: 'root' })
 export class LoginService {
 
-  private apiUrl = ` ${environment.apiUrl}/api/auth/login`;
-
+  // Usar a URL base do environment para facilitar mudança
+  private apiUrl = `${environment.apiUrl}/api/auth/login`;
 
   constructor(private http: HttpClient) {}
 
   entrar(credentials: { email: string; password: string }) {
-    return this.http.post(`${this.apiUrl}`, credentials);
+    return this.http.post(this.apiUrl, credentials);
   }
-
 }

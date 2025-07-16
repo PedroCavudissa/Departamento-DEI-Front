@@ -3,13 +3,12 @@ import { Component,OnInit, TemplateRef } from '@angular/core';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component'; 
 import { CommonModule, NgIfContext } from '@angular/common';
 import { Professor, ProfessorService } from '../../Services/professor.service';
-import { PerfilProfessorComponent } from "../perfil-professor/perfil-professor.component";
 import { FormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-tela-professor',
-  imports: [LateralProfessorComponent, CommonModule, PerfilProfessorComponent,FormsModule],
+  imports: [LateralProfessorComponent, CommonModule, FormsModule],
   templateUrl: './tela-professor.component.html',
   styleUrl: './tela-professor.component.css'
 })
