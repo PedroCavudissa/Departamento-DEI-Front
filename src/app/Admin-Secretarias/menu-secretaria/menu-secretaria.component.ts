@@ -1,7 +1,12 @@
 import { Router } from '@angular/router';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
+
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
+
+import { MenuService } from '../../services/menu.service';
+import { RelatorioService } from '../../services/relatorio.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-menu-admin',
@@ -10,107 +15,138 @@ import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barr
   templateUrl: './menu-secretaria.component.html',
   styleUrls: ['./menu-secretaria.component.css'],
 })
-export class MenuSecretariaComponent implements AfterViewInit {
+export class MenuSecretariaComponent implements OnInit, OnDestroy {
+  totalFuncionarios = 0;
+  totalCadeiras = 0;
+  totalEstudantes = 0;
+
+  private pieChart!: Chart;
+
+  // Exemplo de cores para o gráfico de barras
   colors: Record<string, string> = {
-    '1º Ano': '#009cff',
-    '2º Ano': '#ff9400',
-    '3º Ano': '#808080',
-    '4º Ano': '#ffe600',
-    '5º Ano': '#004080',
+    'Janeiro': '#009cff',
+    'Fevereiro': 'orange',
+    'Março': 'gray',
+    'Abril': 'gold',
+    'Maio': '#4caf50'
   };
 
-  opts: ChartConfiguration['options'] = {
+  // Configurações comuns
+  opts: any = {
     responsive: true,
     maintainAspectRatio: false,
   };
 
-  ngAfterViewInit(): void {
-    const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
-    new Chart(pieCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Funcionários', 'Estudantes', 'Cadeiras', 'Salas'],
-        datasets: [
-          {
-            data: [27, 97, 52, 70],
-            backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              boxWidth: 30,
-              padding: 10,
-            },
-          },
-        },
-      },
-    });
-    const barLabels = Object.keys(this.colors);
-    const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
-    new Chart(barCtx, {
-      type: 'bar',
-      data: {
-        labels: barLabels,
-        datasets: [
-          {
-            data: [100, 68, 38, 25, 10],
-            backgroundColor: barLabels.map((label) => this.colors[label]),
-          },
-        ],
-      },
-      options: {
-        ...this.opts,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { beginAtZero: true },
-        },
-      },
-    });
+  constructor(
+    private router: Router,
+    private relatorioService: RelatorioService
+  ) {}
+
+  ngOnInit(): void {
+    this.carregarDadosGrafico();
   }
 
-  constructor(private router: Router) {}
+  carregarDadosGrafico(): void {
+    const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
+    const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
+
+    if (!pieCtx || !barCtx) return;
+
+    if (this.pieChart) {
+      this.pieChart.destroy(); // Destrói gráfico anterior se existir
+    }
+
+    forkJoin({
+      estudantes: this.relatorioService.getTotalEstudantes(),
+      cadeiras: this.relatorioService.getTotalCadeiras(),
+      funcionarios: this.relatorioService.getTotalFuncionarios()
+    }).subscribe({
+      next: ({ estudantes, cadeiras, funcionarios }) => {
+        this.totalEstudantes = estudantes;
+        this.totalCadeiras = cadeiras;
+        this.totalFuncionarios = funcionarios;
+
+        console.log('Totais recebidos:', {
+          estudantes,
+          cadeiras,
+          funcionarios
+        });
+
+        // Gráfico tipo "pizza"
+        this.pieChart = new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
+            datasets: [
+              {
+                data: [funcionarios, estudantes, cadeiras],
+                backgroundColor: ['#009cff', 'orange', 'gray'],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                align: 'start',
+                labels: {
+                  boxWidth: 30,
+                  padding: 10,
+                },
+              },
+            },
+          }
+        });
+
+        // Gráfico de barras
+        const barLabels = Object.keys(this.colors);
+        new Chart(barCtx, {
+          type: 'bar',
+          data: {
+            labels: barLabels,
+            datasets: [
+              {
+                data: [100, 68, 38, 25, 10], // Exemplo
+                backgroundColor: barLabels.map(label => this.colors[label]),
+              },
+            ],
+          },
+          options: {
+            ...this.opts,
+            plugins: {
+              legend: { display: false },
+            },
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao carregar totais:', err);
+      }
+    });
+  }
 
   verDetalhes(nome: string): void {
     switch (nome) {
-      case 'funcionarios': {
+      case 'funcionarios':
         this.router.navigate(['/detalhes-funcionarios']);
         break;
-      }
-      case 'estudantes': {
+      case 'estudantes':
         this.router.navigate(['/detalhes-estudantes']);
         break;
-      }
-
-      case 'cadeiras': {
+      case 'cadeiras':
         this.router.navigate(['/detalhes-cadeiras']);
         break;
-      }
-      case 'salas':
-        alert('Dados Indisponíveis');
-        break;
-      default:
-        alert('Dados não disponíveis');
     }
   }
 
-  toggleTheme(): void {
-    alert('Fui clicado');
-    const isDark = document.body.classList.contains('dark-theme');
-    if (isDark) {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
+  ngOnDestroy(): void {
+    if (this.pieChart) {
+      this.pieChart.destroy();
     }
   }
 }

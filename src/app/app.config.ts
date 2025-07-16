@@ -6,9 +6,24 @@ import {
 
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { DisciplinaService } from './services/disciplina.service';
+import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { LoginService } from './services/login.service';
+import { MenuService } from './services/menu.service';
+
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
+
+// Interface de resposta de login
+export interface LoginResponse {
+  token: string;
+  role: 'admin' | 'secretaria' | 'estudante' | 'professor';
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +31,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(HttpClientModule),
-    importProvidersFrom(FormsModule),
+    LoginService,
+    LacamentoNotasService,
+    DisciplinaService,
+    MenuService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
 };

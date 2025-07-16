@@ -1,84 +1,101 @@
-<!-- estudante-form.component.html -->
 <div class="formulario-container">
-  <h2>Dados do Estudante</h2>
+  <h2>Cadastro de Estudante</h2>
 
   <form (ngSubmit)="avancar()" #form="ngForm" class="formulario-estudante">
-    <div class="form-row">
-      <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" [(ngModel)]="estudante.nome" required>
-      </div>
 
-      <div class="form-group">
-        <label for="dataNascimento">Data de Nascimento:</label>
-        <input
-          type="text"
-          id="dataNascimento"
-          name="dataNascimento"
-          [(ngModel)]="estudante.dataNascimento"
-          (input)="formatarData($event)"
-          maxlength="10"
-          required
-          placeholder="DD/MM/AAAA"
-          title="Formato: DD/MM/AAAA"
-        >
+    <!-- DADOS PESSOAIS -->
+    <fieldset>
+      <legend>Dados Pessoais</legend>
+      <div class="form-wrapper">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" [(ngModel)]="estudante.nome" required>
+        </div>
+        <div class="form-group">
+          <label for="dataNascimento">Data de Nascimento:</label>
+          <input type="date" id="dataNascimento" name="dataNascimento" [(ngModel)]="estudante.dataNascimento" required>
+        </div>
+        <div class="form-group">
+          <label for="numIdentificacao">Número do Documento:</label>
+          <input type="text" id="numIdentificacao" name="numIdentificacao" [(ngModel)]="estudante.numIdentificacao" required>
+        </div>
+        <div class="form-group">
+          <label for="tipoDocumento">Tipo de Documento:</label>
+          <select id="tipoDocumento" name="tipoDocumento" [(ngModel)]="estudante.tipoDocumento" required>
+            <option value="">Selecione</option>
+            <option value="BI">BI</option>
+            <option value="PASSAPORTE">Passaporte</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <input type="text" id="endereco" name="endereco" [(ngModel)]="estudante.endereco" required>
+        </div>
+        <div class="form-group">
+          <label for="contacto">Telefone:</label>
+          <input type="text" id="contacto" name="contacto" [(ngModel)]="estudante.contacto"
+                 pattern="^(91|92|93|94|95|97|99)\d{7}$"
+                 required title="Número deve começar com: 91, 92, 93, 94, 95, 97 ou 99">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" [(ngModel)]="estudante.email" required>
+        </div>
       </div>
+    </fieldset>
 
-      <div class="form-group">
-        <label for="bi">Nº do BI:</label>
-        <input
-          type="text"
-          id="bi"
-          name="bi"
-          [(ngModel)]="estudante.bi"
-          pattern="\\d{9}[A-Za-z]{2}\\d{3}"
-          required
-          title="Formato: 9 números, 2 letras, 3 números (ex: 123456789AB123)"
-        >
+    <!-- DADOS ACADÊMICOS -->
+    <fieldset>
+      <legend>Dados Acadêmicos</legend>
+      <div class="form-wrapper">
+        <div class="form-group">
+          <label for="instituicaoAnterior">Escola de Origem:</label>
+          <input type="text" id="instituicaoAnterior" name="instituicaoAnterior" [(ngModel)]="estudante.instituicaoAnterior" required>
+        </div>
+        <div class="form-group">
+          <label for="notaEnsinoMedio">Nota do Ensino Médio:</label>
+          <input type="number" id="notaEnsinoMedio" name="notaEnsinoMedio" [(ngModel)]="estudante.notaEnsinoMedio" min="0" max="20" required>
+        </div>
+        <div class="form-group">
+          <label for="notaExameAcesso">Nota do Exame de Acesso:</label>
+          <input type="number" id="notaExameAcesso" name="notaExameAcesso" [(ngModel)]="estudante.notaExameAcesso" min="0" max="20" required>
+        </div>
+        <div class="form-group">
+          <label for="regimeIngresso">Regime de Ingresso:</label>
+          <select id="regimeIngresso" name="regimeIngresso" [(ngModel)]="estudante.regimeIngresso" required>
+            <option value="">Selecione</option>
+            <option value="EXAME_ACESSO">Exame de Acesso</option>
+            <option value="TRANSFERENCIA">Transferência</option>
+            <option value="OUTRO">Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="anoAcademico">Ano Acadêmico:</label>
+          <input type="number" id="anoAcademico" name="anoAcademico" [(ngModel)]="estudante.anoAcademico" min="1" max="5" required>
+        </div>
+        <div class="form-group">
+          <label for="dataIngresso">Data de Ingresso:</label>
+          <input type="date" id="dataIngresso" name="dataIngresso" [(ngModel)]="estudante.dataIngresso" required>
+        </div>
+        <div class="form-group">
+          <label for="dataConclusao">Data de Conclusão (opcional):</label>
+          <input type="date" id="dataConclusao" name="dataConclusao" [(ngModel)]="estudante.dataConclusao">
+        </div>
+        <div class="form-group">
+          <label for="statusEstudante">Status:</label>
+          <select id="statusEstudante" name="statusEstudante" [(ngModel)]="estudante.statusEstudante" required>
+            <option value="">Selecione</option>
+            <option value="ACTIVO">Activo</option>
+            <option value="SUSPENSO">Inactivo</option>
+          </select>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="endereco">Endereço:</label>
-        <input
-          type="text"
-          id="endereco"
-          name="endereco"
-          [(ngModel)]="estudante.endereco"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="telefone">Nº de Telefone:</label>
-        <input
-          type="text"
-          id="telefone"
-          name="telefone"
-          [(ngModel)]="estudante.telefone"
-          pattern="^(91|92|93|94|95|97|99)\\d{7}$"
-          required
-          title="Número deve ter 9 dígitos e começar com: 91, 92, 93, 94, 95, 97 ou 99"
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input
-          type="text"
-          id="email"
-          name="email"
-          [(ngModel)]="estudante.email"
-          pattern="^[a-zA-Z0-9._%+-]+@gmail\\.com$"
-          required
-        >
-      </div>
-    </div>
+    </fieldset>
 
     <div class="botao-container">
-      <button type="submit">Avançar</button>
+      <button type="submit">Matricular</button>
     </div>
   </form>
 </div>
-
 
 <app-barralateral></app-barralateral>

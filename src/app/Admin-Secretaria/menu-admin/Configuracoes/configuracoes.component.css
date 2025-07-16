@@ -1,36 +1,45 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Container principal */
 .main-content {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin-left: 700px; /* espaço para a barra lateral */
+  margin-left: 650px;
   margin-top: 80px;
 }
 
 .button-section {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 300px;
+  gap: 2px;
+  padding: 1px;
+
+  flex-wrap: wrap;
+  width: 80%;
 }
 
 /* Botões */
 .action-button {
-  background-color: #47B5FF; 
-  color: #fff;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  width: 300px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: #47B5FF;
+    border-radius: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 15px;
+    border: 1px solid #333;
+    transition: transform 0.2s ease;
+    width: 450px;
+    height: 60px;
+    margin-bottom: 30px;
+    color: #fff;
+    font-size: 20px;
+  
 }
 
 .action-button:hover {
-  background-color: #2563eb; 
+  background-color: #134cc8; 
 }
 
 /* Responsividade */

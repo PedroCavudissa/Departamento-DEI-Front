@@ -1,39 +1,38 @@
+// disciplina.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-export interface DisciplinaEmAtraso {
-  id: number;
-  nome: string;
-  sigla?: string;
-  ano_academico?: string;
-  semestre?: string | number;
-  precedencia?: string;
-  ano?: number; // usado por cadeira.component.html
-}
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, map, of } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 
 export interface Disciplina {
   id: number;
-  nome: string;
   sigla: string;
-  ano_academico: string;
+  nome: string;
+  anoAcademico: string;
   precedencia: string;
   semestre: string;
-  detalhes: string;
 }
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class DisciplinaService {
-  private baseUrl = '/api/subject/atrasadas';
-
   constructor(private http: HttpClient) {}
 
-  /**
-   * Retorna as disciplinas em atraso para um determinado estudante.
-   * @param estudanteId ID do estudante logado.
-   */
-  getDisciplinas(estudanteId: number): Observable<DisciplinaEmAtraso[]> {
-    return this.http.get<DisciplinaEmAtraso[]>(`${this.baseUrl}/${estudanteId}`);
+  getDisciplinas(): Observable<any[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    });
+  
+    const url = `${environment.apiUrl}/api/subject/list?page=0&size=1000`; 
+    return this.http.get<any>(url, { headers }).pipe(
+      map((res: any) => res.content || []) 
+    );
   }
+  
+  
 }

@@ -1,10 +1,9 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { CalendarioService, Evento } from '../../../Services/calendario.service';
-
-
+import { CalendarioService, Evento } from '../../../services/calendario.service';
 
 @Component({
   selector: 'app-calendario-secretaria',
@@ -13,6 +12,9 @@ import { CalendarioService, Evento } from '../../../Services/calendario.service'
   templateUrl: './calendario-normal.component.html',
   styleUrls: ['./calendario-normal.component.css'],
 })
+
+
+
 export class CalendarioNormalComponent implements OnInit {
   mostrarFormulario = false;
   mostrarToast = false;
@@ -39,7 +41,11 @@ export class CalendarioNormalComponent implements OnInit {
 
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
+
       alert('Preencha todos os campos obrigatórios.');
+
+      alert('Preencha todos os campos obrigatórios.');
+
       return;
     }
 
@@ -75,7 +81,6 @@ export class CalendarioNormalComponent implements OnInit {
     this.tipo = '';
     this.link = '';
   }
-
   exibirToast() {
     this.mostrarToast = true;
     setTimeout(() => {
@@ -83,4 +88,6 @@ export class CalendarioNormalComponent implements OnInit {
     }, 3000);
   }
 }
+
+
 
