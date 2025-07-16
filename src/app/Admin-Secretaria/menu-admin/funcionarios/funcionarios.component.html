@@ -1,0 +1,75 @@
+<div class="supbar">
+  <h2>Funcionários</h2>
+</div>
+
+<div class="main-wrapper">
+  <h2 class="titulo-principal">
+    Total de Funcionários: <span>{{ funcionarios.length }}</span>
+  </h2>
+
+  <div class="graficos">
+    <div class="grafico-box">
+      <div class="grafico-container">
+        <canvas id="graficoDI"></canvas>
+      </div>
+    </div>
+    <div class="grafico-box">
+      <div class="grafico-container">
+        <canvas id="graficoProfessores"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="filtros-wrapper">
+    <select class="select-funcao" [(ngModel)]="filtroFuncao" (change)="onBuscar()">
+      <option value="">Todas as funções</option>
+      <option value="SECRETARIA">Secretaria</option>
+      <option value="PROFESSOR">Professor</option>
+      <option value="ADMINISTRADOR">Administrador</option>
+      <option value="MONITOR">Monitor</option>
+    </select>
+
+    <input 
+  type="text" 
+  [(ngModel)]="pesquisaNome" 
+  (input)="onPesquisaChange($any($event.target).value)"
+  placeholder="Pesquisar por nome ou documento" 
+  class="campo-pesquisa-func"
+  />
+    <button (click)="onBuscar()" class="buscar-btn">Buscar</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-message">
+    <div class="spinner"></div>
+    Carregando dados...
+  </div>
+
+  <div *ngIf="!loading && funcionarios.length === 0" class="no-results">
+    Nenhum funcionário encontrado com esses dados!
+  </div>
+
+  <div *ngIf="!loading && funcionarios.length > 0" class="scroll-container">
+    <table class="tabela-funcionarios">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Função</th>
+          <th>Tipo de Documento</th>
+          <th>ID Documento</th>
+          <th>Nível Acadêmico</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let funcionario of funcionarios">
+          <td>{{ funcionario.nome }}</td>
+          <td>{{ funcionario.cargo }}</td>
+          <td>{{ funcionario.tipoDocumento }}</td>
+          <td>{{ funcionario.numDocumento }}</td>
+          <td>{{ funcionario.nivelAcademico }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-barralateral></app-barralateral>
