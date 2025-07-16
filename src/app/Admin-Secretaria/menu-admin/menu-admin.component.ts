@@ -1,14 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BarralateralComponent } from '../barralateral/barralateral.component';
 import { Router } from '@angular/router';
-import {
-  Chart,
-  ChartConfiguration,
-  registerables
-} from 'chart.js';
-
+import { Chart, registerables } from 'chart.js';
 import { forkJoin } from 'rxjs';
 import { RelatorioService } from '../../services/relatorio.service';
+import { BarralateralComponent } from '../barralateral/barralateral.component';
 
 Chart.register(...registerables);
 
@@ -40,13 +35,13 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
     if (!pieCtx) return;
 
     if (this.pieChart) {
-      this.pieChart.destroy(); // destrói se existir
+      this.pieChart.destroy();
     }
 
     forkJoin({
       estudantes: this.relatorioService.getTotalEstudantes(),
       cadeiras: this.relatorioService.getTotalCadeiras(),
-      funcionarios: this.relatorioService.getTotalFuncionarios()
+      funcionarios: this.relatorioService.getTotalFuncionarios(),
     }).subscribe({
       next: ({ estudantes, cadeiras, funcionarios }) => {
         this.totalEstudantes = estudantes;
@@ -56,7 +51,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
         console.log('Totais recebidos:', {
           estudantes,
           cadeiras,
-          funcionarios
+          funcionarios,
         });
 
         this.pieChart = new Chart(pieCtx, {
@@ -66,7 +61,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
             datasets: [
               {
                 data: [funcionarios, estudantes, cadeiras],
-                backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
+                backgroundColor: ['#009cff', 'orange', 'gray'],
               },
             ],
           },
@@ -88,21 +83,24 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.error('Erro ao carregar totais:', err);
-      }
+      },
     });
   }
 
   verDetalhes(item: string) {
-    switch (item) {
-      case 'Cadeiras':
+    switch (item.toLowerCase()) {
+      case 'cadeiras':
+      case 'salas':
         this.router.navigate(['/detalhes-cadeiras']);
         break;
-      case 'Funcionários':
+      case 'funcionários':
         this.router.navigate(['/detalhes-funcionarios']);
         break;
-      case 'Estudantes':
+      case 'estudantes':
         this.router.navigate(['/detalhes-estudantes']);
         break;
+      default:
+        console.warn('Item desconhecido:', item);
     }
   }
 

@@ -14,6 +14,7 @@
         <th>Nome</th>
         <th>Documento</th>
         <th>Cargo</th>
+        <th>Ações</th>
        
       </tr>
     </thead>
@@ -22,7 +23,11 @@
         <td>{{ f.nome }}</td>
         <td>{{ f.numDocumento }}</td>
         <td>{{ f.cargo }}</td>
-   
+        <td>
+          <button (click)="verDetalhes(f)" class="btn-acao" title="Ver Detalhes">
+            <i class="bx bx-show"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -33,6 +38,20 @@
     </tr>
   </ng-template>
   
+  <!-- MODAL -->
+<div class="modal" *ngIf="funcionarioSelecionado">
+  <div class="modal-content">
+    <span class="close" (click)="fecharModal()">&times;</span>
+    <h3>Detalhes do Funcionário</h3>
+    <p><strong>Nome:</strong> {{ funcionarioSelecionado.nome }}</p>
+    <p><strong>Documento:</strong> {{ funcionarioSelecionado.numDocumento }}</p>
+    <p><strong>Cargo:</strong> {{ funcionarioSelecionado.cargo }}</p>
+    <p><strong>Email:</strong> {{ funcionarioSelecionado.email || '—' }}</p>
+    <p><strong>Contacto:</strong> {{ funcionarioSelecionado.contacto || '—' }}</p>
+    <p><strong>Endereço:</strong> {{ funcionarioSelecionado.endereco || '—' }}</p>
+  </div>
+</div>
+
 </div>
 
 <app-barralateral></app-barralateral>

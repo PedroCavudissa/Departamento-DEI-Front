@@ -17,7 +17,15 @@ export class DetalhesCadeirasSecretariaComponent  {
   disciplinas: Disciplina[] = [];
   anoSelecionado: string = '';
   textoBusca: string = '';
+  disciplinaSelecionada: any = null;
 
+  verDetalhes(disciplina: any) {
+    this.disciplinaSelecionada = disciplina;
+  }
+  
+  fecharModal() {
+    this.disciplinaSelecionada = null;
+  }
   constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {
@@ -28,7 +36,7 @@ export class DetalhesCadeirasSecretariaComponent  {
     this.disciplinaService.getDisciplinas().subscribe({
       next: (dados) => {
         this.disciplinas = dados;
-        console.log('📚 Disciplinas:', dados);
+        console.log('Disciplinas:', dados);
       },
       error: (err) => {
         console.error(' Erro ao carregar disciplinas:', err);

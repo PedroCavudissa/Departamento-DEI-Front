@@ -1,8 +1,8 @@
-
 <div class="container">
+  <h2>Lista de Estudantes</h2>
 
   <form class="form-search" (submit)="false">
-    <select [(ngModel)]="anoSelecionado" name="anoSelecionado" class="form-control" (change)="carregarEstudantes()">
+    <select [(ngModel)]="anoSelecionado" name="anoSelecionado" (change)="carregarEstudantes()">
       <option [ngValue]="''">Selecionar Ano</option>
       <option [ngValue]="1">1º Ano</option>
       <option [ngValue]="2">2º Ano</option>
@@ -10,10 +10,10 @@
       <option [ngValue]="4">4º Ano</option>
       <option [ngValue]="5">5º Ano</option>
     </select>
-    
+
     <input [(ngModel)]="textoBusca" name="textoBusca" type="text" placeholder="Escreva aqui..." />
   </form>
-  
+
   <table>
     <thead>
       <tr>
@@ -21,6 +21,7 @@
         <th>Nº Do Documento</th>
         <th>Ano Acadêmico</th>
         <th>Status</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody *ngIf="estudantesFiltrados.length > 0; else semDados">
@@ -29,7 +30,11 @@
         <td>{{ e.numIdentificacao }}</td>
         <td>{{ e.anoAcademico }}</td>
         <td>{{ e.statusEstudante }}</td>
-
+        <td>
+          <button (click)="verDetalhes(e)" title="Ver Detalhes" class="btn-acao">
+            <i class='bx bx-show'></i>
+          </button>
+        </td>
       </tr>
     </tbody>
     <ng-template #semDados>
@@ -37,8 +42,23 @@
         <td colspan="6">Nenhum Estudante encontrado.</td>
       </tr>
     </ng-template>
-    
   </table>
-  
+
+  <!-- MODAL -->
+  <div class="modal" *ngIf="estudanteSelecionado">
+    <div class="modal-content">
+      <span class="close" (click)="fecharModal()">&times;</span>
+      <h3>Detalhes do Estudante</h3>
+      <p><strong>Nome:</strong> {{ estudanteSelecionado.nome }}</p>
+      <p><strong>Documento:</strong> {{ estudanteSelecionado.numIdentificacao }}</p>
+      <p><strong>Email:</strong> {{ estudanteSelecionado.email || '—' }}</p>
+      <p><strong>Contacto:</strong> {{ estudanteSelecionado.contacto || '—' }}</p>
+      <p><strong>Endereço:</strong> {{ estudanteSelecionado.endereco || '—' }}</p>
+      <p><strong>Ano Acadêmico:</strong> {{ estudanteSelecionado.anoAcademico }}</p>
+      <p><strong>Status:</strong> {{ estudanteSelecionado.statusEstudante }}</p>
+      <!-- Adicione mais campos se quiser -->
+    </div>
   </div>
-  <app-barralateral></app-barralateral>
+</div>
+
+<app-barralateral></app-barralateral>

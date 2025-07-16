@@ -61,7 +61,7 @@ export class LacamentoNotasService {
     );
   }
 
-enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
+importarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
   const formData = new FormData();
   formData.append('file', file); // nome está certo: 'file'
 
@@ -88,4 +88,20 @@ enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
       observe: 'response'
     });
   }
+
+  salvarNotas(disciplinaId: number, tipo: number, notas: any[]): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    });
+  
+    const url = `${this.baseUrl}/departamento/studentsubject/salvar?disciplinaId=${disciplinaId}&tipoP=${tipo}`;
+  
+    return this.http.post(url, notas, { headers });
+  }
+  
 }
+

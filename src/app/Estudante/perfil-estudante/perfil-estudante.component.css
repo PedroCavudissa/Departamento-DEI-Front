@@ -3,20 +3,28 @@
     font-family: Arial, sans-serif;
   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
+
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* centraliza verticalmente */
+    padding: 20px;
   }
+  
 
   .odete{
     color:slateblue ;
 }
-  
+.pagina-centro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  margin-top: 20px;
+}
+
   .card {
     background: #fff;
     border-radius: 22px;
@@ -62,6 +70,7 @@
     display: flex;
     justify-content: center;
      width: 100%;
+     gap: 10px;
     
     
   }

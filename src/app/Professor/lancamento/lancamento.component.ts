@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
 
 import { LacamentoNotasService, Disciplina, TipoPauta } from '../../services/lacamento-notas.service';
+import { Nota } from '../../services/tela-notas.service';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { LacamentoNotasService, Disciplina, TipoPauta } from '../../services/lac
 export class LancamentoComponent implements OnInit {
   professorNome: string = '';
   disciplinas: Disciplina[] = [];
+  notas: Nota[] = [];
   tipos: TipoPauta[] = [
     { codigo: 1, descricao: 'Notas Da AC1 e PF1' },
     { codigo: 2, descricao: 'Notas Da AC2 e PF2' },
@@ -75,22 +77,38 @@ export class LancamentoComponent implements OnInit {
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const fileName = file.name.toLowerCase();
 
-      if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
-        this.excelFile = file;
-        this.mensagem = 'Ficheiro Selecionado Com Sucesso!';
-        this.erro = '';
-        this.limparMensagensDepoisDeTempo();
-      } else {
-        this.excelFile = undefined;
-        this.mensagem = '';
-        this.erro = 'Extensão Inválida. Só são Aceites Ficheiros Excel (.xlsx ou .xls).';
-        this.limparMensagensDepoisDeTempo();
-      }
+    if (!input?.files?.length) return;
+
+    const file = input.files[0];
+    const disciplinaId = Number(this.disciplinaSelecionadaId);
+    const tipoId = Number(this.tipoSelecionado);
+
+    if (!disciplinaId || !tipoId) {
+      alert('Selecione a disciplina e o tipo de avaliação antes de importar.');
+      return;
     }
+
+    this.lacamentoNotasService.importarExcel(file,disciplinaId, tipoId).subscribe({
+      next: (notasImportadas: Nota[]) => {
+        this.notas = notasImportadas;
+        alert('Arquivo importado com sucesso!');
+      },
+      error: (err) => alert('Erro ao importar arquivo: ' + (err.message || err)),
+    });
+  }
+
+
+  salvar(): void {
+    if (!this.tipoSelecionado || !this.disciplinaSelecionadaId) return;
+
+    this.lacamentoNotasService.salvarNotas(
+      this.disciplinaSelecionadaId as number,
+      this.tipoSelecionado as number,
+      this.notas
+    )
+    ;
+
   }
 
   enviarExcel(): void {
@@ -98,7 +116,7 @@ export class LancamentoComponent implements OnInit {
     this.erro = '';
 
     if (this.excelFile && this.disciplinaSelecionadaId != null && this.tipoSelecionado != null) {
-      this.lacamentoNotasService.enviarExcel(this.excelFile, this.disciplinaSelecionadaId, this.tipoSelecionado)
+      this.lacamentoNotasService.importarExcel(this.excelFile, this.disciplinaSelecionadaId, this.tipoSelecionado)
         .subscribe({
           next: () => {
             this.mensagem = 'Ficheiro Enviado Com Sucesso!';
@@ -122,6 +140,11 @@ export class LancamentoComponent implements OnInit {
     } else {
       this.erro = 'Selecione a Disciplina, o Modelo da Pauta, Importe o Ficheiro!';
     }
+  }
+
+
+  private getErrorMessage(err: HttpErrorResponse): string {
+    return err?.error?.message || err.message || 'Erro desconhecido';
   }
 
   baixarModelo(): void {
@@ -171,7 +194,6 @@ export class LancamentoComponent implements OnInit {
       this.erro = '';
     }, 4000);
   }
-
   private carregarProgressoDoLocalStorage(): void {
     const progressoSalvo = localStorage.getItem('progressoTipos');
     if (progressoSalvo) {
