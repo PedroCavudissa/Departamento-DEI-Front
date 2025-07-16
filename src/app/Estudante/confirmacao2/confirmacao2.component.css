@@ -66,6 +66,9 @@ li {
   color: #47B5FF;
   background-color: white;
 }
+.page:hover{
+  cursor: pointer;
+}
 
 .page.active {
   background-color: #47B5FF;
