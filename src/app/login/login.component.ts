@@ -2,61 +2,71 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
+
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
+import { LoginService } from '../services/login.service';
+
 
 
 @Component({
   selector: 'app-login',
-  standalone: true, 
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  standalone: true, // define como standalone
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 
 })
 export class LoginComponent implements OnInit {
-  
-  mostrarSidebar = true;
-  mensagemLogin = '';
-tipoMensagem: 'erro' | 'sucesso' | '' = '';
-mostrarModal = false;
-recuperarForm!: FormGroup;
 
-
-  // Valores válidos 
-  private emailValido = 'admin@teste.com';
-  private senhaValida = '123456';
-
-private emailValidos = 'estudante@teste.com';
-private senhaValidas = '123456';
-
-private emailValid = 'professor@teste.com';
-private senhaValid = '123456';
-
-private emailValidAdmin = 'master@teste.com';
-private senhaValidAdmin = '123456';
-  loginForm!: FormGroup;
-
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private loginService: LoginService
+  ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Oculta a sidebar apenas no login
+
         this.mostrarSidebar = event.url !== '/login';
       }
     });
   }
 
+ notyf = new Notyf({
+  duration: 3000,
+  position: {
+    x: 'right',
+    y: 'top',
+  },
+});
+
+  mostrarSidebar = true;
+  mensagemLogin = '';
+  tipoMensagem: 'erro' | 'sucesso' | '' = '';
+  mostrarModal = false;
+  recuperarForm!: FormGroup;
+
+
+  loginForm!: FormGroup;
+
+
+
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['', Validators.required],
+      senha: ['', Validators.required]
     });
 
-  this.recuperarForm = this.fb.group({
-    gmail: ['', [Validators.required, Validators.email]]
-  });
+    this.recuperarForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]]
+    });
+
+
 }
-  
+
 // Senha esquecida
   abrirModal(event: Event) {
       event.preventDefault();
@@ -66,52 +76,67 @@ fecharModal() {
   this.mostrarModal = false;
 }
 
-continuarRecuperacao() {
-  if (this.recuperarForm.valid) {
-    const email = this.recuperarForm.get('gmail')?.value;
-    console.log("Redirecionar com email:", email);
-    this.mostrarModal = false;
-    this.router.navigate(['/recuperar-senha']); // Ajuste o caminho conforme sua rota
+alterarSenha(){}
+
+entrar() {
+  if (this.loginForm.valid) {
+    const usuario = {
+      email: this.loginForm.get('email')?.value,
+      password: this.loginForm.get('senha')?.value
+    };
+
+    this.loginService.entrar(usuario).subscribe({
+      next: (res: unknown) => {
+        const response = res as { token: string; email: string; role: string };
+        this.notyf.success('Login realizado com sucesso!');
+
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.email);
+
+        const role = response.role;
+        switch (role) {
+          case 'ADMINISTRADOR':
+            this.router.navigate(['/menu-admin']);
+            break;
+          case 'SECRETARIA':
+            this.router.navigate(['/menu-secretaria']);
+            break;
+          case 'PROFESSOR':
+            this.router.navigate(['/tela-professor']);
+            break;
+          case 'ESTUDANTE':
+            this.router.navigate(['/tela-estudante']);
+            break;
+          default:
+            this.router.navigate(['/']);
+        }
+      },
+      error: (error: unknown) => {
+        console.error('Erro ao logar:', error);
+        this.notyf.error('E-mail ou senha inválidos');
+      }
+    });
+
   } else {
-    this.recuperarForm.markAllAsTouched();
+    this.loginForm.markAllAsTouched();
+    this.notyf.error('Preencha todos os campos corretamente.');
   }
 }
-  
 
-  entrar() {
-    if (this.loginForm.valid) {
-      const emailDigitado = this.loginForm.get('username')?.value;
-      const senhaDigitada = this.loginForm.get('password')?.value;
 
-      if (emailDigitado === this.emailValido && senhaDigitada === this.senhaValida) {
-       alert("Login Realizado Com Sucesso");
-        this.tipoMensagem = 'sucesso';
-        this.router.navigate(['/menu-secretaria']);
-      } else if(emailDigitado === this.emailValidos && senhaDigitada === this.senhaValidas){
-        this.mensagemLogin = 'Login realizado com sucesso!';
-       this.tipoMensagem = 'sucesso';
-       alert("Login Realizado Com Sucesso");
-        this.router.navigate(['/tela-estudante']);
-      }else if(emailDigitado === this.emailValid && senhaDigitada === this.senhaValid){
-        this.mensagemLogin = 'Login realizado com sucesso!';
-       this.tipoMensagem = 'sucesso';
-       alert("Login Realizado Com Sucesso");
-        this.router.navigate(['/tela-professor']);
-      }else if(emailDigitado==this.emailValidAdmin &&  senhaDigitada==this.senhaValidAdmin){
-        alert("Login Realizado Com Sucesso"+"Admin");
-        this.router.navigate(['/menu-admin']);
-      }
-      else
-      {
-        this.mensagemLogin = 'E-mail ou Senha Incorreto!';
-        this.tipoMensagem = 'erro';
-      }
-    } else {
-         this.loginForm.markAllAsTouched(); // ativa mensagens de erro nos campos
-         this.mensagemLogin = '';
-      this.tipoMensagem = '';
-    }
+
+recuperar(): void {
+  if (this.recuperarForm.invalid) {
+    this.recuperarForm.markAllAsTouched();
+    this.notyf.success('Verifique a sua caixa de email!');
+      this.fecharModal();
+    return;
+
   }
+  const email = this.recuperarForm.get('email')?.value;
+ 
+ 
 
-  
+
+}
 }
