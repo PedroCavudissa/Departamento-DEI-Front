@@ -15,29 +15,43 @@ export interface Funcionario {
   dataIngresso: string;
 }
 
+interface FuncionarioResponse {
+  content: Funcionario[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class FuncionarioService {
-  private apiUrl = 'https://ee4c4f54fdc8.ngrok-free.app/api/staff';
+  private apiUrl = 'https://73f02505a9f7.ngrok-free.app/api/staff';
 
   constructor(private http: HttpClient) {}
 
   carregarTodosFuncionarios(): Observable<Funcionario[]> {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      console.warn('Token não encontrado no localStorage!');
+    }
+
     const headers = new HttpHeaders({
       'Accept': 'application/json',
       'ngrok-skip-browser-warning': 'true',
-      'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+      'Authorization': `Bearer ${token || ''}`
     });
 
-    return this.http.get<{content: Funcionario[]}>(this.apiUrl, { headers }).pipe(
-      map(response => response.content || []),
+    return this.http.get<FuncionarioResponse>(this.apiUrl, { headers }).pipe(
+      map(response => response?.content ?? []),
       catchError(error => {
         console.error('Erro ao carregar funcionários:', error);
-        return throwError(() => new Error(
-          error.status === 0 ? 'Sem conexão com o servidor' :
-          'Erro ao carregar dados dos funcionários'
-        ));
+        const mensagem = error.status === 0
+          ? 'Sem conexão com o servidor'
+          : `Erro ${error.status}: ${error.statusText || 'ao carregar dados dos funcionários'}`;
+        return throwError(() => new Error(mensagem));
       })
     );
   }

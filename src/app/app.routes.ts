@@ -26,7 +26,7 @@ import { DetalhesCadeirasSecretariaComponent } from './Admin-Secretarias/menu-se
 import { DetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-estudantes-secretaria/detalhes-estudantes-secretaria.component';
 import { DetalhesFuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-funcionarios-secretaria/detalhes-funcionarios-secretaria.component';
 import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/estudantes-secretaria/menu-estudantes-secretaria.component';
-import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
+import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/funcionarios/funcionarios.component';
 import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
 import { GerirPerfilComponent } from './Admin-Secretaria/menu-admin/Configuracoes/Gerirperfis/GerirPerfil.component';
 import { HorarioComponent } from './Admin-Secretaria/menu-admin/horario/horario.component';
@@ -47,6 +47,8 @@ import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudant
 import { AuthGuard } from './guards/auth.guard';
 import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
 import { ComunicadoEstudanteComponent } from './Estudante/comunicado-estudante/comunicado-estudante.component';
+
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -64,7 +66,7 @@ export const routes: Routes = [
   { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard] },
   { path: 'Configuracoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] },
   { path: 'Gerirperfis', component: GerirPerfilComponent, canActivate: [AuthGuard] },
-  { path: 'funcionarios', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard]},
+  { path: 'funcionarios', component: FuncionariosComponent, canActivate: [AuthGuard]},
   { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard] },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard] },
@@ -124,7 +126,8 @@ export const routes: Routes = [
   { path: 'detalhes-estudantes-secretaria', component: DetalhesEstudantesSecretariaComponent, canActivate: [AuthGuard] },
   { path: 'detalhes-funcionarios-secretaria', component: DetalhesFuncionariosSecretariaComponent, canActivate: [AuthGuard] },
   { path: 'ver-pauta-secretaria', component: VerPautaSecretariaComponent , canActivate: [AuthGuard]},
-  { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard] },
+  { path: 'funcionario-secretaria', component: FuncionariosComponent, canActivate: [AuthGuard] },
   { path: 'horario-secretaria', component: HorarioSecretariaComponent , canActivate: [AuthGuard]},
-
+{ path: 'funcionarios', component: FuncionariosComponent, canActivate: [AuthGuard] }, // Admin
+{ path: 'funcionario-secretaria', component: FuncionariosComponent, canActivate: [AuthGuard] }, // Secretaria
 ];
