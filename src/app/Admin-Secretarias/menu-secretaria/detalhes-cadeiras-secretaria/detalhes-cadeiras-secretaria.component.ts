@@ -36,7 +36,7 @@ export class DetalhesCadeirasSecretariaComponent  {
     this.disciplinaService.getDisciplinas().subscribe({
       next: (dados) => {
         this.disciplinas = dados;
-        console.log('📚 Disciplinas:', dados);
+        console.log('Disciplinas:', dados);
       },
       error: (err) => {
         console.error(' Erro ao carregar disciplinas:', err);

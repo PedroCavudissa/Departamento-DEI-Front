@@ -33,7 +33,7 @@ export class ComunicadosService {
 
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
-      .post<Comunicado>(`${this.API_URL}/create`, comunicado, this.httpOptions)
+      .post<Comunicado>(`${this.API_URL}/api/departamento/notices/create`, comunicado, this.httpOptions)
       .pipe(
         catchError((error) => {
           if (error.status === 404) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from '../lateral/lateral.component';
-import { CalendarioService, Evento } from '../../Services/calendario.service';
+import { CalendarioService, Evento } from '../../services/calendario.service';
 import { FormsModule } from '@angular/forms';
 
 
