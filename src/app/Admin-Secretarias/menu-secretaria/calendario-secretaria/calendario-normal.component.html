@@ -1,4 +1,7 @@
-
+<!-- TÍTULO -->
+<div class="titulo-container">
+  <h2 class="titulo">📅 Calendário de Atividades</h2>
+</div>
 
 <body>
   
@@ -78,6 +81,13 @@
 
       <h3 class="form-titulo">Novo Evento</h3>
 
+
+
+      <button type="button" class="close-btn" (click)="fecharFormulario()">×</button>
+
+      <h3 class="form-titulo">Novo Evento</h3>
+
+
       <label for="data">📆 Data</label>
       <input type="text" id="data" name="data" placeholder="dd/mm/aaaa" [(ngModel)]="data" required />
 
@@ -101,6 +111,5 @@
   Evento salvo com sucesso!
 </div>
 
-
-
 <app-barralateral-secretaria></app-barralateral-secretaria>
+

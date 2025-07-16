@@ -16,8 +16,13 @@
             <tbody>
               <tr *ngFor="let disciplina of disciplinas">
                 <td>{{ disciplina.nome }}</td>
+
+                <td>{{ disciplina.ano }}</td>
+                <td>{{ disciplina.semestre }}</td>
+
                 <td>{{ disciplina.ano }}º</td>
                 <td>{{ disciplina.semestre }}º</td>
+
               </tr>
             </tbody>
           </table>

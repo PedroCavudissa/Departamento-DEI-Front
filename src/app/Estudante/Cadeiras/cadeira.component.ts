@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
 import { DisciplinaService } from "../../services/disciplina.service";
-// Defina a interface DisciplinaEmAtraso localmente caso não exista no service
 
 @Component({
   selector: 'app-cadeira',
@@ -12,8 +11,13 @@ import { DisciplinaService } from "../../services/disciplina.service";
   templateUrl: './cadeira.component.html',
   styleUrls: ['./cadeira.component.css']
 })
+
+export class  CadeiraComponent implements OnInit {
+  estudanteId = 1; // Substitua pelo ID real do estudante logado
+  
 export class CadeiraComponent  {
- /* estudanteId = 1; // Substitua pelo ID real do estudante logado
+ estudanteId = 1; // Substitua pelo ID real do estudante logado
+
   disciplinas: DisciplinaEmAtraso[] = [];
 
   constructor(private disciplinaService: DisciplinaService) {}
@@ -31,5 +35,5 @@ export class CadeiraComponent  {
       error: (err) => console.error('Erro ao buscar disciplinas', err)
     });
   }
-  */
+
 }
