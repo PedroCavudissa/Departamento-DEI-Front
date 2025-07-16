@@ -1,3 +1,4 @@
+
 /* Cabeçalho */
 .titulo-container {
   background-color: #44b1f0;
@@ -46,17 +47,28 @@
   color: white;
   padding: 10px 20px;
   border: none;
+
   border-radius: 8px;
+
+  border-radius: 6px;
+
+
   font-size: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
 }
 
 .botao:hover {
   background-color: #3498db;
 }
 
+
 /* Links */
+
+
+
+
 .ver-provas {
   text-decoration: none;
   font-weight: bold;
@@ -122,26 +134,32 @@
   margin-bottom: 15px;
   font-size: 1.2rem;
   text-align: center;
+
 }
 
 label {
   display: block;
+
   margin: 10px 0 4px;
   font-weight: 500;
   font-size: 14px;
+
 }
 
 input[type="text"] {
   width: 100%;
+
   padding: 8px 10px;
   border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 14px;
   box-sizing: border-box;
+
 }
 
 .btn-salvar {
   margin-top: 16px;
+
   background-color: #44b1f0;
   color: #fff;
   font-weight: bold;
@@ -156,10 +174,12 @@ input[type="text"] {
 
 .btn-salvar:hover {
   background-color: #3498db;
+
 }
 
 .close-btn {
   position: absolute;
+
   right: 12px;
   top: 10px;
   background-color: transparent;
@@ -170,11 +190,47 @@ input[type="text"] {
 }
 
 /* Blur */
+
 .blur {
   filter: blur(4px);
   opacity: 0.4;
   pointer-events: none;
+
 }
+
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .quadro, .titulo-container {
+    margin: 20px;
+    width: auto;
+
+  }
+
+  .acoes-topo {
+    flex-direction: column;
+    gap: 10px;
+
+  }
+
+  .botao {
+    width: 100%;
+
+  }
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 /* TOAST DE SUCESSO */
 .toast {
@@ -209,6 +265,7 @@ input[type="text"] {
   90% { opacity: 1; }
   100% { opacity: 0; transform: translateY(-10px); }
 }
+
 
 /* Responsivo */
 @media (max-width: 1024px) {

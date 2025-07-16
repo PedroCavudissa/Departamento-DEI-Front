@@ -1,36 +1,83 @@
 <main>
+  <div class="main-wrapper">
+    <app-barralateral></app-barralateral>
 
-<div class="main-wrapper">   
+    <div class="content-area">
+      <h1 style="text-align: center; margin: 32px 0;">Listas de Comunicados</h1>
 
-    <div class="main">
-    <div>
-         <p>
-         Autor:
-          <strong> Secretaria</strong>
-        </p>
-        <p>
-            Assunto:
-             <strong> Confirmação da Matricula</strong>
-           </p>
-     </div>
-     <br>
-     <br>
-     <p> Descrição</p>
-     <div class="caixa">
-        <p>
-          Informamos a todos os estudantes que as confirmações de matricula terá início  no dia 22/03/2025 e vai até 22/04/2025 <br>
-          Dia 22: Estudantes do 1º e 2º ano <br>
-          Dia 23: Estudante do 3º  e 4º ano <br>
-          Dia 24: Estudantes do 5º ano <br>
-          As matriculas estarão disponiveis no sistemaem função do ano
-        </p>
-     </div> 
-    </div>
-</div>
+      <!-- Loading state -->
+      <div *ngIf="isLoading" class="loading-state">
+        <p>Carregando comunicados...</p>
+      </div>
 
+      <!-- Error state -->
+      <div *ngIf="errorMessage && !isLoading" class="error-state">
+        <p>{{ errorMessage }}</p>
+        <button (click)="carregarComunicados()">Tentar novamente</button>
+      </div>
 
+      <!-- Empty state -->
+      <ng-container *ngIf="!isLoading && !errorMessage">
+        <ng-container *ngIf="(comunicados?.length ?? 0) > 0; else noComunicados">
+          <section *ngFor="let comunicado of comunicados" class="comunicado-card">
+            <div class="comunicado-header">
+              <h2>{{ comunicado.titulo }}</h2>
+              <span class="status-badge" [ngClass]="getStatusClass(comunicado.noticeStatus)">
+                {{ comunicado.noticeStatus | lowercase }}
+              </span>
+            </div>
 
+            <div class="comunicado-meta">
+              <p><strong>Autor:</strong> {{ comunicado.nomeFuncionario }}</p>
+              <p><strong>Destinatário:</strong> {{ comunicado.destinado | titlecase }}</p>
+            </div>
 
+            <div class="comunicado-content">
+              <h3>Conteúdo:</h3>
+              <p>{{ comunicado.conteudo }}</p>
+            </div>
 
+            <div class="comunicado-footer">
+              <p>
+                <strong>Publicado em:</strong>
+                <time [attr.datetime]="comunicado.dataPublicacao">
+                  {{ comunicado.dataPublicacao | date: 'dd/MM/yyyy HH:mm' }}
+                </time>
+              </p>
+              <p *ngIf="comunicado.dataAcontecimento">
+                <strong>Data do acontecimento:</strong>
+                {{ comunicado.dataAcontecimento | date: 'dd/MM/yyyy' }}
+              </p>
+            </div>
+          </section>
+        </ng-container>
+
+        <ng-template #noComunicados>
+          <div class="empty-state">
+            <p>Nenhum comunicado disponível no momento.</p>
+          </div>
+        </ng-template>
+      </ng-container>
+
+      <div class="main">
+        <div>
+          <p>Autor: <strong>Secretaria</strong></p>
+          <p>Assunto: <strong>Confirmação da Matrícula</strong></p>
+        </div>
+
+        <br /><br />
+
+        <p>Descrição</p>
+        <div class="caixa">
+          <p>
+            Informamos a todos os estudantes que as confirmações de matrícula terão início no dia 22/03/2025 e vão até 22/04/2025<br />
+            Dia 22: Estudantes do 1º e 2º ano<br />
+            Dia 23: Estudantes do 3º e 4º ano<br />
+            Dia 24: Estudantes do 5º ano<br />
+            As matrículas estarão disponíveis no sistema em função do ano.
+          </p>
+        </div>
+      </div>
+    </div> <!-- fim content-area -->
+  </div> <!-- fim main-wrapper -->
 </main>
-<app-barralateral></app-barralateral>

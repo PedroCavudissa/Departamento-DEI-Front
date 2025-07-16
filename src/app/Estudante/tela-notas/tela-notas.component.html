@@ -1,131 +1,104 @@
+<!-- src/app/Estudante/tela-notas/tela-notas.component.html -->
+<div class="container">
+  <!-- Seção de Busca por Disciplina -->
+  <section>
+    <h2>🔍 Buscar Nota por Disciplina</h2>
 
- 
-  
-  <body>
-    
+    <div class="form-group">
+      <select
+        [ngModel]="disciplina()"
+        (ngModelChange)="disciplina.set($event)"
+        [disabled]="isLoading()"
+      >
+        <option value="">Selecione uma disciplina</option>
+        <option
+          *ngFor="let d of disciplinas()"
+          [value]="d.nome"
+        >
+          {{ d.nome }}
+        </option>
+      </select>
 
-  <div class="content">
-  
-    <main class="principal">
-      <h3>Minhas Notas</h3>
-      <div class="caixa">
-        <input class="imprimir"
-          type="number"
-          id="numero"
-          name="numero"
-          min="1"
-          max="5"
-          placeholder="Ano Acadêmico"
-        />
-        <button class="imprimir"><i class="bi bi-printer"> </i> Imprimir</button>
-      </div>
-  <div class="table-wrapper">
-      <table class="table">
-        <thead>
-          <tr>         
-            <th scope="col">Cadeira </th>
-            <th scope="col">Semestre</th>
-            <th scope="col">AC1</th>
-            <th scope="col">AC2</th>
-            <th scope="col">P1</th>
-            <th scope="col">P2</th>
-            <th scope="col">MS</th>
-            <th scope="col">Exame</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>      
-            <td>Análise Matemática I</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td>  
-            <td>15</td>        
-          </tr>
-  
-          <tr>        
-            <td>FTI</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td> 
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td>      
-          </tr>
-  
-          <tr>         
-            <td>Fundamento de Programação</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-  
-          <tr>         
-            <td>InglêS Técnico 1</td>
-            <td>1º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td>
-            <td>15</td>  
-          </tr>
-  
-          <tr>         
-            <td>Algoritmos</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-  
-          <tr>         
-            <td>FTI</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td>
-            <td>15</td>  
-          </tr>
-  
-          <tr>
-           
-            <td>InglêS Técnico 2</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-  
-          <tr>         
-            <td>FAnálise Matemática 2</td>
-            <td>2º</td>
-            <td>15</td>
-            <td>15</td>
-            <td>16</td> 
-            <td>16</td> 
-            <td>15</td> 
-            <td>15</td> 
-          </tr>
-        </tbody>
-      </table>
+      <input
+        type="number"
+        [ngModel]="anoLetivo()"
+        (ngModelChange)="anoLetivo.set($event)"
+        [disabled]="isLoading()"
+        placeholder="Ano Letivo"
+      />
+
+      <select
+        [ngModel]="modelo()"
+        (ngModelChange)="modelo.set($event)"
+        [disabled]="isLoading()"
+      >
+        <option *ngFor="let m of ['A', 'B', 'C', 'D', 'E', 'F']" [value]="m">
+          Modelo {{ m }}
+        </option>
+      </select>
+
+      <button (click)="buscarNota()" [disabled]="isLoading() || !disciplina()">
+        <span *ngIf="isLoading(); else buscarTexto" class="spinner"></span>
+        <ng-template #buscarTexto>Buscar Nota</ng-template>
+      </button>
     </div>
-    </main>
+
+    <div *ngIf="resultadoNota() as nota" class="resultado">
+      <h3>Resultado:</h3>
+      <p><strong>Disciplina:</strong> {{ nota.disciplina || nota.cadeira || 'N/A' }}</p>
+      <p><strong>Nota:</strong> {{ nota.nota }}</p>
+    </div>
+  </section>
+
+  <!-- Seção de Listagem de Notas -->
+  <section>
+    <h2>📋 Listar Todas as Notas</h2>
+
+    <div class="form-group">
+      <input
+        type="number"
+        [ngModel]="anoLetivo()"
+        (ngModelChange)="anoLetivo.set($event)"
+        [disabled]="isLoading()"
+        placeholder="Ano Letivo"
+      />
+
+      <select
+        [ngModel]="modelo()"
+        (ngModelChange)="modelo.set($event)"
+        [disabled]="isLoading()"
+      >
+        <option *ngFor="let m of ['A', 'B', 'C', 'D', 'E', 'F']" [value]="m">
+          Modelo {{ m }}
+        </option>
+      </select>
+
+      <button (click)="listarNotas()" [disabled]="isLoading()">
+        <span *ngIf="isLoading(); else listarTexto" class="spinner"></span>
+        <ng-template #listarTexto>Listar Todas</ng-template>
+      </button>
+    </div>
+
+    <div *ngIf="notas().length > 0" class="resultado">
+      <h3>Notas Encontradas:</h3>
+      <ul>
+        <li *ngFor="let nota of notas()">
+          {{ nota.disciplina || nota.cadeira || 'Disciplina desconhecida' }}:
+          <strong>{{ nota.nota }}</strong>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Mensagens de Status -->
+  <div *ngIf="errorMessage()" class="error-message">
+    ⚠️ {{ errorMessage() }}
   </div>
-  <app-lateral></app-lateral>
-</body>
+
+  <div *ngIf="isLoading()" class="loading-message">
+    ⌛ Carregando...
+  </div>
+
+  <!-- Sidebar -->
+  <app-barralateral></app-barralateral>
+</div>

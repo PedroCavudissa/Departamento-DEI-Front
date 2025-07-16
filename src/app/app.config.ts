@@ -1,17 +1,44 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
+
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
 
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { DisciplinaService } from './services/disciplina.service';
+import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { LoginService } from './services/login.service';
+import { MenuService } from './services/menu.service';
 
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
 
+// Interface de resposta de login
+export interface LoginResponse {
+  token: string;
+  role: 'admin' | 'secretaria' | 'estudante' | 'professor';
+}
 
-// Definindo o appConfig com o tipo ApplicationConfig corretamente configurado
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
-    
-  ]
+    importProvidersFrom(HttpClientModule),
+    LoginService,
+    LacamentoNotasService,
+    DisciplinaService,
+    MenuService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
 };

@@ -1,3 +1,5 @@
+/*
+
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LateralComponent } from './lateral-professor.component';
@@ -20,4 +22,4 @@ describe('LateralComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+});*/

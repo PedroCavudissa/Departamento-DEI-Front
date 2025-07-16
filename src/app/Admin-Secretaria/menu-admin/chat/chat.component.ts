@@ -12,6 +12,7 @@ import { BarralateralComponent } from '../../barralateral/barralateral.component
   styleUrls: ['./chat.component.css'],
 })
 
+
 export class ChatComponent implements OnInit {
 
   recipient = '';
@@ -21,6 +22,7 @@ export class ChatComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
  ngOnInit() {
     this.route.queryParams.subscribe(params => {
+
       this.recipient = params['destinatario'] || '';
       this.subject = params['assunto'] || '';
     });
@@ -34,7 +36,10 @@ export class ChatComponent implements OnInit {
         description: this.description,
       });
 
+
       // Limpar campo da descrição após o envio
+
+      
       this.description = '';
     }
   }

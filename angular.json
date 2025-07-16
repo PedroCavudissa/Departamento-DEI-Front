@@ -22,10 +22,12 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets"
-
             ],
-           
-            "scripts": []
+            "scripts": [],
+            "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/styles.css"
+            ]
           },
           "configurations": {
             "production": {
@@ -42,6 +44,7 @@
                 }
               ],
               "outputHashing": "all"
+              
             },
             "development": {
               "optimization": false,
@@ -80,10 +83,12 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/assets/"
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -97,6 +102,9 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
@@ -105,6 +113,8 @@
     "analytics": "54b3101e-5ea5-4e1b-9a44-9222f26104a2",
     "schematicCollections": [
       "angular-eslint"
+      
     ]
   }
+  
 }

@@ -1,23 +1,34 @@
-<body>
-  
-  
-    <div class="container">
-      
-        <div class="card">
-          <img src="assets/icones/perfil.png" alt="Perfil" />
-          <div class="aluno-dados">
-            <h3>Dados</h3>
-            <p><strong>Nome:</strong> Vivaldo Vieira</p>
-            <p><strong>Contacto:</strong> 20231234 </p>
-            <p><strong>Cadeira(s) a lecionar:</strong> Analise /Fisica</p>
-            <p><strong>Grau:</strong> Engenheiro</p>
-            <p><strong>Nivel na instituição:</strong> contratado</p>
-
-          </div>
-        </div>
-      </div>
 
 
-   
-</body>
+ <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<div class="container">
+
+<div class="card">
+  <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
+  <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+  </div>
+
+  <div *ngIf="professorSelecionado; else noProfessores">
+         <h3 > Dados academicos</h3>
+        <p><strong>Nome:</strong> {{ professorSelecionado.nome}}</p>
+        <p><strong>Cargo:</strong>{{professorSelecionado.userDetails.cargo }} </p>
+        <p><strong>Data Ingresso:</strong>{{professorSelecionado.userDetails.dataIngresso| date:'shortDate' }}</p>
+        <p><strong>NumDocumento:</strong>{{ professorSelecionado.userDetails.numDocumento}}</p>
+        <p><strong>Endereço:</strong>{{ professorSelecionado.userDetails.endereco}}</p>
+        <p><strong>Data Nasc:</strong>{{professorSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
+    </div>
+
+  <ng-template #noProfessores>
+    <p>Nenhum Professpor encontrado.</p>
+  </ng-template>
+  </div>
+
+</div>
+
 <app-lateral-professor></app-lateral-professor>
+
+
+
+
+

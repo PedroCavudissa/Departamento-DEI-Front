@@ -1,12 +1,17 @@
 import { Router } from '@angular/router';
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
+
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
+import { MenuService } from '../../Services/menu.service';
+
 
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
+
   imports: [BarralateralSecretariaComponent],
+
   templateUrl: './menu-secretaria.component.html',
   styleUrls: ['./menu-secretaria.component.css'],
 })
@@ -24,15 +29,29 @@ export class MenuSecretariaComponent implements AfterViewInit {
     maintainAspectRatio: false,
   };
 
-  ngAfterViewInit(): void {
+  constructor(private router: Router){}
+  async ngAfterViewInit(): Promise<void> {
+    const funcionarios = 12;
+    const estudantes = 23;
+    const cadeiras = 21; // Substitua se tiver endpoint
+    const salas = 70;    // Substitua se tiver endpoint
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
+
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
     new Chart(pieCtx, {
       type: 'doughnut',
       data: {
-        labels: ['Funcionários', 'Estudantes', 'Cadeiras', 'Salas'],
+        labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
         datasets: [
           {
-            data: [27, 97, 52, 70],
+
+            
+            data: [funcionarios, estudantes, cadeiras],
+
+            
             backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
           },
         ],
@@ -52,6 +71,14 @@ export class MenuSecretariaComponent implements AfterViewInit {
         },
       },
     });
+
+<<<<<<< HEAD
+=======
+    
+  
+
+    
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
     const barLabels = Object.keys(this.colors);
     const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
     new Chart(barCtx, {
@@ -60,7 +87,9 @@ export class MenuSecretariaComponent implements AfterViewInit {
         labels: barLabels,
         datasets: [
           {
-            data: [100, 68, 38, 25, 10],
+
+            data: [100, 68, 38, 25, 10], 
+
             backgroundColor: barLabels.map((label) => this.colors[label]),
           },
         ],
@@ -77,7 +106,18 @@ export class MenuSecretariaComponent implements AfterViewInit {
     });
   }
 
-  constructor(private router: Router) {}
+<<<<<<< HEAD
+
+  constructor(
+    private router: Router,
+    private menuService: MenuService
+  ) {}
+
+=======
+  
+  
+
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
   verDetalhes(nome: string): void {
     switch (nome) {
@@ -102,15 +142,5 @@ export class MenuSecretariaComponent implements AfterViewInit {
     }
   }
 
-  toggleTheme(): void {
-    alert('Fui clicado');
-    const isDark = document.body.classList.contains('dark-theme');
-    if (isDark) {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
-    }
-  }
+
 }

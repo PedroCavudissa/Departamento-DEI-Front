@@ -1,0 +1,68 @@
+<div class="container">
+  <section class="secao">
+    <h3 class="secao-titulo">Lançamento de Notas</h3>
+<br>
+    <!-- SELEÇÃO DE DISCIPLINA -->
+    <div class="form-group mt-3">
+      <label for="disciplina"><strong>1. Disciplina</strong></label>
+      <select
+        id="disciplina"
+        class="form-control"
+        [(ngModel)]="disciplinaSelecionadaId"
+        (change)="onDisciplinaChange()">
+        <option [ngValue]="null">-- Selecione a Disciplina --</option>
+        <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina.disciplinaId">
+          {{ disciplina.disciplinaNome}}
+        </option>
+      </select>
+    </div>
+    <!-- TIPO DE PAUTA -->
+    <div class="form-group mt-3" *ngIf="tipos.length > 0">
+      <label for="tipoPauta"><strong>2. Modelo Da Pauta</strong></label>
+      <select
+  id="tipoPauta"
+  class="form-control"
+  [(ngModel)]="tipoSelecionado"
+  [disabled]="!disciplinaSelecionadaId">
+  <option [ngValue]="null">-- Modelos --</option>
+  <option 
+    *ngFor="let tipo of tipos" 
+    [ngValue]="tipo.codigo"
+    [disabled]="!isTipoPermitido(disciplinaSelecionadaId, tipo.codigo)">
+    {{ tipo.descricao }}
+  </option>
+</select>
+    </div>
+
+    <!-- BOTÃO DE BAIXAR MODELO -->
+    <div class="mt-4">
+      <button
+        class="btn btn-primary"
+        [disabled]="!disciplinaSelecionadaId || !tipoSelecionado"
+        (click)="baixarModelo()"
+      >
+        📥 Baixar Modelo Da Pauta
+      </button>
+    </div><br>
+
+    <!-- UPLOAD -->
+    <div class="form-group mt-3">
+      <label for="excelFile"><strong>3. Importe o ficheiro Excel com as notas preenchidas</strong></label>
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".xlsx,.xls" />
+<button (click)="enviarExcel()">Enviar</button>
+  </div>
+    <!-- ALERTAS -->
+    <div *ngIf="mensagem" class="alert alert-success">
+      ✅ {{ mensagem }}
+    </div>
+    <p *ngIf="erro" style="color: red">{{ erro }}</p>
+  </section>
+
+  <!-- MODAL DE CARREGAMENTO -->
+<div *ngIf="carregando" class="modal-overlay">
+  <div class="modal-content">
+    <p>🔄 Carregando a página, por favor aguarde...</p>
+  </div>
+</div> 
+</div>
+<app-lateral-professor></app-lateral-professor>

@@ -1,157 +1,120 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body, html{
-    height: 100%;
-    font-family: arial;
-}
+<<<<<<< HEAD
+=======
 
-
-
-
-.main-wrapper{
-    margin-left: 210px;
-    width: calc(100% - 250px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    overflow-y: auto;
-    padding-top: 70px;    
-   
-     
-}
-.main{ 
-    width: 80%;  
-    min-height: 400px;
-    padding: 20px;  
-       margin-top: 20px;
-       border: 1px solid rgba(179, 179, 179, 0.521);
-         border-radius: 6px;
-         margin-left: 140px;
- 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.caixa{
-
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid rgba(179, 179, 179, 0.521);
-    padding: 6px;
-    border-radius: 4px;
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
 }
 
-
-
-
-
-
-
-
-@media (max-width: 580px) {
-    /* Reduzindo a sidebar para dispositivos muito pequenos */
-    .side-bar {
-        position: absolute;
-        left: 0;        
-        top: 30px;
-        width: 100%;
-        position: relative;
-        height: calc(100dvh - 110px);  
-        background-color: white;    
-        z-index: 1000; 
-           margin-bottom: -50px;
-    }
-
-    .side-interior {     
-        top: 0;
-        right: 1%;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;       
-        position: relative;
-        background-color: white;
-        height: calc(100dvh - 110px);   
-        width: 100%;
-   
-     
-    
-    }
-      .side-interior h2{
-        color: black;
-      }
-
-    .main-wrapper {
-        margin-left: 0;
-        width: 100%;
-
-    }
-
-    .top-bar p {
-        font-size: 12px;
-        
-    }
-
-    .menu-link {
-        font-size: 12px;
-        padding: 5px;
-        margin: 2px;
-        border-radius: 4px;
-        background-color: #0d91f7;
-   
-    }
-    .menu-link li a span:hover {
-        background-color: #7fb3eb;
-    }
-
-    a{
-        background-color: red;
-    }
-
-    .main {
-        padding: 10px;
-    }
-
-    .texto {
-        font-size: 12px;
-        padding: 10px 20px;
-    }
-
-    button {
-        padding: 3px 10px;
-    }
-
-    img {
-        height: 30px;
-    }
-    .caixa2{
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-     
+/* Layout principal */
+>>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
+.main-wrapper {
+  display: flex;
+  min-height: 100vh;
 }
-@media (max-width: 680px){
-    .caixa2{
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
 
-    input,select{
-        width: 100%;
-    }
+.content-area {
+  flex: 1;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.comunicado-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.comunicado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.comunicado-header h2 {
+  margin: 0;
+  color: #2c3e50;
 
 }
 
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
 
+.status-valid {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
 
+.status-invalid {
+  background-color: #ffebee;
+  color: #c62828;
+}
 
+.comunicado-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
 
+.comunicado-content {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
 
+.comunicado-content h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: #333;
+}
 
+.comunicado-footer {
+  font-size: 0.8rem;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 0.5rem;
+}
 
+.loading-state, .empty-state, .error-state {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
 
+.error-state {
+  color: white;
+  background-color: red;
+  border-radius: 4px;
+}
 
+.error-state button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-state button:hover {
+  background-color: blue;
+}
 

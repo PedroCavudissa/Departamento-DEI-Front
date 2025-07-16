@@ -1,44 +1,40 @@
-<body>
-  
-
 <div class="container">
+  <section class="form-section">   
+    <div class="table-section">
+      <h3 class="secao-titulo">Disciplinas Do Próximo Semestre</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome da Disciplina</th>
+            <th>Pré-requisito</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let disciplina of disciplinasfaze">
+            <td>{{ disciplina.sigla }}</td>
+            <td>{{ disciplina.nome }}</td>
+            <td>
+              <span *ngIf="disciplina.precedenciasDisciplinaNome && disciplina.precedenciasDisciplinaNome.length > 0; else semPreReq">
+                {{ disciplina.precedenciasDisciplinaNome }}
+              </span>
+              <ng-template #semPreReq>
+                <span style="color: gray;">Nenhum</span>
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-    <main class="main-content">
-  
-      <section class="form-section">
-        <div class="table-section">
-          <h3>Disciplinas a Fazer</h3>
-          <table>
-  
-                <th>Selecionar</th>
-                <th>Código</th>
-                <th>Nome da Disciplina</th>
-          </table>
-          <br><br>
-          <h3>Disciplinas em Atraso</h3>
-          <table>
-                <th>Selecionar</th>
-                <th>Código</th>
-                <th>Nome da Disciplina</th>
-          </table>
-  
-          <br><br><br><br>
-  
-          <a href="#" class="termo-link">Termo de matrícula</a>
-          <div class="termo-check">
-            <input type="checkbox" id="aceito">
-            <label for="aceito">Declaro que li e aceito os termos de matrícula</label>
-          </div>
-        </div>
-  
-        <div class="pagination">
-          <span class="page active">1</span>
-          <span class="page">2</span>
-          <span class="page">3</span>
-        </div>
-        <button class="confirm-btn" (click)="confi2()">Confirmar</button>
-      </section>
-    </main>
+  <div class="pagination">
+    <span class="page active">1</span>
+    <span class="page">2</span>
+    <span class="page">3</span>
   </div>
-</body>
+
+  <button class="confirm-btn" (click)="confi2()">Continuar</button>
+</div>
+
 <app-lateral></app-lateral>

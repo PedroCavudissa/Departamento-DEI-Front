@@ -1,146 +1,275 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ========== CONTAINER PRINCIPAL ========== */
+.container {
+  padding: 48px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  animation: fadeIn 0.6s ease;
+}
+
+@media (min-width: 961px) {
+  .container {
+    margin-left: 190px;
   }
-  
-  body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-  }
-  
-  .main-wrapper {
-    margin-left: 169px;
-    width: calc(100% - 169px);
-    display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== TÍTULO DA PÁGINA ========== */
+.titulo-pagina {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #0d48a144;
+  margin-bottom: 40px;
+  letter-spacing: 0.8px;
+  animation: fadeIn 1s ease;
+}
+
+/* ========== FORMULÁRIO ========== */
+.card-form {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.171);
+  margin-bottom: 48px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.card-form:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.form-field {
+  flex: 1 1 100%;
+  min-width: 280px;
+}
+
+mat-form-field {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+mat-form-field.mat-focused .mat-form-field-label {
+  color: #1976d2 !important;
+}
+
+mat-form-field.mat-focused .mat-form-field-outline {
+  color: #1976d2;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.form-actions button {
+  min-width: 160px;
+  padding: 12px 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+button[color="primary"] {
+  background-color: #7696ff;
+  color: white;
+}
+
+button[color="primary"]:hover {
+  background-color: #003c8f;
+  transform: scale(1.02);
+}
+
+button[color="warn"] {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+button[color="warn"]:hover {
+  background-color: #cacaca;
+  transform: scale(1.02);
+}
+
+/* ========== COMUNICADOS LISTADOS ========== */
+.comunicado-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border-left: 6px solid #0d47a1;
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.comunicado-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.comunicado-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.comunicado-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  color: #0d47a1;
+}
+
+.status-badge {
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* ✅ CORRETAS CLASSES DE STATUS SEM ROSA */
+.status-valid {
+  background-color: #e0f7e9;
+  color: #1b5e20;
+  border: 1px solid #81c784;
+}
+
+.status-invalid {
+  background-color: #fff3e0; /* laranja pastel, NÃO rosa */
+  color: #ef6c00;
+  border: 1px solid #ffb74d;
+}
+
+.comunicado-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  color: #546e7a;
+}
+
+.comunicado-content {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #37474f;
+  margin-bottom: 16px;
+}
+
+.comunicado-footer {
+  font-size: 0.85rem;
+  color: #607d8b;
+  border-top: 1px solid #eceff1;
+  padding-top: 8px;
+}
+
+/* ========== ESTADOS (ERRO, LOADING, ETC) ========== */
+.empty-state,
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: #607d8b;
+  font-size: 1rem;
+}
+
+.error-state {
+  background-color: #fdecea;
+  border-left: 5px solid #c62828;
+  border-radius: 6px;
+  animation: fadeIn 0.6s ease;
+}
+
+.error-state button {
+  margin-top: 1rem;
+  background-color: #0d47a1;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.error-state button:hover {
+  background-color: #003c8f;
+  transform: scale(1.05);
+}
+
+/* ========== SPINNER ========== */
+mat-spinner {
+  margin: 0 auto;
+}
+
+/* ========== RESPONSIVO ========== */
+@media (max-width: 960px) {
+  .form-row {
     flex-direction: column;
+  }
+
+  .form-actions {
     justify-content: center;
-    align-items: flex-start;
-    overflow-y: auto;
-    padding-top: 50px;
   }
-  
-  .main {
-    margin: 50px auto;
-    width: 60%;
-    min-height: 400px;
-    padding: 20px;
-    border: 1px solid rgba(179, 179, 179, 0.521);
-    border-radius: 6px;
-    background-color: white;
-  }
-  
-  .texto {
-    background-color: #0d91f7;
-    text-align: center;
-    margin: 30px auto;
-    padding: 12px 40px;
-    border-radius: 30px;
-    color: white;
-    font-weight: 500;
-    font-size: 1.1rem;
-  }
-  
-  .main > .caixa {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 10px;
+
+  .form-actions button {
     width: 100%;
   }
-  
-  button {
-    padding: 8px 20px;
-    margin: 6px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.95rem;
+
+  .titulo-pagina {
+    font-size: 2.2rem;
   }
-  
-  .btn-azul {
-    background-color: #0d91f7;
-    color: white;
-    border: none;
+
+  .form-field {
+    min-width: 100%;
   }
-  
-  .btn-preto {
-    background-color: black;
-    color: white;
-    border: none;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 24px 12px;
   }
-  
-  textarea {
-    width: 100%;
-    padding: 20px;
-    border-radius: 6px;
-    resize: vertical;
+
+  .titulo-pagina {
+    font-size: 1.6rem;
   }
-  
-  input, select {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    width: 100%;
-    margin: 5px 0;
+
+  mat-card-title {
+    font-size: 1.2rem;
   }
-  
-  /* Responsivo para tablets e smartphones */
-  @media (max-width: 1024px) {
-    .main {
-      width: 80%;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .main-wrapper {
-      margin-left: 0;
-      width: 100%;
-      padding-top: 60px;
-      align-items: center;
-    }
-  
-    .main {
-      width: 90%;
-      margin: 20px auto;
-      padding: 15px;
-    }
-  
-    .texto {
-      font-size: 0.95rem;
-      padding: 10px 25px;
-    }
-  
-    button {
-      font-size: 0.85rem;
-      padding: 6px 14px;
-    }
-  
-    .main > .caixa {
-      flex-direction: column;
-      align-items: center;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .main {
-      width: 95%;
-      padding: 10px;
-    }
-  
-    .texto {
-      font-size: 0.85rem;
-      padding: 8px 18px;
-    }
-  
-    button {
-      width: 100%;
-      text-align: center;
-    }
-  
-    textarea {
-      padding: 15px;
-    }
-  }
-  
+}
+mat-card{
+  background-color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.384);
+}

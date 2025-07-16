@@ -1,79 +1,82 @@
-<body>
+<div class="login-container">
+  <div class="login-box animated-fade-in">
+    <img src="assets/imagens/logo-feuan.png" alt="logotipo" />
+    <p>
+      Faculdade de Engenharia <br />
+      Departamento de Informática <br /><br />
+    </p>
 
-  <div class="login-container">
-      <div class="login-box">
-          <img src="assets/imagens/logo-feuan.png" alt="logitipo">
-          <p>Faculdade de Enegenharia <br>
-          Departamento de informática <br> <br></p>
-          <h2>Faça Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="entrar()">
+      <fieldset>
+        <legend>Faça Login</legend>
 
-          <form [formGroup]="loginForm" (ngSubmit)="entrar()">
-
-              <div class="input-group">
-                      <label for="username">Email</label>
-                  <input type="email"  formControlName="username" placeholder="Digite seu email" >
-                   <div class="error-message" *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')">
-                          Este campo é obrigatório!
-                   </div>
-
-              </div>
-
-              <div class="input-group">
-                 <label for="password">Senha</label>      
-
-                 
-                  <input type="password" id="password" formControlName="password" placeholder="Digite sua senha" >
-                  <div class="error-message" id="error-message" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
-                        Este campo é obrigatório!
-                  </div>
-
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="Digite seu email"
+          />
+          <div class="error-message" *ngIf="loginForm.get('email')?.touched">
+            <span *ngIf="loginForm.get('email')?.hasError('required')">Este campo é obrigatório!</span>
+            <span *ngIf="loginForm.get('email')?.hasError('email')">Email inválido!</span>
           </div>
-              <div class="input-group">
-                  
-                  <button  class="btn" (click)="entrar()">
-                      <img src="assets/icones/entrar.png" alt="">
-                      Entrar</button>
+        </div>
 
-              </div>         
-          </form>
+        <div class="input-group">
+          <label for="senha">Senha</label>
+          <input
+            id="senha"
+            type="password"
+            formControlName="senha"
+            placeholder="Digite sua senha"
+          />
+          <div
+            class="error-message"
+            *ngIf="loginForm.get('senha')?.touched && loginForm.get('senha')?.hasError('required')"
+          >
+            Este campo é obrigatório!
+          </div>
+        </div>
 
-       
-                  <div class="mensagem-login" *ngIf="mensagemLogin" [ngClass]="tipoMensagem">
-                      {{ mensagemLogin }}
-                  </div>
+        <div class="input-group">
+          <button class="btn" type="submit">
+            <i class="bx bx-log-in"></i> Entrar
+          </button>
+        </div>
+      </fieldset>
+    </form>
 
-                  <div class="esqueci-senha">
-                      <a href="#" (click)="abrirModal($event)">Esqueci a senha</a>
-                  </div>
+    <div class="mensagem-login" *ngIf="mensagemLogin" [ngClass]="tipoMensagem">
+      {{ mensagemLogin }}
+    </div>
 
-              </div>         
-       
-
-
-
-<!-- Modal Esqueci a Senha -->
-<div class="modal-overlay" *ngIf="mostrarModal">
-<div class="modal">
+    <div class="esqueci-senha">
+      <a href="#" (click)="abrirModal($event)">Esqueci a senha</a>
+    </div>
+  </div><!-- Modal de Recuperação -->
+  <div class="modal-overlay" *ngIf="mostrarModal">
+    <div class="modal">
+      <p>Digite seu Email para continuar</p>
   
-  <p>Digite seu Email Para Continuar!</p>
-
-  <form [formGroup]="recuperarForm" (ngSubmit)="continuarRecuperacao()">
-    <input type="email" formControlName="gmail" placeholder="Digite seu Gmail" />
-    <div class="error-message" *ngIf="recuperarForm.get('gmail')?.touched && recuperarForm.get('gmail')?.hasError('required')">
-      O Email é obrigatório!
+      <form [formGroup]="recuperarForm" (ngSubmit)="recuperar()">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Digite seu email"
+        />
+        <div class="error-message" *ngIf="recuperarForm.get('email')?.touched">
+          <span *ngIf="recuperarForm.get('email')?.hasError('required')">O Email é obrigatório!</span>
+          <span *ngIf="recuperarForm.get('email')?.hasError('email')">Email inválido!</span>
+        </div>
+  
+        <div class="modal-buttons">
+          <button type="button" (click)="fecharModal()">Cancelar</button>
+          <button type="submit" >Continuar</button>
+        </div>
+      </form>
     </div>
-    <div class="error-message" *ngIf="recuperarForm.get('gmail')?.touched && recuperarForm.get('gmail')?.hasError('email')">
-      Email inválido!
-    </div>
-
-    <div class="modal-buttons">
-      <button type="button" (click)="fecharModal()">Cancelar</button>
-      <button type="submit">Continuar</button>
-    </div>
-  </form>
-</div>
-</div>
-
-
-      </div>
-</body>
+  </div>
+  
+  
