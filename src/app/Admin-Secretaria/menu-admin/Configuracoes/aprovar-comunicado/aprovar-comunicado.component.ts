@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BarralateralComponent } from "../../../barralateral/barralateral.component";
+import { environment } from '../../../../../enviroments/environment';
 
 
 @Component({
@@ -156,7 +157,7 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
     };
 
     this.comunicadosService.debugRequest(
-      `${this.comunicadosService.API_URL}/update/${testId}`,
+      `${environment.apiUrl}/update/${testId}`,
       'PUT',
       testData
     ).subscribe({

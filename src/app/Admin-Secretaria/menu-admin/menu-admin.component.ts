@@ -96,9 +96,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       case 'funcionários':
         this.router.navigate(['/detalhes-funcionarios']);
         break;
-      case 'estudantes':
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
+     
       default:
         console.warn('Item desconhecido:', item);
     }

@@ -102,14 +102,23 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* RESPONSIVIDADE */
+
+/* Responsivo geral */
 @media (max-width: 600px) {
-  .grid-dados {
-    grid-template-columns: 1fr;
+  .matricula-container {
+    padding: 12px;
+    margin: 100px auto;
+    overflow-y: hidden;
   }
 
-  .button-container {
-    flex-direction: column;
-    align-items: center;
+  .secao-titulo {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .page {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
   }
 }
