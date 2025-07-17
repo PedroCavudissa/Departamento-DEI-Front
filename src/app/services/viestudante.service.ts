@@ -31,7 +31,7 @@ export class ViestudanteService {
   cadastrar(viestudante: Viestudante) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = `${environment.apiUrl}`; // URL da API
+  private baseUrl = `${environment.apiUrl}`; // URL da API
 
 
   constructor(private http: HttpClient) { }
@@ -67,7 +67,7 @@ private getHeaders(): HttpHeaders {
 }
 
 getEstudante(): Observable<Viestudante> {
-  return this.http.get(`${this.apiUrl}/api/auth/me`, {
+  return this.http.get(`${this.baseUrl}/api/auth/me`, {
     responseType: 'text',
     headers: new HttpHeaders({
       'Authorization': `Bearer ${localStorage.getItem('token') || ''}`,
@@ -91,7 +91,7 @@ getEstudante(): Observable<Viestudante> {
   );
 }
 atualizarPerfil(id: number, dadosAtualizados: Partial<Viestudante>): Observable<Viestudante> {
-  return this.http.patch<Viestudante>(`${this.apiUrl}/api/departamento/students/${id}`, dadosAtualizados, {
+  return this.http.patch<Viestudante>(`${this.baseUrl}/api/departamento/students/${id}`, dadosAtualizados, {
     headers: this.getHeaders()
   });
 }

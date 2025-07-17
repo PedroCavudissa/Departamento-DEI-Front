@@ -9,7 +9,7 @@ import { environment } from '../../enviroments/environment';
 })
 export class PerfilestudanteService {
 
- private apiUrl = `${environment.apiUrl}`; 
+ private baseUrl = `${environment.apiUrl}`; 
   
  constructor(private http: HttpClient) { }
     private getHeaders(): HttpHeaders {
@@ -34,7 +34,7 @@ alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
   // request() diretamente
   const req = new HttpRequest(
     'PUT',
-    `${this.apiUrl}/api/auth/me/update-password`,
+    `${this.baseUrl}/api/auth/me/update-password`,
     body,
     {
       headers: this.getHeaders(),

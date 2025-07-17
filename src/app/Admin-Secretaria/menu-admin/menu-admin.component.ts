@@ -94,7 +94,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
         this.router.navigate(['/detalhes-cadeiras']);
         break;
       case 'funcionários':
-        this.router.navigate(['/detalhes-funcionarios']);
+        this.router.navigate(['/Tela-funcionarios']);
         break;
      
       default:

@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
  notyf = new Notyf({
   duration: 3000,
   position: {
-    x: 'right',
+    x: 'center',
     y: 'top',
   },
 });
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-
+localStorage.removeItem('token');
 }
 
 // Senha esquecida

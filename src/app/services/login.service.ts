@@ -6,11 +6,11 @@ import { environment } from '../../enviroments/environment';
 export class LoginService {
 
   // Usar a URL base do environment para facilitar mudança
-  private apiUrl = `${environment.apiUrl}/api/auth/login`;
+  private baseUrl = `${environment.apiUrl}/api/auth/login`;
 
   constructor(private http: HttpClient) {}
 
   entrar(credentials: { email: string; password: string }) {
-    return this.http.post(this.apiUrl, credentials);
+    return this.http.post(this.baseUrl, credentials);
   }
 }
