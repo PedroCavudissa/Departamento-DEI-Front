@@ -12,8 +12,7 @@ import { environment } from '../../enviroments/environment';
   providedIn: 'root',
 })
 export class ComunicadosService {
-  public readonly API_URL =`${environment.apiUrl}/api/departamento/notices/create`;
-
+ 
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -27,13 +26,13 @@ export class ComunicadosService {
 
   listar(): Observable<Comunicado[]> {
     return this.http
-      .get<Comunicado[]>(`${this.API_URL}/list`, this.httpOptions)
+      .get<Comunicado[]>(`${environment.apiUrl}/api/departamento/notices/list`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
-      .post<Comunicado>(`${this.API_URL}/api/departamento/notices/create`, comunicado, this.httpOptions)
+      .post<Comunicado>(`${environment.apiUrl}/api/departamento/notices/create`, comunicado, this.httpOptions)
       .pipe(
         catchError((error) => {
           if (error.status === 404) {
@@ -125,7 +124,7 @@ export class ComunicadosService {
 
   remover(id: number): Observable<void> {
     return this.http
-      .delete<void>(`${this.API_URL}/delete/${id}`, this.httpOptions)
+      .delete<void>(`${environment.apiUrl}/delete/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

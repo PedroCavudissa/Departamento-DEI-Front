@@ -12,14 +12,6 @@ import { CalendarioService, Evento } from '../../services/calendario.service';
   styleUrl: './calendario-professor.component.css'
 })
 export class CalendarioProfessorComponent implements OnInit {
-  mostrarFormulario = false;
-  mostrarToast = false;
-
-  data = '';
-  titulo = '';
-  tipo = '';
-  link? = '';
-
   eventos: Evento[] = [];
 
   constructor(private calendarioService: CalendarioService) {}
@@ -28,56 +20,10 @@ export class CalendarioProfessorComponent implements OnInit {
     this.carregarEventos();
   }
 
-  carregarEventos() {
-    this.calendarioService.obterEventos().subscribe({
-      next: (res) => (this.eventos = res),
-      error: (err) => console.error('Erro ao carregar eventos:', err)
+  carregarEventos(): void {
+    this.calendarioService.listarEventos().subscribe({
+      next: (dados) => (this.eventos = dados),
+      error: (erro) => console.error('Erro ao carregar eventos:', erro)
     });
-  }
-
-  salvarEvento() {
-    if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
-      alert('Preencha todos os campos obrigatórios.');
-      return;
-    }
-
-    const novoEvento: Evento = {
-      data: this.data.trim(),
-      titulo: this.titulo.trim(),
-      tipo: this.tipo.trim(),
-      link: this.link?.trim() || ''
-    };
-
-    this.calendarioService.salvarEvento(novoEvento).subscribe({
-      next: evento => {
-        this.eventos.push(evento);
-        this.fecharFormulario();
-        this.limparCampos();
-        this.exibirToast();
-      },
-      error: err => console.error('Erro ao salvar evento:', err)
-    });
-  }
-
-  toggleFormulario() {
-    this.mostrarFormulario = !this.mostrarFormulario;
-  }
-
-  fecharFormulario() {
-    this.mostrarFormulario = false;
-  }
-
-  limparCampos() {
-    this.data = '';
-    this.titulo = '';
-    this.tipo = '';
-    this.link = '';
-  }
-
-  exibirToast() {
-    this.mostrarToast = true;
-    setTimeout(() => {
-      this.mostrarToast = false;
-    }, 3000);
   }
 }

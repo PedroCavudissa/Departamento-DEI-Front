@@ -47,6 +47,7 @@ import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudant
 import { AuthGuard } from './guards/auth.guard';
 import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
 import { ComunicadoEstudanteComponent } from './Estudante/comunicado-estudante/comunicado-estudante.component';
+import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/TelaFuncionario/TelaFuncionario.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -71,10 +72,10 @@ export const routes: Routes = [
   { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard] },
   { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] },
   { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
+{path:'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard]},
 
 
 
-{path:'cadastro-funcionario', component: CadastroFuncionarioComponent,  canActivate: [AuthGuard] },
   { path: 'menu-admin', component: MenuAdminComponent , canActivate: [AuthGuard]},
   { path: 'aprovarComunicado', component: AprovarComunicadoComponent , canActivate: [AuthGuard] },
   { path: 'comunicado', component: ComunicadoComponent , canActivate: [AuthGuard] },

@@ -38,6 +38,13 @@
       </li>
 
       <li>
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Calendario' }" >
+          <i class='bx bx-message'></i>
+          <span (click)="selecionarMenu('Calendario','Calendario')" tabindex="0" (keyup.enter)="selecionarMenu('Calendario','Calendario')">Calendario</span>
+        </a>
+      </li>
+
+      <li>
         <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Disciplinas em Atraso' }">
           <i class='bx bx-time-five'></i>
           <span (click)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')" tabindex="0" (keyup.enter)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')">Disciplinas em Atraso</span>

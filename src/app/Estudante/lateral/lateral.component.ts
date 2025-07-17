@@ -37,7 +37,7 @@ export class LateralComponent implements OnInit {
       case 'Minhas Notas': this.router.navigate(['/tela-notas']); break;
       case 'Horários': this.router.navigate(['/horario-estudante']); break;
       case 'Chat': this.router.navigate(['/chat-estudante']); break;
-      case 'Calendário': this.router.navigate(['/calendario-estudante']); break;
+      case 'Calendario': this.router.navigate(['/calendario-estudante']); break;
       case 'Perfil': this.router.navigate(['/perfil-estudante']); break;
       case 'Comunicado': this.router.navigate(['/comunicado-estudante']); break;
       case 'Sair':

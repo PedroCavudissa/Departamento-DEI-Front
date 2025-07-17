@@ -36,7 +36,7 @@ import { Router, RouterModule } from '@angular/router';
     switch (item) {
       case 'Dados Gerais': this.router.navigate(['/menu-admin']); break;
       case 'Estudantes': this.router.navigate(['/menu-estudantes']); break;
-      case 'Funcionários': this.router.navigate(['/funcionarios']); break;
+      case 'Funcionários': this.router.navigate(['/Tela-Funcionario']); break;
       case 'Matrículas': this.router.navigate(['/cadastro']); break;
       case 'Disciplinas': this.router.navigate(['/detalhes-cadeiras']); break;
       case 'Horários': this.router.navigate(['/horario']); break;
