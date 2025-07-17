@@ -23,7 +23,7 @@ import { LateralComponent } from '../lateral/lateral.component';
 @Component({
   selector: 'app-notas',
   standalone: true,
-  imports: [CommonModule, FormsModule, LateralComponent],
+  imports: [CommonModule, FormsModule,LateralComponent ],
   templateUrl: './tela-notas.component.html',
   styleUrls: ['./tela-notas.component.css']
 })

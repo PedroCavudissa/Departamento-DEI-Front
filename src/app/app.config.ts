@@ -9,15 +9,16 @@ import { routes } from './app.routes';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DisciplinaService } from './services/disciplina.service';
-import { LacamentoNotasService } from './services/lacamento-notas.service';
+
 import { LoginService } from './services/login.service';
-import { MenuService } from './services/menu.service';
+
 
 import {
   HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
 } from '@angular/common/http';
+import { LacamentoNotasService } from './services/lacamento-notas.service';
 
 // Interface de resposta de login
 export interface LoginResponse {
@@ -34,7 +35,7 @@ export const appConfig: ApplicationConfig = {
     LoginService,
     LacamentoNotasService,
     DisciplinaService,
-    MenuService,
+   
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

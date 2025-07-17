@@ -9,8 +9,6 @@ import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { LoginService } from '../services/login.service';
 
-
-
 @Component({
   selector: 'app-login',
   standalone: true, // define como standalone
