@@ -7,7 +7,7 @@ import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../Services/login.service';
 
 @Component({
   selector: 'app-login',
