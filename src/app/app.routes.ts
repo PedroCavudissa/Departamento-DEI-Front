@@ -53,8 +53,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   //Rotas para o Admin-Master(Acesso Geral)
 
-
-
 {path:'cadastro-funcionario', component: CadastroFuncionarioComponent, canActivate: [AuthGuard]},
   { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] },
   { path: 'aprovar-comunicado', component: AprovarComunicadoComponent, canActivate: [AuthGuard] },
