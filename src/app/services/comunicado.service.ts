@@ -8,12 +8,18 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Comunicado } from '../models/comunicado.model';
 
+interface ApiResponse {
+  headers: Record<string, unknown>;
+  body: Comunicado;
+  statusCode: string;
+  statusCodeValue: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class ComunicadoService {
-  private apiUrl =
-    'https://42f235bb2128.ngrok-free.app/api/departamento/notices/list';
+  private apiUrl = 'https://e199070f04ee.ngrok-free.app/api/departamento/notices/noticesForMe';
 
   constructor(private http: HttpClient) {}
 
@@ -25,13 +31,13 @@ export class ComunicadoService {
       'ngrok-skip-browser-warning': 'true',
     });
 
-    return this.http.get<Comunicado[]>(this.apiUrl, { headers }).pipe(
-      tap((data) => console.log('Comunicados recebidos:', data)),
-      map((comunicados) =>
-        comunicados.map((c) => ({
-          ...c,
-          dataAcontecimento: this.formatarData(c.dataAcontecimento),
-          dataPublicacao: this.formatarData(c.dataPublicacao),
+    return this.http.get<ApiResponse[]>(this.apiUrl, { headers }).pipe(
+      tap((data) => console.log('Resposta da API:', data)),
+      map((responses) =>
+        responses.map(response => ({
+          ...response.body,
+          dataAcontecimento: this.formatarData(response.body.dataAcontecimento),
+          dataPublicacao: this.formatarData(response.body.dataPublicacao),
         }))
       ),
       catchError((error: unknown) => {
@@ -44,7 +50,7 @@ export class ComunicadoService {
   private formatarData(dataString: string): string {
     try {
       return new Date(dataString).toISOString();
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       console.warn('Erro ao formatar data:', dataString);
       return dataString;

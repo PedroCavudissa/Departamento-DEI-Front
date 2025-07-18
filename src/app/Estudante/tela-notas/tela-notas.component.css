@@ -1,256 +1,79 @@
-:host {
-  display: block;
-  width: 100%;
-  max-width: 1000px;
-  margin: 4rem auto;
-  margin-right: 5rem;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  box-sizing: border-box;
-}
-
-/* Estilos para Desktop (1024px pra cima) */
-section {
-  margin-bottom: 2.5rem;
-  padding: 1.5rem;
-  background: #f8fafc;
-  border-radius: 10px;
-  border: 1px solid #e2e8f0;
+/* src/app/tela-notas/tela-notas.component.css */
+.notas-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+    margin-top: 30px;
 }
 
 h2 {
-  color: #1e293b;
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.form-group {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  margin-bottom: 1.5rem;
+.disciplinas-container {
+  margin-top: 20px;
+  overflow-x: auto;
 }
 
-select, input {
-  flex: 1 1 200px;
-  padding: 0.75rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: white;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
+.disciplinas-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
 }
 
-select:focus, input:focus {
-  outline: none;
-  border-color: #6366f1;
-}
-
-button {
-  flex: 0 0 auto;
-  padding: 0.75rem 1.5rem;
-  background: #4f46e5;
+.disciplinas-table th {
+  background-color: #3498db;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.disciplinas-table td {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.disciplinas-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+.loading-state {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  color: #3498db;
 }
 
-button:hover {
-  background: #4338ca;
+.error-state {
+  background-color: #ffebee;
+  color: #e74c3c;
+  padding: 15px;
+  border-radius: 4px;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-button:disabled {
-  background: #94a3b8;
-  cursor: not-allowed;
+.empty-state {
+  text-align: center;
+  padding: 30px;
+  color: #7f8c8d;
 }
 
 .spinner {
-  display: inline-block;
-  width: 1rem;
-  height: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid rgba(52, 152, 219, 0.2);
   border-radius: 50%;
-  border-top-color: white;
-  animation: spin 1s ease-in-out infinite;
+  border-top-color: #3498db;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-.resultado {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-top: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.resultado h3 {
-  color: #1e293b;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-
-.resultado p {
-  margin: 0.5rem 0;
-  color: #334155;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #e2e8f0;
-  display: flex;
-  justify-content: space-between;
-}
-
-li:last-child {
-  border-bottom: none;
-}
-
-.error-message {
-  padding: 1rem;
-  background: #fee2e2;
-  color: #dc2626;
-  border-radius: 8px;
-  margin-top: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.error-message::before {
-  content: "⚠️";
-}
-
-/* Estilos para Tablet (768px - 1023px) */
-@media (max-width: 1023px) {
-  :host {
-    padding: 1.5rem;
-    max-width: 800px;
-  }
-
-  section {
-    padding: 1.25rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  .form-group {
-    gap: 0.8rem;
-  }
-
-  select, input {
-    flex: 1 1 150px;
-    padding: 0.65rem;
-  }
-
-  button {
-    padding: 0.65rem 1.25rem;
-  }
-
-  .resultado {
-    padding: 1.25rem;
-  }
-}
-
-/* Estilos para Mobile (até 767px) */
-@media (max-width: 767px) {
-  :host {
-    padding: 1rem;
-    margin: 1rem auto;
-    border-radius: 8px;
-  }
-
-  section {
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .form-group {
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  select, input, button {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 0.95rem;
-  }
-
-  button {
-    justify-content: center;
-  }
-
-  .resultado {
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
-  .resultado h3 {
-    font-size: 1.1rem;
-  }
-
-  .resultado p {
-    font-size: 0.95rem;
-  }
-
-  li {
-    padding: 0.5rem 0;
-    font-size: 0.95rem;
-  }
-
-  .error-message {
-    padding: 0.75rem;
-    font-size: 0.95rem;
-  }
-}
-
-/* Estilos para Telas Muito Pequenas (até 480px) */
-@media (max-width: 480px) {
-  :host {
-    padding: 0.75rem;
-  }
-
-  section {
-    padding: 0.75rem;
-  }
-
-  h2 {
-    font-size: 1.1rem;
-  }
-
-  select, input {
-    padding: 0.65rem;
-  }
-
-  .resultado {
-    padding: 0.75rem;
-  }
 }

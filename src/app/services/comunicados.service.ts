@@ -12,7 +12,7 @@ import { Comunicado, NovoComunicado } from '../models/comunicados.model';
 })
 export class ComunicadosService {
   public readonly API_URL =
-    'https://42f235bb2128.ngrok-free.app/api/departamento/notices';
+    'https://e199070f04ee.ngrok-free.app/api/departamento/notices';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -30,6 +30,32 @@ export class ComunicadosService {
       .get<Comunicado[]>(`${this.API_URL}/list`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+// comunicados.service.ts
+
+// comunicados.service.ts
+filtrarPorDestinatario(destino: string): Observable<Comunicado[]> {
+  const destinosValidos = ['PROFESSOR', 'ESTUDANTE', 'SECRETARIA', 'ADMINISTRADOR', 'TODOS'];
+
+  if (!destinosValidos.includes(destino)) {
+    return throwError(() => new Error('Destinatário inválido'));
+  }
+
+  // Correção: destino é parte da URL, não query string
+  const url = `${this.API_URL}/destinado/${encodeURIComponent(destino)}`;
+
+  return this.http.get<Comunicado[]>(url, this.httpOptions).pipe(
+    catchError(error => {
+      console.error('Erro na filtragem:', error);
+      return throwError(() => new Error(
+        error.status === 404
+          ? 'Nenhum comunicado encontrado para este filtro'
+          : 'Erro ao filtrar comunicados'
+      ));
+    })
+  );
+}
+
 
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
@@ -61,7 +87,7 @@ export class ComunicadosService {
     console.log('Payload:', payload);
 
     return this.http.patch<Comunicado>(
-      `${this.API_URL}/update/${id}`, // ✅ agora está certo
+      `${this.API_URL}/update/${id}`,
       payload,
       this.httpOptions
     );
@@ -82,7 +108,6 @@ export class ComunicadosService {
   }
 
   private prepararPayloadAtualizacao(comunicado: Comunicado): unknown {
-    // Garantir que os campos estão no formato correto
     return {
       titulo: comunicado.titulo?.trim() || '',
       conteudo: comunicado.conteudo?.trim() || '',
@@ -92,9 +117,7 @@ export class ComunicadosService {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
   private formatData(data: string): string {
-    // Garantir formato YYYY-MM-DD
     if (!data) return new Date().toISOString().split('T')[0];
     return data.includes('T') ? data.split('T')[0] : data;
   }
@@ -106,12 +129,9 @@ export class ComunicadosService {
       noticeStatus: comunicado.noticeStatus,
       destinado: comunicado.destinado,
       dataAcontecimento: comunicado.dataAcontecimento,
-      // Campos removidos:
-      // - nomeFuncionario (não deve ser atualizável)
-      // - dataPublicacao (deve ser definida apenas na criação)
     };
   }
-  // Novo método para preparar dados
+
   private prepararDadosAtualizacao(comunicado: Comunicado): unknown {
     return {
       titulo: comunicado.titulo,
@@ -119,7 +139,6 @@ export class ComunicadosService {
       noticeStatus: comunicado.noticeStatus,
       destinado: comunicado.destinado,
       dataAcontecimento: comunicado.dataAcontecimento,
-      // Remova campos que não devem ser atualizados
     };
   }
 
@@ -129,7 +148,6 @@ export class ComunicadosService {
       .pipe(catchError(this.handleError));
   }
 
-  // Método para debug
   debugRequest(
     url: string,
     method: string,

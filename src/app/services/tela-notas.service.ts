@@ -1,113 +1,62 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+// src/app/tela-notas/services/tela-notas.service.ts
+import { Injectable } from '@angular/core';
+import {
+  HttpClient,
+  HttpParams,
+  HttpHeaders,
+  HttpErrorResponse,
+} from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
+import { DisciplinaNota, NotaFilter } from '../models/nota.model';
 
-// Interface para nota individual
-export interface Nota {
-  disciplina: string | null;
-  cadeira: string | null;
-  nota: number;
-}
-
-// Interface para disciplina
-export interface Disciplina {
-  id: number;
-  sigla: string;
-  nome: string;
-  anoAcademico: number;
-  semestre: number;
-}
-
-// Interface para resposta paginada
-export interface PaginatedResponse<T> {
-  content: T[];
-  totalElements?: number;
-  totalPages?: number;
-  number?: number;
-  size?: number;
-}
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class TelaNotasService {
-  private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://42f235bb2128.ngrok-free.app/api/departamento/students/list';
-  private readonly disciplinaUrl = 'https://42f235bb2128.ngrok-free.app/api/subject/list';
+  private readonly apiUrl =
+    'https://e199070f04ee.ngrok-free.app/api/departamento/students/list/minhasnotas';
 
-  // Buscar disciplinas (com parse manual do texto)
-  getDisciplinas(): Observable<Disciplina[]> {
-    const params = new HttpParams().set('page', '0');
+  constructor(private http: HttpClient) {}
 
-    return this.http.get(this.disciplinaUrl, { params, responseType: 'text' }).pipe(
-      map(responseText => {
-        console.log('Resposta bruta do servidor:', responseText);
-
-        try {
-          const response = JSON.parse(responseText);
-          if (!response?.content || !Array.isArray(response.content)) {
-            throw new Error('Resposta inválida da API: campo "content" ausente ou mal formatado.');
-          }
-          return response.content as Disciplina[];
-        } catch (e) {
-          throw new Error('Falha ao analisar JSON da resposta: ' + e);
-        }
-      }),
-      catchError((error: HttpErrorResponse | Error) =>
-        this.handleError<Disciplina[]>(error, 'Falha ao carregar disciplinas')
-      )
-    );
-  }
-
-  // Buscar nota por disciplina
-  buscarNotaPorDisciplina(disciplina: string, anoLetivo: number, modelo: string): Observable<Nota> {
-    const params = new HttpParams()
-      .set('anoLetivo', anoLetivo.toString())
-      .set('modelo', modelo);
-
-    return this.http.get<Nota>(`${this.baseUrl}/myscore/${disciplina}`, { params }).pipe(
-      catchError((error: HttpErrorResponse) =>
-        this.handleError<Nota>(error, 'Falha ao buscar nota')
-      )
-    );
-  }
-
-  // Listar todas as notas (corrigido para tratar resposta paginada)
-  listarTodasNotas(anoLetivo: number, modelo: string): Observable<Nota[]> {
-    const params = new HttpParams()
-      .set('anoLetivo', anoLetivo.toString())
-      .set('modelo', modelo);
-
-    return this.http.get<PaginatedResponse<Nota>>(`${this.baseUrl}/minhasnotas`, { params }).pipe(
-      map(response => {
-        if (!response?.content || !Array.isArray(response.content)) {
-          throw new Error('Resposta inválida da API: campo "content" ausente ou mal formatado.');
-        }
-        return response.content;
-      }),
-      catchError((error: HttpErrorResponse | Error) =>
-        this.handleError<Nota[]>(error, 'Falha ao listar notas')
-      )
-    );
-  }
-
-  // Tratamento de erros
-  private handleError<T>(error: HttpErrorResponse | Error, message: string): Observable<T> {
-    console.error('Erro na requisição:', error);
-
-    let errorMessage: string;
-
-    if (
-      error instanceof HttpErrorResponse &&
-      error.status === 200 &&
-      error.error instanceof ProgressEvent
-    ) {
-      errorMessage = `${message} - Problema ao processar resposta da API`;
-    } else if (error instanceof HttpErrorResponse && error.error?.message) {
-      errorMessage = error.error.message;
-    } else {
-      errorMessage = `${message}${error instanceof HttpErrorResponse ? ` (Status ${error.status})` : ''}`;
+  getNotas(filters: NotaFilter): Observable<DisciplinaNota[]> {
+    // Validação do modelo
+    if (!filters.modelo) {
+      return throwError(() => new Error('O modelo é obrigatório'));
     }
 
-    return throwError(() => new Error(errorMessage));
+    // Configuração dos parâmetros
+    let params = new HttpParams().set('modelo', filters.modelo);
+
+    if (filters.anoLetivo) {
+      params = params.set('anoLetivo', filters.anoLetivo.toString());
+    }
+
+    // Configuração dos headers
+    const headers = new HttpHeaders({
+      Accept: 'application/json',
+      'ngrok-skip-browser-warning': 'true',
+    });
+
+    return this.http
+      .get<DisciplinaNota[]>(this.apiUrl, { params, headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('Erro na requisição:', error);
+
+    if (error.status === 404) {
+      return throwError(
+        () => 'Nenhuma disciplina encontrada para os filtros selecionados'
+      );
+    }
+
+    if (error.status === 0) {
+      return throwError(() => 'Erro de conexão. Verifique sua internet.');
+    }
+
+    return throwError(
+      () => 'Erro ao carregar notas. Tente novamente mais tarde.'
+    );
   }
 }

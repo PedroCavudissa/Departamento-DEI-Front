@@ -1,104 +1,54 @@
-<!-- src/app/Estudante/tela-notas/tela-notas.component.html -->
-<div class="container">
-  <!-- Seção de Busca por Disciplina -->
-  <section>
-    <h2>🔍 Buscar Nota por Disciplina</h2>
+<!-- src/app/tela-notas/tela-notas.component.html -->
+<div class="notas-container">
+  <h2>Minhas Notas</h2>
 
-    <div class="form-group">
-      <select
-        [ngModel]="disciplina()"
-        (ngModelChange)="disciplina.set($event)"
-        [disabled]="isLoading()"
-      >
-        <option value="">Selecione uma disciplina</option>
-        <option
-          *ngFor="let d of disciplinas()"
-          [value]="d.nome"
-        >
-          {{ d.nome }}
-        </option>
-      </select>
+  <app-tela-notas-filter
+    (filterChange)="onFilterChange($event)">
+  </app-tela-notas-filter>
 
-      <input
-        type="number"
-        [ngModel]="anoLetivo()"
-        (ngModelChange)="anoLetivo.set($event)"
-        [disabled]="isLoading()"
-        placeholder="Ano Letivo"
-      />
-
-      <select
-        [ngModel]="modelo()"
-        (ngModelChange)="modelo.set($event)"
-        [disabled]="isLoading()"
-      >
-        <option *ngFor="let m of ['A', 'B', 'C', 'D', 'E', 'F']" [value]="m">
-          Modelo {{ m }}
-        </option>
-      </select>
-
-      <button (click)="buscarNota()" [disabled]="isLoading() || !disciplina()">
-        <span *ngIf="isLoading(); else buscarTexto" class="spinner"></span>
-        <ng-template #buscarTexto>Buscar Nota</ng-template>
-      </button>
-    </div>
-
-    <div *ngIf="resultadoNota() as nota" class="resultado">
-      <h3>Resultado:</h3>
-      <p><strong>Disciplina:</strong> {{ nota.disciplina || nota.cadeira || 'N/A' }}</p>
-      <p><strong>Nota:</strong> {{ nota.nota }}</p>
-    </div>
-  </section>
-
-  <!-- Seção de Listagem de Notas -->
-  <section>
-    <h2>📋 Listar Todas as Notas</h2>
-
-    <div class="form-group">
-      <input
-        type="number"
-        [ngModel]="anoLetivo()"
-        (ngModelChange)="anoLetivo.set($event)"
-        [disabled]="isLoading()"
-        placeholder="Ano Letivo"
-      />
-
-      <select
-        [ngModel]="modelo()"
-        (ngModelChange)="modelo.set($event)"
-        [disabled]="isLoading()"
-      >
-        <option *ngFor="let m of ['A', 'B', 'C', 'D', 'E', 'F']" [value]="m">
-          Modelo {{ m }}
-        </option>
-      </select>
-
-      <button (click)="listarNotas()" [disabled]="isLoading()">
-        <span *ngIf="isLoading(); else listarTexto" class="spinner"></span>
-        <ng-template #listarTexto>Listar Todas</ng-template>
-      </button>
-    </div>
-
-    <div *ngIf="notas().length > 0" class="resultado">
-      <h3>Notas Encontradas:</h3>
-      <ul>
-        <li *ngFor="let nota of notas()">
-          {{ nota.disciplina || nota.cadeira || 'Disciplina desconhecida' }}:
-          <strong>{{ nota.nota }}</strong>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Mensagens de Status -->
-  <div *ngIf="errorMessage()" class="error-message">
-    ⚠️ {{ errorMessage() }}
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <span>Carregando disciplinas...</span>
   </div>
 
-  <div *ngIf="isLoading()" class="loading-message">
-    ⌛ Carregando...
+  <div *ngIf="error" class="error-state">
+    <i class="icon">⚠️</i>
+    <p>{{ error }}</p>
   </div>
 
-  <!-- Sidebar -->
-  <app-barralateral></app-barralateral>
+  <div *ngIf="disciplinas.length > 0" class="disciplinas-container">
+    <table class="disciplinas-table">
+      <thead>
+        <tr>
+          <th>Disciplina</th>
+          <th *ngFor="let field of getModelFields()">{{ field }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let disciplina of disciplinas">
+          <td>{{ disciplina.disciplinaNome }}</td>
+          <td *ngFor="let field of getModelFields()">
+            {{ getNotaValue(disciplina, field) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="disciplinas.length === 0 && !loading && !error" class="empty-state">
+    <i class="icon">📭</i>
+    <p>Nenhuma disciplina encontrada</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <app-nota-disciplina></app-nota-disciplina>
 </div>
