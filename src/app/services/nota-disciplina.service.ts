@@ -5,7 +5,7 @@ import { NotaDisciplinaRequest, NotaDisciplinaResponse } from '../models/nota-di
 
 @Injectable({ providedIn: 'root' })
 export class NotaDisciplinaService {
-  private readonly baseUrl = 'https://e199070f04ee.ngrok-free.app/api/departamento/students/list/myscore';
+  private readonly baseUrl = 'https://9c257c8cf488.ngrok-free.app/api/departamento/students/list/myscore';
 
   constructor(private http: HttpClient) {}
 

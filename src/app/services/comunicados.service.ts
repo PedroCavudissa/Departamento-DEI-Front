@@ -12,7 +12,7 @@ import { Comunicado, NovoComunicado } from '../models/comunicados.model';
 })
 export class ComunicadosService {
   public readonly API_URL =
-    'https://e199070f04ee.ngrok-free.app/api/departamento/notices';
+    'https://9c257c8cf488.ngrok-free.app/api/departamento/notices';
 
   private httpOptions = {
     headers: new HttpHeaders({

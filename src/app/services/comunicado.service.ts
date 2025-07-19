@@ -19,7 +19,7 @@ interface ApiResponse {
   providedIn: 'root',
 })
 export class ComunicadoService {
-  private apiUrl = 'https://e199070f04ee.ngrok-free.app/api/departamento/notices/noticesForMe';
+  private apiUrl = 'https://9c257c8cf488.ngrok-free.app/api/departamento/notices/noticesForMe';
 
   constructor(private http: HttpClient) {}
 

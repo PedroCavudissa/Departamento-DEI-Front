@@ -14,7 +14,7 @@ import { DisciplinaNota, NotaFilter } from '../models/nota.model';
 })
 export class TelaNotasService {
   private readonly apiUrl =
-    'https://e199070f04ee.ngrok-free.app/api/departamento/students/list/minhasnotas';
+    'https://9c257c8cf488.ngrok-free.app/api/departamento/students/list/minhasnotas';
 
   constructor(private http: HttpClient) {}
 
