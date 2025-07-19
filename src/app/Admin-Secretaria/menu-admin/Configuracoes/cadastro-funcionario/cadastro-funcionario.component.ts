@@ -7,7 +7,7 @@ import { Notyf } from 'notyf';
 
 import { BarralateralComponent } from '../../../barralateral/barralateral.component';
 import { error } from 'jquery';
-import { FuncionarioService } from '../../../../services/cadastro.service';
+import { FuncionarioService } from '../../../../Services/cadastro.service';
 
 @Component({
   selector: 'app-cadastro-funcionario',

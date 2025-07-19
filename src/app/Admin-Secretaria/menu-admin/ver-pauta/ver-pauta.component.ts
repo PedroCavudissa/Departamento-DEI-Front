@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AlunoPauta, Disciplina, MenuService } from '../../../services/ver-pauta-secretaria.service';
+import { AlunoPauta, Disciplina, MenuService } from '../../../Services/ver-pauta-secretaria.service';
 
 @Component({
   selector: 'app-ver-pauta',

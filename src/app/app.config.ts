@@ -8,9 +8,9 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { DisciplinaService } from './services/disciplina.service';
+import { DisciplinaService } from './Services/disciplina.service';
 
-import { LoginService } from './services/login.service';
+import { LoginService } from './Services/login.service';
 
 
 import {
@@ -18,7 +18,7 @@ import {
   HttpClientModule,
   provideHttpClient,
 } from '@angular/common/http';
-import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { LacamentoNotasService } from './Services/lacamento-notas.service';
 
 // Interface de resposta de login
 export interface LoginResponse {

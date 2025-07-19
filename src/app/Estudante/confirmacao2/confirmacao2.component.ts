@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LateralComponent } from "../lateral/lateral.component";
-import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // importa a interface Disciplina
+import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../Services/confirmacao.service'; // importa a interface Disciplina
 
 @Component({
   selector: 'app-confirmacao2',

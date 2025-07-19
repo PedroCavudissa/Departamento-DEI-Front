@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LateralProfessorComponent } from "../lateral-professor/lateral-professor.component";
-import { ComunicadoService } from '../../services/comunicado.service';
+import { ComunicadoService } from '../../Services/comunicado.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Comunicado } from '../../models/comunicado.model';

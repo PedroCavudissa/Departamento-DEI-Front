@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ComunicadosService } from '../../../../services/comunicados.service';
+import { ComunicadosService } from '../../../../Services/comunicados.service';
 import { Comunicado, NovoComunicado } from '../../../../models/comunicados.model';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';

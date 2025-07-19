@@ -2,7 +2,7 @@
 import { Component,OnInit, TemplateRef } from '@angular/core';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component'; 
 import { CommonModule, NgIfContext } from '@angular/common';
-import { Professor, ProfessorService } from '../../services/professor.service';
+import { Professor, ProfessorService } from '../../Services/professor.service';
 import { FormsModule } from '@angular/forms';
 
 
