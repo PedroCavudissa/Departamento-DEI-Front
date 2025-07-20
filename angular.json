@@ -28,6 +28,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/Departamento-DEI-Front/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
