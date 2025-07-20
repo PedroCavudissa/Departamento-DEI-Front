@@ -22,21 +22,6 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
 
   private pieChart!: Chart;
 
-  // Exemplo de cores para o gráfico de barras
-  colors: Record<string, string> = {
-    'Janeiro': '#009cff',
-    'Fevereiro': 'orange',
-    'Março': 'gray',
-    'Abril': 'gold',
-    'Maio': '#4caf50'
-  };
-
-  // Configurações comuns
-  opts: any = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
-
   constructor(
     private router: Router,
     private relatorioService: RelatorioService
@@ -48,18 +33,16 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
 
   carregarDadosGrafico(): void {
     const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
-    const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
-
-    if (!pieCtx || !barCtx) return;
+    if (!pieCtx) return;
 
     if (this.pieChart) {
-      this.pieChart.destroy(); // Destrói gráfico anterior se existir
+      this.pieChart.destroy();
     }
 
     forkJoin({
       estudantes: this.relatorioService.getTotalEstudantes(),
       cadeiras: this.relatorioService.getTotalCadeiras(),
-      funcionarios: this.relatorioService.getTotalFuncionarios()
+      funcionarios: this.relatorioService.getTotalFuncionarios(),
     }).subscribe({
       next: ({ estudantes, cadeiras, funcionarios }) => {
         this.totalEstudantes = estudantes;
@@ -69,10 +52,9 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
         console.log('Totais recebidos:', {
           estudantes,
           cadeiras,
-          funcionarios
+          funcionarios,
         });
 
-        // Gráfico tipo "pizza"
         this.pieChart = new Chart(pieCtx, {
           type: 'doughnut',
           data: {
@@ -97,51 +79,17 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
                 },
               },
             },
-          }
-        });
-
-        // Gráfico de barras
-        const barLabels = Object.keys(this.colors);
-        new Chart(barCtx, {
-          type: 'bar',
-          data: {
-            labels: barLabels,
-            datasets: [
-              {
-                data: [100, 68, 38, 25, 10], // Exemplo
-                backgroundColor: barLabels.map(label => this.colors[label]),
-              },
-            ],
           },
-          options: {
-            ...this.opts,
-            plugins: {
-              legend: { display: false },
-            },
-            scales: {
-              y: { beginAtZero: true }
-            }
-          }
         });
       },
       error: (err) => {
         console.error('Erro ao carregar totais:', err);
-      }
+      },
     });
   }
 
-  verDetalhes(nome: string): void {
-    switch (nome) {
-      case 'funcionarios':
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-      case 'estudantes':
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
-      case 'cadeiras':
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-    }
+  verDetalhes(item: string) {
+   
   }
 
   ngOnDestroy(): void {
