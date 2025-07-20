@@ -2,14 +2,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
 import { filter, map, Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PerfilestudanteService {
 
- private baseUrl = `${environment.apiUrl}`; 
+ private apiUrl = `${environment.apiUrl}`; 
   
  constructor(private http: HttpClient) { }
     private getHeaders(): HttpHeaders {
@@ -34,7 +34,7 @@ alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
   // request() diretamente
   const req = new HttpRequest(
     'PUT',
-    `${this.baseUrl}/api/auth/me/update-password`,
+    `${this.apiUrl}/api/auth/me/update-password`,
     body,
     {
       headers: this.getHeaders(),
