@@ -48,6 +48,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
 import { ComunicadoEstudanteComponent } from './Estudante/comunicado-estudante/comunicado-estudante.component';
 import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/TelaFuncionario/TelaFuncionario.component';
+import { Component } from '@angular/core';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -125,5 +126,6 @@ export const routes: Routes = [
   { path: 'ver-pauta-secretaria', component: VerPautaSecretariaComponent , canActivate: [AuthGuard]},
   { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard] },
   { path: 'horario-secretaria', component: HorarioSecretariaComponent , canActivate: [AuthGuard]},
+  {path: 'confirmacoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] },
 
 ];

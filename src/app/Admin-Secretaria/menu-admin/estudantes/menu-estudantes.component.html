@@ -30,9 +30,9 @@
 
     <input [(ngModel)]="textoBusca" name="textoBusca" type="text" placeholder="Escreva aqui..." />
   </form>
-
+<div class="scroll-container" >
   <table>
-    <thead>
+     <thead>
       <tr>
         <th>Nome</th>
         <th>Nº Do Documento</th>
@@ -60,7 +60,7 @@
       </tr>
     </ng-template>
   </table>
-
+</div>
   <!-- MODAL -->
   <div class="modal" *ngIf="estudanteSelecionado">
     <div class="modal-content">
@@ -73,7 +73,7 @@
       <p><strong>Endereço:</strong> {{ estudanteSelecionado.endereco || '—' }}</p>
       <p><strong>Ano Acadêmico:</strong> {{ estudanteSelecionado.anoAcademico }}</p>
       <p><strong>Status:</strong> {{ estudanteSelecionado.statusEstudante }}</p>
-      <!-- Adicione mais campos se quiser -->
+      <p><strong>Data de Nascimento:</strong> {{ estudanteSelecionado.dataNascimento | date: 'dd/MM/yyyy' }}</p>
     </div>
   </div>
 </section>

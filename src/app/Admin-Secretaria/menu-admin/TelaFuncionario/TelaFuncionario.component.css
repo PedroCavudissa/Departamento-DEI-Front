@@ -274,8 +274,8 @@
   }
 
   .main-wrapper {
-    margin-left: 0;
-    width: 100%;
+    margin:60px auto;
+    width: 90%;
     padding: 15px;
   }
 

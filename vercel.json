@@ -1,6 +1,20 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/browser/**",
+      "use": "@vercel/static"
+    }
   ],
-  "public": "dist/departamento-dei/browser"
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "build": {
+    "env": {
+      "NODE_VERSION": "18"
+    }
+  }
 }

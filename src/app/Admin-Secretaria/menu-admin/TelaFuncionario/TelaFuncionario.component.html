@@ -26,23 +26,27 @@
       </div>
 
       <div class="filtros-wrapper">
-        <select class="select-funcao" [(ngModel)]="filtroFuncao" (change)="onBuscar()">
-          <option value="">Todas as funções</option>
-          <option value="SECRETARIA">Secretaria</option>
-          <option value="PROFESSOR">Professor</option>
-          <option value="ADMINISTRADOR">Administrador</option>
-          <option value="MONITOR">Monitor</option>
-        </select>
-
-        <input
-          type="text"
-          [(ngModel)]="pesquisaNome"
-          (input)="onPesquisaChange($any($event.target).value)"
-          placeholder="Pesquisar por nome ou documento"
-          class="campo-pesquisa-func"
-        />
-       
+        <div class="filtro-item">
+          <select class="select-funcao" [(ngModel)]="filtroFuncao" (change)="onBuscar()">
+            <option value="">Todas as funções</option>
+            <option value="SECRETARIA">Secretaria</option>
+            <option value="PROFESSOR">Professor</option>
+            <option value="ADMINISTRADOR">Administrador</option>
+            <option value="MONITOR">Monitor</option>
+          </select>
+        </div>
+      
+        <div class="filtro-item">
+          <input
+            type="text"
+            [(ngModel)]="pesquisaNome"
+            (input)="onPesquisaChange($any($event.target).value)"
+            placeholder="Pesquisar por nome ou documento"
+            class="campo-pesquisa-func"
+          />
+        </div>
       </div>
+      
 
       <div *ngIf="loading" class="loading-message">
         <div class="spinner"></div>
