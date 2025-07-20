@@ -68,14 +68,23 @@ export class MenuEstudantesComponent implements AfterViewInit {
   
 
   get estudantesFiltrados(): Estudante[] {
+    const normalizar = (texto: string) =>
+      texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  
     return this.estudantes.filter(d => {
-      const buscaTexto = this.textoBusca.toLowerCase();
-      const nomeMatch = d.nome.toLowerCase().includes(buscaTexto);
+      const buscaTexto = normalizar(this.textoBusca || '');
+  
+      const nomeMatch = d.nome && normalizar(d.nome).includes(buscaTexto);
+      const numDocumentoMatch = d.numIdentificacao && d.numIdentificacao.toLowerCase().includes(buscaTexto);
+      const anoAcademicoMatch = d.anoAcademico && d.anoAcademico.toString().includes(buscaTexto);
+      const statusMatch = d.statusEstudante && normalizar(d.statusEstudante).includes(buscaTexto);
+      
       const anoMatch = this.anoSelecionado === '' || d.anoAcademico === parseInt(this.anoSelecionado, 10);
-
-      return nomeMatch && anoMatch;
+  
+      return anoMatch && (nomeMatch || numDocumentoMatch || anoAcademicoMatch || statusMatch);
     });
   }
+  
   
   ngAfterViewInit(): void {
     this.gerarGraficos();

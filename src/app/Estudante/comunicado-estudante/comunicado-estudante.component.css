@@ -4,6 +4,9 @@
   flex-direction: column;
 }
 
+.comunicados-main{
+  margin:100px auto;
+}
 .content-area {
   flex: 1;
   padding: 2rem;

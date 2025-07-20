@@ -5,6 +5,7 @@ import { Professor, ProfessorService } from '../../services/professor.service';
 import { PerfiprofService } from '../../services/perfiprof.service';
 import { CommonModule } from '@angular/common';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-perfil-professor',
@@ -32,7 +33,8 @@ export class PerfilProfessorComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private professorService: ProfessorService,
-    private perfiprofService: PerfiprofService
+    private perfiprofService: PerfiprofService,
+    private notification: NotificationService
   ) {
     this.professor = {
       email: '',
@@ -136,6 +138,7 @@ export class PerfilProfessorComponent implements OnInit {
     if (this.formularioSenha.invalid) {
       this.formularioSenha.markAllAsTouched();
       this.mensagemErroSenha = 'Por favor, preencha todos os campos corretamente';
+      this.notification.error('Por favor, preencha todos os campos corretamente');
       return;
     }
 

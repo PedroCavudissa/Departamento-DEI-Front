@@ -4,13 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { EstudanteService, Estudante } from '../../../services/estudante.service';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { Notyf } from 'notyf';
+import { BarralateralSecretariaComponent } from '../../../Admin-Secretarias/barralateral-secretaria/barralateral-secretaria.component';
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarralateralComponent],
+  imports: [CommonModule, FormsModule, BarralateralSecretariaComponent],
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.css']
 })

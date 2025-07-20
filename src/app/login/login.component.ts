@@ -8,6 +8,7 @@ import {  NavigationEnd } from '@angular/router';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { LoginService } from '../services/login.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notification: NotificationService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -62,7 +64,7 @@ export class LoginComponent implements OnInit {
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-
+localStorage.removeItem('token');
 }
 
 // Senha esquecida
@@ -86,7 +88,7 @@ entrar() {
     this.loginService.entrar(usuario).subscribe({
       next: (res: unknown) => {
         const response = res as { token: string; email: string; role: string };
-        this.notyf.success('Login realizado com sucesso!');
+        this.notification.success('Login realizado com sucesso!');
 
         localStorage.setItem('token', response.token);
         localStorage.setItem('usuario', response.email);
@@ -111,13 +113,13 @@ entrar() {
       },
       error: (error: unknown) => {
         console.error('Erro ao logar:', error);
-        this.notyf.error('E-mail ou senha inválidos');
+        this.notification.error('E-mail ou senha inválidos');
       }
     });
 
   } else {
     this.loginForm.markAllAsTouched();
-    this.notyf.error('Preencha todos os campos corretamente.');
+    this.notification.error('Preencha todos os campos corretamente.');
   }
 }
 
@@ -126,7 +128,7 @@ entrar() {
 recuperar(): void {
   if (this.recuperarForm.invalid) {
     this.recuperarForm.markAllAsTouched();
-    this.notyf.success('Verifique a sua caixa de email!');
+    this.notification.success('Verifique a sua caixa de email!');
       this.fecharModal();
     return;
 

@@ -35,9 +35,7 @@
          <li><a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Funcionários' }"> <i class='bx bx-briefcase'></i>
            <span (click)="selecionarMenu('Funcionários','Funcionários')"tabindex="0" (keyup.enter)="selecionarMenu('Funcionários','Funcionários')">Funcionários</span> </a> </li>
                   
-        <li> <a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Matrículas' }"> <i class='bx bx-file'></i>
-          <span  (click)="selecionarMenu('Matrículas','Matrículas')" tabindex="0" (keyup.enter)="selecionarMenu('Matrículas','Matrículas')">Matrículas</span></a></li>
-      
+        
         <li> <a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Disciplinas' }"> <i class='bx bx-book-open'></i>
            <span (click)="selecionarMenu('Disciplinas','Disciplinas')" tabindex="0" (keyup.enter)="selecionarMenu('Disciplinas','Disciplinas')">Disciplinas</span> </a> </li>
                    

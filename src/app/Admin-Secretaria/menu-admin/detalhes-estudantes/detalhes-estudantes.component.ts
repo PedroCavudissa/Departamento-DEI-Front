@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-import { Estudante, EstudanteService } from '../../../services/estudante.service';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Estudante, EstudanteService } from '../../../services/estudante.service';
 
 @Component({
   selector: 'app-detalhes-estudantes',
