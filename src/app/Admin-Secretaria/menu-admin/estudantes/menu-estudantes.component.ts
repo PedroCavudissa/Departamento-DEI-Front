@@ -1,7 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-import { EstudanteService, Estudante } from '../../../services/estudante.service';
+import { EstudanteService, Estudante } from '../../../Services/estudante.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

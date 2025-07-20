@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Professor, ProfessorService } from '../../services/professor.service';
-import { PerfiprofService } from '../../services/perfiprof.service';
+import { Professor, ProfessorService } from '../../Services/professor.service';
+import { PerfiprofService } from '../../Services/perfiprof.service';
 import { CommonModule } from '@angular/common';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
 import { NotificationService } from '../../services/notification.service';
@@ -46,15 +46,21 @@ export class PerfilProfessorComponent implements OnInit {
         tipoDocumento: '',
         endereco: '',
         cargo: '',
-        anoAcademico: 0,
+        nivelAcademico: 0,
         curriculo: '',
         dataIngresso: '',
       }
     };
 
     this.formulario = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      endereco: ['', [Validators.required, Validators.minLength(5)]],
+        email: ['', [Validators.required, Validators.email]],
+        endereco: ['', [Validators.required, Validators.minLength(5)]],
+        tipoDocumento: [{value: '', disabled: true}],
+        dataIngresso: ['',],
+        dataNascimento: [{value: '', disabled: true}],
+        numDocumento: [{value: '', disabled: true}],
+        cargo:['',] ,
+        anoAcademico: ['',]
     });
 
     this.formularioSenha = this.fb.group({
@@ -173,14 +179,22 @@ export class PerfilProfessorComponent implements OnInit {
               nivelAcademico: res.userDetails.nivelAcademico || '',
               dataIngresso: res.userDetails.dataIngresso || '',
               cargo: res.userDetails.cargo || '',
-              curriculo: res.userDetails.curriculo || '',
-              anoAcademico: res.userDetails.anoAcademico || 0
+              curriculo: res.userDetails.curriculo || ''
+            
             }
           };
 
           this.formulario.patchValue({
             email: this.professor.email,
-            endereco: this.professor.userDetails.endereco
+            endereco: this.professor.userDetails.endereco,
+             dataNascimento: this.professor.userDetails.dataNascimento,
+              numDocumento: this.professor.userDetails.numDocumento,
+              tipoDocumento: this.professor.userDetails.tipoDocumento, 
+              nivelAcademico: this.professor.userDetails.nivelAcademico ,
+              dataIngresso: this.professor.userDetails.dataIngresso ,
+              cargo: this.professor.userDetails.cargo ,
+              curriculo: this.professor.userDetails.curriculo ,
+             
           });
         } else {
           this.mensagemErro = 'Estrutura de dados inválida da API';

@@ -1,6 +1,6 @@
 // tela-estudante.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Viestudante, ViestudanteService } from '../../services/viestudante.service';
+import { Viestudante, ViestudanteService } from '../../Services/viestudante.service';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
 
@@ -32,14 +32,10 @@ export class TelaEstudanteComponent implements OnInit {
       },
       error: (err: { message: string }) => {
         console.error('Erro ao buscar estudante:', err);
-        this.errorMessage = err.message || 'Erro desconhecido ao buscar estudante.';
         this.estudanteSelecionado = undefined;
       }
     });
-
-
   }
-
 }
 
 

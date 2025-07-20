@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
-import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // <== Adicione 'Disciplina'
+import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../Services/confirmacao.service'; // <== Adicione 'Disciplina'
 
 @Component({
   selector: 'app-confirmacao1',

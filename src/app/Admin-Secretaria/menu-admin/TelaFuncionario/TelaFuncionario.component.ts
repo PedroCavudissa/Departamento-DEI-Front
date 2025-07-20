@@ -6,7 +6,7 @@ import Chart from 'chart.js/auto';
 
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
-import { Funcionario, FuncionarioService } from '../../../services/cadastro.service';
+import { Funcionario, FuncionarioService } from '../../../Services/cadastro.service';
 
 @Component({
   selector: 'app-tela-funcionario',

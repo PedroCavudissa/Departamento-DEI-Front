@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ConfirmacaoService, Rupe, DadosAcademicos, Disciplina } from '../../services/confirmacao.service';
+import { ConfirmacaoService, Rupe, DadosAcademicos, Disciplina } from '../../Services/confirmacao.service';
 import { LateralComponent } from '../lateral/lateral.component';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';

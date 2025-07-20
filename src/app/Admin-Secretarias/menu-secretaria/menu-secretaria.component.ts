@@ -4,8 +4,8 @@ import { Chart, ChartConfiguration } from 'chart.js';
 
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
 
-import { MenuService } from '../../services/menu.service';
-import { RelatorioService } from '../../services/relatorio.service';
+import { MenuService } from '../../Services/menu.service';
+import { RelatorioService } from '../../Services/relatorio.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
