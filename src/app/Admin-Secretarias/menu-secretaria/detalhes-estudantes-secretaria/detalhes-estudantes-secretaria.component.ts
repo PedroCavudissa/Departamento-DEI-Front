@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { Estudante, EstudanteService } from '../../../Services/estudante.service';
+import { Estudante, EstudanteService } from '../../../services/estudante.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

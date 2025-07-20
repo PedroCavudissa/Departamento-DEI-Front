@@ -10,7 +10,7 @@ import { routes } from './app.routes';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { DisciplinaService } from './Services/disciplina.service';
 
-import { LoginService } from './Services/login.service';
+import { LoginService } from './services/login.service';
 
 
 import {
