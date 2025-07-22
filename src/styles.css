@@ -1,23 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 /* variáveis padrão */
 :root {
-    --bg-color: #f5f5f5;
-    --text-color: #000000;
-  }
-  
-  /* aplica as variáveis */
-  body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-  }
-  
-  /* tema escuro: quando a classe dark-theme estiver no body */
-  body.dark-theme {
-    --bg-color: #121212;
-    --text-color: #ffffff;
-  }
-  
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  --bg-color: #f5f5f5;
+  --text-color: #000000;
+}
+
+/* aplica as variáveis */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* tema escuro: quando a classe dark-theme estiver no body */
+body.dark-theme {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+}
+
+html, body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: 600;
+}

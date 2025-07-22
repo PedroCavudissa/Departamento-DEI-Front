@@ -292,13 +292,8 @@ mat-spinner {
   .comunicado-meta {
     flex-direction: column;
   }
-
-  .form-actions {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
 }
+
 /* === COMUNICADO INVALIDO - RISCADO COM FUNDO VERMELHO CLARO === */
 .riscado {
   background-color: #ffebee !important; /* vermelho claro */

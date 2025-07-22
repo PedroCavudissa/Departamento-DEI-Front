@@ -1,0 +1,48 @@
+<div class="matricula-container">
+
+  <section class="secao">
+    <h3 class="secao-titulo">RUPE</h3>
+    <button class="print-btn" (click)="imprimirRupe()">
+      <i class='bx bx-printer'></i> Imprimir RUPE
+    </button>
+    <div class="grid-dados" *ngIf="rupe; else semRupe">
+      <p><strong>Nome:</strong> {{ rupe.studentName }}</p>
+      <p><strong>Número do BI:</strong> {{ rupe.studentNumber }}</p>
+      <p><strong>RUPE:</strong> {{ rupe.rupeNumber }}</p>
+      <p><strong>Valor:</strong> {{ rupe.amount | currency:'AOA':'symbol' }}</p>
+      <p><strong>Data de Emissão:</strong> {{ rupe.emissionDate | date }}</p>
+      <p><strong>Data de Vencimento:</strong> {{ rupe.expirationDate | date }}</p>
+      <p>
+        <strong>Status:</strong>
+        <span [ngStyle]="{ color: rupe.status === 'PAID' ? 'green' : 'red' }">
+          {{ rupe.status }}
+        </span>
+      </p>
+    </div>
+
+    <ng-template #semRupe>
+      <p><strong>Nenhum RUPE gerado.</strong></p>
+    </ng-template>
+
+    <p class="mensagem">{{ mensagem }}</p>
+  </section>
+
+  <div class="pagination">
+    <span class="page active">1</span>
+    <span class="page active">2</span>
+    <span class="page active">3</span>
+  </div>
+
+  <div class="button-container">
+    <button class="back-btn" (click)="confi2()"><i class="bx bx-arrow-from-right"></i></button>
+    <button class="confirm-btn" (click)="finalizarConfirmacao()" [disabled]="!rupe || rupe.status !== 'PAID'">
+      Concluir
+    </button>
+  </div>
+
+  
+  
+
+</div>
+
+<app-lateral></app-lateral>

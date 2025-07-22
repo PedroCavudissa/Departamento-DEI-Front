@@ -1,3 +1,7 @@
+<!-- TÍTULO -->
+<div class="titulo-container">
+  <h2 class="titulo">📅 Calendário de Atividades</h2>
+</div>
 
 <body>
   
@@ -63,6 +67,7 @@
       <strong>{{ evento.data }}</strong> — <span class="titulo-evento">{{ evento.titulo }}</span>
       <span class="tipo">({{ evento.tipo }})</span>
       <a *ngIf="evento.link" [href]="evento.link" target="_blank">🔗 Mais informações</a>
+
     </li>
   </ul>
 </main>
@@ -71,9 +76,17 @@
 <div *ngIf="mostrarFormulario" class="overlay">
   <div class="form-container">
     <form (ngSubmit)="salvarEvento()" #eventoForm="ngForm">
+
       <button type="button" class="close-btn" (click)="fecharFormulario()">×</button>
 
       <h3 class="form-titulo">Novo Evento</h3>
+
+
+
+      <button type="button" class="close-btn" (click)="fecharFormulario()">×</button>
+
+      <h3 class="form-titulo">Novo Evento</h3>
+
 
       <label for="data">📆 Data</label>
       <input type="text" id="data" name="data" placeholder="dd/mm/aaaa" [(ngModel)]="data" required />
@@ -85,6 +98,7 @@
       <input type="text" id="tipo" name="tipo" [(ngModel)]="tipo" required />
 
       <label for="link">🔗 Link (opcional)</label>
+
       <input type="text" id="link" name="link" [(ngModel)]="link" />
 
       <button type="submit" class="btn-salvar">Salvar</button>
@@ -98,3 +112,4 @@
 </div>
 
 <app-barralateral-secretaria></app-barralateral-secretaria>
+

@@ -1,51 +1,58 @@
+
 import { Component, OnInit } from '@angular/core';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { DisciplinaEmAtraso, DisciplinaService } from '../../../services/disciplina.service';
+import {  Disciplina, DisciplinaService } from '../../../services/disciplina.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 const estudanteId = 1;
 @Component({
   selector: 'app-detalhes-cadeiras-secretaria',
+  standalone: true,
   imports: [BarralateralSecretariaComponent,FormsModule,CommonModule],
   templateUrl: './detalhes-cadeiras-secretaria.component.html',
   styleUrls: ['./detalhes-cadeiras-secretaria.component.css'],
 })
-export class DetalhesCadeirasSecretariaComponent implements OnInit {
+export class DetalhesCadeirasSecretariaComponent  {
+  disciplinas: Disciplina[] = [];
+  anoSelecionado: string = '';
+  textoBusca: string = '';
+  disciplinaSelecionada: any = null;
 
-  disciplinas: DisciplinaEmAtraso[] = [];
-  errorMessage: string | null = null;
+  verDetalhes(disciplina: any) {
+    this.disciplinaSelecionada = disciplina;
+  }
   
-
+  fecharModal() {
+    this.disciplinaSelecionada = null;
+  }
   constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {
-    this.carregarEstudantes();
+    this.carregarDisciplinas();
   }
 
-  carregarEstudantes(): void {
-    this.disciplinaService.getDisciplinas(estudanteId)
-.subscribe({
-      next: (data) => {
-        this.disciplinas = data;
-        this.errorMessage = null;
+  carregarDisciplinas(): void {
+    this.disciplinaService.getDisciplinas().subscribe({
+      next: (dados) => {
+        this.disciplinas = dados;
+        console.log('Disciplinas:', dados);
       },
       error: (err) => {
-        console.error('Erro detalhado:', err);
-        this.errorMessage = this.getErrorMessage(err);
-        this.disciplinas = [];
+        console.error(' Erro ao carregar disciplinas:', err);
+        alert('Erro ao carregar disciplinas. Por favor, tente novamente mais tarde.');
       }
+      
     });
   }
-
-  private getErrorMessage(err: Error): string {
-    if (err.message.includes('HTML em vez de dados JSON')) {
-      return 'O servidor está retornando uma página HTML. Verifique:';
-    } else if (err.message.includes('JSON válido')) {
-      return 'Os dados recebidos não estão no formato correto.';
-    }
-    return err.message;
-// eslint-disable-next-line no-irregular-whitespace
-  }
-
+  get disciplinasFiltradas(): Disciplina[] {
+    return this.disciplinas.filter(d => {
+      const buscaTexto = this.textoBusca.toLowerCase();
+      const nomeMatch = d.nome.toLowerCase().includes(buscaTexto);
+      const anoMatch = this.anoSelecionado === '' || d.anoAcademico === this.anoSelecionado;
+      return nomeMatch && anoMatch;
+    });
+  }
+  
 }
+

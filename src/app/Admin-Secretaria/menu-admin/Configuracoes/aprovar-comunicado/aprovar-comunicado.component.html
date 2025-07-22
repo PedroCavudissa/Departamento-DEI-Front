@@ -2,8 +2,6 @@
   <app-barralateral></app-barralateral>
   <h1 class="titulo-pagina">Gerenciar Comunicados</h1>
 
-
-
   <!-- Formulário de edição/criação -->
   <mat-card class="card-form" id="formulario-comunicado">
     <h2>{{ modoEdicao ? 'Editar Comunicado' : 'Novo Comunicado' }}</h2>
@@ -63,9 +61,8 @@
     </div>
   </mat-card>
 
-  <!-- FILTAR  de comunicados -->
-
-<app-comunicadosf>  </app-comunicadosf>
+  <!-- FILTRO de comunicados -->
+  <app-comunicadosf></app-comunicadosf>
 
   <!-- Lista de comunicados -->
   <div *ngIf="carregando && comunicados.length === 0" class="loading-state">

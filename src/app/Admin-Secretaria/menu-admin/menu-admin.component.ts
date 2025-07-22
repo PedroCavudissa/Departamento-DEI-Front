@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { MenuAdminService } from '../../Services/relatorio.service';
-import { BarralateralComponent } from '../barralateral/barralateral.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+import { forkJoin } from 'rxjs';
+import { RelatorioService } from '../../services/relatorio.service';
+import { BarralateralComponent } from '../barralateral/barralateral.component';
 
 Chart.register(...registerables);
 
@@ -12,75 +13,78 @@ Chart.register(...registerables);
   imports: [BarralateralComponent],
   templateUrl: './menu-admin.component.html',
   styleUrls: ['./menu-admin.component.css'],
-  providers: [MenuAdminService],
 })
-export class MenuAdminComponent {
-  colors: Record<string, string> = {
-    '1º Ano': '#009cff',
-    '2º Ano': '#ff9400',
-    '3º Ano': '#808080',
-    '4º Ano': '#ffe600',
-    '5º Ano': '#004080',
-  };
-
-  opts: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
-
-  estudantes: unknown;
-  totalEstudantes = 0;
+export class MenuAdminComponent implements OnInit, OnDestroy {
   totalFuncionarios = 0;
+  totalCadeiras = 0;
+  totalEstudantes = 0;
 
-  constructor(private router: Router, private service: MenuAdminService) {}
+  private pieChart!: Chart;
+
+  constructor(
+    private router: Router,
+    private relatorioService: RelatorioService
+  ) {}
 
   ngOnInit(): void {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-    }
+    this.carregarDadosGrafico();
   }
 
-  async ngAfterViewInit(): Promise<void> {
-    try {
-      const [estudantes, funcionarios] = await Promise.all([
-        this.service.getTotalEstudantes(),
-        this.service.getTotalFuncionarios(),
-      ]);
+  carregarDadosGrafico(): void {
+    const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
+    if (!pieCtx) return;
 
-      this.totalEstudantes = estudantes;
-      this.totalFuncionarios = funcionarios;
+    if (this.pieChart) {
+      this.pieChart.destroy();
+    }
 
-      const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
-      new Chart(pieCtx, {
-        type: 'doughnut',
-        data: {
-          labels: ['Funcionários', 'Estudantes', 'Cadeiras', 'Salas'],
-          datasets: [
-            {
-              data: [funcionarios, estudantes, 52, 70],
-              backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'right',
-              align: 'start',
-              labels: {
-                boxWidth: 30,
-                padding: 10,
+    forkJoin({
+      estudantes: this.relatorioService.getTotalEstudantes(),
+      cadeiras: this.relatorioService.getTotalCadeiras(),
+      funcionarios: this.relatorioService.getTotalFuncionarios(),
+    }).subscribe({
+      next: ({ estudantes, cadeiras, funcionarios }) => {
+        this.totalEstudantes = estudantes;
+        this.totalCadeiras = cadeiras;
+        this.totalFuncionarios = funcionarios;
+
+        console.log('Totais recebidos:', {
+          estudantes,
+          cadeiras,
+          funcionarios,
+        });
+
+        this.pieChart = new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
+            datasets: [
+              {
+                data: [funcionarios, estudantes, cadeiras],
+                backgroundColor: ['#009cff', 'orange', 'gray'],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                align: 'start',
+                labels: {
+                  boxWidth: 30,
+                  padding: 10,
+                },
               },
             },
           },
-        },
-      });
-    } catch (error) {
-      console.error('Erro ao carregar dados dos gráficos', error);
-    }
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao carregar totais:', err);
+      },
+    });
   }
 
   verDetalhes(item: string) {
@@ -94,6 +98,12 @@ export class MenuAdminComponent {
       case 'Estudantes':
         this.router.navigate(['/detalhes-estudantes']);
         break;
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.pieChart) {
+      this.pieChart.destroy();
     }
   }
 }

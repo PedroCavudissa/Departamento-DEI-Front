@@ -4,10 +4,15 @@ import { CommonModule } from '@angular/common';
 import { OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import {  NavigationEnd } from '@angular/router';
+
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
+<<<<<<< HEAD
 import { LoginService } from '../Services/login.service';
 
+=======
+import { LoginService } from '../services/login.service';
+>>>>>>> origin
 
 @Component({
   selector: 'app-login',
@@ -18,6 +23,7 @@ import { LoginService } from '../Services/login.service';
 
 })
 export class LoginComponent implements OnInit {
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -25,6 +31,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+
         this.mostrarSidebar = event.url !== '/login';
       }
     });
@@ -33,16 +40,20 @@ export class LoginComponent implements OnInit {
  notyf = new Notyf({
   duration: 3000,
   position: {
+<<<<<<< HEAD
     x: 'right',
+=======
+    x: 'center',
+>>>>>>> origin
     y: 'top',
   },
 });
 
   mostrarSidebar = true;
   mensagemLogin = '';
-tipoMensagem: 'erro' | 'sucesso' | '' = '';
-mostrarModal = false;
-recuperarForm!: FormGroup;
+  tipoMensagem: 'erro' | 'sucesso' | '' = '';
+  mostrarModal = false;
+  recuperarForm!: FormGroup;
 
 
   loginForm!: FormGroup;
@@ -60,6 +71,10 @@ recuperarForm!: FormGroup;
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
 
+<<<<<<< HEAD
+=======
+localStorage.removeItem('token');
+>>>>>>> origin
 }
 
 // Senha esquecida
@@ -70,12 +85,8 @@ recuperarForm!: FormGroup;
 fecharModal() {
   this.mostrarModal = false;
 }
-/*
-alterarSenha() {
-  if (this.recuperarForm.valid) {
-    const email = this.recuperarForm.get('gmail')?.value;
-    const senha = this.recuperarForm.get('senha')?.value;
 
+<<<<<<< HEAD
     const dados = { email, senha };
 
     this.loginService.recuperarSenha().subscribe({
@@ -98,6 +109,9 @@ alterarSenha() {
 }
 
 */
+=======
+alterarSenha(){}
+>>>>>>> origin
 
 entrar() {
   if (this.loginForm.valid) {
@@ -110,18 +124,25 @@ entrar() {
       next: (res: unknown) => {
         const response = res as { token: string; email: string; role: string };
         this.notyf.success('Login realizado com sucesso!');
+<<<<<<< HEAD
         localStorage.setItem('token', response.token);
         localStorage.setItem('usuario', response.email);
 
+=======
+
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.email);
+
+>>>>>>> origin
         const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
-          case 'admin':
+          case 'SECRETARIA':
             this.router.navigate(['/menu-secretaria']);
             break;
-          case 'professor':
+          case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
             break;
           case 'ESTUDANTE':
@@ -144,21 +165,31 @@ entrar() {
 }
 
 
+<<<<<<< HEAD
   cadastro(){
 
     this.router.navigate(['/cadastro']);
   }
+=======
+>>>>>>> origin
 
-  continuarRecuperacao() {
-    if (this.recuperarForm.valid) {
-      const email = this.recuperarForm.get('gmail')?.value;
-      console.log('Redirecionar com email:', email);
-      this.mostrarModal = false;
-      this.router.navigate(['/recuperar-senha']);
-    } else {
-      this.recuperarForm.markAllAsTouched();
-    }
+recuperar(): void {
+  if (this.recuperarForm.invalid) {
+    this.recuperarForm.markAllAsTouched();
+    this.notyf.success('Verifique a sua caixa de email!');
+      this.fecharModal();
+    return;
+
+<<<<<<< HEAD
+
+}
+=======
   }
+  const email = this.recuperarForm.get('email')?.value;
+ 
+ 
 
 
 }
+}
+>>>>>>> origin

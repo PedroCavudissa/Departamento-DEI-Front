@@ -1,8 +1,10 @@
+// src/app/components/cadeira/cadeira.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
-import { DisciplinaService, DisciplinaEmAtraso } from "../../services/disciplina.service";
+import {  CadeirasService, DisciplinaEmAtraso } from "../../services/cadeiras.service";
 
 @Component({
   selector: 'app-cadeira',
@@ -12,15 +14,23 @@ import { DisciplinaService, DisciplinaEmAtraso } from "../../services/disciplina
   styleUrls: ['./cadeira.component.css']
 })
 export class CadeiraComponent implements OnInit {
-  estudanteId = 1; // Substitua pelo ID real do estudante logado
   disciplinas: DisciplinaEmAtraso[] = [];
 
-  constructor(private disciplinaService: DisciplinaService) {}
+  constructor(private cadeirasService: CadeirasService) {}
 
   ngOnInit(): void {
-    this.disciplinaService.getDisciplinas(this.estudanteId).subscribe({
-      next: (dados) => this.disciplinas = dados,
-      error: (err) => console.error('Erro ao buscar disciplinas', err)
+    this.cadeirasService.getDisciplinasEmAtraso().subscribe({
+      next: (dados) => {
+        this.disciplinas = dados.map(d => ({
+          ...d,
+          ano_academico: typeof d.ano_academico === 'string' ? Number(d.ano_academico) : d.ano_academico,
+          semestre: d.semestre ?? '',
+          status: d.status ?? 'desconhecido'
+        }));
+      },
+      error: (err) => {
+        console.error('Erro ao buscar disciplinas em atraso:', err);
+      }
     });
   }
 }

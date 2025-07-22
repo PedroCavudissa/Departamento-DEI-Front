@@ -1,0 +1,124 @@
+.matricula-container {
+  max-width: 600px;
+  margin: 150px auto;
+  padding: 8px;
+  margin-left: 550px;
+}
+
+.secao {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 40px 8px 8px 8px;
+  margin-bottom: 15px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.secao-titulo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 98%;
+  margin: 0;
+}
+
+.grid-dados {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.mensagem {
+  margin-top: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.page {
+  width: 28px;
+  height: 28px;
+  border: 1px solid #47B5FF;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 26px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #47B5FF;
+  background-color: white;
+}
+
+.page.active {
+  background-color: #47B5FF;
+  color: white;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.print-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.back-btn,
+.confirm-btn,
+.print-btn {
+  padding: 10px 16px;
+  background-color: #47B5FF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.back-btn:hover,
+.confirm-btn:hover,
+.print-btn:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+
+/* Responsivo geral */
+@media (max-width: 600px) {
+  .matricula-container {
+    padding: 12px;
+    margin: 100px auto;
+    overflow-y: hidden;
+  }
+
+  .secao-titulo {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  .page {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+  }
+}

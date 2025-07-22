@@ -1,19 +1,29 @@
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-<body>
-    <div class="container">
-      
-        <div class="card">
-          
-          <div class="aluno-dados">
-            <h3>Dados</h3>
-            <p><strong>Nome:</strong> Vivaldo Vieira</p>
-            <p><strong>Contacto:</strong> 20231234 </p>
-            <p><strong>Cadeira(s) a lecionar:</strong> Analise /Fisica</p>
-            <p><strong>Grau:</strong> Engenheiro</p>
-            <p><strong>Nivel na instituição:</strong> contratado</p>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
-          </div>
-        </div>
+<div class="container">
+  <div class="card">
+    <img src="assets/imagens/estudante-masculino.png" alt="Perfil do Professor" />
+
+    <div class="info">
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
       </div>
-</body>
+
+      <div *ngIf="professorSelecionado; else noProfessores">
+        <h3>Dados Acadêmicos</h3>
+        <p><strong>Nome:</strong> {{ professorSelecionado.nome }}</p>
+        <p><strong>Cargo:</strong> {{ professorSelecionado.userDetails.cargo }}</p>
+        <p><strong>Data de Ingresso:</strong> {{ professorSelecionado.userDetails.dataIngresso | date:'shortDate' }}</p>
+        <p><strong>Nº Documento:</strong> {{ professorSelecionado.userDetails.numDocumento }}</p>
+        <p><strong>Endereço:</strong> {{ professorSelecionado.userDetails.endereco }}</p>
+        <p><strong>Data de Nascimento:</strong> {{ professorSelecionado.userDetails.dataNascimento | date:'shortDate' }}</p>
+      </div>
+
+      <ng-template #noProfessores>
+        <p>Nenhum professor encontrado.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
 <app-lateral-professor></app-lateral-professor>

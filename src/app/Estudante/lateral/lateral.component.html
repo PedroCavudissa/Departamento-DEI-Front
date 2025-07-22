@@ -5,64 +5,59 @@
 <!--Barra -Superior-->
 <button class="hamburger" (click)="toggleMenu()">☰</button>
 <div class="supbar">
-  <h2 id="nome">{{titulo}}</h2>
-  <div class="icons">
-    <div class="icon" (click)="selecionarMenu('Notificação','Notificação')" tabindex="0" (keyup.enter)="selecionarMenu('','')">
-      <i class="bx bx-bell"></i>
-      <span class="badge">1</span>
-      <p>Notificações</p>
-    </div>
-    <div class="icon" (click)="selecionarMenu('Perfil','Perfil')" tabindex="0" (keyup.enter)="selecionarMenu('','')">
-      <i class="bx bx-user"></i>
-      <p>Perfil</p>
-    </div>
-  </div>
+ 
 </div>
 
 <!-- Barra-Lateral -->
 <nav class="sidebar" [class.active]="menuAtivo">
   <ul>
     <div class="scroll-container">
-      <li>
-        <a class="menu-link">
-          <i class='bx bx-home'></i>
-          <span (click)="selecionarMenu('Página Inicial','Página Inicial')" tabindex="0" (keyup.enter)="selecionarMenu('Página Inicial','Olá, Pedro José Cavudissa')">Página Inicial</span>
-        </a>
+      <li><a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Página Inicial' }">
+          <i class='bx bx-home'></i><span (click)="selecionarMenu('Página Inicial','Página Inicial')" tabindex="0" (keyup.enter)="selecionarMenu('Página Inicial','Olá, Pedro José Cavudissa')">Página Inicial</span></a></li>
+      <li><a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Perfil' }"><i class='bx bx-user'></i><span (click)="selecionarMenu('Perfil','Perfil')" tabindex="0" (keyup.enter)="selecionarMenu('Perfil','Perfil')">Perfil</span></a>
       </li>
 
       <li>
-        <a class="menu-link">
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Confirmação da Matrícula' }">
           <i class='bx bx-book'></i>
           <span (click)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')" tabindex="0" (keyup.enter)="selecionarMenu('Confirmação da Matrícula','Confirmação da Matrícula')">Confirmação da Matrícula</span>
         </a>
       </li>
 
       <li>
-        <a class="menu-link">
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Minhas Notas' }" >
           <i class='bx bx-certification'></i>
           <span (click)="selecionarMenu('Minhas Notas','Minhas Notas')" tabindex="0" (keyup.enter)="selecionarMenu('Minhas Notas','Minhas Notas')">Minhas Notas</span>
         </a>
       </li>
+      <li>
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Comunicado' }" >
+          <i class='bx bx-message'></i>
+          <span (click)="selecionarMenu('Comunicado','Comunicado')" tabindex="0" (keyup.enter)="selecionarMenu('Comunicado','Comunicado')">Comunicados</span>
+        </a>
+      </li>
 
       <li>
-        <a class="menu-link">
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Calendario' }" >
+          <i class='bx bx-message'></i>
+          <span (click)="selecionarMenu('Calendario','Calendario')" tabindex="0" (keyup.enter)="selecionarMenu('Calendario','Calendario')">Calendario</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Disciplinas em Atraso' }">
           <i class='bx bx-time-five'></i>
           <span (click)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')" tabindex="0" (keyup.enter)="selecionarMenu('Disciplinas em Atraso','Disciplinas em Atraso')">Disciplinas em Atraso</span>
         </a>
       </li>
 
-            <li><a  class="menu-link"> <i class='bx bx-chat'></i>
+            <li><a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Chat' }"> <i class='bx bx-chat'></i>
               <span (click)="selecionarMenu('Chat','Chat')" tabindex="0" (keyup.enter)="selecionarMenu('Chat','Chat')">Chat</span> </a> </li>
           
-              <li><a  class="menu-link"> <i class='bx bx-log-out'></i>
+              <li><a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Sair' }"> <i class='bx bx-log-out'></i>
                 <span (click)="selecionarMenu('Sair','Sair')" tabindex="0" (keyup.enter)="selecionarMenu('Sair','Sair')">Sair</span> </a> </li>
             
   </div>
-        </ul>
-      
-    </nav> 
- 
-
+   </ul>
     
-
-
+    </nav> 

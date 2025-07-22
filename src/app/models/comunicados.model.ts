@@ -10,4 +10,3 @@ export interface Comunicado {
 }
 
 export type NovoComunicado = Omit<Comunicado, 'id' | 'nomeFuncionario' | 'dataPublicacao'>;
-

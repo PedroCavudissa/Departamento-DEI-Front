@@ -1,75 +1,169 @@
-
-*{
+/* RESET */
+* {
   margin: 0;
   padding: 0;
-}.card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 5px;
-    border: 1px solid #333;
-    transition: transform 0.2s ease;
-    width: 180px;
-    height: 80px;
-    margin-bottom: 2%;
-  
-  }
-  .card.blue {
-    border-left: 5px solid blue;
-  }
-  .card h3 {
-    font-size: 14px;
-    color: #444;
-    margin: 0;
-   
-  }
-  .card .number {
-    font-size: 32px;
-    font-weight: bold;
-    margin-top: 8px;
-   
-  }
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    padding: 20px;
-    width: 100%;
-    overflow-y: hidden;
-    height: 100vh;
-  }
-  .container { max-width:1000px; margin:0 auto;margin-top: 7%; margin-left: 22%;}
-  
-  h2 { margin:24px 0 12px; font-size:16px; text-transform:uppercase; color:#333; }
-  .form-search { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-  .form-search select, .form-search input { flex:1; min-width:120px; padding:8px 12px; font-size:14px; border:1px solid #ccc; border-radius:4px; }
-  .form-search button { padding:8px 12px; font-size:14px; border:none; border-radius:4px; cursor:pointer; }
-  .btn-new { background:#009cff; color:#fff; }
-  .btn-search { background:#222; color:#fff; }
-  .results { background:#fff; border-radius:8px; height:200px; }
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f4f8;
+  padding: 20px;
+  height: 100vh;
+  overflow-x: hidden;
+}
 
-  
-  @media (max-width: 768px) {
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    
-    }
-    .container {
-      margin: 30% auto 0 auto;  /* Centraliza horizontalmente e dá espaço superior */
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80%;
-      overflow-x: hidden;
-      
-    }
-    .results { background: #fff; 
-      border-radius: 8px; padding: 16px;
-       box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-       width: 100%;
-       height: 85%;
+/* CONTAINER GERAL */
+.container {
+  max-width: 1000px;
+  margin-left: 22%;
+  margin-top: 7%;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* FORM DE BUSCA */
+.form-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-search select,
+.form-search input {
+  flex: 1;
+  min-width: 150px;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
+}
+
+.form-search select:focus,
+.form-search input:focus {
+  border-color: #009cff;
+  outline: none;
+}
+
+/* TABELA DE RESULTADOS */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+thead {
+  background-color: #009cff;
+  color: white;
+  text-align: left;
+}
+
+th, td {
+  padding: 14px 16px;
+  font-size: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #eef7ff;
+}
+
+/* SEM DADOS */
+tbody td[colspan] {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+  padding: 20px;
+}
+
+
+.btn-acao {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  color: #009cff;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.btn-acao:hover {
+  color: #0073b1;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.modal-content p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #999;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .container {
+    margin: 30% auto 0 auto;
+    width: 80%;
+    padding: 16px;
+    font-size: 14px;
+    overflow-y: auto;
   }
 
+  .form-search {
+    flex-direction: column;
   }
-  
+
+  table, thead, tbody, th, td, tr {
+    font-size: 14px;
+  }
+}
