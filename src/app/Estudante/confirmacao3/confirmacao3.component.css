@@ -107,8 +107,8 @@ button:disabled {
 @media (max-width: 600px) {
   .matricula-container {
     padding: 12px;
-    margin: 100px auto;
-    overflow-y: hidden;
+    margin: 200px auto;
+    overflow-y: auto;
   }
 
   .secao-titulo {

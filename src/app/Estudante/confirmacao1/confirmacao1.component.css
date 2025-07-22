@@ -15,7 +15,7 @@
   padding-top: 48px;
   margin-bottom: 20px;
   background-color: #fff;
-  overflow: hidden;
+  overflow: auto;
 }
 
 /* Título da seção */
@@ -36,7 +36,7 @@
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 20px;
-  overflow: hidden;
+  overflow: auto;
   margin-bottom: 20px;
 }
 
@@ -109,7 +109,8 @@
 @media (max-width: 600px) {
   .container {
     padding: 12px;
-    margin: 100px auto;
+    margin: 200px auto;
+    overflow-y: auto;
   }
 
   .secao-titulo {

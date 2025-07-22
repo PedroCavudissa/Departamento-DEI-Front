@@ -88,18 +88,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
   }
 
   verDetalhes(item: string) {
-    switch (item.toLowerCase()) {
-      case 'cadeiras':
-      case 'salas':
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-      case 'funcionários':
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-     
-      default:
-        console.warn('Item desconhecido:', item);
-    }
+
   }
 
   ngOnDestroy(): void {

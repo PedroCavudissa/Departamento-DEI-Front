@@ -108,12 +108,12 @@
   }
   
   /* ---------------------------- */
-  /* 📱 Responsividade */
-  /* ---------------------------- */
   @media (max-width: 768px) {
     .content-area {
       padding: 1rem;
-      margin: 20px auto;
+      margin: 100px auto;
+      overflow: auto;
+      width:90%;
     }
   
     .comunicado-header h2 {

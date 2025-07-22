@@ -1,16 +1,11 @@
 <!-- Estrutura principal do layout -->
 <div class="pagina-wrapper">
-  <app-barralateral></app-barralateral>
-
+ 
   <div class="conteudo-principal">
-    <div class="supbar">
-      <h2>Funcionários</h2>
-    </div>
+    
 
     <div class="main-wrapper">
-      <h2 class="titulo-principal">
-        Total de Funcionários: <span>{{ funcionarios.length }}</span>
-      </h2>
+      
 
       <div class="graficos">
         <div class="grafico-box">
@@ -25,7 +20,9 @@
         </div>
       </div>
 
-      <div class="filtros-wrapper">
+    
+      <div class="form-search"><br>
+     
         <select class="select-funcao" [(ngModel)]="filtroFuncao" (change)="onBuscar()">
           <option value="">Todas as funções</option>
           <option value="SECRETARIA">Secretaria</option>

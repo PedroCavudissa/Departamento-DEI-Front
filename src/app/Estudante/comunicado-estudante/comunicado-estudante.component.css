@@ -4,9 +4,6 @@
   flex-direction: column;
 }
 
-.comunicados-main{
-  margin:100px auto;
-}
 .content-area {
   flex: 1;
   padding: 2rem;
@@ -111,12 +108,12 @@
 }
 
 /* ---------------------------- */
-/* 📱 Responsividade */
-/* ---------------------------- */
 @media (max-width: 768px) {
   .content-area {
     padding: 1rem;
-    margin: 20px auto;
+    margin: 100px auto;
+    overflow: auto;
+    width:90%;
   }
 
   .comunicado-header h2 {
@@ -136,7 +133,6 @@
 @media (max-width: 480px) {
   .comunicado-card {
     padding: 1rem;
-    margin: 20px auto;
   }
 
   .comunicado-header {
@@ -150,8 +146,5 @@
 
   .error-state button {
     width: 100%;
-  }
-  main{
-    margin: 20px auto;
   }
 }

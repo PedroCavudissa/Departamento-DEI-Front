@@ -1,47 +1,33 @@
-
-/* Conteúdo principal */
-.main-wrapper {
-  margin-left: 350px;
-  padding: 20px;
-  margin-top: 60px;
-  width: calc(100% - 550px);
-  background-color: #ffffff;
-  min-height: calc(100vh - 60px);
+*{
+  margin :0px;
+  padding:0px;
 }
-
-.titulo-principal {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2c3e50;
-}
-
-.titulo-principal span {
-  color: #47B5FF;
-  font-weight: bold;
+.pagina-wrapper{
+  margin:150px auto;
 }
 
 /* Container dos gráficos */
 .graficos {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  margin-bottom: 40px;
+  gap: 25px;
+  margin-bottom: 80px;
   flex-wrap: wrap;
+  margin-left: 180px;
+ 
 }
-
 /* Caixa do gráfico */
 .grafico-box {
-  background-color: white;
-  padding: 20px;
+  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
-  height: 300px;
+  border: 1px solid #333;
+  width: 42%;
+  padding: 16px;
+  box-shadow: 1px 5px 4px rgba(0,0,0,0.1);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  flex-direction: column;
+  margin-top: -40px;
+
 }
 
 /* Container interno do gráfico */
@@ -61,62 +47,30 @@
   height: auto !important;
 }
 
-/* Área de filtros */
-.filtros-wrapper {
+/* FORM DE BUSCA */
+.form-search {
   display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-/* Dropdown de função */
-.select-funcao {
-  padding: 12px 15px;
-  border: 1px solid #47B5FF;
-  border-radius: 6px;
-  background-color: #E0F0FF;
-  color: #0b3c5d;
-  font-size: 16px;
-  min-width: 200px;
-  width: 100%;
-  max-width: 300px;
-  box-sizing: border-box;
-  transition: all 0.3s ease;
+.form-search select,
+.form-search input {
+  flex: 1;
+  width:75%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
 }
 
-/* Campo de pesquisa */
-.campo-pesquisa-func {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  min-width: 200px;
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
+.select-funcao{
+  width: 20px;
+  color: #47B5FF;
 }
-
-/* Botão de busca */
-.buscar-btn {
-  padding: 12px 20px;
-  background-color: #47B5FF;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-  width: 100%;
-  max-width: 150px;
-  box-sizing: border-box;
-}
-
-.buscar-btn:hover {
-  background-color: #3a9de0;
-}
-
 /* Mensagem de carregamento */
 .loading-message {
   display: flex;
@@ -135,37 +89,27 @@
   height: 20px;
   animation: spin 1s linear infinite;
 }
-
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 /* Mensagem sem resultados */
 .no-results {
   text-align: center;
   padding: 30px;
   color: #666;
-  background-color: #f8f9fa;
+  background-color: #fff;
   border-radius: 4px;
+  width:75%;
+  margin-top: 40px;
+  margin-left: 265px;
 }
-
-/* Container da tabela com scroll */
-.scroll-container {
-  overflow-x: auto;
-  margin-top: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  -webkit-overflow-scrolling: touch;
-}
-
 /* Estilos da tabela */
 .tabela-funcionarios {
   width: 100%;
   border-collapse: collapse;
   min-width: 600px;
 }
-
 .tabela-funcionarios th {
   background-color: #47B5FF;
   color: white;
@@ -285,16 +229,11 @@
     transform: translateX(0);
   }
 
-  .supbar {
-    width: 100%;
-    left: 0;
-    justify-content: flex-start;
-    padding-left: 60px;
-  }
+
 
   .main-wrapper {
     margin-left: 0;
-    width: 100%;
+    width: 90%;
     padding: 15px;
   }
 
@@ -310,7 +249,7 @@
   .select-funcao, 
   .campo-pesquisa-func, 
   .buscar-btn {
-    max-width: 100%;
+    max-width: 90%;
   }
 
   .titulo-principal {

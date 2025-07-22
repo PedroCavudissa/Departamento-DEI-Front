@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { EstudanteService, Estudante } from '../../../services/estudante.service';
 
 import { Notyf } from 'notyf';
-import { BarralateralSecretariaComponent } from '../../../Admin-Secretarias/barralateral-secretaria/barralateral-secretaria.component';
+import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
 
 @Component({
   selector: 'app-cadastro',

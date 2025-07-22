@@ -21,7 +21,7 @@ import { CalendarioNormalComponent } from './Admin-Secretarias/menu-secretaria/c
 import { MenuSecretariaComponent } from './Admin-Secretarias/menu-secretaria/menu-secretaria.component';
 import { ChatSecretariaComponent } from './Admin-Secretarias/menu-secretaria/chat-secretaria/chat-secretaria.component';
 import { ChatComponent } from './Admin-Secretaria/menu-admin/chat/chat.component';
-import { ComunicadoSecretariaComponent } from './Admin-Secretarias/menu-secretaria/comunicado-secretaria/comunicado-secretaria.component';
+
 import { DetalhesCadeirasSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-cadeiras-secretaria/detalhes-cadeiras-secretaria.component';
 import { DetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-estudantes-secretaria/detalhes-estudantes-secretaria.component';
 import { DetalhesFuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-funcionarios-secretaria/detalhes-funcionarios-secretaria.component';
@@ -38,7 +38,7 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
- import { CadastroComponent } from './Admin-Secretaria/menu-admin/cadastro/cadastro.component';
+ import { CadastroComponent } from './Admin-Secretarias/menu-secretaria/cadastro/cadastro.component';
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
@@ -51,6 +51,7 @@ import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/TelaFuncion
 
 import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
 import { ConfirmacoesComponent } from './Admin-Secretarias/menu-secretaria/confirmacoes/confirmacoes.component';
+import { ComunicadoSecretariaComponent } from './Admin-Secretarias/menu-secretaria/comunicado-secretaria/comunicado-secretaria.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },

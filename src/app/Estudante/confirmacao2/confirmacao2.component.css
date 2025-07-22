@@ -119,8 +119,8 @@ li {
 /* Responsivo */
 @media (max-width: 600px) {
   .matricula-container{
-    margin: 100px auto;
-    margin-right: 1%;
+    margin: 200px auto;
+  overflow: auto;
   }
   .grid-dados {
     grid-template-columns: 1fr;

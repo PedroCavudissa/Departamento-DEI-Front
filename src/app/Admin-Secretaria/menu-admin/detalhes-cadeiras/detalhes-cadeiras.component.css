@@ -5,23 +5,16 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f0f4f8;
-  padding: 20px;
-  height: 100vh;
-  overflow-x: hidden;
-}
-
 /* CONTAINER GERAL */
 .container {
-  max-width: 1000px;
-  margin-left: 22%;
+  max-width: 1500px;
+  margin-left: 16%;
   margin-top: 7%;
   padding: 20px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 1300px;
 }
 
 /* FORM DE BUSCA */
