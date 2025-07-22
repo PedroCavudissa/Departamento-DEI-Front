@@ -63,21 +63,9 @@
     </div>
   </mat-card>
 
+  <!-- FILTAR  de comunicados -->
 
-  <!-- Filtro por destinatário -->
-  <mat-card class="card-form">
-    <mat-form-field appearance="outline" class="form-field">
-      <mat-label>Filtrar por destinatário</mat-label>
-      <mat-select [(ngModel)]="filtroDestinatario" (selectionChange)="aplicarFiltro()">
-        <mat-option *ngFor="let dest of destinatarios" [value]="dest.valor">
-          {{ dest.exibicao }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-card>
-
-
-
+<app-comunicadosf>  </app-comunicadosf>
 
   <!-- Lista de comunicados -->
   <div *ngIf="carregando && comunicados.length === 0" class="loading-state">

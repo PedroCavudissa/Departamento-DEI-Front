@@ -15,6 +15,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BarralateralComponent } from '../../../barralateral/barralateral.component';
+import { ComunicadoComponent } from "../../comunicado/comunicado.component";
+import { ComunicadosComponent } from "../comunicadosf/comunicadosF.component";
+
+
 
 @Component({
   selector: 'app-aprovar-comunicado',
@@ -35,8 +39,10 @@ import { BarralateralComponent } from '../../../barralateral/barralateral.compon
     MatTableModule,
     MatIconModule,
     MatFormFieldModule,
-    BarralateralComponent
-  ]
+    BarralateralComponent,
+    ComunicadoComponent,
+    ComunicadosComponent
+]
 })
 export class AprovarComunicadoComponent implements OnInit {
   comunicados: Comunicado[] = [];
@@ -90,29 +96,28 @@ carregarComunicados(): void {
     }
   });
 }
- aplicarFiltro(): void {
-  this.carregando = true;
 
-  // Limpa a lista antes de aplicar novo filtro
+
+
+
+
+
+aplicarFiltro(): void {
+  this.carregando = true;
   this.comunicados = [];
 
-  const observable = this.filtroDestinatario === 'TODOS'
-    ? this.comunicadosService.listar()
-    : this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario);
-
-  observable.subscribe({
+  this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario).subscribe({
     next: (comunicados) => {
       this.comunicados = comunicados;
       this.carregando = false;
 
-      // Feedback visual
       if (this.filtroDestinatario !== 'TODOS' && comunicados.length === 0) {
-        this.mostrarMensagem('Nenhum comunicado encontrado para este filtro', 'warning');
+        this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
       }
     },
     error: (err) => {
-      console.error('Erro:', err);
-      this.mostrarMensagem(err.message || 'Erro ao filtrar', 'error');
+      console.error('Erro ao filtrar:', err);
+      this.mostrarMensagem(err.message || 'Erro ao filtrar comunicados', 'error');
       this.carregando = false;
     }
   });

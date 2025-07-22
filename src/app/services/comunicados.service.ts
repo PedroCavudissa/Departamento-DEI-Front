@@ -31,32 +31,32 @@ export class ComunicadosService {
       .pipe(catchError(this.handleError));
   }
 
-// comunicados.service.ts
-
-// comunicados.service.ts
 filtrarPorDestinatario(destino: string): Observable<Comunicado[]> {
+  // Lista de destinos válidos em maiúsculas
   const destinosValidos = ['PROFESSOR', 'ESTUDANTE', 'SECRETARIA', 'ADMINISTRADOR', 'TODOS'];
 
-  if (!destinosValidos.includes(destino)) {
-    return throwError(() => new Error('Destinatário inválido'));
+  // Converte o destino para maiúsculas e remove espaços
+  const destinoFormatado = destino.toUpperCase().trim();
+
+  // Valida o destino
+  if (!destinosValidos.includes(destinoFormatado)) {
+    return throwError(() => new Error(`Destinatário inválido. Use um dos seguintes: ${destinosValidos.join(', ')}`));
   }
 
-  // Correção: destino é parte da URL, não query string
-  const url = `${this.API_URL}/destinado/${encodeURIComponent(destino)}`;
+  // Codifica o parâmetro da URL corretamente
+  const url = `${this.API_URL}/destinado/${encodeURIComponent(destinoFormatado)}`;
 
   return this.http.get<Comunicado[]>(url, this.httpOptions).pipe(
     catchError(error => {
       console.error('Erro na filtragem:', error);
       return throwError(() => new Error(
         error.status === 404
-          ? 'Nenhum comunicado encontrado para este filtro'
-          : 'Erro ao filtrar comunicados'
+          ? 'Nenhum comunicado encontrado para este destinatário'
+          : 'Erro ao filtrar comunicados. Por favor, tente novamente.'
       ));
     })
   );
 }
-
-
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
       .post<Comunicado>(`${this.API_URL}/create`, comunicado, this.httpOptions)
@@ -91,6 +91,40 @@ filtrarPorDestinatario(destino: string): Observable<Comunicado[]> {
       payload,
       this.httpOptions
     );
+  }
+
+  remover(id: number): Observable<void> {
+    return this.http
+      .delete<void>(`${this.API_URL}/delete/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  debugRequest(
+    url: string,
+    method: string,
+    body?: unknown
+  ): Observable<unknown> {
+    console.log('Debug request:', { url, method, body });
+
+    const options = {
+      ...this.httpOptions,
+      observe: 'response' as const,
+    };
+
+    switch (method.toUpperCase()) {
+      case 'GET':
+        return this.http.get(url, options);
+      case 'POST':
+        return this.http.post(url, body, options);
+      case 'PUT':
+        return this.http.put(url, body, options);
+      case 'PATCH':
+        return this.http.patch(url, body, options);
+      case 'DELETE':
+        return this.http.delete(url, options);
+      default:
+        return throwError(() => new Error(`Método ${method} não suportado`));
+    }
   }
 
   private validarCampo(valor: string): string {
@@ -140,40 +174,6 @@ filtrarPorDestinatario(destino: string): Observable<Comunicado[]> {
       destinado: comunicado.destinado,
       dataAcontecimento: comunicado.dataAcontecimento,
     };
-  }
-
-  remover(id: number): Observable<void> {
-    return this.http
-      .delete<void>(`${this.API_URL}/delete/${id}`, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
-  debugRequest(
-    url: string,
-    method: string,
-    body?: unknown
-  ): Observable<unknown> {
-    console.log('Debug request:', { url, method, body });
-
-    const options = {
-      ...this.httpOptions,
-      observe: 'response' as const,
-    };
-
-    switch (method.toUpperCase()) {
-      case 'GET':
-        return this.http.get(url, options);
-      case 'POST':
-        return this.http.post(url, body, options);
-      case 'PUT':
-        return this.http.put(url, body, options);
-      case 'PATCH':
-        return this.http.patch(url, body, options);
-      case 'DELETE':
-        return this.http.delete(url, options);
-      default:
-        return throwError(() => new Error(`Método ${method} não suportado`));
-    }
   }
 
   private handleError(error: HttpErrorResponse) {
