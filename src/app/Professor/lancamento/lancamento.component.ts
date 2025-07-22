@@ -1,16 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
-<<<<<<< HEAD
-import { LancamentoService, Nota } from '../../Services/lacamento-notas.service';
-=======
+import { LacamentoNotasService } from '../../services/lacamento-notas.service';
+import { Disciplina } from '../../services/lacamento-notas.service'; // Importa a interface correta
 
-import { LacamentoNotasService, Disciplina, TipoPauta } from '../../services/lacamento-notas.service';
-import { Nota } from '../../services/tela-notas.service';
+interface Nota {
+  // Defina a estrutura das notas conforme necessário
+  id?: number;
+  alunoId?: number;
+  valor?: number;
+  // Outras propriedades
+}
 
->>>>>>> origin
+interface TipoPauta {
+  codigo: number;
+  descricao: string;
+}
 
 @Component({
   selector: 'app-lancamento',
@@ -20,7 +27,7 @@ import { Nota } from '../../services/tela-notas.service';
   imports: [LateralProfessorComponent, CommonModule, FormsModule],
 })
 export class LancamentoComponent implements OnInit {
-  professorNome: string = '';
+  professorNome = '';
   disciplinas: Disciplina[] = [];
   notas: Nota[] = [];
   tipos: TipoPauta[] = [
@@ -34,24 +41,28 @@ export class LancamentoComponent implements OnInit {
   disciplinaSelecionadaId: number | null = null;
   tipoSelecionado: number | null = null;
   excelFile?: File;
-  carregando: boolean = false;
-  mensagem: string = '';
-  erro: string = '';
-  progressoTipos: { [disciplinaId: number]: number } = {}; // controle local
+  carregando = false;
+  mensagem = '';
+  erro = '';
+  progressoTipos: Record<number, number> = {};
 
   constructor(private lacamentoNotasService: LacamentoNotasService) {}
 
   ngOnInit(): void {
-    this.carregarProgressoDoLocalStorage(); // carregar progresso salvo
+    this.carregarProgressoDoLocalStorage();
 
     this.carregando = true;
     this.lacamentoNotasService.getDadosDoProfessor().subscribe({
-      next: (dados) => this.professorNome = dados.nome,
-      error: () => this.professorNome = ''
+      next: (dados: { nome: string }) => {
+        this.professorNome = dados.nome;
+      },
+      error: () => {
+        this.professorNome = '';
+      }
     });
 
     this.lacamentoNotasService.getDisciplinasDoProfessor().subscribe({
-      next: (dados) => {
+      next: (dados: Disciplina[]) => {
         this.carregando = false;
         this.disciplinas = dados;
         if (dados.length === 0) {
@@ -60,6 +71,7 @@ export class LancamentoComponent implements OnInit {
         }
       },
       error: (err: HttpErrorResponse) => {
+        this.carregando = false;
         this.erro = 'Erro ao Carregar Disciplinas.';
         console.error(err);
         this.limparMensagensDepoisDeTempo();
@@ -84,39 +96,27 @@ export class LancamentoComponent implements OnInit {
 
     if (!input?.files?.length) return;
 
-    const file = input.files[0];
-    const disciplinaId = Number(this.disciplinaSelecionadaId);
-    const tipoId = Number(this.tipoSelecionado);
-
-    if (!disciplinaId || !tipoId) {
-      alert('Selecione a disciplina e o tipo de avaliação antes de importar.');
-      return;
-    }
-
-<<<<<<< HEAD
-    this.lancamentoService.importarExcel(disciplinaId, tipoId, file).subscribe({
-=======
-    this.lacamentoNotasService.importarExcel(file,disciplinaId, tipoId).subscribe({
->>>>>>> origin
-      next: (notasImportadas: Nota[]) => {
-        this.notas = notasImportadas;
-        alert('Arquivo importado com sucesso!');
-      },
-      error: (err) => alert('Erro ao importar arquivo: ' + (err.message || err)),
-    });
+    this.excelFile = input.files[0];
   }
-
 
   salvar(): void {
     if (!this.tipoSelecionado || !this.disciplinaSelecionadaId) return;
 
     this.lacamentoNotasService.salvarNotas(
-      this.disciplinaSelecionadaId as number,
-      this.tipoSelecionado as number,
+      this.disciplinaSelecionadaId,
+      this.tipoSelecionado,
       this.notas
-    )
-    ;
-
+    ).subscribe({
+      next: () => {
+        this.mensagem = 'Notas salvas com sucesso!';
+        this.limparMensagensDepoisDeTempo();
+      },
+      error: (err: HttpErrorResponse) => {
+        this.erro = 'Erro ao salvar notas.';
+        console.error(err);
+        this.limparMensagensDepoisDeTempo();
+      }
+    });
   }
 
   enviarExcel(): void {
@@ -126,13 +126,16 @@ export class LancamentoComponent implements OnInit {
     if (this.excelFile && this.disciplinaSelecionadaId != null && this.tipoSelecionado != null) {
       this.lacamentoNotasService.importarExcel(this.excelFile, this.disciplinaSelecionadaId, this.tipoSelecionado)
         .subscribe({
-          next: () => {
+          next: (notasImportadas: Nota[]) => {
+            this.notas = notasImportadas;
             this.mensagem = 'Ficheiro Enviado Com Sucesso!';
-            
-            const atual = this.progressoTipos[this.disciplinaSelecionadaId!] ?? 0;
-            if (this.tipoSelecionado! > atual) {
-              this.progressoTipos[this.disciplinaSelecionadaId!] = this.tipoSelecionado!;
-              this.salvarProgressoNoLocalStorage(); // salvar no localStorage
+            let atual = 0;
+            if (this.disciplinaSelecionadaId !== null) {
+              atual = this.progressoTipos[this.disciplinaSelecionadaId] ?? 0;
+            }
+            if (this.tipoSelecionado && this.disciplinaSelecionadaId !== null && this.tipoSelecionado > atual) {
+              this.progressoTipos[this.disciplinaSelecionadaId] = this.tipoSelecionado;
+              this.salvarProgressoNoLocalStorage();
             }
 
             this.tipoSelecionado = null;
@@ -150,27 +153,23 @@ export class LancamentoComponent implements OnInit {
     }
   }
 
-
-  private getErrorMessage(err: HttpErrorResponse): string {
-    return err?.error?.message || err.message || 'Erro desconhecido';
-  }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin
-
   baixarModelo(): void {
     if (this.disciplinaSelecionadaId && this.tipoSelecionado != null) {
       this.lacamentoNotasService
         .baixarModeloExcel(this.disciplinaSelecionadaId, this.tipoSelecionado)
         .subscribe({
-          next: (response) => {
-            const blob = response.body!;
+          next: (response: HttpResponse<Blob>) => {
+            const blob = response.body;
+            if (!blob) {
+              this.erro = 'Resposta sem conteúdo.';
+              return;
+            }
+
             const contentDisposition = response.headers.get('Content-Disposition');
             let filename = 'modelo_notas.xlsx';
 
             if (contentDisposition) {
-              const utf8Match = contentDisposition.match(/filename\*\=UTF-8''(.+)/);
+              const utf8Match = contentDisposition.match(/filename\*=UTF-8''(.+)/);
               if (utf8Match && utf8Match[1]) {
                 filename = decodeURIComponent(utf8Match[1]);
               } else {
@@ -188,7 +187,7 @@ export class LancamentoComponent implements OnInit {
             a.click();
             window.URL.revokeObjectURL(url);
           },
-          error: (err) => {
+          error: (err: HttpErrorResponse) => {
             console.error('Erro ao baixar modelo:', err);
             this.erro = 'Erro ao baixar modelo Excel.';
             this.limparMensagensDepoisDeTempo();
@@ -206,6 +205,7 @@ export class LancamentoComponent implements OnInit {
       this.erro = '';
     }, 4000);
   }
+
   private carregarProgressoDoLocalStorage(): void {
     const progressoSalvo = localStorage.getItem('progressoTipos');
     if (progressoSalvo) {
@@ -217,4 +217,3 @@ export class LancamentoComponent implements OnInit {
     localStorage.setItem('progressoTipos', JSON.stringify(this.progressoTipos));
   }
 }
-

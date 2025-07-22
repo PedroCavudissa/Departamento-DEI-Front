@@ -32,23 +32,23 @@ export class Confirmacao3Component implements OnInit {
 
   carregarDados(): void {
     this.confirmacaoService.getDadosAcademicos().subscribe({
-      next: (data) => {
+      next: (data: DadosAcademicos) => {
         this.dadosAcademicos = data;
-        const estudanteId = data.userDetails.id;
-        const ano = data.userDetails.anoAcademico;
+        const estudanteId: number = data.userDetails.id;
+        const ano: number = data.userDetails.anoAcademico;
         this.carregarRupe();
-        this.carregarDisciplinasPorFazer(estudanteId, ano, 1); // <- semestre fixo ou dinâmico
+        this.carregarDisciplinasPorFazer(estudanteId, ano, 1); // semestre fixo ou dinâmico
       },
-      error: (err) => console.error('Erro ao carregar dados:', err)
+      error: (err: unknown) => console.error('Erro ao carregar dados:', err)
     });
   }
 
   carregarDisciplinasPorFazer(estudanteId: number, ano: number, semestre: number): void {
     this.confirmacaoService.getDisciplinasFazer(estudanteId, ano, semestre).subscribe({
-      next: (disciplinas) => {
+      next: (disciplinas: Disciplina[]) => {
         this.disciplinasPorFazer = disciplinas;
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro ao carregar disciplinas por fazer:', err);
         this.mensagem = 'Erro ao carregar disciplinas.';
       }
@@ -57,7 +57,7 @@ export class Confirmacao3Component implements OnInit {
 
   carregarRupe(): void {
     this.confirmacaoService.getRupeDoEstudante().subscribe({
-      next: (listaRupes) => {
+      next: (listaRupes: Rupe[]) => {
         if (listaRupes.length > 0) {
           this.rupe = listaRupes[listaRupes.length - 1];
           this.mensagem = '';
@@ -66,7 +66,7 @@ export class Confirmacao3Component implements OnInit {
           this.rupeGeravel = true;
         }
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro Ao Buscar RUPE:', err);
         this.rupe = null;
         this.rupeGeravel = false;
@@ -82,7 +82,7 @@ export class Confirmacao3Component implements OnInit {
       return;
     }
 
-    html2canvas(elemento as HTMLElement, { scale: 2 } as any).then(canvas => {
+    html2canvas(elemento as HTMLElement).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgProps = pdf.getImageProperties(imgData);
@@ -103,7 +103,7 @@ export class Confirmacao3Component implements OnInit {
       return;
     }
 
-    const disciplinasIds = this.disciplinasPorFazer.map(d => d.id);
+    const disciplinasIds: number[] = this.disciplinasPorFazer.map(d => d.id);
     if (disciplinasIds.length === 0) {
       this.mensagem = 'Nenhuma disciplina disponível para confirmar.';
       return;
@@ -118,12 +118,12 @@ export class Confirmacao3Component implements OnInit {
         this.mensagem = 'Confirmação Finalizada Com Sucesso!';
         this.finalizando = false;
       },
-      error: (err) => {
+      error: (err: { status: number; error?: { message?: string } } | unknown) => {
         console.error('Erro Ao Finalizar Confirmação:', err);
         this.finalizando = false;
 
-        if (err.status === 409) {
-          this.mensagem = err.error?.message || 'Confirmação Já Foi Realizada.';
+        if (typeof err === 'object' && err !== null && 'status' in err && err.status === 409) {
+          this.mensagem = (err as { error?: { message?: string } }).error?.message || 'Confirmação Já Foi Realizada.';
         } else {
           this.mensagem = 'Erro Ao Finalizar Confirmação.';
         }

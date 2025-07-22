@@ -4,20 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Notyf } from 'notyf';
-<<<<<<< HEAD:src/app/Admin-Secretaria/menu-admin/cadastro-funcionario/cadastro-funcionario.component.ts
-import { FuncionarioService } from '../../../Services/cadastro.service';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
-=======
-
+import { FuncionarioService } from '../../../../services/cadastro.service'; // caminho corrigido para minúsculas
 import { BarralateralComponent } from '../../../barralateral/barralateral.component';
-import { error } from 'jquery';
-import { FuncionarioService } from '../../../../services/cadastro.service';
->>>>>>> origin:src/app/Admin-Secretaria/menu-admin/Configuracoes/cadastro-funcionario/cadastro-funcionario.component.ts
 
 @Component({
   selector: 'app-cadastro-funcionario',
   standalone: true,
-  imports: [CommonModule, FormsModule,BarralateralComponent],
+  imports: [CommonModule, FormsModule, BarralateralComponent],
   templateUrl: './cadastro-funcionario.component.html',
   styleUrls: ['./cadastro-funcionario.component.css']
 })
@@ -47,20 +40,16 @@ export class CadastroFuncionarioComponent {
       dataNascimento: new Date(this.funcionario.dataNascimento),
       dataIngresso: new Date(this.funcionario.dataIngresso)
     };
-  
+
     this.funcionarioService.cadastrar(funcionarioCorrigido).subscribe({
       next: () => {
         this.notyf.success('Funcionário cadastrado com sucesso!');
         this.router.navigate(['/menu-admin']);
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error(err);
         this.notyf.error('Erro ao cadastrar funcionário!');
       }
     });
   }
-  
-
-
-  
 }

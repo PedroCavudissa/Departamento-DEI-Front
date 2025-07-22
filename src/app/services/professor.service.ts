@@ -1,10 +1,10 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-// Defina interfaces 
+// Defina interfaces
 interface UserDetails {
   id: number;
   dataNascimento?: string;
@@ -14,14 +14,14 @@ interface UserDetails {
   cargo?: string;
   dataIngresso?: string;
   nivelAcademico?: string;
-  [key: string]: any; // Permite propriedades adicionais
+  [key: string]: unknown; // Permite propriedades adicionais
 }
 
 export interface Professor {
   nome?: string;
   email: string;
   userDetails: UserDetails;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 @Injectable({
@@ -29,7 +29,7 @@ export interface Professor {
 })
 export class ProfessorService {
 
-  cadastrar(professor: Professor) {
+  cadastrar() {
     throw new Error('Method not implemented.');
   }
   private apiUrl = `${environment.apiUrl}`; // URL da API
@@ -53,12 +53,13 @@ export class ProfessorService {
     if (typeof error.error === 'string' && error.error.startsWith('<!DOCTYPE html>')) {
       return throwError(() => new Error('O servidor retornou uma página de erro HTML. Verifique: \n1. Se a URL está correta\n2. Se o servidor está online\n3. Se há problemas com o ngrok'));
     }
-    
+
     // Tenta extrair a mensagem de erro do payload ngrok
     try {
       const payload = JSON.parse(error.error.split('data-payload="')[1].split('"')[0]);
       const decoded = atob(payload);
       return throwError(() => new Error(`Erro ngrok: ${decoded}`));
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       return throwError(() => new Error(`Erro ${error.status}: ${error.message}`));
     }

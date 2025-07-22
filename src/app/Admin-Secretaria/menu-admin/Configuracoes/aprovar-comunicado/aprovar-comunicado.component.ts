@@ -14,16 +14,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-<<<<<<< HEAD
 import { BarralateralComponent } from '../../../barralateral/barralateral.component';
 import { ComunicadoComponent } from "../../comunicado/comunicado.component";
 import { ComunicadosComponent } from "../comunicadosf/comunicadosF.component";
-
-=======
-import { BarralateralComponent } from "../../../barralateral/barralateral.component";
-import { environment } from '../../../../../environments/environment';
->>>>>>> origin
-
 
 @Component({
   selector: 'app-aprovar-comunicado',
@@ -44,14 +37,10 @@ import { environment } from '../../../../../environments/environment';
     MatTableModule,
     MatIconModule,
     MatFormFieldModule,
-<<<<<<< HEAD
     BarralateralComponent,
     ComunicadoComponent,
     ComunicadosComponent
-=======
-    BarralateralComponent
->>>>>>> origin
-]
+  ]
 })
 export class AprovarComunicadoComponent implements OnInit {
   comunicados: Comunicado[] = [];
@@ -59,7 +48,6 @@ export class AprovarComunicadoComponent implements OnInit {
   modoEdicao = false;
   carregando = false;
   colunasExibidas = ['titulo', 'status', 'destinatario', 'data', 'acoes'];
-<<<<<<< HEAD
   filtroDestinatario = 'TODOS';
 
   destinatarios = [
@@ -69,8 +57,6 @@ export class AprovarComunicadoComponent implements OnInit {
     { valor: 'SECRETARIA', exibicao: 'Secretaria' },
     { valor: 'ADMINISTRADOR', exibicao: 'Administrador' }
   ];
-=======
->>>>>>> origin
 
   constructor(
     private comunicadosService: ComunicadosService,
@@ -81,76 +67,51 @@ export class AprovarComunicadoComponent implements OnInit {
     this.carregarComunicados();
   }
 
-<<<<<<< HEAD
-  // aprovar-comunicado.component.ts
-
-// aprovar-comunicado.component.ts
-carregarComunicados(): void {
-  this.carregando = true;
-  this.comunicados = [];
-
-  const obs = this.filtroDestinatario === 'TODOS'
-    ? this.comunicadosService.listar()
-    : this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario);
-
-  obs.subscribe({
-    next: (data) => {
-      this.comunicados = data;
-      this.carregando = false;
-
-      if (this.filtroDestinatario !== 'TODOS' && data.length === 0) {
-        this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
-      }
-    },
-    error: (err) => {
-      console.error('Erro:', err);
-      this.mostrarMensagem(err.message || 'Erro ao carregar comunicados', 'error');
-      this.carregando = false;
-    }
-  });
-}
-
-
-
-
-
-
-aplicarFiltro(): void {
-  this.carregando = true;
-  this.comunicados = [];
-
-  this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario).subscribe({
-    next: (comunicados) => {
-      this.comunicados = comunicados;
-      this.carregando = false;
-
-      if (this.filtroDestinatario !== 'TODOS' && comunicados.length === 0) {
-        this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
-      }
-    },
-    error: (err) => {
-      console.error('Erro ao filtrar:', err);
-      this.mostrarMensagem(err.message || 'Erro ao filtrar comunicados', 'error');
-      this.carregando = false;
-    }
-  });
-}
-=======
   carregarComunicados(): void {
     this.carregando = true;
-    this.comunicadosService.listar().subscribe({
+    this.comunicados = [];
+
+    const obs = this.filtroDestinatario === 'TODOS'
+      ? this.comunicadosService.listar()
+      : this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario);
+
+    obs.subscribe({
       next: (data) => {
         this.comunicados = data;
         this.carregando = false;
+
+        if (this.filtroDestinatario !== 'TODOS' && data.length === 0) {
+          this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
+        }
       },
       error: (err) => {
-        console.error('Erro ao carregar:', err);
-        this.mostrarMensagem('Erro ao carregar comunicados', 'error');
+        console.error('Erro:', err);
+        this.mostrarMensagem(err.message || 'Erro ao carregar comunicados', 'error');
         this.carregando = false;
       }
     });
   }
->>>>>>> origin
+
+  aplicarFiltro(): void {
+    this.carregando = true;
+    this.comunicados = [];
+
+    this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario).subscribe({
+      next: (comunicados) => {
+        this.comunicados = comunicados;
+        this.carregando = false;
+
+        if (this.filtroDestinatario !== 'TODOS' && comunicados.length === 0) {
+          this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
+        }
+      },
+      error: (err) => {
+        console.error('Erro ao filtrar:', err);
+        this.mostrarMensagem(err.message || 'Erro ao filtrar comunicados', 'error');
+        this.carregando = false;
+      }
+    });
+  }
 
   salvar(): void {
     if (!this.validarFormulario()) return;
@@ -163,7 +124,6 @@ aplicarFiltro(): void {
       this.criarComunicado();
     }
   }
-<<<<<<< HEAD
 
   private atualizarComunicado(): void {
     if (!this.comunicadoEmEdicao.id) {
@@ -196,49 +156,6 @@ aplicarFiltro(): void {
     });
   }
 
-=======
-private atualizarComunicado(): void {
-  if (!this.comunicadoEmEdicao.id) {
-    this.mostrarMensagem('ID do comunicado não encontrado', 'error');
-    return;
-  }
-
-  this.carregando = true;
-
-  this.comunicadosService.atualizar(
-    this.comunicadoEmEdicao.id,
-    this.comunicadoEmEdicao as Comunicado
-  ).subscribe({
-    next: () => {
-      this.mostrarMensagem('Comunicado atualizado com sucesso!', 'success');
-      this.carregarComunicados();
-      this.limparFormulario();
-    },
-    error: (err) => {
-      console.error('Erro completo:', err);
-
-      let mensagem = 'Falha na atualização';
-      if (err.status === 500) {
-        mensagem = 'Erro no servidor - verifique os dados ou contate o suporte';
-      } else if (err.status === 405) {
-        mensagem = 'Método não permitido - atualização falhou';
-      }
-
-      this.mostrarMensagem(mensagem, 'error', 8000);
-      this.carregando = false;
-    }
-  });
-}
-
-private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', duracao = 5000) {
-  this.snackBar.open(mensagem, 'Fechar', {
-    duration: duracao,
-    panelClass: [`snackbar-${tipo}`]
-  });
-}
-
-
->>>>>>> origin
   private criarComunicado(): void {
     this.comunicadosService.criar(this.comunicadoEmEdicao as NovoComunicado)
       .subscribe({
@@ -248,13 +165,8 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
           this.limparFormulario();
         },
         error: (err) => {
-<<<<<<< HEAD
           console.error('Erro ao criar comunicado:', err);
           let mensagem = 'Erro ao criar comunicado';
-=======
-          console.error('Erro na criação:', err);
-          let mensagem = 'Falha ao criar comunicado';
->>>>>>> origin
 
           if (err.status === 405) {
             mensagem += ': Método não permitido pelo servidor';
@@ -266,7 +178,6 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
       });
   }
 
-<<<<<<< HEAD
   editar(comunicado: Comunicado): void {
     this.comunicadoEmEdicao = { ...comunicado };
     this.modoEdicao = true;
@@ -277,47 +188,12 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
         form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 100);
-=======
-  // Método para testar a rota manualmente (pode ser chamado temporariamente)
-  testarRotaUpdate(): void {
-    const testId = 1; // Use um ID que exista
-    const testData = {
-      titulo: 'Teste de atualização',
-      conteudo: 'Conteúdo de teste para atualização',
-      noticeStatus: 'VALIDO',
-      destinado: 'PROFESSOR',
-      dataAcontecimento: new Date().toISOString()
-    };
-
-    this.comunicadosService.debugRequest(
-      `${environment.apiUrl}/update/${testId}`,
-      'PUT',
-      testData
-    ).subscribe({
-      next: (response) => {
-        console.log('Resposta do debug:', response);
-        this.mostrarMensagem('Rota testada com sucesso! Verifique o console.', 'success');
-      },
-      error: (err) => {
-        console.error('Erro no debug:', err);
-        this.mostrarMensagem('Falha no teste da rota. Verifique o console.', 'error');
-      }
-    });
-  }
-
-  editar(comunicado: Comunicado): void {
-    this.comunicadoEmEdicao = { ...comunicado };
-    this.modoEdicao = true;
->>>>>>> origin
   }
 
   excluir(id: number): void {
     if (confirm('Tem certeza que deseja excluir este comunicado?')) {
       this.carregando = true;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin
       this.comunicadosService.remover(id).subscribe({
         next: () => {
           this.mostrarMensagem('Comunicado excluído com sucesso!', 'success');
@@ -325,11 +201,7 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
           this.carregando = false;
         },
         error: (err) => {
-<<<<<<< HEAD
           console.error('Erro ao excluir comunicado:', err);
-=======
-          console.error('Erro ao excluir:', err);
->>>>>>> origin
           this.mostrarMensagem('Erro ao excluir comunicado', 'error');
           this.carregando = false;
         }
@@ -365,7 +237,6 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
     return true;
   }
 
-<<<<<<< HEAD
   getStatusClass(status: 'VALIDO' | 'INVALIDO'): string {
     return status === 'VALIDO' ? 'status-valido' : 'status-invalido riscado';
   }
@@ -377,35 +248,8 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
     });
   }
 
-  testarRotaUpdate(): void {
-    const testId = 1;
-    const testData = {
-      titulo: 'Teste de atualização',
-      conteudo: 'Conteúdo de teste para atualização',
-      noticeStatus: 'VALIDO',
-      destinado: 'PROFESSOR',
-      dataAcontecimento: new Date().toISOString()
-    };
 
-    this.comunicadosService.debugRequest(
-      `${this.comunicadosService.API_URL}/update/${testId}`,
-      'PUT',
-      testData
-    ).subscribe({
-      next: (response) => {
-        console.log('Resposta do debug:', response);
-        this.mostrarMensagem('Rota testada com sucesso! Verifique o console.', 'success');
-      },
-      error: (err) => {
-        console.error('Erro no teste da rota:', err);
-        this.mostrarMensagem('Falha ao testar a rota. Veja o console.', 'error');
-      }
-    });
-=======
-
-
-  getStatusClass(status: 'VALIDO' | 'INVALIDO'): string {
-    return status === 'VALIDO' ? 'status-valido' : 'status-invalido';
->>>>>>> origin
+  formatarData(data: string): string {
+    return new Date(data).toLocaleDateString('pt-BR');
   }
 }
