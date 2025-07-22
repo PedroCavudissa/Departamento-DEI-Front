@@ -16,7 +16,8 @@
     <div class="card">
       <h3>Dados Pessoais</h3> <br>
       
-      <div class="form-group">
+    <div *ngIf="estudanteSelecionado; else noEstudantes">
+            <div class="form-group">
         <label for="email">Email</label>
         <input id="email" type="email" formControlName="email" placeholder="Digite seu email" />
         <div class="error-message" *ngIf="formulario.get('email')?.touched">
@@ -34,10 +35,8 @@
         <label for="contato">Contacto</label>
         <input id="contato" type="tel" formControlName="contato" placeholder="(XX) XXXXX-XXXX" />
       </div>
-      <div class="form-group">
-          <label for="notaEnsinoMedio">Média do Ensino Médio</label>
-          <input id="notaEnsinoMedio" type="number" formControlName="notaEnsinoMedio" min="0" max="10" step="0.1" placeholder="Média geral" />
-        </div>
+      
+        <p><strong>:</strong>{{ estudanteSelecionado.userDetails.instituicaoAnterior}}</p>
      
        
       <div class="form-group">
@@ -48,18 +47,19 @@
         </div>
       </div>
 
-         <div class="form-group">
-          <label for="dataIngresso">Data de Ingresso</label>
-          <input id="dataIngresso" type="date" formControlName="dataIngresso" />
-        </div>
+        
+        <p><strong>Data de Ingresso:</strong>{{ estudanteSelecionado.userDetails.dataIngresso}}</p>
 
+    </div>
        
       <div class="buttons">
         <button type="button" (click)="accao()"><i class="bx bx-edit"></i>Atualizar dados</button>
         <button type="button" (click)="abrirModal()"><i class="bx bx-cog"></i>Mais Configurações</button>
       </div>
     </div>
-   
+     <ng-template #noEstudantes>
+    <p>Nenhum estudante encontrado.</p> 
+  </ng-template>
   </form>
 </div>
 <app-lateral></app-lateral>
