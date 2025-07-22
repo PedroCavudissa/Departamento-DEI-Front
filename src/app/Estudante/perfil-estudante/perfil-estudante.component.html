@@ -31,8 +31,6 @@
         <label for="contato">Contacto:</label>
         <input id="contato" type="tel" formControlName="contato" placeholder="(XX) XXXXX-XXXX" />
       </div>
-      
-        <p><strong>instituicao Anterior:</strong>{{ estudanteSelecionado.userDetails.dataIngresso}}</p> <br>
         
         <p><strong>Data de Ingresso:</strong>{{ estudanteSelecionado.userDetails.dataIngresso}}</p> <br>
     
@@ -42,9 +40,7 @@
         <div class="error-message" *ngIf="formulario.get('endereco')?.touched">
           <span *ngIf="formulario.get('endereco')?.errors?.['minlength']">O endereço deve ter pelo menos 5 caracteres</span>
         </div>
-      </div>
-
-        
+      </div>  
 
     </div>
        
