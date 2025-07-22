@@ -12,7 +12,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ComunicadosService {
- 
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -22,25 +21,49 @@ export class ComunicadosService {
     }),
   };
 
+  private readonly API_URL = `${environment.apiUrl}/api/departamento/notices`;
+
   constructor(private http: HttpClient) {}
 
   listar(): Observable<Comunicado[]> {
     return this.http
-      .get<Comunicado[]>(`${environment.apiUrl}/api/departamento/notices/list`, this.httpOptions)
+      .get<Comunicado[]>(`${this.API_URL}/list`, this.httpOptions)
       .pipe(catchError(this.handleError));
+  }
+
+  filtrarPorDestinatario(destino: string): Observable<Comunicado[]> {
+    const destinosValidos = ['PROFESSOR', 'ESTUDANTE', 'SECRETARIA', 'ADMINISTRADOR', 'TODOS'];
+    const destinoFormatado = destino.toUpperCase().trim();
+
+    if (!destinosValidos.includes(destinoFormatado)) {
+      return throwError(() =>
+        new Error(`Destinatário inválido. Use um dos seguintes: ${destinosValidos.join(', ')}`)
+      );
+    }
+
+    const url = `${this.API_URL}/destinado/${encodeURIComponent(destinoFormatado)}`;
+
+    return this.http.get<Comunicado[]>(url, this.httpOptions).pipe(
+      catchError((error) => {
+        console.error('Erro na filtragem:', error);
+        return throwError(() =>
+          new Error(
+            error.status === 404
+              ? 'Nenhum comunicado encontrado para este destinatário'
+              : 'Erro ao filtrar comunicados. Por favor, tente novamente.'
+          )
+        );
+      })
+    );
   }
 
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
-      .post<Comunicado>(`${environment.apiUrl}/api/departamento/notices/create`, comunicado, this.httpOptions)
+      .post<Comunicado>(`${this.API_URL}/create`, comunicado, this.httpOptions)
       .pipe(
         catchError((error) => {
           if (error.status === 404) {
-            return this.http.post<Comunicado>(
-              `${environment.apiUrl}/createNotice`,
-              comunicado,
-              this.httpOptions
-            );
+            return this.http.post<Comunicado>(`${this.API_URL}/createNotice`, comunicado, this.httpOptions);
           }
           return throwError(() => error);
         })
@@ -48,112 +71,37 @@ export class ComunicadosService {
   }
 
   atualizar(id: number, comunicado: Comunicado): Observable<Comunicado> {
-    const payload = {
-      titulo: this.validarCampo(comunicado.titulo),
-      conteudo: this.validarCampo(comunicado.conteudo),
-      noticeStatus: comunicado.noticeStatus || 'VALIDO',
-      destinado: comunicado.destinado || 'PROFESSOR',
-      dataAcontecimento: this.formatarData(comunicado.dataAcontecimento),
-    };
+    const payload = this.prepararPayloadAtualizacao(comunicado);
 
     console.log('Enviando PATCH para ID:', id);
     console.log('Payload:', payload);
 
-    return this.http.patch<Comunicado>(
-      `${environment.apiUrl}/update/${id}`,
-      payload,
-      this.httpOptions
+    return this.http.patch<Comunicado>(`${this.API_URL}/update/${id}`, payload, this.httpOptions).pipe(
+      catchError(this.handleError)
     );
   }
 
-  private validarCampo(valor: string): string {
-    return (valor || '').toString().trim();
-  }
-
-  private formatarData(data: string): string {
-    try {
-      return data
-        ? new Date(data).toISOString().split('T')[0]
-        : new Date().toISOString().split('T')[0];
-    } catch {
-      return new Date().toISOString().split('T')[0];
-    }
+  remover(id: number): Observable<void> {
+    return this.http
+      .delete<void>(`${this.API_URL}/delete/${id}`, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private prepararPayloadAtualizacao(comunicado: Comunicado): unknown {
-    // Garantir que os campos estão no formato correto
     return {
-      titulo: comunicado.titulo?.trim() || '',
-      conteudo: comunicado.conteudo?.trim() || '',
+      titulo: (comunicado.titulo || '').trim(),
+      conteudo: (comunicado.conteudo || '').trim(),
       noticeStatus: comunicado.noticeStatus || 'VALIDO',
       destinado: comunicado.destinado || 'PROFESSOR',
       dataAcontecimento: this.formatarData(comunicado.dataAcontecimento),
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/adjacent-overload-signatures
-  private formatData(data: string): string {
-    // Garantir formato YYYY-MM-DD
-    if (!data) return new Date().toISOString().split('T')[0];
-    return data.includes('T') ? data.split('T')[0] : data;
-  }
-
-  private filtrarDadosAtualizacao(comunicado: Comunicado): unknown {
-    return {
-      titulo: comunicado.titulo,
-      conteudo: comunicado.conteudo,
-      noticeStatus: comunicado.noticeStatus,
-      destinado: comunicado.destinado,
-      dataAcontecimento: comunicado.dataAcontecimento,
-      // Campos removidos:
-      // - nomeFuncionario (não deve ser atualizável)
-      // - dataPublicacao (deve ser definida apenas na criação)
-    };
-  }
-  // Novo método para preparar dados
-  private prepararDadosAtualizacao(comunicado: Comunicado): unknown {
-    return {
-      titulo: comunicado.titulo,
-      conteudo: comunicado.conteudo,
-      noticeStatus: comunicado.noticeStatus,
-      destinado: comunicado.destinado,
-      dataAcontecimento: comunicado.dataAcontecimento,
-      // Remova campos que não devem ser atualizados
-    };
-  }
-
-  remover(id: number): Observable<void> {
-    return this.http
-      .delete<void>(`${environment.apiUrl}/delete/${id}`, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
-  // Método para debug
-  debugRequest(
-    url: string,
-    method: string,
-    body?: unknown
-  ): Observable<unknown> {
-    console.log('Debug request:', { url, method, body });
-
-    const options = {
-      ...this.httpOptions,
-      observe: 'response' as const,
-    };
-
-    switch (method.toUpperCase()) {
-      case 'GET':
-        return this.http.get(url, options);
-      case 'POST':
-        return this.http.post(url, body, options);
-      case 'PUT':
-        return this.http.put(url, body, options);
-      case 'PATCH':
-        return this.http.patch(url, body, options);
-      case 'DELETE':
-        return this.http.delete(url, options);
-      default:
-        return throwError(() => new Error(`Método ${method} não suportado`));
+  private formatarData(data: string): string {
+    try {
+      return data ? new Date(data).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+    } catch {
+      return new Date().toISOString().split('T')[0];
     }
   }
 

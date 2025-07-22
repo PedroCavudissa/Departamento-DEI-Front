@@ -1,0 +1,107 @@
+/* nota-disciplina.component.css */
+
+/* Container geral */
+.nota-disciplina {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Formulário */
+.formulario {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+input,
+select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 1 1 200px;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+/* Mensagem de erro */
+.erro {
+  color: #dc2626;
+  background-color: #fee2e2;
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Resultado */
+.resultado {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.resultado h3 {
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.resultado p {
+  margin-bottom: 1rem;
+  color: #4b5563;
+}
+
+/* Grid de notas */
+.notas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.nota {
+  background-color: #f3f4f6;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nota span {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.nota strong {
+  font-size: 1.2rem;
+  color: #111827;
+  margin-top: 0.25rem;
+}

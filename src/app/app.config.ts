@@ -7,18 +7,18 @@ import {
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
-import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { DisciplinaService } from './services/disciplina.service';
-
-import { LoginService } from './services/login.service';
-
-
 import {
   HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
 } from '@angular/common/http';
+
+import { LoginService } from './services/login.service';
 import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { DisciplinaService } from './services/disciplina.service';
+import { MenuService } from './services/menu.service';
+
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 // Interface de resposta de login
 export interface LoginResponse {
@@ -35,7 +35,7 @@ export const appConfig: ApplicationConfig = {
     LoginService,
     LacamentoNotasService,
     DisciplinaService,
-   
+    MenuService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
