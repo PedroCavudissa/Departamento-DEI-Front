@@ -35,7 +35,7 @@ fecharPerfilModal() {
   // Método ngOnInit para inicializar o componente
  
  ngOnInit(): void {
-    // Substitua '1' pelo ID real do estudante que deseja buscar
+   
    this.buscarProfessor();
   }
    buscarProfessor(): void {

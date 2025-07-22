@@ -26,10 +26,9 @@ mensagemSucesso: string = '';
 mensagemErro: string = '';
   mensagemErroSenha = '';
   mensagemSucessoSenha = '';
-  viestudante?: Viestudante
   formularioSenha: FormGroup;
   errorMessage: null | undefined;
-
+  viestudante?: Viestudante
   constructor(
     private fb: FormBuilder,
     private viestudanteService: ViestudanteService,
@@ -269,61 +268,5 @@ accao(): void {
   }
 
 }
- /*
-accao(): void {
-  // Verifica apenas se os campos preenchidos são válidos (não verifica required)
-  if (this.formulario.invalid) {
-    this.mensagemErro = 'Por favor, corrija os campos inválidos';
-    this.formulario.markAllAsTouched();
-    return;
-  }
 
-  if (!this.viestudante) {
-    alert('Dados atualizados com sucesso!');
-    return;
-  }
-
-  // Prepara os dados alterados (mesmo código anterior)
-  const dadosAlterados: any = {};
-  
-  if (this.formulario.value.contato !== this.viestudante.userDetails.contacto) {
-    dadosAlterados.contacto = this.formulario.value.contato;
-  }
-  
-  if (this.formulario.value.endereco !== this.viestudante.userDetails.endereco) {
-    dadosAlterados.endereco = this.formulario.value.endereco;
-  }
-  
-  if (this.formulario.value.email !== this.viestudante['email']) {
-    dadosAlterados.email = this.formulario.value.email;
-  }
-
-  // Verifica se há algo para atualizar
-  if (Object.keys(dadosAlterados).length === 0) {
-    this.mensagemErro = 'Nenhum dado foi alterado';
-    return;
-  }
-
-
-  if (this.viestudante&& this.viestudante.userDetails) {
-    this.viestudanteService.atualizarPerfil(this.viestudante.userDetails.id, dadosAlterados)
-      .subscribe({
-        next: (resposta: any) => {
-          // Atualiza os dados localmente
-          if (this.viestudante) {
-            if (dadosAlterados.contacto) this.viestudante.userDetails.contacto = dadosAlterados.contacto;
-            if (dadosAlterados.endereco) this.viestudante.userDetails.endereco = dadosAlterados.endereco;
-            if (dadosAlterados.email) this.viestudante['email'] = dadosAlterados.email;
-          }
-          
-          this.mensagemSucesso = 'Dados atualizados com sucesso!';
-          setTimeout(() => this.carregarDadosEstudante(), 1000);
-        },
-        error: (err: HttpErrorResponse) => {
-          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-        }
-      });
-  } 
-}
-}*/
 

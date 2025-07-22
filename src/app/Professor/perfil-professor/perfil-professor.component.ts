@@ -15,19 +15,20 @@ import { LateralProfessorComponent } from '../lateral-professor/lateral-professo
   providers: [ProfessorService, PerfiprofService]
 })
 export class PerfilProfessorComponent implements OnInit {
+  professorSelecionado: Professor | undefined;
   formulario: FormGroup;
   formularioSenha: FormGroup;
-
   professor?: Professor;
-
   mostrarModal = false;
   mostrarMensagens = false;
   mensagemSucesso = '';
   mensagemErro = '';
   mensagemSucessoSenha = '';
   mensagemErroSenha = '';
-
   modoEdicao: boolean = false;
+  errorMessage: null | undefined;
+
+
 
   constructor(
     private fb: FormBuilder,
@@ -35,9 +36,9 @@ export class PerfilProfessorComponent implements OnInit {
     private perfiprofService: PerfiprofService
   ) {
     this.professor = {
-      email: '',
-      nome: '',
-      userDetails: {
+       email: '',
+       nome: '',
+       userDetails: {
         id: 0,
         dataNascimento: '',
         numDocumento: '',
@@ -70,6 +71,7 @@ export class PerfilProfessorComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarDadosProfessor();
+     this.buscarProfessor();
   }
 
   alternarModoEdicao(): void {
@@ -114,6 +116,7 @@ export class PerfilProfessorComponent implements OnInit {
 
     this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados).subscribe({
       next: (res: any) => {
+        this.mostrarMensagens = true;
         this.mensagemSucesso = 'Dados atualizados com sucesso!';
         if (dadosAlterados.email) this.professor!.email = dadosAlterados.email;
         if (dadosAlterados.endereco) this.professor!.userDetails.endereco = dadosAlterados.endereco;
@@ -209,4 +212,17 @@ export class PerfilProfessorComponent implements OnInit {
     const confirmarSenha = group.get('confirmarSenha')?.value;
     return novaSenha === confirmarSenha ? null : { senhasNaoCoincidem: true };
   }
-}
+
+   buscarProfessor(): void {
+    this.professorService.getProfessor().subscribe({
+      next: (data: Professor) => {
+        this.professorSelecionado = data;
+        this.errorMessage = null;
+      },
+      error: (err: { message: string }) => {
+        console.error('Erro ao buscar professor:', err);
+        this.professorSelecionado = undefined;
+      }
+    });
+
+  }}

@@ -2,36 +2,25 @@
 <body>
 <form [formGroup]="formulario">
     <!-- Mensagens de sucesso/erro -->
-    <div *ngIf="mostrarMensagens">
-      <div *ngIf="mensagemSucesso" class="alert alert-success">{{ mensagemSucesso }}</div>
-      <div *ngIf="mensagemErro" class="alert alert-danger">{{ mensagemErro }}</div>
-    </div>
+<div *ngIf="mostrarMensagens">
+  <div *ngIf="mensagemSucesso" class="alert alert-success">
+    {{ mensagemSucesso }}
+  </div>
+
+  <div *ngIf="mensagemErro" class="alert alert-danger">
+    {{ mensagemErro }}
+  </div>
+</div>
   
     <div class="card">
      
         <h3>Dados Pessoais</h3> <br>
-  
-        <!-- Campo Tipo Documento (desativado) -->
+
+
+     <div *ngIf="professorSelecionado; else noProfessores">
+     
         <div class="form-group">
-          <label for="tipoDocumento">Tipo de Documento</label>
-          <input id="tipoDocumento" type="text" formControlName="tipoDocumento" placeholder="Tipo de documento"  />
-        </div>
-  
-        <!-- Campo Número Documento (desativado) -->
-        <div class="form-group">
-          <label for="numDocumento">Número do Documento</label>
-          <input id="numDocumento" type="text" formControlName="numDocumento" placeholder="Número do documento"  />
-        </div>
-  
-        <!-- Campo Data Nascimento (desativado) -->
-        <div class="form-group">
-          <label for="dataNascimento">Data de Nascimento</label>
-          <input id="dataNascimento" type="date" formControlName="dataNascimento"/>
-        </div>
-  
-        <!-- Campo Email (editável) -->
-        <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">Email:</label>
           <input id="email" type="email" formControlName="email" placeholder="Digite seu email" />
           <div class="error-message" *ngIf="formulario.get('email')?.touched">
             <span *ngIf="formulario.get('email')?.errors?.['required']">Campo obrigatório</span>
@@ -39,9 +28,12 @@
           </div>
         </div>
   
-        <!-- Campo Endereço (editável) -->
+          <p><strong>Número do Documento:</strong> {{ professorSelecionado.userDetails.numDocumento }}</p> <br>
+
+            <p><strong>Data de Nascimento: </strong> {{ professorSelecionado.userDetails.dataNascimento }}</p> <br>
+  
         <div class="form-group">
-          <label for="endereco">Endereço</label>
+          <label for="endereco">Endereço:</label>
           <input id="endereco" type="text" formControlName="endereco" placeholder="Digite seu endereço" />
           <div class="error-message" *ngIf="formulario.get('endereco')?.touched">
             <span *ngIf="formulario.get('endereco')?.errors?.['required']">Campo obrigatório</span>
@@ -49,9 +41,13 @@
               O endereço deve ter pelo menos 5 caracteres
             </span>
           </div>
-        </div>
+        </div> <br>
+     </div>
   
-       
+         <ng-template #noProfessores>
+        <p>Processando</p>
+      </ng-template>
+
         <div class="buttons">
         <button type="button" (click)="accao()"><i class="bx bx-edit"></i>Atualizar dados</button>
         <button type="button" (click)="abrirModal()"><i class="bx bx-cog"></i>Mais Configurações</button>
@@ -100,6 +96,7 @@
           As senhas não coincidem
         </div>
       </div>
+
       
       <div class="modal-botoes">
         <button type="button" (click)="salvarSenha()">Salvar</button>
