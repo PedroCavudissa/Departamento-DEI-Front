@@ -15,12 +15,11 @@ export interface Estudante {
   exameEspecial: number;
 }
 
-
-
 export interface Disciplina {
   disciplinaId: number;
   nome: string;
 }
+
 
 @Injectable({
   providedIn: 'root'

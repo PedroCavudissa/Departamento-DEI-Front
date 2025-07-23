@@ -42,6 +42,7 @@ import { ChatProfessorComponent } from './Professor/chat-professor/chat-professo
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
+import { VerPautaProfessorComponent } from './Professor/ver-pauta-professor/ver-pauta-professor.component';
 import { CadastroFuncionarioComponent } from './Admin-Secretaria/menu-admin/Configuracoes/cadastro-funcionario/cadastro-funcionario.component';
 import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudante.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -119,7 +120,10 @@ export const routes: Routes = [
   { path: 'chat-professor', component: ChatProfessorComponent, canActivate: [AuthGuard] },
   { path: 'lancamento', component: LancamentoComponent , canActivate: [AuthGuard]},
   { path: 'calendario-professor', component: CalendarioProfessorComponent, canActivate: [AuthGuard] },
-  { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] },
+
+  { path: 'ver-pauta-professor', component: VerPautaProfessorComponent, canActivate: [AuthGuard] },
+
+  { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] }
   // Secretaria
   { path: 'menu-secretaria', component: MenuSecretariaComponent , canActivate: [AuthGuard]},
   { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] },

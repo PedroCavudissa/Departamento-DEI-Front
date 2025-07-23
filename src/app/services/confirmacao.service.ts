@@ -37,12 +37,8 @@ export interface DadosAcademicos {
 }
 
 export interface Disciplina {
-  id: number;
-  sigla: string;
-  nome: string;
-  anoAcademico: number;
-  semestre: number;
-  precedenciasDisciplinaNome: string[];
+   disciplinaId: number;
+   nome: string;
 }
 
 export interface Rupe {
@@ -77,7 +73,12 @@ export class ConfirmacaoService {
   getDadosAcademicos(): Observable<DadosAcademicos> {
     return this.http.get<DadosAcademicos>(`${this.baseUrl}/api/auth/me`, this.getHeaders());
   }
-
+  getDisciplinasFazer(): Observable<Disciplina[]> {
+  return this.http.get<Disciplina[]>(
+    `${this.baseUrl}/departamento/students/disciplinas`,
+    this.getHeaders()
+  );
+}
   getDisciplinasFazer(estudanteId: number, ano: number, semestre: number): Observable<Disciplina[]> {
     return this.http.get<Disciplina[]>(
       `${this.baseUrl}/api/subject/disciplinas/disponiveis/${estudanteId}?ano=${ano}&semestre=${semestre}`,
@@ -93,14 +94,20 @@ export class ConfirmacaoService {
     return this.http.get<Rupe[]>(`${this.baseUrl}/api/payments/rupe/myRupes`, this.getHeaders());
   }
 
- finalizarConfirmacao(estudanteId: number, disciplinasIds: number[]): Observable<any> {
+finalizarConfirmacao(disciplinasIds: number[]): Observable<any> {
   return this.http.post(
+    `${this.baseUrl}/departamento/students/confirmar`,
+    disciplinasIds,
     `${this.baseUrl}/api/departamento/students/confirmar/${estudanteId}`,
     disciplinasIds, // deve ser tipo: number[]
     this.getHeaders()
   );
 }
-
+getDisciplinasInscritas(): Observable<Disciplina[]> {
+  return this.http.get<Disciplina[]>(
+    `${this.baseUrl}/departamento/studentsubject/disciplinas-inscritas`,
+    this.getHeaders()
+  );
 
 listarConfirmacoes(): Observable<{ content: Confirmacao[] }> {
   return this.http.get<{ content: Confirmacao[] }>(`${this.baseUrl}/api/departamento/confirmation`,this.getHeaders());
@@ -108,5 +115,6 @@ listarConfirmacoes(): Observable<{ content: Confirmacao[] }> {
 
 atualizarEstado(id: number, dados: Confirmacao): Observable<any> {
   return this.http.patch(`${this.baseUrl}/api/departamento/confirmation/${id}`, dados,this.getHeaders());
+}
 }
 }
