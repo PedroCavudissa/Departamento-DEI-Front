@@ -22,9 +22,6 @@ export class PerfilestudanteService {
     });
   }
 
-
-
-
 alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
   const body = {
     currentPassword: senhaAtual,

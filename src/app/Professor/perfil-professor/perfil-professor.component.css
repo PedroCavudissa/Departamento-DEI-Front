@@ -10,6 +10,9 @@
 .form-row .form-group {
   flex: 1;
 }
+label {
+ color: #080808;
+}
 
 body {
   margin: 0;

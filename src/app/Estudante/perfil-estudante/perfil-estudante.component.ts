@@ -22,8 +22,8 @@ export class PerfilEstudanteComponent implements OnInit {
   mostrarModal = false;
   mostrarMensagens = false; 
   formulario: FormGroup;
-mensagemSucesso: string = '';
-mensagemErro: string = '';
+  mensagemSucesso: string = '';
+  mensagemErro: string = '';
   mensagemErroSenha = '';
   mensagemSucessoSenha = '';
   formularioSenha: FormGroup;
@@ -35,9 +35,9 @@ mensagemErro: string = '';
     private perfilestudanteService: PerfilestudanteService
   ) {
     this.viestudante = {
-      email: '', 
-      nome: '',
-      userDetails: {
+       email: '', 
+        nome: '',
+        userDetails: {
         id: 0,
         dataNascimento: '',
         numIdentificacao: '',
@@ -232,13 +232,12 @@ accao(): void {
             if (dadosAlterados.email) this.viestudante['email'] = dadosAlterados.email;
           }
           
-          // Mostra mensagem de sucesso
           this.mensagemSucesso = 'Dados atualizados com sucesso!';
           
-          // Limpa a mensagem após 5 segundos
+          // Limpa a mensagem após 3 segundos
           setTimeout(() => {
             this.mensagemSucesso = '';
-          }, 5000);
+          }, 3000);
           
           // Recarrega os dados do estudante
           setTimeout(() => this.carregarDadosEstudante(), 1000);
@@ -246,10 +245,9 @@ accao(): void {
         error: (err: HttpErrorResponse) => {
           this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
           
-          // Limpa a mensagem de erro após 5 segundos
           setTimeout(() => {
             this.mensagemErro = '';
-          }, 5000);
+          }, 3000);
         }
       });
   } 
