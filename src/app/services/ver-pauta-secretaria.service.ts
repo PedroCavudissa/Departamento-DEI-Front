@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../enviroments/environment';
 import { map } from 'rxjs/operators';
 
 export interface AlunoPauta {
@@ -40,7 +41,7 @@ export interface Disciplina {
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  private baseUrl = 'https://ed37ccb8f819.ngrok-free.app/api';
+  private baseUrl = ` ${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 

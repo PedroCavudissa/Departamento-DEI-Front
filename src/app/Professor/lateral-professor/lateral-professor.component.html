@@ -35,6 +35,13 @@
       </li>
 
       <li>
+        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Ver Pautas' }">
+          <i class='bx bx-book'></i>
+          <span (click)="selecionarMenu('Ver Pautas','Ver Pautas')" tabindex="0" (keyup.enter)="selecionarMenu('Ver Pautas','Ver Pautas')">Ver Pautas</span>
+        </a>
+      </li>
+
+      <li>
         <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Minhas Turmas' }" >
           <i class='bx bx-certification'></i>
           <span (click)="selecionarMenu('Minhas Turmas','Minhas Turmas')" tabindex="0" (keyup.enter)="selecionarMenu('Minhas Turmas','Minhas Turmas')">Minhas Turmas</span>

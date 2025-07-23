@@ -8,7 +8,11 @@
         <select  id="disciplina" (change)="visualizarPauta()" [(ngModel)]="disciplinaSelecionadaNome" class="form-control">
           <option [ngValue]="null">-- Selecione a Disciplina --</option>
           <option *ngFor="let d of disciplinas" [value]="d.disciplinaNome">{{ d.disciplinaNome }}</option>
-        </select><br><br><br>
+        </select><br><br>
+        <!-- Botão para abrir o modal -->
+      <button class="confirm-btn" (click)="abrirModal()" [disabled]="!disciplinaSelecionadaNome">
+        Ver Pedidos de Edição de Nota
+      </button><br><br>
 
         <table *ngIf="pauta.length > 0" class="table table-bordered mt-4">
           <thead>

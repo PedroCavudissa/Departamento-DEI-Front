@@ -25,7 +25,7 @@ export interface Disciplina {
   providedIn: 'root'
 })
 export class PautaService {
-  private baseUrl =  `${environment.apiUrl}/api`;
+  private baseUrl = ` ${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
