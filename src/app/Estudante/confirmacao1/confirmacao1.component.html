@@ -15,7 +15,6 @@
             <td>{{ disciplina.nome }}</td>
           </tr>
         </tbody>
-
       </table>
     </div>
   </section>
@@ -30,20 +29,22 @@
 
   <button class="modal-btn" (click)="abrirModal()">Disciplinas Inscritas</button>
 
-  
-    <div class="modal-backdrop" *ngIf="mostrarModal">
-      <div class="modal-content">
-        <h3>Disciplinas Inscritas</h3>
-        <ul *ngIf="disciplinasInscritas.length > 0; else nenhuma">
-        </ul>
-        <ng-template #nenhuma>
-          <p>O estudante ainda não está inscrito em nenhuma disciplina.
-            O estudante não fez a Confirmação.
-          </p>
-        </ng-template>
-        <button class="close-btn" (click)="fecharModal()">Fechar</button>
-      </div>
-    </div>
-</div>
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>Disciplinas Inscritas</h3>
 
+    <ul *ngIf="disciplinasInscritas.length > 0; else nenhuma">
+      <li *ngFor="let disciplina of disciplinasInscritas">
+        <strong>{{ disciplina.nomeDisciplina }}</strong> 
+        ({{ disciplina.siglaDisciplina }})
+      </li>
+    </ul>
+
+    <ng-template #nenhuma>
+      <p>O estudante ainda não está inscrito em nenhuma disciplina.</p>
+    </ng-template>
+
+    <button class="close-btn" (click)="fecharModal()">Fechar</button>
+  </div>
+</div>
 <app-lateral></app-lateral>

@@ -39,6 +39,9 @@ export interface DadosAcademicos {
 export interface Disciplina {
    disciplinaId: number;
    nome: string;
+    nomeDisciplina: string;
+  siglaDisciplina: string;
+  status: string; 
 }
 
 export interface Rupe {
@@ -51,6 +54,7 @@ export interface Rupe {
   status: string;
   paymentReasons: string[];
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
@@ -99,7 +103,7 @@ finalizarConfirmacao(disciplinasIds: number[]): Observable<any> {
 
 getDisciplinasInscritas(): Observable<Disciplina[]> {
   return this.http.get<Disciplina[]>(
-    `${this.baseUrl}/departamento/studentsubject/disciplinas-inscritas`,
+    `${this.baseUrl}/departamento/students/student/my-current-subject`,
     this.getHeaders()
   );
 }
