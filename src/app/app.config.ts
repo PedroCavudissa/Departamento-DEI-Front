@@ -7,10 +7,14 @@ import {
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
-import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { DisciplinaService } from './Services/disciplina.service';
+import { LoginService } from './Services/login.service';
+import { LacamentoNotasService } from './Professor/lancamento/lacamento-notas.service';
+import { DisciplinaService } from './services/disciplina.service';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { MenuService } from './services/menu.service';
 
-import { LoginService } from './services/login.service';
 
 
 import {
@@ -42,6 +46,7 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
   ],
+
 };
 
 export type NotaCampo =

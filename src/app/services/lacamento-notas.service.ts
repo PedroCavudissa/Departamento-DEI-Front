@@ -57,12 +57,11 @@ export interface TipoPauta {
   descricao: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class LacamentoNotasService {
-  private baseUrl = ` ${environment.apiUrl}/api`;
+  private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -77,7 +76,7 @@ export class LacamentoNotasService {
     };
   }
 
- getDadosDoProfessor(): Observable<any> {
+  getDadosDoProfessor(): Observable<any> {
     return this.http.get(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
 
@@ -90,24 +89,23 @@ export class LacamentoNotasService {
     );
   }
 
-importarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
-  const formData = new FormData();
-  formData.append('file', file); // nome está certo: 'file'
+  importarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
 
-  const token = localStorage.getItem('token') || '';
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-    'Accept': 'application/json',
-  });
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Accept': 'application/json',
+    });
 
-  const url = `${this.baseUrl}/departamento/studentsubject/upload?disciplinaId=${disciplinaId}&tipoP=${tipo}`;
+    const url = `${this.baseUrl}/departamento/studentsubject/upload?disciplinaId=${disciplinaId}&tipoP=${tipo}`;
+    return this.http.post(url, formData, {
+      headers,
+      responseType: 'text' as 'json'
+    });
+  }
 
- return this.http.post(url, formData, {
-  headers,
-  responseType: 'text' as 'json' // <- tipo `text`, mas compatível com o Angular
-});
-
-}
   baixarModeloExcel(disciplinaId: number, tipo: number): Observable<HttpResponse<Blob>> {
     return this.http.get(`${this.baseUrl}/departamento/studentsubject/pauta/${disciplinaId}?tipoP=${tipo}`, {
       headers: this.getHeaders().headers,
@@ -115,47 +113,45 @@ importarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
       observe: 'response'
     });
   }
-buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
-  const token = localStorage.getItem('token') || '';
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`,
-    'ngrok-skip-browser-warning': 'true'
-  });
 
-  const nomeCodificado = encodeURIComponent(disciplina.trim());
-  const url = `${this.baseUrl}/staff/buscarpauta/${nomeCodificado}`;
+  buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'ngrok-skip-browser-warning': 'true'
+    });
 
-  return this.http.get<PautaEstudante[]>(url, { headers });
-}
+    const nomeCodificado = encodeURIComponent(disciplina.trim());
+    const url = `${this.baseUrl}/staff/buscarpauta/${nomeCodificado}`;
 
-atualizarNotas(id: number, payload: any): Observable<any> {
-  const headers = this.getHeaders().headers;
-  return this.http.patch(`${this.baseUrl}/departamento/studentsubject/${id}`, payload, { headers });
-}
+    return this.http.get<PautaEstudante[]>(url, { headers });
+  }
 
-/////////////////////////////////////////////////////////////////////
+  atualizarNotas(id: number, payload: any): Observable<any> {
+    const headers = this.getHeaders().headers;
+    return this.http.patch(`${this.baseUrl}/departamento/studentsubject/${id}`, payload, { headers });
+  }
 
-getPedidosPendentes(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
-  return this.http.get<PedidoEdicaoNota[]>(
-    `${this.baseUrl}/departamento/StudentSubjectEdit/${disciplinaId}`,
-    this.getHeaders()
-  );
-}
+  getPedidosPendentes(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
+    return this.http.get<PedidoEdicaoNota[]>(
+      `${this.baseUrl}/departamento/StudentSubjectEdit/${disciplinaId}`,
+      this.getHeaders()
+    );
+  }
 
-getPedidosAprovados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
-  return this.http.get<PedidoEdicaoNota[]>(
-    `${this.baseUrl}/departamento/StudentSubjectEdit/aprovadas/${disciplinaId}`,
-    this.getHeaders()
-  );
-}
+  getPedidosAprovados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
+    return this.http.get<PedidoEdicaoNota[]>(
+      `${this.baseUrl}/departamento/StudentSubjectEdit/aprovadas/${disciplinaId}`,
+      this.getHeaders()
+    );
+  }
 
-getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
-  return this.http.get<PedidoEdicaoNota[]>(
-    `${this.baseUrl}/departamento/StudentSubjectEdit/rejeitadas/${disciplinaId}`,
-    this.getHeaders()
-  );
-}
-}
+  getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
+    return this.http.get<PedidoEdicaoNota[]>(
+      `${this.baseUrl}/departamento/StudentSubjectEdit/rejeitadas/${disciplinaId}`,
+      this.getHeaders()
+    );
+  }
 
   salvarNotas(disciplinaId: number, tipo: number, notas: any[]): Observable<any> {
     const token = localStorage.getItem('token') || '';
@@ -165,11 +161,9 @@ getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
       'Accept': 'application/json',
       'ngrok-skip-browser-warning': 'true'
     });
-  
+
     const url = `${this.baseUrl}/departamento/studentsubject/salvar?disciplinaId=${disciplinaId}&tipoP=${tipo}`;
-  
+
     return this.http.post(url, notas, { headers });
   }
-  
 }
-

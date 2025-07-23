@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
 import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service';
-
-import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // <== Adicione 'Disciplina'
+import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service';
 
 @Component({
   selector: 'app-confirmacao1',
@@ -12,11 +11,13 @@ import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/
   templateUrl: './confirmacao1.component.html',
   styleUrl: './confirmacao1.component.css'
 })
+
 export class Confirmacao1Component implements OnInit {
   disciplinasfaze: Disciplina[] = []; // 
   disciplinasInscritas: Disciplina[] = [];
   mostrarModal = false;
    mensagem: string = ''; // ← Adiciona isto
+
 
   constructor(
     private router: Router,
@@ -27,6 +28,7 @@ ngOnInit(): void {
   this.confirmacaoService.getDadosAcademicos().subscribe({
     next: (dados) => {
       const estudanteId = dados.userDetails.id;
+
       const ano = dados.userDetails.anoAcademico;
       const semestre = this.getSemestre(); // Certifica-te que essa função retorna 1 ou 2
 
@@ -37,17 +39,21 @@ ngOnInit(): void {
       }
 
       this.confirmacaoService.getDisciplinasFazer().subscribe({
+
         next: (disciplinas) => {
           this.disciplinasfaze = disciplinas;
         },
         error: (err) => {
+
           console.error('❌ Erro Ao Carregar Disciplinas a Fazer:', err);
           this.mensagem = 'Erro ao carregar disciplinas.';
+
           this.disciplinasfaze = [];
         }
       });
     },
     error: (err) => {
+
       console.error('❌ Erro Ao Obter Dados Acadêmicos:', err);
       this.mensagem = 'Erro ao carregar dados do estudante.';
     }
@@ -58,6 +64,7 @@ getSemestre(): number {
   const mes = new Date().getMonth() + 1;
   return mes <= 6 ? 1 : 2;
 }
+
 
 abrirModal(): void {
   this.confirmacaoService.getDisciplinasInscritas().subscribe({
@@ -88,4 +95,5 @@ fecharModal(): void {
   confi3() {
     this.router.navigate(['/confirmacao3']);
   }
+
 }

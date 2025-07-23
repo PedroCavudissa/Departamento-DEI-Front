@@ -102,6 +102,7 @@ export const routes: Routes = [
  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
 
   // Estudante
+
   { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard] },
   { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] },
   { path: 'cadeira', component: CadeiraComponent , canActivate: [AuthGuard]},
@@ -113,6 +114,7 @@ export const routes: Routes = [
   { path: 'chat-estudante', component: ChatEstudanteComponent , canActivate: [AuthGuard]},
   { path: 'calendario-estudante', component: CalendarioEstudanteComponent , canActivate: [AuthGuard]},
   { path: 'comunicado-estudante', component: ComunicadoEstudanteComponent, canActivate: [AuthGuard] },
+
   // Professor
   { path: 'tela-professor', component: TelaProfessorComponent , canActivate: [AuthGuard]},
   { path: 'perfil-professor', component: PerfilProfessorComponent, canActivate: [AuthGuard] },

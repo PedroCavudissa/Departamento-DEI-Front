@@ -7,12 +7,23 @@
           <tr>
             <th>Código</th>
             <th>Nome da Disciplina</th>
+            <th>Pré-requisito</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let disciplina of disciplinasfaze">
+
             <td>{{ disciplina.disciplinaId }}</td>
+
             <td>{{ disciplina.nome }}</td>
+            <td>
+              <span *ngIf="disciplina.precedenciasDisciplinaNome && disciplina.precedenciasDisciplinaNome.length > 0; else semPreReq">
+                {{ disciplina.precedenciasDisciplinaNome }}
+              </span>
+              <ng-template #semPreReq>
+                <span style="color: gray;">Nenhum</span>
+              </ng-template>
+            </td>
           </tr>
         </tbody>
 
@@ -44,6 +55,7 @@
         <button class="close-btn" (click)="fecharModal()">Fechar</button>
       </div>
     </div>
+
 </div>
 
 <app-lateral></app-lateral>

@@ -28,7 +28,11 @@
   <option 
     *ngFor="let tipo of tipos" 
     [ngValue]="tipo.codigo"
+<<<<<<< HEAD
    >
+=======
+    [disabled]="!isTipoPermitido(disciplinaSelecionadaId, tipo.codigo)">
+>>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
     {{ tipo.descricao }}
   </option>
 </select>
@@ -41,15 +45,23 @@
         [disabled]="!disciplinaSelecionadaId || !tipoSelecionado"
         (click)="baixarModelo()"
       >
+<<<<<<< HEAD
         <i class="bx bx-download"></i> Baixar Modelo Da Pauta
+=======
+        📥 Baixar Modelo Da Pauta
+>>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
       </button>
     </div><br>
 
     <!-- UPLOAD -->
     <div class="form-group mt-3">
       <label for="excelFile"><strong>3. Importe o ficheiro Excel com as notas preenchidas</strong></label>
+<<<<<<< HEAD
       <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".xlsx,.xls" /> <br> <br>
 
+=======
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".xlsx,.xls" />
+>>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 <button (click)="enviarExcel()">Enviar</button>
   </div>
     <!-- ALERTAS -->

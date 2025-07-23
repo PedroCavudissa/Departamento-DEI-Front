@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from "../../../Admin-Secretarias/barralateral-secretaria/barralateral-secretaria.component";
-import { AlunoPauta, Disciplina, MenuService } from '../../../Services/ver-pauta-secretaria.service';
+import { AlunoPauta, Disciplina, MenuService } from '../../../services/ver-pauta-secretaria.service';
 
 @Component({
   selector: 'app-ver-pauta',
@@ -80,7 +80,7 @@ export class VerPautaComponent implements OnInit {
       }
     }
   }
-  
+  /*
   modelo = 'A';
   anoLetivo!: number;
   disciplinaId!: number;
@@ -143,4 +143,4 @@ export class VerPautaComponent implements OnInit {
       this.carregarDisciplinas(this.paginaAtual + 1);
     }
   }
-}
+*/

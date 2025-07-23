@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LateralComponent } from "../lateral/lateral.component";
+
 import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // importa a interface Disciplina
+
 
 @Component({
   selector: 'app-confirmacao2',
@@ -18,6 +20,7 @@ export class Confirmacao2Component implements OnInit {
   erro: string = '';
   loading = true;
  disciplinasfaze: Disciplina[] = [];
+<<<<<<< HEAD
 
   constructor(
     private router: Router,
