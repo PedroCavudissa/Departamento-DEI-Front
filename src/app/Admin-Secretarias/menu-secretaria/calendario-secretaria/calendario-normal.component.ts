@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
 import { CalendarioService, Evento } from '../../../Services/calendario.service';
+import { error } from 'jquery';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-calendario-secretaria',
@@ -18,6 +20,7 @@ import { CalendarioService, Evento } from '../../../Services/calendario.service'
 export class CalendarioNormalComponent implements OnInit {
   mostrarFormulario = false;
   mostrarToast = false;
+  loading: boolean = false;
 
   data = '';
   titulo = '';
@@ -26,14 +29,14 @@ export class CalendarioNormalComponent implements OnInit {
 
   eventos: Evento[] = [];
 
-  constructor(private calendarioService: CalendarioService) {}
+  constructor(private calendarioService: CalendarioService, private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.carregarEventos();
   }
 
   carregarEventos() {
-    this.calendarioService.obterEventos().subscribe({
+    this.calendarioService.obterEventos(1).subscribe({
       next: (res) => (this.eventos = res),
       error: (err) => console.error('Erro ao carregar eventos:', err)
     });
@@ -42,9 +45,9 @@ export class CalendarioNormalComponent implements OnInit {
   salvarEvento() {
     if (!this.data.trim() || !this.titulo.trim() || !this.tipo.trim()) {
 
-      alert('Preencha todos os campos obrigatórios.');
+      this.notification.error('Preencha todos os campos obrigatórios.');
 
-      alert('Preencha todos os campos obrigatórios.');
+  
 
       return;
     }

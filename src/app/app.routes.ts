@@ -133,4 +133,5 @@ export const routes: Routes = [
   { path: 'horario-secretaria', component: HorarioSecretariaComponent , canActivate: [AuthGuard]},
   {path:'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard]},
 
+
 ];
