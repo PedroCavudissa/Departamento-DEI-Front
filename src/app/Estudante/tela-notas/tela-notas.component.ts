@@ -15,14 +15,15 @@ import {
   Nota,
   Disciplina
 } from '../../services/tela-notas.service';
-import { BarralateralComponent } from '../../Admin-Secretaria/barralateral/barralateral.component';
+
 import { lastValueFrom } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { LateralComponent } from '../lateral/lateral.component';
 
 @Component({
   selector: 'app-notas',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarralateralComponent],
+  imports: [CommonModule, FormsModule,LateralComponent ],
   templateUrl: './tela-notas.component.html',
   styleUrls: ['./tela-notas.component.css']
 })

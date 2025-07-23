@@ -69,7 +69,7 @@
 .botao:hover {
   background-color: #3498db;
 }
-
+}
 /* Links */
 .ver-provas {
   text-decoration: none;
@@ -317,3 +317,4 @@ input[type="text"] {
   }
 }
 
+}

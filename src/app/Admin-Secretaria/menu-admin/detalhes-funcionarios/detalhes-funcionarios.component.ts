@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Funcionario, FuncionarioService } from '../../../services/cadastro.service';
+import { Funcionario, FuncionarioService } from '../../../Services/cadastro.service';
 
 @Component({
   selector: 'app-detalhes-funcionarios',
@@ -16,7 +16,16 @@ import { Funcionario, FuncionarioService } from '../../../services/cadastro.serv
   textoBusca: string = '';
 
   readonly CARGOS = ['PROFESSOR', 'SECRETARIA', 'ADMINISTRADOR'];
+  funcionarioSelecionado: any = null;
 
+  verDetalhes(funcionario: any) {
+    this.funcionarioSelecionado = funcionario;
+  }
+  
+  fecharModal() {
+    this.funcionarioSelecionado = null;
+  }
+  
   constructor(private funcionarioService: FuncionarioService) {}
 
   ngOnInit(): void {

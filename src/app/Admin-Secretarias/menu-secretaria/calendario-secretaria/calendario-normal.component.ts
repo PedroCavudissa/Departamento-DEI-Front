@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-
-import { CalendarioService, Evento } from '../../../services/calendario.service';
 import { CalendarioService, Evento } from '../../../Services/calendario.service';
 
 @Component({
@@ -15,9 +13,6 @@ import { CalendarioService, Evento } from '../../../Services/calendario.service'
   styleUrls: ['./calendario-normal.component.css'],
 })
 
-export class CalendarioNormalComponent implements OnInit {
-  mostrarFormulario = false;
-  mostrarToast = false;
 
 
 export class CalendarioNormalComponent implements OnInit {

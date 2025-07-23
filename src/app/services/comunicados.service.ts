@@ -6,14 +6,13 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Comunicado, NovoComunicado } from '../models/comunicados.model';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComunicadosService {
-  public readonly API_URL =
-    'https://42f235bb2128.ngrok-free.app/api/departamento/notices';
-
+ 
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -27,18 +26,18 @@ export class ComunicadosService {
 
   listar(): Observable<Comunicado[]> {
     return this.http
-      .get<Comunicado[]>(`${this.API_URL}/list`, this.httpOptions)
+      .get<Comunicado[]>(`${environment.apiUrl}/api/departamento/notices/list`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
-      .post<Comunicado>(`${this.API_URL}/create`, comunicado, this.httpOptions)
+      .post<Comunicado>(`${environment.apiUrl}/api/departamento/notices/create`, comunicado, this.httpOptions)
       .pipe(
         catchError((error) => {
           if (error.status === 404) {
             return this.http.post<Comunicado>(
-              `${this.API_URL}/createNotice`,
+              `${environment.apiUrl}/createNotice`,
               comunicado,
               this.httpOptions
             );
@@ -61,7 +60,7 @@ export class ComunicadosService {
     console.log('Payload:', payload);
 
     return this.http.patch<Comunicado>(
-      `${this.API_URL}/update/${id}`, // ✅ agora está certo
+      `${environment.apiUrl}/update/${id}`,
       payload,
       this.httpOptions
     );
@@ -125,7 +124,7 @@ export class ComunicadosService {
 
   remover(id: number): Observable<void> {
     return this.http
-      .delete<void>(`${this.API_URL}/delete/${id}`, this.httpOptions)
+      .delete<void>(`${environment.apiUrl}/delete/${id}`, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
 

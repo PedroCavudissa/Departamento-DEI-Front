@@ -7,8 +7,9 @@ import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import { LoginService } from '../Services/login.service';
 
+import { LoginService } from '../services/login.service';
+import { NotificationService } from '../services/notification.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notification: NotificationService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -34,10 +36,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
  notyf = new Notyf({
   duration: 3000,
   position: {
@@ -67,11 +65,8 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
-<<<<<<< HEAD
-=======
-    
->>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
+localStorage.removeItem('token');
 }
 
 // Senha esquecida
@@ -83,33 +78,8 @@ fecharModal() {
   this.mostrarModal = false;
 }
 
-<<<<<<< HEAD
-    const dados = { email, senha };
-
-    this.loginService.recuperarSenha().subscribe({
-      next: () => {
-        this.mostrarModal = false;
-        notyf.success('Senha alterada com sucesso!');
-        this.mensagemLogin = 'Senha alterada com sucesso!';
-        this.tipoMensagem = 'sucesso';
-      },
-      error: () => {
-        this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
-        this.tipoMensagem = 'erro';
-
-      }
-    });
-  } else {
-    notyf.error('Usuário não encontrado ou erro ao alterar a senha.');
-    this.recuperarForm.markAllAsTouched();
-  }
-}
-
-*/
-
-=======
 alterarSenha(){}
->>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
+
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -120,16 +90,10 @@ entrar() {
     this.loginService.entrar(usuario).subscribe({
       next: (res: unknown) => {
         const response = res as { token: string; email: string; role: string };
-        this.notyf.success('Login realizado com sucesso!');
-<<<<<<< HEAD
+        this.notification.success('Login realizado com sucesso!');
+
         localStorage.setItem('token', response.token);
         localStorage.setItem('usuario', response.email);
-=======
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', res.email);
-        console.log('Usuário logado:', res.email);
-        console.log('Token recebido:', res.token);
->>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
 
         const role = response.role;
         switch (role) {
@@ -137,7 +101,7 @@ entrar() {
             this.router.navigate(['/menu-admin']);
             break;
           case 'SECRETARIA':
-            this.router.navigate(['/menu-admin']);
+            this.router.navigate(['/menu-secretaria']);
             break;
           case 'PROFESSOR':
             this.router.navigate(['/tela-professor']);
@@ -151,50 +115,30 @@ entrar() {
       },
       error: (error: unknown) => {
         console.error('Erro ao logar:', error);
-        this.notyf.error('E-mail ou senha inválidos');
+        this.notification.error('E-mail ou senha inválidos');
       }
     });
 
   } else {
     this.loginForm.markAllAsTouched();
-    this.notyf.error('Preencha todos os campos corretamente.');
+    this.notification.error('Preencha todos os campos corretamente.');
   }
 }
 
 
-<<<<<<< HEAD
-  cadastro(){
 
-    this.router.navigate(['/cadastro']);
-  }
-
-  continuarRecuperacao() {
-    if (this.recuperarForm.valid) {
-      const email = this.recuperarForm.get('gmail')?.value;
-      console.log('Redirecionar com email:', email);
-      this.mostrarModal = false;
-      this.router.navigate(['/recuperar-senha']);
-    } else {
-      this.recuperarForm.markAllAsTouched();
-    }
-=======
 recuperar(): void {
   if (this.recuperarForm.invalid) {
     this.recuperarForm.markAllAsTouched();
-    this.notyf.success('Verifique a sua caixa de email!');
+    this.notification.success('Verifique a sua caixa de email!');
       this.fecharModal();
     return;
->>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5
+
   }
   const email = this.recuperarForm.get('email')?.value;
  
  
 
-<<<<<<< HEAD
 
 }
-=======
-  
 }
-}
->>>>>>> 19d5d3f8b73f4fbf96c9ff582fa49be44b936ed5

@@ -1,0 +1,151 @@
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  .content-area {
+    flex: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .comunicado-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .comunicado-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .comunicado-header h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+  }
+  
+  .status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
+  .status-valid {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .status-invalid {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .comunicado-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .comunicado-content {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .comunicado-content h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .comunicado-footer {
+    font-size: 0.8rem;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 0.5rem;
+  }
+  
+  .loading-state, .empty-state, .error-state {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+  }
+  
+  .error-state {
+    color: white;
+    background-color: rgb(127, 121, 121);
+    border-radius: 4px;
+  }
+  
+  .error-state button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #47B5FF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .error-state button:hover {
+    background-color: blue;
+  }
+  
+  /* ---------------------------- */
+  @media (max-width: 768px) {
+    .content-area {
+      padding: 1rem;
+      margin: 100px auto;
+      overflow: auto;
+      width:90%;
+    }
+  
+    .comunicado-header h2 {
+      font-size: 1.2rem;
+    }
+  
+    .comunicado-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .comunicado-content h3 {
+      font-size: 0.95rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .comunicado-card {
+      padding: 1rem;
+    }
+  
+    .comunicado-header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .status-badge {
+      font-size: 0.75rem;
+    }
+  
+    .error-state button {
+      width: 100%;
+    }
+  }
+  

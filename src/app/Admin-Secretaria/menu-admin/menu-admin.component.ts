@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
 import { forkJoin } from 'rxjs';
-import { RelatorioService } from '../../services/relatorio.service';
+import { RelatorioService } from '../../Services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
 
 Chart.register(...registerables);
@@ -88,21 +88,7 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
   }
 
   verDetalhes(item: string) {
-    switch (item.toLowerCase()) {
-      case 'cadeiras':
-      case 'salas':
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-      case 'funcionários':
-      case 'funcionarios':
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-      case 'estudantes':
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
-      default:
-        console.warn('Item desconhecido:', item);
-    }
+
   }
 
   ngOnDestroy(): void {

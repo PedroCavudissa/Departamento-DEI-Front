@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ComunicadosService } from '../../../../services/comunicados.service';
+import { ComunicadosService } from '../../../../Services/comunicados.service';
 import { Comunicado, NovoComunicado } from '../../../../models/comunicados.model';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BarralateralComponent } from "../../../barralateral/barralateral.component";
+import { environment } from '../../../../../enviroments/environment';
 
 
 @Component({
@@ -156,7 +157,7 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
     };
 
     this.comunicadosService.debugRequest(
-      `${this.comunicadosService.API_URL}/update/${testId}`,
+      `${environment.apiUrl}/update/${testId}`,
       'PUT',
       testData
     ).subscribe({

@@ -2,17 +2,20 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { EstudanteService, Estudante } from '../../../services/estudante.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-funcionarios',
   standalone: true,
-  imports: [BarralateralComponent],
+  imports: [BarralateralComponent,FormsModule,CommonModule],
   templateUrl: './menu-estudantes.component.html',
   styleUrls: ['./menu-estudantes.component.css'],
 })
 export class MenuEstudantesComponent implements AfterViewInit {
+
   colors: Record<string, string> = {
     '1º Ano': '#009cff',
     '2º Ano': '#ff9400',
@@ -21,8 +24,68 @@ export class MenuEstudantesComponent implements AfterViewInit {
     '5º Ano': '#004080',
   };
 
+
+
+  estudantes: Estudante[] = [];
+  anoSelecionado: string = '';
+  textoBusca: string = '';
+  estudanteSelecionado: any = null;
+
+  verDetalhes(estudante: any) {
+    this.estudanteSelecionado = estudante;
+  }
+  
+  fecharModal() {
+    this.estudanteSelecionado = null;
+  }
+  
   constructor(private estudanteService: EstudanteService) {}
 
+ 
+    ngOnInit(): void {
+      this.carregarEstudantes();
+    }
+
+
+  carregarEstudantes(): void {
+    const ano = Number(this.anoSelecionado);
+    if (!ano) {
+      this.estudantes = [];
+      console.warn('⚠️ Selecione um ano para buscar os estudantes.');
+      return;
+    }
+  
+    this.estudanteService.getEstudantesPorAno(ano).subscribe({
+      next: (dados) => {
+        this.estudantes = dados;
+        console.log(`📚 Estudantes do ${ano}º ano:`, dados);
+      },
+      error: (err) => {
+        console.error('❌ Erro ao carregar estudantes:', err);
+      }
+    });
+  }
+  
+
+  get estudantesFiltrados(): Estudante[] {
+    const normalizar = (texto: string) =>
+      texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  
+    return this.estudantes.filter(d => {
+      const buscaTexto = normalizar(this.textoBusca || '');
+  
+      const nomeMatch = d.nome && normalizar(d.nome).includes(buscaTexto);
+      const numDocumentoMatch = d.numIdentificacao && d.numIdentificacao.toLowerCase().includes(buscaTexto);
+      const anoAcademicoMatch = d.anoAcademico && d.anoAcademico.toString().includes(buscaTexto);
+      const statusMatch = d.statusEstudante && normalizar(d.statusEstudante).includes(buscaTexto);
+      
+      const anoMatch = this.anoSelecionado === '' || d.anoAcademico === parseInt(this.anoSelecionado, 10);
+  
+      return anoMatch && (nomeMatch || numDocumentoMatch || anoAcademicoMatch || statusMatch);
+    });
+  }
+  
+  
   ngAfterViewInit(): void {
     this.gerarGraficos();
   }

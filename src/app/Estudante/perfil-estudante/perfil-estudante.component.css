@@ -1,44 +1,42 @@
  * {
     box-sizing: border-box;
+   padding: 0;
+   margin: 0;
     font-family: Arial, sans-serif;
   }
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #f1f1f1;
+body {
+  height: 100%;
+}
+
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh; /* centraliza verticalmente */
+    padding: 20px;
   }
 
-  .odete{
-    color:slateblue ;
+
+
+.card h3 {
+  font-size: 18px;
+  text-align: center;
 }
-  
   .card {
     background: #fff;
     border-radius: 22px;
     padding: 19px;
     width: 450px;
-    margin-top:10px;
+    margin-top:70px;
     display: flex;
     flex-direction: column;
-
-     
-  
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     
-    max-width: 400px;
+    max-width: 500px;
    
   }
 
-  .card h3 {
-    text-align: center;
-   
-    color: #333;
-  }
 
   .form-group {
     margin-bottom: 15px;
@@ -62,12 +60,11 @@
     display: flex;
     justify-content: center;
      width: 100%;
-    
-    
+     gap: 10px;
   }
-
+ 
   .buttons button {
-    padding: 8px 7px;
+    padding: 10px 16px;
     border: none;
     border-radius: 5px;
     background-color:  #47B5FF;
@@ -75,13 +72,10 @@
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 100%;
-    max-width: 200px;
-
       }
 
   .buttons button:hover {
-    background-color: #0056b3;
+    background-color: #2764a5;
   }
 
     @media (max-width: 768px) {
@@ -91,8 +85,6 @@
   padding: 10px;
   width: 300px;
 }
-
-
 
 
 .card h3 {
@@ -118,10 +110,6 @@
     }
 }
  /*Mensagem e*/ 
-
-
- 
-
 .error-message {
   color: red !important;
   font-size: 0.9em;
@@ -131,6 +119,7 @@
 }
 
 /* Estilos do Modal */
+
 .modal {
   position: fixed;
   top: 0;
@@ -147,9 +136,9 @@
 .modal-conteudo {
   background: white;
   padding: 20px;
-  border-radius: 17px;
-  width: 90%;
-  max-width: 340px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 330px;
   position: relative;
 }
 

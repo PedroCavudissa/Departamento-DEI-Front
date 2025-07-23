@@ -32,14 +32,10 @@ export class TelaEstudanteComponent implements OnInit {
       },
       error: (err: { message: string }) => {
         console.error('Erro ao buscar estudante:', err);
-        this.errorMessage = err.message || 'Erro desconhecido ao buscar estudante.';
         this.estudanteSelecionado = undefined;
       }
     });
-
-
   }
-
 }
 
 

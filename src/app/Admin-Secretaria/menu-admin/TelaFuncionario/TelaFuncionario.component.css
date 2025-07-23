@@ -1,0 +1,315 @@
+*{
+  margin :0px;
+  padding:0px;
+}
+.pagina-wrapper{
+  margin:150px auto;
+}
+
+/* Container dos gráficos */
+.graficos {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 80px;
+  flex-wrap: wrap;
+  margin-left: 180px;
+ 
+}
+/* Caixa do gráfico */
+.grafico-box {
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #333;
+  width: 42%;
+  padding: 16px;
+  box-shadow: 1px 5px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  margin-top: -40px;
+
+}
+
+/* Container interno do gráfico */
+.grafico-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo do canvas do gráfico */
+.grafico-box canvas {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* FORM DE BUSCA */
+.form-search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-search select,
+.form-search input {
+  flex: 1;
+  width:75%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  transition: border-color 0.2s;
+}
+
+.select-funcao{
+  width: 20px;
+  color: #47B5FF;
+}
+/* Mensagem de carregamento */
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  color: #666;
+}
+
+.spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #47B5FF;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Mensagem sem resultados */
+.no-results {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+  background-color: #fff;
+  border-radius: 4px;
+  width:75%;
+  margin-top: 40px;
+  margin-left: 265px;
+}
+/* Estilos da tabela */
+.tabela-funcionarios {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+.tabela-funcionarios th {
+  background-color: #47B5FF;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+}
+
+.tabela-funcionarios td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabela-funcionarios tr:hover {
+  background-color: #f5f5f5;
+}
+
+.tabela-funcionarios tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Botão do menu mobile */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1100;
+  background: #47B5FF;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.modal-content h3 {
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.modal-content p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 26px;
+  cursor: pointer;
+  color: #999;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* ========= RESPONSIVIDADE ========= */
+
+/* Tablet - 992px ou menos */
+@media (max-width: 992px) {
+  .graficos {
+    gap: 20px;
+  }
+
+  .grafico-box {
+    height: 280px;
+  }
+
+  .filtros-wrapper {
+    gap: 12px;
+  }
+
+  .select-funcao, 
+  .campo-pesquisa-func {
+    max-width: 250px;
+  }
+}
+
+/* Tablet pequeno - 768px ou menos */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+
+
+  .main-wrapper {
+    margin-left: 0;
+    width: 90%;
+    padding: 15px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .filtros-wrapper {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .select-funcao, 
+  .campo-pesquisa-func, 
+  .buscar-btn {
+    max-width: 90%;
+  }
+
+  .titulo-principal {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+}
+
+/* Celular grande - 576px ou menos */
+@media (max-width: 576px) {
+  .grafico-box {
+    height: 250px;
+    padding: 15px;
+  }
+
+  .supbar h2 {
+    font-size: 1.2rem;
+  }
+
+  .tabela-funcionarios th, 
+  .tabela-funcionarios td {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .select-funcao, 
+  .campo-pesquisa-func {
+    font-size: 14px;
+    padding: 12px 15px;
+  }
+
+  .buscar-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+/* Celular pequeno - 400px ou menos */
+@media (max-width: 400px) {
+  .main-wrapper {
+    padding: 10px;
+  }
+
+  .grafico-box {
+    height: 220px;
+  }
+
+  .campo-pesquisa-func {
+    min-width: 100%;
+  }
+
+  .campo-pesquisa-func::placeholder {
+    font-size: 13px;
+  }
+
+  .select-funcao, 
+  .campo-pesquisa-func {
+    padding: 10px 12px;
+  }
+
+  .filtros-wrapper {
+    gap: 8px;
+  }}

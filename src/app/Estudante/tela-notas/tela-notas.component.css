@@ -1,23 +1,20 @@
-:host {
-  display: block;
-  width: 100%;
-  max-width: 1000px;
-  margin: 4rem auto;
-  margin-right: 5rem;
+/* Container principal respeitando a barra lateral */
+.container {
+  margin-left: 450px; /* Largura estimada da <app-lateral> */
   padding: 2rem;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 800px;
   box-sizing: border-box;
+  margin-top: 60px;
 }
 
-/* Estilos para Desktop (1024px pra cima) */
-section {
-  margin-bottom: 2.5rem;
+/* Seções em forma de card */
+.card-box {
+  background: #217dd8;
   padding: 1.5rem;
-  background: #f8fafc;
-  border-radius: 10px;
+  border-radius: 12px;
+  margin-bottom: 2rem;
   border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 h2 {
@@ -25,6 +22,9 @@ h2 {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .form-group {
@@ -35,7 +35,8 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-select, input {
+select,
+input {
   flex: 1 1 200px;
   padding: 0.75rem;
   border: 1px solid #cbd5e1;
@@ -46,7 +47,8 @@ select, input {
   box-sizing: border-box;
 }
 
-select:focus, input:focus {
+select:focus,
+input:focus {
   outline: none;
   border-color: #6366f1;
 }
@@ -87,7 +89,9 @@ button:disabled {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .resultado {
@@ -120,35 +124,50 @@ li {
   border-bottom: 1px solid #e2e8f0;
   display: flex;
   justify-content: space-between;
+  font-weight: 500;
 }
 
 li:last-child {
   border-bottom: none;
 }
 
+/* Mensagens de erro */
 .error-message {
   padding: 1rem;
-  background: #fee2e2;
-  color: #dc2626;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
   border-radius: 8px;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   display: flex;
   align-items: center;
+  font-weight: 500;
   gap: 0.5rem;
 }
 
-.error-message::before {
-  content: "⚠️";
+/* Loading */
+.loading-message {
+  padding: 1rem;
+  background: #f0f9ff;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  gap: 0.5rem;
 }
 
-/* Estilos para Tablet (768px - 1023px) */
+/* Responsivo: Tablet */
 @media (max-width: 1023px) {
-  :host {
+  .container {
+    margin-left: 0;
+    width: 100%;
     padding: 1.5rem;
-    max-width: 800px;
   }
 
-  section {
+  .card-box {
     padding: 1.25rem;
   }
 
@@ -160,7 +179,8 @@ li:last-child {
     gap: 0.8rem;
   }
 
-  select, input {
+  select,
+  input {
     flex: 1 1 150px;
     padding: 0.65rem;
   }
@@ -174,15 +194,15 @@ li:last-child {
   }
 }
 
-/* Estilos para Mobile (até 767px) */
+/* Responsivo: Mobile */
 @media (max-width: 767px) {
-  :host {
+  .container {
+    margin-left: 0;
+    width: 100%;
     padding: 1rem;
-    margin: 1rem auto;
-    border-radius: 8px;
   }
 
-  section {
+  .card-box {
     padding: 1rem;
     margin-bottom: 1.5rem;
   }
@@ -198,7 +218,9 @@ li:last-child {
     margin-bottom: 1rem;
   }
 
-  select, input, button {
+  select,
+  input,
+  button {
     width: 100%;
     padding: 0.75rem;
     font-size: 0.95rem;
@@ -230,15 +252,22 @@ li:last-child {
     padding: 0.75rem;
     font-size: 0.95rem;
   }
+
+  .loading-message {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
 }
 
-/* Estilos para Telas Muito Pequenas (até 480px) */
+/* Responsivo: Telas muito pequenas */
 @media (max-width: 480px) {
-  :host {
+  .container {
+    margin-left: 0;
     padding: 0.75rem;
+    width: 100%;
   }
 
-  section {
+  .card-box {
     padding: 0.75rem;
   }
 
@@ -246,8 +275,9 @@ li:last-child {
     font-size: 1.1rem;
   }
 
-  select, input {
-    padding: 0.65rem;
+  select,
+  input {
+    padding: 10px;
   }
 
   .resultado {

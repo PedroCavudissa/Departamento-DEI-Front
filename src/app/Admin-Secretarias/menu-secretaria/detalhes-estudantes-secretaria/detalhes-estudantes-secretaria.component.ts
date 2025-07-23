@@ -15,7 +15,15 @@ export class DetalhesEstudantesSecretariaComponent implements OnInit{
   estudantes: Estudante[] = [];
   anoSelecionado: string = '';
   textoBusca: string = '';
+  estudanteSelecionado: any = null;
 
+  verDetalhes(estudante: any) {
+    this.estudanteSelecionado = estudante;
+  }
+  
+  fecharModal() {
+    this.estudanteSelecionado = null;
+  }
   constructor(private estudanteService: EstudanteService) {}
 
  

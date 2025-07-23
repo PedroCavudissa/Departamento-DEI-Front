@@ -7,13 +7,14 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Comunicado } from '../models/comunicado.model';
+import { environment } from '../../enviroments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComunicadoService {
   private apiUrl =
-    'https://42f235bb2128.ngrok-free.app/api/departamento/notices/list';
+    `${environment.apiUrl}/api/departamento/notices/list `;
 
   constructor(private http: HttpClient) {}
 

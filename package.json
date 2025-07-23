@@ -11,7 +11,8 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/cdk": "^19.2.15",
+    "@angular/animations": "^19.2.8",
+    "@angular/cdk": "^19.2.8",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -25,12 +26,9 @@
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.5.0",
     "esbuild": "^0.25.4",
-
-    "jquery": "^3.7.1",
-
     "html2canvas": "^1.4.1",
+    "jquery": "^3.7.1",
     "jspdf": "^3.0.1",
-
     "ng2-charts": "^8.0.0",
     "notyf": "^3.10.0",
     "rxjs": "^7.8.2",
@@ -45,6 +43,7 @@
     "@types/html2canvas": "^0.5.35",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.32",
+    "@types/notyf": "^2.0.0",
     "angular-cli-ghpages": "^2.0.3",
     "angular-eslint": "19.4.0",
     "eslint": "^9.26.0",

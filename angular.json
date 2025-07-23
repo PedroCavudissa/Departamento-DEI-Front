@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/departamento-dei",
+            "outputPath": "dist/departamento-dei/browser",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -25,27 +25,38 @@
             ],
             "scripts": [],
             "styles": [
-              "@angular/material/prebuilt-themes/rose-red.css",
+              "src/custom-theme.scss",
               "src/styles.css"
             ]
           },
           "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
-              "outputHashing": "all"
-              
-            },
+          "production": {
+  "fileReplacements": [
+    {
+      "replace": "src/enviroments/environment.ts",
+      "with": "src/enviroments/environment.prod.ts"
+    }
+  ],
+  "budgets": [
+    {
+      "type": "initial",
+      "maximumWarning": "3MB",
+      "maximumError": "5MB"
+    },
+    {
+      "type": "anyComponentStyle",
+      "maximumWarning": "10KB",
+      "maximumError": "20KB"
+    }
+  ],
+  "outputHashing": "all",
+  "optimization": true,
+  "sourceMap": false,
+  "namedChunks": false,
+  "aot": true
+
+}
+,
             "development": {
               "optimization": false,
               "extractLicenses": false,

@@ -1,8 +1,7 @@
-<!-- src/app/Estudante/tela-notas/tela-notas.component.html -->
 <div class="container">
-  <!-- Seção de Busca por Disciplina -->
-  <section>
-    <h2>🔍 Buscar Nota por Disciplina</h2>
+  <!-- Buscar por disciplina -->
+  <section class="card-box">
+    <h2><i class="bx bx-search"></i> Buscar Nota por Disciplina</h2>
 
     <div class="form-group">
       <select
@@ -11,10 +10,7 @@
         [disabled]="isLoading()"
       >
         <option value="">Selecione uma disciplina</option>
-        <option
-          *ngFor="let d of disciplinas()"
-          [value]="d.nome"
-        >
+        <option *ngFor="let d of disciplinas()" [value]="d.nome">
           {{ d.nome }}
         </option>
       </select>
@@ -39,7 +35,7 @@
 
       <button (click)="buscarNota()" [disabled]="isLoading() || !disciplina()">
         <span *ngIf="isLoading(); else buscarTexto" class="spinner"></span>
-        <ng-template #buscarTexto>Buscar Nota</ng-template>
+        <ng-template #buscarTexto><i class="bx bx-search-alt-2"></i> Buscar Nota</ng-template>
       </button>
     </div>
 
@@ -48,11 +44,13 @@
       <p><strong>Disciplina:</strong> {{ nota.disciplina || nota.cadeira || 'N/A' }}</p>
       <p><strong>Nota:</strong> {{ nota.nota }}</p>
     </div>
-  </section>
+  </section> <br>
+  <hr>
 
-  <!-- Seção de Listagem de Notas -->
-  <section>
-    <h2>📋 Listar Todas as Notas</h2>
+
+  <!-- Listar todas as notas -->
+  <section class="card-box">
+    <h2><i class="bx bx-list-check"></i> Listar Todas as Notas</h2>
 
     <div class="form-group">
       <input
@@ -75,7 +73,7 @@
 
       <button (click)="listarNotas()" [disabled]="isLoading()">
         <span *ngIf="isLoading(); else listarTexto" class="spinner"></span>
-        <ng-template #listarTexto>Listar Todas</ng-template>
+        <ng-template #listarTexto><i class="bx bx-list-ul"></i> Listar Todas</ng-template>
       </button>
     </div>
 
@@ -90,15 +88,14 @@
     </div>
   </section>
 
-  <!-- Mensagens de Status -->
+  <!-- Mensagens de erro ou carregamento -->
   <div *ngIf="errorMessage()" class="error-message">
-    ⚠️ {{ errorMessage() }}
+    <i class="bx bx-error"></i>{{ errorMessage() }}
   </div>
 
   <div *ngIf="isLoading()" class="loading-message">
-    ⌛ Carregando...
+    <i class="bx bx-loader-circle bx-spin"></i> Carregando...
   </div>
-
-  <!-- Sidebar -->
-  <app-barralateral></app-barralateral>
 </div>
+
+<app-lateral></app-lateral>

@@ -40,6 +40,9 @@ selecionar(select: string){
             case 'Horários':
               {this.router.navigate(['/horario'])};
               break;
+              case 'Funcionários':
+                {this.router.navigate(['/cadastro-funcionario'])};
+                break;
   }
 }
 }

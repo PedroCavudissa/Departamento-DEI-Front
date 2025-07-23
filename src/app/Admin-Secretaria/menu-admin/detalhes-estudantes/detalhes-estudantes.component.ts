@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-import { Estudante, EstudanteService } from '../../../services/estudante.service';
+
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Estudante, EstudanteService } from '../../../services/estudante.service';
 
 @Component({
   selector: 'app-detalhes-estudantes',
@@ -16,7 +17,16 @@ export class DetalhesEstudantesComponent  implements OnInit{
   estudantes: Estudante[] = [];
   anoSelecionado: string = '';
   textoBusca: string = '';
+  estudanteSelecionado: any = null;
 
+  verDetalhes(estudante: any) {
+    this.estudanteSelecionado = estudante;
+  }
+  
+  fecharModal() {
+    this.estudanteSelecionado = null;
+  }
+  
   constructor(private estudanteService: EstudanteService) {}
 
  
