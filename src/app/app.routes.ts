@@ -123,7 +123,7 @@ export const routes: Routes = [
 
   { path: 'ver-pauta-professor', component: VerPautaProfessorComponent, canActivate: [AuthGuard] },
 
-  { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] }
+  { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] },
   // Secretaria
   { path: 'menu-secretaria', component: MenuSecretariaComponent , canActivate: [AuthGuard]},
   { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] },

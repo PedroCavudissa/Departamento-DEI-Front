@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
 import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service';
 
-import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // <== Adicione 'Disciplina'
-
 @Component({
   selector: 'app-confirmacao1',
   imports: [CommonModule, LateralComponent],

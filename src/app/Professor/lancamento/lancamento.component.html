@@ -41,15 +41,14 @@
         [disabled]="!disciplinaSelecionadaId || !tipoSelecionado"
         (click)="baixarModelo()"
       >
-        <i class="bx bx-download"></i> Baixar Modelo Da Pauta
+        📥 Baixar Modelo Da Pauta
       </button>
     </div><br>
 
     <!-- UPLOAD -->
     <div class="form-group mt-3">
       <label for="excelFile"><strong>3. Importe o ficheiro Excel com as notas preenchidas</strong></label>
-      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".xlsx,.xls" /> <br> <br>
-
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept=".xlsx,.xls" />
 <button (click)="enviarExcel()">Enviar</button>
   </div>
     <!-- ALERTAS -->

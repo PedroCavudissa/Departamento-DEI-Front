@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
-import { AlunoPauta, MenuService, Disciplina } from '../../../Services/ver-pauta-secretaria.service';
 import { CommonModule } from '@angular/common';
 import { BarralateralSecretariaComponent } from "../../barralateral-secretaria/barralateral-secretaria.component";
 
@@ -76,5 +75,4 @@ export class VerPautaSecretariaComponent implements OnInit {
       this.carregarDisciplinas(this.paginaAtual + 1);
     }
   }
-}
 }

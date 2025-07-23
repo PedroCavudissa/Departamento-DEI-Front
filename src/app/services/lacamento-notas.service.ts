@@ -90,7 +90,7 @@ export class LacamentoNotasService {
     );
   }
 
-importarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
+enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
   const formData = new FormData();
   formData.append('file', file); // nome está certo: 'file'
 
@@ -115,6 +115,7 @@ importarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
       observe: 'response'
     });
   }
+
 buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
   const token = localStorage.getItem('token') || '';
   const headers = new HttpHeaders({
@@ -155,21 +156,5 @@ getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
     this.getHeaders()
   );
 }
-}
-
-  salvarNotas(disciplinaId: number, tipo: number, notas: any[]): Observable<any> {
-    const token = localStorage.getItem('token') || '';
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'ngrok-skip-browser-warning': 'true'
-    });
-  
-    const url = `${this.baseUrl}/departamento/studentsubject/salvar?disciplinaId=${disciplinaId}&tipoP=${tipo}`;
-  
-    return this.http.post(url, notas, { headers });
-  }
-  
 }
 
