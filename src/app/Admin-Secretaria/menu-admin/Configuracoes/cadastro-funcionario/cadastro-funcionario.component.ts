@@ -4,15 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Notyf } from 'notyf';
-<<<<<<< HEAD:src/app/Admin-Secretaria/menu-admin/cadastro-funcionario/cadastro-funcionario.component.ts
-import { FuncionarioService } from '../../../Services/cadastro.service';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
-=======
+
 
 import { BarralateralComponent } from '../../../barralateral/barralateral.component';
 import { error } from 'jquery';
 import { FuncionarioService } from '../../../../services/cadastro.service';
->>>>>>> origin:src/app/Admin-Secretaria/menu-admin/Configuracoes/cadastro-funcionario/cadastro-funcionario.component.ts
 
 @Component({
   selector: 'app-cadastro-funcionario',
