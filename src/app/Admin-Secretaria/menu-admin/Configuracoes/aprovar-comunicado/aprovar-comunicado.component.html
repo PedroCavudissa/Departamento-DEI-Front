@@ -1,120 +1,109 @@
 <div class="container">
-  
-  <h1 class="titulo-pagina">Gerenciamento de Comunicados</h1>
+  <app-barralateral></app-barralateral>
+  <h1 class="titulo-pagina">Gerenciar Comunicados</h1>
 
-  <!-- Formulário -->
-  <mat-card class="card-form">
-    <mat-card-header>
-      <mat-card-title>{{ modoEdicao ? 'Editar' : 'Novo' }} Comunicado</mat-card-title>
-    </mat-card-header>
+  <!-- Formulário de edição/criação -->
+  <mat-card class="card-form" id="formulario-comunicado">
+    <h2>{{ modoEdicao ? 'Editar Comunicado' : 'Novo Comunicado' }}</h2>
 
-    <mat-card-content>
-      <form (submit)="salvar()" class="form-container">
+    <div class="form-container">
+      <div class="form-row">
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Título *</mat-label>
-          <input matInput [(ngModel)]="comunicadoEmEdicao.titulo" name="titulo" required>
+          <mat-label>Título</mat-label>
+          <input matInput [(ngModel)]="comunicadoEmEdicao.titulo" required>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Conteúdo</mat-label>
+          <textarea matInput [(ngModel)]="comunicadoEmEdicao.conteudo" required rows="5"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="comunicadoEmEdicao.noticeStatus">
+            <mat-option value="VALIDO">Válido</mat-option>
+            <mat-option value="INVALIDO">Inválido</mat-option>
+          </mat-select>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Conteúdo *</mat-label>
-          <textarea matInput [(ngModel)]="comunicadoEmEdicao.conteudo" name="conteudo" rows="5" required></textarea>
+          <mat-label>Destinatário</mat-label>
+          <mat-select [(ngModel)]="comunicadoEmEdicao.destinado">
+            <mat-option value="PROFESSOR">Professor</mat-option>
+            <mat-option value="ESTUDANTE">Estudante</mat-option>
+            <mat-option value="SECRETARIA">Secretaria</mat-option>
+            <mat-option value="ADMINISTRADOR">Administrador</mat-option>
+            <mat-option value="TODOS">Todos</mat-option>
+          </mat-select>
         </mat-form-field>
-
-        <div class="form-row">
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Status</mat-label>
-            <mat-select [(ngModel)]="comunicadoEmEdicao.noticeStatus" name="noticeStatus">
-              <mat-option value="VALIDO">Válido</mat-option>
-              <mat-option value="INVALIDO">Inválido</mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Destinatário</mat-label>
-            <mat-select [(ngModel)]="comunicadoEmEdicao.destinado" name="destinado">
-              <mat-option value="PROFESSOR">Professor</mat-option>
-              <mat-option value="ALUNO">Aluno</mat-option>
-              <mat-option value="TODOS">Todos</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
 
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Data do Acontecimento</mat-label>
-          <input matInput type="date" [(ngModel)]="comunicadoEmEdicao.dataAcontecimento" name="dataAcontecimento">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="comunicadoEmEdicao.dataAcontecimento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+      </div>
 
-        <div class="form-actions">
-          <button mat-raised-button color="warn" type="button"
-                  (click)="limparFormulario()" *ngIf="modoEdicao">
-            Cancelar
-          </button>
-          <button mat-raised-button color="primary" type="submit" [disabled]="carregando">
-            <span *ngIf="!carregando">{{ modoEdicao ? 'Atualizar' : 'Salvar' }}</span>
-            <mat-spinner diameter="20" *ngIf="carregando"></mat-spinner>
-          </button>
-        </div>
-      </form>
-    </mat-card-content>
+      <div class="form-actions">
+        <button mat-raised-button color="warn" (click)="limparFormulario()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="salvar()" [disabled]="carregando">
+          <span *ngIf="carregando">
+            <mat-spinner diameter="20"></mat-spinner>
+          </span>
+          <span *ngIf="!carregando">{{ modoEdicao ? 'Atualizar' : 'Salvar' }}</span>
+        </button>
+      </div>
+    </div>
   </mat-card>
 
-  <!-- LISTA DE COMUNICADOS COM ESTILIZAÇÃO EM CARD -->
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Comunicados Cadastrados</mat-card-title>
-      <mat-spinner diameter="30" *ngIf="carregando"></mat-spinner>
-    </mat-card-header>
+  <!-- FILTRO de comunicados -->
+  <app-comunicadosf></app-comunicadosf>
 
-    <mat-card-content>
-      <ng-container *ngIf="(comunicados?.length ?? 0) > 0; else noComunicados">
-        <section *ngFor="let comunicado of comunicados" class="comunicado-card">
-          <div class="comunicado-header">
-            <h2>{{ comunicado.titulo }}</h2>
-            <span class="status-badge" [ngClass]="getStatusClass(comunicado.noticeStatus)">
-              {{ comunicado.noticeStatus | lowercase }}
-            </span>
-          </div>
+  <!-- Lista de comunicados -->
+  <div *ngIf="carregando && comunicados.length === 0" class="loading-state">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Carregando comunicados...</p>
+  </div>
 
-          <div class="comunicado-meta">
-            <p><strong>Autor:</strong> {{ comunicado.nomeFuncionario }}</p>
-            <p><strong>Destinatário:</strong> {{ comunicado.destinado | titlecase }}</p>
-          </div>
+  <div *ngIf="!carregando && comunicados.length === 0" class="empty-state">
+    <p>Nenhum comunicado encontrado</p>
+  </div>
 
-          <div class="comunicado-content">
-            <h3>Conteúdo:</h3>
-            <p>{{ comunicado.conteudo }}</p>
-          </div>
+  <div *ngFor="let comunicado of comunicados">
+    <mat-card class="comunicado-card" [class.riscado]="comunicado.noticeStatus === 'INVALIDO'">
+      <div class="comunicado-header">
+        <h2>{{ comunicado.titulo }}</h2>
+        <span class="status-badge" [ngClass]="getStatusClass(comunicado.noticeStatus)">
+          {{ comunicado.noticeStatus === 'VALIDO' ? 'VÁLIDO' : 'INVÁLIDO' }}
+        </span>
+      </div>
 
-          <div class="comunicado-footer">
-            <p>
-              <strong>Publicado em:</strong>
-              <time [attr.datetime]="comunicado.dataPublicacao">
-                {{ comunicado.dataPublicacao | date: 'dd/MM/yyyy HH:mm' }}
-              </time>
-            </p>
-            <p *ngIf="comunicado.dataAcontecimento">
-              <strong>Data do acontecimento:</strong>
-              {{ comunicado.dataAcontecimento | date: 'dd/MM/yyyy' }}
-            </p>
-          </div>
+      <div class="comunicado-meta">
+        <span><strong>Destinatário:</strong> {{ comunicado.destinado }}</span>
+        <span><strong>Publicado em:</strong> {{ comunicado.dataPublicacao | date:'dd/MM/yyyy HH:mm' }}</span>
+        <span><strong>Data do evento:</strong> {{ comunicado.dataAcontecimento | date:'dd/MM/yyyy' }}</span>
+        <span *ngIf="comunicado.nomeFuncionario"><strong>Publicado por:</strong> {{ comunicado.nomeFuncionario }}</span>
+      </div>
 
-          <div class="form-actions" style="margin-top: 10px;">
-            <button mat-raised-button color="primary" (click)="editar(comunicado)">
-              <mat-icon>edit</mat-icon> Editar
-            </button>
-            <button mat-raised-button color="warn" (click)="excluir(comunicado.id)">
-              <mat-icon>delete</mat-icon> Excluir
-            </button>
-          </div>
-        </section>
-      </ng-container>
+      <div class="comunicado-content">
+        <p>{{ comunicado.conteudo }}</p>
+      </div>
 
-      <ng-template #noComunicados>
-        <div class="empty-state">
-          <p>Nenhum comunicado cadastrado.</p>
-        </div>
-      </ng-template>
-    </mat-card-content>
-  </mat-card>
+      <div class="form-actions">
+        <button mat-button color="primary" (click)="editar(comunicado)">
+          <mat-icon>edit</mat-icon>
+          Editar
+        </button>
+        <button mat-button color="warn" (click)="excluir(comunicado.id)">
+          <mat-icon>delete</mat-icon>
+          Excluir
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>
-<app-barralateral></app-barralateral>

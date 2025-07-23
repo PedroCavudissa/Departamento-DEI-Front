@@ -1,3 +1,59 @@
+<<<<<<< HEAD
+<!-- src/app/tela-notas/tela-notas.component.html -->
+<div class="notas-container">
+  <h2>Minhas Notas</h2>
+
+  <app-tela-notas-filter
+    (filterChange)="onFilterChange($event)">
+  </app-tela-notas-filter>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <span>Carregando disciplinas...</span>
+  </div>
+
+  <div *ngIf="error" class="error-state">
+    <i class="icon">⚠️</i>
+    <p>{{ error }}</p>
+  </div>
+
+  <div *ngIf="disciplinas.length > 0" class="disciplinas-container">
+    <table class="disciplinas-table">
+      <thead>
+        <tr>
+          <th>Disciplina</th>
+          <th *ngFor="let field of getModelFields()">{{ field }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let disciplina of disciplinas">
+          <td>{{ disciplina.disciplinaNome }}</td>
+          <td *ngFor="let field of getModelFields()">
+            {{ getNotaValue(disciplina, field) }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="disciplinas.length === 0 && !loading && !error" class="empty-state">
+    <i class="icon">📭</i>
+    <p>Nenhuma disciplina encontrada</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <app-nota-disciplina></app-nota-disciplina>
+</div>
+=======
 <div class="container">
   <!-- Buscar por disciplina -->
   <section class="card-box">
@@ -99,3 +155,4 @@
 </div>
 
 <app-lateral></app-lateral>
+>>>>>>> origin

@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
-
   // Usar a URL base do environment para facilitar mudança
   private baseUrl = `${environment.apiUrl}/api/auth/login`;
 

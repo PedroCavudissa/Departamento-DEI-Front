@@ -7,7 +7,12 @@ import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
+<<<<<<< HEAD
+import { LoginService } from '../Services/login.service';
+
+=======
 import { LoginService } from '../services/login.service';
+>>>>>>> origin
 
 @Component({
   selector: 'app-login',
@@ -35,7 +40,11 @@ export class LoginComponent implements OnInit {
  notyf = new Notyf({
   duration: 3000,
   position: {
+<<<<<<< HEAD
+    x: 'right',
+=======
     x: 'center',
+>>>>>>> origin
     y: 'top',
   },
 });
@@ -62,7 +71,10 @@ export class LoginComponent implements OnInit {
       senha: ['', [Validators.required, Validators.minLength(6)]]
     });
 
+<<<<<<< HEAD
+=======
 localStorage.removeItem('token');
+>>>>>>> origin
 }
 
 // Senha esquecida
@@ -74,7 +86,32 @@ fecharModal() {
   this.mostrarModal = false;
 }
 
+<<<<<<< HEAD
+    const dados = { email, senha };
+
+    this.loginService.recuperarSenha().subscribe({
+      next: () => {
+        this.mostrarModal = false;
+        notyf.success('Senha alterada com sucesso!');
+        this.mensagemLogin = 'Senha alterada com sucesso!';
+        this.tipoMensagem = 'sucesso';
+      },
+      error: () => {
+        this.mensagemLogin = 'Erro ao alterar a senha. Verifique o email.';
+        this.tipoMensagem = 'erro';
+
+      }
+    });
+  } else {
+    notyf.error('Usuário não encontrado ou erro ao alterar a senha.');
+    this.recuperarForm.markAllAsTouched();
+  }
+}
+
+*/
+=======
 alterarSenha(){}
+>>>>>>> origin
 
 entrar() {
   if (this.loginForm.valid) {
@@ -87,10 +124,16 @@ entrar() {
       next: (res: unknown) => {
         const response = res as { token: string; email: string; role: string };
         this.notyf.success('Login realizado com sucesso!');
+<<<<<<< HEAD
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('usuario', response.email);
+
+=======
 
         localStorage.setItem('token', response.token);
         localStorage.setItem('usuario', response.email);
 
+>>>>>>> origin
         const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
@@ -122,6 +165,13 @@ entrar() {
 }
 
 
+<<<<<<< HEAD
+  cadastro(){
+
+    this.router.navigate(['/cadastro']);
+  }
+=======
+>>>>>>> origin
 
 recuperar(): void {
   if (this.recuperarForm.invalid) {
@@ -130,6 +180,10 @@ recuperar(): void {
       this.fecharModal();
     return;
 
+<<<<<<< HEAD
+
+}
+=======
   }
   const email = this.recuperarForm.get('email')?.value;
  
@@ -138,3 +192,4 @@ recuperar(): void {
 
 }
 }
+>>>>>>> origin

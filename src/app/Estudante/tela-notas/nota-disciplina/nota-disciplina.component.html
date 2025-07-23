@@ -1,0 +1,44 @@
+<div class="nota-disciplina">
+  <!-- Formulário -->
+  <div class="formulario">
+    <input [(ngModel)]="disciplinaInput" placeholder="Nome da disciplina">
+
+    <select [(ngModel)]="modeloSelecionado">
+      <option value="A">Modelo A</option>
+      <option value="B">Modelo B</option>
+      <option value="C">Modelo C</option>
+      <option value="D">Modelo D</option>
+      <option value="E">Modelo E</option>
+      <option value="F">Modelo F</option>
+    </select>
+
+    <select [(ngModel)]="anoSelecionado">
+      <option [ngValue]="undefined">Ano Letivo (opcional)</option>
+      <option *ngFor="let ano of anosDisponiveis" [value]="ano">
+        {{ ano }}
+      </option>
+    </select>
+
+    <button (click)="buscarNota()" [disabled]="loading">
+      {{ loading ? 'Buscando...' : 'Buscar' }}
+    </button>
+  </div>
+
+  <!-- Mensagem de erro -->
+  <div *ngIf="errorMessage" class="erro">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Exibição das notas -->
+  <div *ngIf="response && camposVisiveis.length > 0" class="resultado">
+    <h3>{{ response.disciplinaNome }}</h3>
+    <p>Estudante: {{ response.estudanteNome }}</p>
+
+    <div class="notas-grid">
+      <div *ngFor="let campo of camposVisiveis" class="nota">
+        <span>{{ getNomeCampo(campo) }}:</span>
+        <strong>{{ getValorCampo(campo) }}</strong>
+      </div>
+    </div>
+  </div>
+</div>

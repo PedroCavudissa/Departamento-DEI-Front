@@ -3,10 +3,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
+<<<<<<< HEAD
+import { LancamentoService, Nota } from '../../Services/lacamento-notas.service';
+=======
 
 import { LacamentoNotasService, Disciplina, TipoPauta } from '../../services/lacamento-notas.service';
 import { Nota } from '../../services/tela-notas.service';
 
+>>>>>>> origin
 
 @Component({
   selector: 'app-lancamento',
@@ -89,7 +93,11 @@ export class LancamentoComponent implements OnInit {
       return;
     }
 
+<<<<<<< HEAD
+    this.lancamentoService.importarExcel(disciplinaId, tipoId, file).subscribe({
+=======
     this.lacamentoNotasService.importarExcel(file,disciplinaId, tipoId).subscribe({
+>>>>>>> origin
       next: (notasImportadas: Nota[]) => {
         this.notas = notasImportadas;
         alert('Arquivo importado com sucesso!');
@@ -146,6 +154,10 @@ export class LancamentoComponent implements OnInit {
   private getErrorMessage(err: HttpErrorResponse): string {
     return err?.error?.message || err.message || 'Erro desconhecido';
   }
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin
 
   baixarModelo(): void {
     if (this.disciplinaSelecionadaId && this.tipoSelecionado != null) {
