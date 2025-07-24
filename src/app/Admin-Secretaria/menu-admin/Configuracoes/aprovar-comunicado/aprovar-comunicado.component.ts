@@ -15,7 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BarralateralComponent } from "../../../barralateral/barralateral.component";
-import { environment } from '../../../../../enviroments/environment';
+import { environment } from '../../../../../environments/environment';
 
 
 @Component({

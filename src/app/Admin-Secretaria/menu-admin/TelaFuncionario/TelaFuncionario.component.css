@@ -196,6 +196,7 @@
   color: #000;
 }
 
+
 /* ========= RESPONSIVIDADE ========= */
 
 /* Tablet - 992px ou menos */
@@ -232,7 +233,8 @@
 
 
   .main-wrapper {
-    margin-left: 0;
+
+    margin:60px auto;
     width: 90%;
     padding: 15px;
   }
