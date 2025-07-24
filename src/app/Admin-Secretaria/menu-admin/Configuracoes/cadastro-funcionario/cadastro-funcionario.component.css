@@ -1,11 +1,11 @@
 .form {
-    width: 30%; /* ou 500px se quiser fixo */
-    margin-left: 400px; /* move o card para a direita */
+    width: 30%;
+    margin-left: 24%; 
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    font-family: 'Segoe UI', sans-serif;
+  margin: 200px auto;
   }
   
   @media (max-width: 768px) {

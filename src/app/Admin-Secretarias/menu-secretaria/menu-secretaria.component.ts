@@ -4,8 +4,8 @@ import { Chart, ChartConfiguration } from 'chart.js';
 
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
 
-import { MenuService } from '../../Services/menu.service';
-import { RelatorioService } from '../../Services/relatorio.service';
+import { MenuService } from '../../services/menu.service';
+import { RelatorioService } from '../../services/relatorio.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -108,7 +108,7 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
             labels: barLabels,
             datasets: [
               {
-                data: [100, 68, 38, 25, 10], // Exemplo
+                data: [100, 68, 38, 25, 10], 
                 backgroundColor: barLabels.map(label => this.colors[label]),
               },
             ],
@@ -131,17 +131,7 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
   }
 
   verDetalhes(nome: string): void {
-    switch (nome) {
-      case 'funcionarios':
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-      case 'estudantes':
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
-      case 'cadeiras':
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-    }
+  
   }
 
   ngOnDestroy(): void {

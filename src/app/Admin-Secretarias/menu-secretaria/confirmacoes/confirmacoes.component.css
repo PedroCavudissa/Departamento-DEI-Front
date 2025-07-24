@@ -1,0 +1,82 @@
+/* Estilo geral do container */
+.container {
+  max-width: 1000px;
+  margin: 100px auto;
+  margin-left: 450px;
+  padding: 24px 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Título */
+.container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Estilo da tabela */
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.tabela th,
+.tabela td {
+  padding: 12px 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.tabela th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* Botão */
+.tabela button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.tabela button:hover {
+  background-color: #0056b3;
+}
+
+/* Carregando e erro */
+.container div[ng-reflect-ng-if="true"] {
+  text-align: center;
+  margin: 20px 0;
+  color: #555;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tabela {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .tabela th,
+  .tabela td {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 16px 8px;
+    margin: 60px auto;
+    width: 90%;
+  }
+
+  .container h2 {
+    font-size: 1.5rem;
+  }
+}

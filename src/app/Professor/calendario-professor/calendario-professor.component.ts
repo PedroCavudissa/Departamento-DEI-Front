@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LateralProfessorComponent } from "../lateral-professor/lateral-professor.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CalendarioService, Evento } from '../../Services/calendario.service';
+import { CalendarioService, Evento } from '../../services/calendario.service';
 
 
 @Component({

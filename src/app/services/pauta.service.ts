@@ -15,18 +15,17 @@ export interface Estudante {
   exameEspecial: number;
 }
 
-
-
 export interface Disciplina {
   disciplinaId: number;
   nome: string;
 }
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class PautaService {
-  private baseUrl =  `${environment.apiUrl}/api`;
+  private baseUrl = ` ${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 

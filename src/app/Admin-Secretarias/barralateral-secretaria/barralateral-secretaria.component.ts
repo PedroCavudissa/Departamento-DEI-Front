@@ -46,6 +46,8 @@ export class BarralateralSecretariaComponent {
       case 'Calendário': this.router.navigate(['/calendario-secretaria']); break;
       case 'Chat': this.router.navigate(['/chat-secretaria']); break;
       case 'Comunicados': this.router.navigate(['/comunicado-secretaria']); break;
+      case 'Confirmacões': this.router.navigate(['/confirmacoes']); break;
+      
       case 'Sair':
         const confirmacao = window.confirm('Tem certeza que deseja sair?');
         if (confirmacao) {

@@ -43,6 +43,7 @@
     "@types/html2canvas": "^0.5.35",
     "@types/jasmine": "~5.1.0",
     "@types/jquery": "^3.5.32",
+    "@types/notyf": "^2.0.0",
     "angular-cli-ghpages": "^2.0.3",
     "angular-eslint": "19.4.0",
     "eslint": "^9.26.0",

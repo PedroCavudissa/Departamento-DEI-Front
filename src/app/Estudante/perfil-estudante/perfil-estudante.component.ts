@@ -4,9 +4,9 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors }
 import { LateralComponent } from '../lateral/lateral.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PerfilestudanteService } from '../../Services/perfilestudante.service';
+import { PerfilestudanteService } from '../../services/perfilestudante.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Viestudante, ViestudanteService } from '../../Services/viestudante.service';
+import { Viestudante, ViestudanteService } from '../../services/viestudante.service';
 
 @Component({
   selector: 'app-perfil-estudante',
@@ -91,9 +91,7 @@ export class PerfilEstudanteComponent implements OnInit {
     const hoje = new Date();
     return data > hoje ? { dataFutura: true } : null;
   }
-
-
-
+  
   abrirModal() {
     this.mostrarModal = true;
     this.formularioSenha.reset();

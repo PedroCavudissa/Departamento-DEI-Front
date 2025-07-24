@@ -3,6 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../enviroments/environment';
 
+export interface Confirmacao {
+  id: number;
+  nomeEstudante: string;
+  estudanteId: number | string; // depende do backend, pode ajustar
+  anoLetivo: string;
+  semestre: number;
+  estado: 'PAGO' | 'NÃO_PAGO'; // se quiser mais preciso, ou apenas: string
+}
+
 export interface UserDetails {
   id: number;
   nome: string;
@@ -28,12 +37,11 @@ export interface DadosAcademicos {
 }
 
 export interface Disciplina {
-  id: number;
-  sigla: string;
-  nome: string;
-  anoAcademico: number;
-  semestre: number;
-  precedenciasDisciplinaNome: string[];
+   disciplinaId: number;
+   nome: string;
+    nomeDisciplina: string;
+  siglaDisciplina: string;
+  status: string; 
 }
 
 export interface Rupe {
@@ -46,6 +54,7 @@ export interface Rupe {
   status: string;
   paymentReasons: string[];
 }
+
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
@@ -69,12 +78,12 @@ export class ConfirmacaoService {
     return this.http.get<DadosAcademicos>(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
 
-  getDisciplinasFazer(estudanteId: number, ano: number, semestre: number): Observable<Disciplina[]> {
-    return this.http.get<Disciplina[]>(
-      `${this.baseUrl}/subject/disciplinas/disponiveis/${estudanteId}?ano=${ano}&semestre=${semestre}`,
-      this.getHeaders()
-    );
-  }
+  getDisciplinasFazer(): Observable<Disciplina[]> {
+  return this.http.get<Disciplina[]>(
+    `${this.baseUrl}/departamento/students/disciplinas`,
+    this.getHeaders()
+  );
+}
 
   getDisciplinasAtrasadas(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/departamento/students/list/disciplinasemetraso`, this.getHeaders());
@@ -84,12 +93,35 @@ export class ConfirmacaoService {
     return this.http.get<Rupe[]>(`${this.baseUrl}/payments/rupe/myRupes`, this.getHeaders());
   }
 
- finalizarConfirmacao(estudanteId: number, disciplinasIds: number[]): Observable<any> {
+finalizarConfirmacao(disciplinasIds: number[]): Observable<any> {
   return this.http.post(
-    `${this.baseUrl}/departamento/students/confirmar/${estudanteId}`,
-    disciplinasIds, // deve ser tipo: number[]
+    `${this.baseUrl}/departamento/students/confirmar`,
+    disciplinasIds,
     this.getHeaders()
   );
 }
 
+getDisciplinasInscritas(): Observable<Disciplina[]> {
+  return this.http.get<Disciplina[]>(
+    `${this.baseUrl}/departamento/students/student/my-current-subject`,
+    this.getHeaders()
+  );
+}
+
+
+
+listarConfirmacoes(): Observable<{ content: Confirmacao[] }> {
+  return this.http.get<{ content: Confirmacao[] }>(
+    `${this.baseUrl}/departamento/confirmacoes`,
+    this.getHeaders()
+  );
+}
+
+atualizarEstado(id: number, confirmacaoAtualizada: Confirmacao): Observable<any> {
+  return this.http.put(
+    `${this.baseUrl}/departamento/confirmacoes/${id}`,
+    confirmacaoAtualizada,
+    this.getHeaders()
+  );
+}
 }

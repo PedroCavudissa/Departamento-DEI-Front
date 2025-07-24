@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { Funcionario, FuncionarioService } from '../../../Services/cadastro.service';
+import { Funcionario, FuncionarioService } from '../../../services/cadastro.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

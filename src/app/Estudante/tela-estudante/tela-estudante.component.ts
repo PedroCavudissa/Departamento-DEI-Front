@@ -1,6 +1,6 @@
 // tela-estudante.component.ts
 import { Component, OnInit } from '@angular/core';
-import { Viestudante, ViestudanteService } from '../../Services/viestudante.service';
+import { Viestudante, ViestudanteService } from '../../services/viestudante.service';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
 

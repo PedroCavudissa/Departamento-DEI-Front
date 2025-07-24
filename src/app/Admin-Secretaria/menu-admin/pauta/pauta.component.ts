@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PautaService, Disciplina, Estudante } from '../../../Services/pauta.service';
+import { PautaService, Disciplina, Estudante } from '../../../services/pauta.service';
 import { BarralateralComponent } from "../../barralateral/barralateral.component";
 
 @Component({
@@ -9,7 +9,7 @@ import { BarralateralComponent } from "../../barralateral/barralateral.component
   standalone: true,
   imports: [CommonModule, FormsModule, BarralateralComponent],
   templateUrl: './pauta.component.html',
-  styleUrl: './pauta.component.css'
+  styleUrls: ['./pauta.component.css']
 })
 export class PautaComponent implements OnInit {
   disciplinas: Disciplina[] = [];

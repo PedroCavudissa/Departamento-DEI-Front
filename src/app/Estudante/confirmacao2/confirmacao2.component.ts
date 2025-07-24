@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LateralComponent } from "../lateral/lateral.component";
-import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../Services/confirmacao.service'; // importa a interface Disciplina
+import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // importa a interface Disciplina
 
 @Component({
   selector: 'app-confirmacao2',
@@ -24,6 +24,7 @@ export class Confirmacao2Component implements OnInit {
     private confirmacaoService: ConfirmacaoService
   ) {}
 
+
   private limparMensagensDepoisDeTempo(): void {
     setTimeout(() => {
       this.mensagem = '';
@@ -31,55 +32,57 @@ export class Confirmacao2Component implements OnInit {
     }, 4000); // 4 segundos
   }
 
-  ngOnInit(): void {
-    this.confirmacaoService.getDadosAcademicos().subscribe({
-      next: (estudante) => {
-        this.dadosAcademicos = {
-          ...estudante,
-          confirmacao: `${estudante.userDetails.anoAcademico || 1}º Ano ${this.getSemestre()}º Semestre`
-        };
-        this.loading = false;
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+  
+ngOnInit(): void {
+  this.confirmacaoService.getDadosAcademicos().subscribe({
+    next: (estudante) => {
+      this.dadosAcademicos = {
+        ...estudante,
+        confirmacao: `${estudante.userDetails.anoAcademico || 1}º Ano ${this.getSemestre()}º Semestre`
+      };
+      this.loading = false;
 
-        // Carrega disciplinas do próximo semestre
-        const estudanteId = estudante.userDetails.id;
-        const ano = estudante.userDetails.anoAcademico || 1;
-        const semestre = this.getSemestre();
+      // ✅ Agora sem parâmetros
+      this.confirmacaoService.getDisciplinasFazer().subscribe({
+        next: (disciplinas) => {
+          this.disciplinasfaze = disciplinas;
+        },
+        error: () => {
+          this.erro = 'Erro ao carregar disciplinas do próximo semestre';
+          this.limparMensagensDepoisDeTempo();
+          this.disciplinasfaze = [];
+        }
+      });
+    },
+    error: () => {
+      this.erro = 'Erro ao carregar dados acadêmicos';
+      this.loading = false;
+      this.limparMensagensDepoisDeTempo();
+    }
+  });
 
-        this.confirmacaoService.getDisciplinasFazer(estudanteId, ano, semestre).subscribe({
-          next: (disciplinas) => {
-            this.disciplinasfaze = disciplinas;
-          },
-          error: () => {
-            this.erro = 'Erro ao carregar disciplinas do próximo semestre';
-            this.limparMensagensDepoisDeTempo();
-            this.disciplinasfaze = [];
-          }
-        });
-      },
-      error: () => {
-        this.erro = 'Erro ao carregar dados acadêmicos';
-        this.loading = false;
-        this.limparMensagensDepoisDeTempo();
-      }
-    });
-
-    this.confirmacaoService.getDisciplinasAtrasadas().subscribe({
-      next: (disciplinas) => {
-        this.disciplinasAtrasadas = disciplinas;
-      },
-      error: () => {
-        this.erro = 'Erro ao carregar disciplinas em atraso';
-        this.disciplinasAtrasadas = [];
-        this.limparMensagensDepoisDeTempo();
-      }
-    });
-  }
-
+  this.confirmacaoService.getDisciplinasAtrasadas().subscribe({
+    next: (disciplinas) => {
+      this.disciplinasAtrasadas = disciplinas;
+    },
+    error: () => {
+      this.erro = 'Erro ao carregar disciplinas em atraso';
+      this.disciplinasAtrasadas = [];
+      this.limparMensagensDepoisDeTempo();
+    }
+  });
+}
   getSemestre(): number {
     const mes = new Date().getMonth() + 1;
     return mes <= 6 ? 1 : 2;
   }
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+    confi2() {
+    this.router.navigate(['/confirmacao2']);
+  }
 
+  
   confi1() {
     this.router.navigate(['/confirmacao1']);
   }
@@ -87,4 +90,5 @@ export class Confirmacao2Component implements OnInit {
   confi3() {
     this.router.navigate(['/confirmacao3']);
   }
+
 }

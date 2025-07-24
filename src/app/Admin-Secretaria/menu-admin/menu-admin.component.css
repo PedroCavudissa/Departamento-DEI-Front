@@ -105,6 +105,7 @@ body {
 @media (max-width: 1024px) {
   .conteudo {
     padding: 40px 16px;
+    margin: 60px auto;
   }
 
   .card {
@@ -115,7 +116,7 @@ body {
 @media (max-width: 768px) {
   .conteudo {
     padding: 30px 10px;
-    margin-top: 0;
+    margin: 60px auto;
   }
 
   .card {

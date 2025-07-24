@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ComunicadoService } from '../../../Services/comunicado.service';
+import { ComunicadoService } from '../../../services/comunicado.service';
 import { Comunicado } from '../../../models/comunicado.model';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { RouterModule } from '@angular/router';
