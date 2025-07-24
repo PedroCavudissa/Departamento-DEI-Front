@@ -22,7 +22,8 @@ import {
   HttpClientModule,
   provideHttpClient,
 } from '@angular/common/http';
-import { LacamentoNotasService } from './Services/lacamento-notas.service';
+import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 // Interface de resposta de login
 export interface LoginResponse {

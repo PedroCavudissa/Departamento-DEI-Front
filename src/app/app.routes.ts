@@ -49,14 +49,10 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { ComunicadoEstudanteComponent } from './Estudante/comunicado-estudante/comunicado-estudante.component';
 import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/TelaFuncionario/TelaFuncionario.component';
-<<<<<<< HEAD
-
 import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
 import { ConfirmacoesComponent } from './Admin-Secretarias/menu-secretaria/confirmacoes/confirmacoes.component';
 import { ComunicadoSecretariaComponent } from './Admin-Secretarias/menu-secretaria/comunicado-secretaria/comunicado-secretaria.component';
-=======
-import { Component } from '@angular/core';
->>>>>>> 03b93fcc0b44aaf11a29a5a4fcc93f3ebdb79b4b
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
