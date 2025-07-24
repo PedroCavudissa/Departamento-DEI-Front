@@ -18,7 +18,7 @@ export class ComunicadoComponent implements OnInit {
   isLoading = true;
   errorMessage: string | null = null;
 
-  constructor(private comunicadoService: ComunicadoService) {}
+  constructor(private comunicado: ComunicadoService) {}
 
   ngOnInit(): void {
     this.carregarComunicados();
@@ -28,7 +28,7 @@ export class ComunicadoComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = null;
 
-    this.comunicadoService.getTodosComunicados().subscribe({
+    this.comunicado.getTodosComunicados().subscribe({
       next: (data: Comunicado[]) => {
         this.comunicados = data;
         this.isLoading = false;

@@ -4,10 +4,7 @@
   padding: 16px;
   margin-left: 550px;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 .secao {
   position: relative;
   border: 1px solid #ccc;
@@ -15,14 +12,7 @@
   padding: 24px 16px 16px;
   margin-bottom: 20px;
   background-color: #fff;
-<<<<<<< HEAD
   overflow: hidden;
-=======
-   overflow: hidden;
-   padding-top: 40px;
-    min-height: auto;
-  height: auto;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 }
 
 .secao-titulo {
@@ -38,13 +28,8 @@
 .grid-dados {
   display: grid;
   grid-template-columns: 1fr 1fr;
-<<<<<<< HEAD
   gap: 10px;
   font-size: 14px;
-=======
-  gap: 8px;
-  font-size: 13px;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 }
 
 ul {
@@ -80,9 +65,6 @@ li {
   background-color: white;
   cursor: pointer;
 }
-.page:hover{
-  cursor: pointer;
-}
 
 .page.active {
   background-color: #47B5FF;
@@ -114,25 +96,11 @@ li {
   background-color: #0056b3;
 }
 
-<<<<<<< HEAD
 /* Alertas */
 .alert {
   padding: 10px 15px;
   border-radius: 6px;
   margin: 20px 0;
-=======
-
-.back-btn:hover {
-  background-color: #0056b3;
-}
-.button-container {
-  display: flex;  
-}
-.alert {
-  padding: 10px 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   font-weight: 500;
 }
 
@@ -141,15 +109,6 @@ li {
   color: #2c7a4b;
   border: 1px solid #c3e6cb;
 }
-<<<<<<< HEAD
-=======
-
-.alert-danger {
-  background-color: #fbeaea;
-  color: #c0392b;
-  border: 1px solid #e0b4b4;
-}
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 
 .alert-danger {
   background-color: #fbeaea;
@@ -160,8 +119,8 @@ li {
 /* Responsivo */
 @media (max-width: 600px) {
   .matricula-container{
-    margin: 200px auto;
-  overflow: auto;
+    margin: 100px auto;
+    margin-right: 1%;
   }
   .grid-dados {
     grid-template-columns: 1fr;

@@ -1,13 +1,11 @@
 import { Router } from '@angular/router';
 import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
-
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
-
 import { MenuService } from '../../services/menu.service';
 
 import { forkJoin } from 'rxjs';
-import { RelatorioService } from '../../Services/relatorio.service';
+import { RelatorioService } from '../../services/relatorio.service';
 
 @Component({
   selector: 'app-menu-admin',
@@ -23,10 +21,12 @@ export class MenuSecretariaComponent implements OnInit, OnDestroy {
 
   private pieChart!: Chart;
 
+
   constructor(
     private router: Router,
     private relatorioService: RelatorioService
   ) {}
+
 
   ngOnInit(): void {
     this.carregarDadosGrafico();

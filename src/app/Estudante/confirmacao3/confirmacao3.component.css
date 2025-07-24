@@ -1,54 +1,30 @@
 .matricula-container {
   max-width: 600px;
-<<<<<<< HEAD
   margin: 150px auto;
   padding: 8px;
   margin-left: 550px;
 }
 
-=======
-  margin: 80px auto;
-  padding: 8px;
-}
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 .secao {
   position: relative;
   border: 1px solid #ccc;
   border-radius: 20px;
-<<<<<<< HEAD
   padding: 40px 8px 8px 8px;
   margin-bottom: 15px;
   background-color: #fff;
   overflow: hidden;
-=======
-  padding: 8px;
-  margin-bottom: 15px;
-  background-color: #fff;
-   overflow: hidden;
-   padding-top: 40px;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 }
 
 .secao-titulo {
   position: absolute;
   top: 0;
   left: 0;
-<<<<<<< HEAD
   text-align: center;
   padding: 10px;
   border-radius: 4px;
   font-size: 14px;
   width: 98%;
   margin: 0;
-=======
-  background-color: #47B5FF;
-  text-align: center;
-  padding: 10px;
-  border-radius: 4px;
-  margin: 0px;
-  font-size: 14px;
-  width: 98%;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 }
 
 .grid-dados {
@@ -64,22 +40,13 @@
   font-weight: bold;
 }
 
-<<<<<<< HEAD
 .pagination {
   display: flex;
-=======
-/* Paginação */
-.pagination {
- display: flex;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   justify-content: center;
   gap: 8px;
   margin-bottom: 20px;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 .page {
   width: 28px;
   height: 28px;
@@ -92,19 +59,12 @@
   color: #47B5FF;
   background-color: white;
 }
-<<<<<<< HEAD
-.page:hover{
-  cursor: pointer;
-}
-=======
 
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 .page.active {
   background-color: #47B5FF;
   color: white;
 }
 
-<<<<<<< HEAD
 .button-container {
   display: flex;
   justify-content: center;
@@ -121,12 +81,6 @@
 .back-btn,
 .confirm-btn,
 .print-btn {
-=======
-/* Botão */
-.back-btn{
-  display: block;
-  margin: 0 auto;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   padding: 10px 16px;
   background-color: #47B5FF;
   color: white;
@@ -135,73 +89,26 @@
   font-size: 14px;
   cursor: pointer;
   transition: background 0.3s ease;
-<<<<<<< HEAD
 }
 
 .back-btn:hover,
 .confirm-btn:hover,
-=======
-  margin-left: 210px;
-}
-.confirm-btn {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 16px;
-  background-color: #47B5FF;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-right: 210px;
-  }
-  .print-btn {
-  background-color: #47B5FF;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 .print-btn:hover {
   background-color: #0056b3;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
-.button-container {
-  display: flex;  
-}
-
-.confirm-btn:hover {
-  background-color: #0056b3;
-}
-.back-btn:hover {
-  background-color: #0056b3;
-}
-<<<<<<< HEAD
-=======
-
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
 
-<<<<<<< HEAD
 
 /* Responsivo geral */
 @media (max-width: 600px) {
   .matricula-container {
     padding: 12px;
-    margin: 200px auto;
-    overflow-y: auto;
+    margin: 100px auto;
+    overflow-y: hidden;
   }
 
   .secao-titulo {

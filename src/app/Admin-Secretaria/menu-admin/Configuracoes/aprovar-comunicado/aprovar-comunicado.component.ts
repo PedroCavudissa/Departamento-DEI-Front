@@ -14,9 +14,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { BarralateralComponent } from "../../../barralateral/barralateral.component";
-import { environment } from '../../../../../environments/environment';
-
+import { BarralateralComponent } from '../../../barralateral/barralateral.component';
+import { ComunicadoComponent } from "../../comunicado/comunicado.component";
+import { ComunicadosComponent } from "../comunicadosf/comunicadosF.component";
 
 @Component({
   selector: 'app-aprovar-comunicado',
@@ -37,8 +37,9 @@ import { environment } from '../../../../../environments/environment';
     MatTableModule,
     MatIconModule,
     MatFormFieldModule,
-    BarralateralComponent
-]
+    BarralateralComponent,
+    ComunicadosComponent
+  ]
 })
 export class AprovarComunicadoComponent implements OnInit {
   comunicados: Comunicado[] = [];
@@ -46,6 +47,15 @@ export class AprovarComunicadoComponent implements OnInit {
   modoEdicao = false;
   carregando = false;
   colunasExibidas = ['titulo', 'status', 'destinatario', 'data', 'acoes'];
+  filtroDestinatario = 'TODOS';
+
+  destinatarios = [
+    { valor: 'TODOS', exibicao: 'Todos' },
+    { valor: 'PROFESSOR', exibicao: 'Professor' },
+    { valor: 'ESTUDANTE', exibicao: 'Estudante' },
+    { valor: 'SECRETARIA', exibicao: 'Secretaria' },
+    { valor: 'ADMINISTRADOR', exibicao: 'Administrador' }
+  ];
 
   constructor(
     private comunicadosService: ComunicadosService,
@@ -58,14 +68,45 @@ export class AprovarComunicadoComponent implements OnInit {
 
   carregarComunicados(): void {
     this.carregando = true;
-    this.comunicadosService.listar().subscribe({
+    this.comunicados = [];
+
+    const obs = this.filtroDestinatario === 'TODOS'
+      ? this.comunicadosService.listar()
+      : this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario);
+
+    obs.subscribe({
       next: (data) => {
         this.comunicados = data;
         this.carregando = false;
+
+        if (this.filtroDestinatario !== 'TODOS' && data.length === 0) {
+          this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
+        }
       },
       error: (err) => {
-        console.error('Erro ao carregar:', err);
-        this.mostrarMensagem('Erro ao carregar comunicados', 'error');
+        console.error('Erro:', err);
+        this.mostrarMensagem(err.message || 'Erro ao carregar comunicados', 'error');
+        this.carregando = false;
+      }
+    });
+  }
+
+  aplicarFiltro(): void {
+    this.carregando = true;
+    this.comunicados = [];
+
+    this.comunicadosService.filtrarPorDestinatario(this.filtroDestinatario).subscribe({
+      next: (comunicados) => {
+        this.comunicados = comunicados;
+        this.carregando = false;
+
+        if (this.filtroDestinatario !== 'TODOS' && comunicados.length === 0) {
+          this.mostrarMensagem('Nenhum comunicado encontrado para este destinatário', 'warning');
+        }
+      },
+      error: (err) => {
+        console.error('Erro ao filtrar:', err);
+        this.mostrarMensagem(err.message || 'Erro ao filtrar comunicados', 'error');
         this.carregando = false;
       }
     });
@@ -82,46 +123,37 @@ export class AprovarComunicadoComponent implements OnInit {
       this.criarComunicado();
     }
   }
-private atualizarComunicado(): void {
-  if (!this.comunicadoEmEdicao.id) {
-    this.mostrarMensagem('ID do comunicado não encontrado', 'error');
-    return;
-  }
 
-  this.carregando = true;
-
-  this.comunicadosService.atualizar(
-    this.comunicadoEmEdicao.id,
-    this.comunicadoEmEdicao as Comunicado
-  ).subscribe({
-    next: () => {
-      this.mostrarMensagem('Comunicado atualizado com sucesso!', 'success');
-      this.carregarComunicados();
-      this.limparFormulario();
-    },
-    error: (err) => {
-      console.error('Erro completo:', err);
-
-      let mensagem = 'Falha na atualização';
-      if (err.status === 500) {
-        mensagem = 'Erro no servidor - verifique os dados ou contate o suporte';
-      } else if (err.status === 405) {
-        mensagem = 'Método não permitido - atualização falhou';
-      }
-
-      this.mostrarMensagem(mensagem, 'error', 8000);
-      this.carregando = false;
+  private atualizarComunicado(): void {
+    if (!this.comunicadoEmEdicao.id) {
+      this.mostrarMensagem('ID do comunicado não encontrado', 'error');
+      return;
     }
-  });
-}
 
-private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', duracao = 5000) {
-  this.snackBar.open(mensagem, 'Fechar', {
-    duration: duracao,
-    panelClass: [`snackbar-${tipo}`]
-  });
-}
+    this.comunicadosService.atualizar(
+      this.comunicadoEmEdicao.id,
+      this.comunicadoEmEdicao as Comunicado
+    ).subscribe({
+      next: () => {
+        this.mostrarMensagem('Comunicado atualizado com sucesso!', 'success');
+        this.carregarComunicados();
+        this.limparFormulario();
+      },
+      error: (err) => {
+        console.error('Erro ao atualizar comunicado:', err);
+        let mensagem = 'Erro ao atualizar comunicado';
 
+        if (err.status === 500) {
+          mensagem = 'Erro interno do servidor';
+        } else if (err.status === 405) {
+          mensagem = 'Método não permitido';
+        }
+
+        this.mostrarMensagem(mensagem, 'error', 8000);
+        this.carregando = false;
+      }
+    });
+  }
 
   private criarComunicado(): void {
     this.comunicadosService.criar(this.comunicadoEmEdicao as NovoComunicado)
@@ -132,8 +164,8 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
           this.limparFormulario();
         },
         error: (err) => {
-          console.error('Erro na criação:', err);
-          let mensagem = 'Falha ao criar comunicado';
+          console.error('Erro ao criar comunicado:', err);
+          let mensagem = 'Erro ao criar comunicado';
 
           if (err.status === 405) {
             mensagem += ': Método não permitido pelo servidor';
@@ -145,41 +177,22 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
       });
   }
 
-  // Método para testar a rota manualmente (pode ser chamado temporariamente)
-  testarRotaUpdate(): void {
-    const testId = 1; // Use um ID que exista
-    const testData = {
-      titulo: 'Teste de atualização',
-      conteudo: 'Conteúdo de teste para atualização',
-      noticeStatus: 'VALIDO',
-      destinado: 'PROFESSOR',
-      dataAcontecimento: new Date().toISOString()
-    };
-
-    this.comunicadosService.debugRequest(
-      `${environment.apiUrl}/update/${testId}`,
-      'PUT',
-      testData
-    ).subscribe({
-      next: (response) => {
-        console.log('Resposta do debug:', response);
-        this.mostrarMensagem('Rota testada com sucesso! Verifique o console.', 'success');
-      },
-      error: (err) => {
-        console.error('Erro no debug:', err);
-        this.mostrarMensagem('Falha no teste da rota. Verifique o console.', 'error');
-      }
-    });
-  }
-
   editar(comunicado: Comunicado): void {
     this.comunicadoEmEdicao = { ...comunicado };
     this.modoEdicao = true;
+
+    setTimeout(() => {
+      const form = document.getElementById('formulario-comunicado');
+      if (form) {
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   }
 
   excluir(id: number): void {
     if (confirm('Tem certeza que deseja excluir este comunicado?')) {
       this.carregando = true;
+
       this.comunicadosService.remover(id).subscribe({
         next: () => {
           this.mostrarMensagem('Comunicado excluído com sucesso!', 'success');
@@ -187,7 +200,7 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
           this.carregando = false;
         },
         error: (err) => {
-          console.error('Erro ao excluir:', err);
+          console.error('Erro ao excluir comunicado:', err);
           this.mostrarMensagem('Erro ao excluir comunicado', 'error');
           this.carregando = false;
         }
@@ -223,9 +236,19 @@ private mostrarMensagem(mensagem: string, tipo: 'success'|'error'|'warning', dur
     return true;
   }
 
-
-
   getStatusClass(status: 'VALIDO' | 'INVALIDO'): string {
-    return status === 'VALIDO' ? 'status-valido' : 'status-invalido';
+    return status === 'VALIDO' ? 'status-valido' : 'status-invalido riscado';
+  }
+
+  private mostrarMensagem(mensagem: string, tipo: 'success' | 'error' | 'warning', duracao = 5000) {
+    this.snackBar.open(mensagem, 'Fechar', {
+      duration: duracao,
+      panelClass: [`snackbar-${tipo}`]
+    });
+  }
+
+
+  formatarData(data: string): string {
+    return new Date(data).toLocaleDateString('pt-BR');
   }
 }

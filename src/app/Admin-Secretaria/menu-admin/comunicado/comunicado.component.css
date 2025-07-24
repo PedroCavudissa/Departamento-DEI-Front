@@ -1,33 +1,48 @@
+/* ========== CONTAINER PRINCIPAL ========== */
 .main-wrapper {
   display: flex;
+  flex-direction: row;
   min-height: 100vh;
-  flex-direction: column;
 }
 
+/* ========== ÁREA DE CONTEÚDO ========== */
 .content-area {
   flex: 1;
   padding: 2rem;
   max-width: 800px;
   margin: 0 auto;
-  width: 100%;
+  box-sizing: border-box;
 }
 
+/* ========== CARD DE COMUNICADO ========== */
 .comunicado-card {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
+/* ========== CARD INVÁLIDO ========== */
+.invalid-card {
+  background-color: #ffe6e6 !important;
+  border: 1px solid #c62828;
+}
+
+/* ========== TEXTO RISCADO ========== */
+.strikethrough-text * {
+  text-decoration: line-through;
+  color: #a1a1a1;
+}
+
+/* ========== CABEÇALHO DO COMUNICADO ========== */
 .comunicado-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
   flex-wrap: wrap;
-  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 .comunicado-header h2 {
@@ -36,6 +51,7 @@
   font-size: 1.5rem;
 }
 
+/* ========== STATUS BADGE ========== */
 .status-badge {
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
@@ -54,13 +70,14 @@
   color: #c62828;
 }
 
+/* ========== METADADOS ========== */
 .comunicado-meta {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: #555;
+  flex-wrap: wrap;
 }
 
 .comunicado-content {
@@ -81,22 +98,26 @@
   padding-top: 0.5rem;
 }
 
-.loading-state, .empty-state, .error-state {
+/* ========== ESTADOS DE TELA ========== */
+.loading-state,
+.empty-state,
+.error-state {
   text-align: center;
   padding: 2rem;
   color: #666;
 }
 
+/* ========== ERRO ========== */
 .error-state {
   color: white;
-  background-color: rgb(127, 121, 121);
+  background-color: red;
   border-radius: 4px;
 }
 
 .error-state button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  background-color: #47B5FF;
+  background-color: blue;
   color: white;
   border: none;
   border-radius: 4px;
@@ -104,19 +125,26 @@
 }
 
 .error-state button:hover {
-  background-color: blue;
+  background-color: darkblue;
 }
 
-/* ---------------------------- */
-/* 📱 Responsividade */
-/* ---------------------------- */
-@media (max-width: 768px) {
-  .content-area {
-    padding: 1rem;
+/* ========== RESPONSIVIDADE ========== */
+
+/* Tablets (>= 600px) */
+@media (max-width: 960px) {
+  .main-wrapper {
+    flex-direction: column;
   }
 
-  .comunicado-header h2 {
-    font-size: 1.2rem;
+  .content-area {
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  .comunicado-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
   .comunicado-meta {
@@ -124,26 +152,32 @@
     gap: 0.5rem;
   }
 
-  .comunicado-content h3 {
-    font-size: 0.95rem;
+  .comunicado-header h2 {
+    font-size: 1.25rem;
   }
 }
 
+/* Celulares (<= 480px) */
 @media (max-width: 480px) {
+  .content-area {
+    padding: 1rem;
+  }
+
   .comunicado-card {
     padding: 1rem;
   }
 
-  .comunicado-header {
-    flex-direction: column;
-    align-items: flex-start;
+  .comunicado-header h2 {
+    font-size: 1.1rem;
   }
 
   .status-badge {
     font-size: 0.75rem;
+    padding: 0.2rem 0.4rem;
   }
 
-  .error-state button {
-    width: 100%;
+  .comunicado-meta,
+  .comunicado-footer {
+    font-size: 0.75rem;
   }
 }

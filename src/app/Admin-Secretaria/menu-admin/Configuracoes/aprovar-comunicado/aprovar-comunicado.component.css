@@ -1,14 +1,10 @@
 /* ========== CONTAINER PRINCIPAL ========== */
 .container {
-  padding: 48px 32px;
-  max-width: 1000px;
-  margin-top: 100px;
-  margin-left: 540px; /* Largura da barra lateral */
-  margin-right: auto;
-  background-color: white;
-  animation: fadeIn 0.6s ease;
+  padding: 4% 3%;
+  max-width: 100%;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease-in-out;
 }
-
 
 @media (min-width: 961px) {
   .container {
@@ -17,47 +13,51 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ========== TÍTULO DA PÁGINA ========== */
 .titulo-pagina {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 2.8rem;
   font-weight: 700;
-  color: #0d48a144;
-  margin-bottom: 40px;
-  letter-spacing: 0.8px;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  letter-spacing: 0.6px;
   animation: fadeIn 1s ease;
 }
 
 /* ========== FORMULÁRIO ========== */
 .card-form {
   background: #ffffff;
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.171);
-  margin-bottom: 48px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-  animation: fadeIn 1s ease-in-out;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+  transition: all 0.3s ease;
 }
 
 .card-form:hover {
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
 }
 
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.5rem;
 }
 
 .form-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
 }
 
 .form-field {
@@ -67,76 +67,88 @@
 
 mat-form-field {
   width: 100%;
-  background-color: #ffffff;
-  border-radius: 6px;
-  transition: all 0.3s ease;
 }
 
 mat-form-field.mat-focused .mat-form-field-label {
-  color: #1976d2 !important;
+  color: #3f51b5 !important;
 }
 
 mat-form-field.mat-focused .mat-form-field-outline {
-  color: #1976d2;
+  color: #3f51b5;
 }
 
 .form-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 16px;
-  margin-top: 32px;
+  gap: 1rem;
+  margin-top: 2rem;
 }
 
 .form-actions button {
   min-width: 160px;
-  padding: 12px 20px;
+  padding: 12px 24px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   border-radius: 6px;
   transition: all 0.3s ease;
 }
 
+/* Botão salvar/atualizar */
 button[color="primary"] {
-  background-color: #7696ff;
-  color: white;
+  background-color: #3f51b5;
+  color: #fff;
 }
 
 button[color="primary"]:hover {
-  background-color: #003c8f;
-  transform: scale(1.02);
+  background-color: #2c3e94;
+  transform: scale(1.03);
 }
 
+/* Botão cancelar */
 button[color="warn"] {
-  background-color: #e0e0e0;
+  background-color: #f5f5f5;
   color: #333;
 }
 
 button[color="warn"]:hover {
-  background-color: #cacaca;
-  transform: scale(1.02);
+  background-color: #ddd;
+  transform: scale(1.03);
 }
 
-/* ========== COMUNICADOS LISTADOS ========== */
+/* ========== CARDS DE COMUNICADOS ========== */
+mat-card {
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
 .comunicado-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 28px;
+  border: 1px solid #e0e0e0;
   margin-bottom: 24px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
-  border-left: 6px solid #0d47a1;
-  animation: fadeInUp 0.5s ease forwards;
+  animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .comunicado-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
 }
 
 .comunicado-header {
@@ -149,30 +161,29 @@ button[color="warn"]:hover {
 .comunicado-header h2 {
   margin: 0;
   font-size: 1.6rem;
-  color: #0d47a1;
+  color: #2c3e50;
 }
 
 .status-badge {
   padding: 6px 14px;
   font-size: 0.75rem;
   font-weight: 700;
-  border-radius: 100px;
+  border-radius: 999px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: all 0.3s ease;
 }
 
-/* ✅ CORRETAS CLASSES DE STATUS SEM ROSA */
+/* STATUS */
 .status-valid {
-  background-color: #e0f7e9;
-  color: #1b5e20;
-  border: 1px solid #81c784;
+  background-color: #e0f2f1;
+  color: #00796b;
+  border: 1px solid #4db6ac;
 }
 
 .status-invalid {
-  background-color: #fff3e0; /* laranja pastel, NÃO rosa */
+  background-color: #fff3e0;
   color: #ef6c00;
-  border: 1px solid #ffb74d;
+  border: 1px solid #ffa726;
 }
 
 .comunicado-meta {
@@ -181,7 +192,7 @@ button[color="warn"]:hover {
   gap: 1.2rem;
   margin-bottom: 12px;
   font-size: 0.95rem;
-  color: #546e7a;
+  color: #607d8b;
 }
 
 .comunicado-content {
@@ -194,41 +205,36 @@ button[color="warn"]:hover {
 .comunicado-footer {
   font-size: 0.85rem;
   color: #607d8b;
-  border-top: 1px solid #eceff1;
-  padding-top: 8px;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 10px;
 }
 
-/* ========== ESTADOS (ERRO, LOADING, ETC) ========== */
+/* AÇÕES DOS CARDS */
+.comunicado-card .form-actions {
+  margin-top: 16px;
+  justify-content: flex-start;
+}
+
+.comunicado-card button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========== ESTADOS ========== */
 .empty-state,
 .loading-state,
 .error-state {
   text-align: center;
   padding: 2rem;
+  font-size: 1.1rem;
   color: #607d8b;
-  font-size: 1rem;
 }
 
 .error-state {
-  background-color: #fdecea;
+  background-color: #ffebee;
   border-left: 5px solid #c62828;
   border-radius: 6px;
-  animation: fadeIn 0.6s ease;
-}
-
-.error-state button {
-  margin-top: 1rem;
-  background-color: #0d47a1;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  font-weight: 600;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.error-state button:hover {
-  background-color: #003c8f;
-  transform: scale(1.05);
 }
 
 /* ========== SPINNER ========== */
@@ -251,7 +257,8 @@ mat-spinner {
   }
 
   .titulo-pagina {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    margin-top: 10%;
   }
 
   .form-field {
@@ -261,18 +268,44 @@ mat-spinner {
 
 @media (max-width: 600px) {
   .container {
-    padding: 24px 12px;
+    padding: 5% 6%;
   }
 
   .titulo-pagina {
-    font-size: 1.6rem;
+    font-size: 1rem;
+    margin-top: 20%;
+    margin-bottom: 10%;
+  }
+
+  .card-form {
+    margin-bottom: 20px;
   }
 
   mat-card-title {
     font-size: 1.2rem;
   }
+
+  .comunicado-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .comunicado-meta {
+    flex-direction: column;
+  }
 }
-mat-card{
-  background-color: white;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.384);
+
+/* === COMUNICADO INVALIDO - RISCADO COM FUNDO VERMELHO CLARO === */
+.riscado {
+  background-color: #ffebee !important; /* vermelho claro */
+  text-decoration: line-through;
+  opacity: 0.8;
+  border: 1px solid #e53935;
+}
+
+/* Para aplicar no texto inteiro do card */
+.comunicado-card.riscado h2,
+.comunicado-card.riscado p,
+.comunicado-card.riscado time {
+  text-decoration: line-through;
+  color: #b71c1c;
 }

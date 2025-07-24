@@ -1,5 +1,4 @@
 .container {
-<<<<<<< HEAD
   max-width: 640px;
   margin: 100px auto;
   padding: 16px;
@@ -65,94 +64,6 @@ button {
 }
 
 button:hover {
-=======
-   max-width: 600px;
-  margin: 80px auto;
-  padding: 8px;
-}
-
-.secao {
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 8px;
-  margin-bottom: 15px;
-  background-color: #fff;
-   overflow: hidden;
-   padding-top: 40px;
-}
-
-.secao-titulo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #47B5FF;
-  text-align: center;
-  padding: 10px;
-  border-radius: 4px;
-  margin: 0px;
-  font-size: 14px;
-  width: 98%;
-}
-
-label {
-  font-weight: 600;
-  margin-bottom: 5px;
-  display: block;
-  color: #333;
-}
-
-.form-group {
-  margin-bottom: 50px;
-}
-select.form-control {
-  width: 100%;
-  max-width: 98%;
-  min-height: 40px;     /* Altura mínima consistente */
-  font-size: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  box-sizing: border-box;
-}
-
-select.form-control:focus {
-  border-color: #2980b9;
-  box-shadow: 0 0 4px rgba(41, 128, 185, 0.3);
-  outline: none;
-}
-
-input[type="file"] {
-  display: block;
-  margin-top: 8px;
-  padding: 6px 12px;
-  font-size: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background-color: #f9f9f9;
-  cursor: pointer;
-  width: 94%;
-  /*max-width:558px;*/
-}
-
-input[type="file"]:focus {
-  border-color: #2980b9;
-  box-shadow: 0 0 4px rgba(41, 128, 185, 0.3);
-  outline: none;
-}
-
-button {
-   background-color: #47B5FF;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-button:hover{
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   background-color: #0056b3;
 }
 
@@ -162,7 +73,6 @@ button:disabled {
 }
 
 .alert {
-<<<<<<< HEAD
   padding: 12px 16px;
   border-radius: 6px;
   margin-top: 16px;
@@ -172,17 +82,6 @@ button:disabled {
 .alert-success {
   background-color: #e8f9f1;
   color: #226644;
-=======
-  padding: 10px 15px;
-  border-radius: 6px;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.alert-success {
-  background-color: #e9f8ef;
-  color: #2c7a4b;
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   border: 1px solid #c3e6cb;
 }
 
@@ -191,7 +90,6 @@ button:disabled {
   color: #c0392b;
   border: 1px solid #e0b4b4;
 }
-<<<<<<< HEAD
 
 /* Grupo do botão de upload */
 .grupo-acoes {
@@ -202,9 +100,6 @@ button:disabled {
 }
 
 /* Modal de carregamento */
-=======
-/*
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -227,9 +122,7 @@ button:disabled {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   color: #333;
 }
-*/
 
-<<<<<<< HEAD
 /* Responsivo geral */
 @media screen and (max-width: 600px) {
   .container {
@@ -247,85 +140,3 @@ button:disabled {
     top: -18px;
   }
 }
-=======
-/* RESPONSIVIDADE*/
-@media screen and (width: 375px) and (height: 667px){
-  .matricula-container {
-    margin-top: 91px;
-  }
-}
-
-@media screen and (width: 414px) and (height: 896px) {
-      .container {
-        margin-top: 105px;
-        padding: 18px;
-      }
-
-    }
-   @media screen and (width: 390px) and (height: 844px) {
-    
-    }
-
- @media screen and (width: 430px) and (height: 932px) {
-      .container {
-        margin-top: 105px;
-        padding: 18px;
-      }
-    }
-     @media screen and (width: 412px) and (height: 914px) {
-     .container {
-        margin-top: 105px;
-      }
-
-    }
-  @media screen and (width: 412px) and (height: 915px) {
-       .container {
-        margin-top: 105px;
-        padding: 18px;
-      }
-    }
-
- @media screen and (width: 360px) and (height: 740px) {
-      .container {
-        margin-top: 80px;
-      } 
-    }
-     @media screen and (width: 768px) and (height: 1024px) {
-      .container{
-        margin-top: 120px;
-      }
-    }
-     @media screen and (width: 820px) and (height: 1180px) {
-      .container {
-        margin-top: 160px;
-      }
-
-    }
-     @media screen and (width: 1024px) and (height: 1366px) {
-      .container {
-        margin-top: 130px;
-      }
-    }
-
- @media screen and (width: 912px) and (height: 1368px) {
-      .container {
-        margin-top: 180px;
-      }
-    }
- @media screen and (width: 540px) and (height: 720px) {
-    
-    }
-
- @media screen and (width: 344px) and (height: 882px) {
-      .container {
-        margin-top: 130px;
-     margin-left: 05px;
-      }
-
-    }
- @media screen and (width: 853px) and (height: 1280px) {
-      .container {
-        margin-top: 150px;
-      }
-    }
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f

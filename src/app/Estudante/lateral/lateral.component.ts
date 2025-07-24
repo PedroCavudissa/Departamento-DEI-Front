@@ -1,22 +1,12 @@
-<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-=======
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginComponent } from "../../login/login.component";
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
 
 @Component({
   selector: 'app-lateral',
   standalone: true,
-<<<<<<< HEAD
   imports: [RouterModule,FormsModule,CommonModule],
-=======
-  imports:[LoginComponent],
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   templateUrl: './lateral.component.html',
   styleUrls: ['./lateral.component.css'],
 })

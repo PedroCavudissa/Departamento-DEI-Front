@@ -1,198 +1,226 @@
- * {
-    box-sizing: border-box;
-   padding: 0;
-   margin: 0;
-    font-family: Arial, sans-serif;
-  }
-
-body {
-  height: 100%;
+* {
+  box-sizing: border-box;
+ padding: 0;
+ margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* centraliza verticalmente */
-    padding: 20px;
-  }
+label{
+color: rgb(15, 13, 13);
+}
+.p{
+
+color: rgb(15, 13, 13);
+}
+
+body {
+height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* centraliza verticalmente */
+  padding: 20px;
+}
 
 
 
 .card h3 {
-  font-size: 18px;
-  text-align: center;
+font-size: 18px;
+text-align: center;
 }
-  .card {
-    background: #fff;
-    border-radius: 22px;
-    padding: 19px;
-    width: 450px;
-    margin-top:70px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+.card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 19px;
+  width: 450px;
+  margin-top:70px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  
+  max-width: 500px;
+ 
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+   font-size: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+   width: 100%;
+   gap: 10px;
+}
+
+.buttons button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color:  #47B5FF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+    }
+
+.buttons button:hover {
+  background-color: #2764a5;
+}
+
+@media (max-width: 556px){
+
+ .buttons {
+  display: flex;
+  justify-content: center;
+   width: 70%;
+}
+ .buttons button {
+  padding: 3px 5px;
+  border-radius: 5px;
+    }
     
-    max-width: 500px;
-   
-  }
+}   
+
+  @media (max-width: 768px) {
+ .card {
+flex-direction: column;
+padding: 10px;
+width: 300px;
+ }
+
+ .buttons {
+  display: flex;
+  justify-content: center;
+   width: 100%;
+   gap: 7px;
+}
 
 
-  .form-group {
-    margin-bottom: 15px;
-     font-size: 16px;
+ .card h3 {
+   font-size: 18px;
+}
+ .form-group {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .form-group label {
-    display: block;
+    width: 70%;
     margin-bottom: 5px;
-    font-weight: bold;
   }
 
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-  }
+  .button {
 
-  .buttons {
-    display: flex;
+    
+    width: 70%;
     justify-content: center;
-     width: 100%;
-     gap: 10px;
+
+    
   }
- 
-  .buttons button {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 5px;
-    background-color:  #47B5FF;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-      }
-
-  .buttons button:hover {
-    background-color: #2764a5;
-  }
-
-    @media (max-width: 768px) {
-.card {
-  flex-direction: column;
-
-  padding: 10px;
-  width: 300px;
 }
-
-
-.card h3 {
-  font-size: 18px;
-}
-   .form-group {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .form-group label {
-      width: 70%;
-      margin-bottom: 5px;
-    }
-
-    .button {
-
-      
-      width: 70%;
-      justify-content: center;
-
-      
-    }
-}
- /*Mensagem e*/ 
+/Mensagem e/ 
 .error-message {
-  color: red !important;
-  font-size: 0.9em;
-  margin-top: 4px;
-  display: block;
+color: red !important;
+font-size: 0.9em;
+margin-top: 4px;
+display: block;
 
 }
 
 /* Estilos do Modal */
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.5);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 1000;
 }
 
 .modal-conteudo {
-  background: white;
-  padding: 20px;
-  border-radius: 16px;
-  width: 100%;
-  max-width: 330px;
-  position: relative;
+background: white;
+padding: 20px;
+border-radius: 16px;
+width: 100%;
+max-width: 330px;
+position: relative;
 }
 
 .fechar-modal {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
+position: absolute;
+top: 10px;
+right: 15px;
+font-size: 24px;
+cursor: pointer;
 }
 
 /* Estilos dos alertas */
 .alert {
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border-radius: 4px;
+padding: 10px 15px;
+margin-bottom: 15px;
+border-radius: 4px;
 }
 
 .alert-success {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+background-color: #d4edda;
+color: #155724;
+border: 1px solid #c3e6cb;
 }
 
 .alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+background-color: #f8d7da;
+color: #721c24;
+border: 1px solid #f5c6cb;
 }
 
 /* Estilos dos formulários */
 .form-group {
-  margin-bottom: 15px;
+margin-bottom: 15px;
 }
 
 .error-message {
-  color: #dc3545;
-  font-size: 0.8em;
-  margin-top: 5px;
+color: #dc3545;
+font-size: 0.8em;
+margin-top: 5px;
 }
 
 .modal-botoes button {
-  padding: 5px;
-  margin: 10px;
-  width: 90px;
-  background-color: #47B5FF;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+padding: 5px;
+margin: 10px;
+width: 90px;
+background-color: #47B5FF;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+color: white;
+font-weight: bold;
+transition: background-color 0.2s ease;
 }
 
 .modal-botoes button:hover {
-  background-color:  #0056b3;
+background-color:  #0056b3;
 }

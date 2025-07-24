@@ -13,8 +13,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ComunicadoService {
-  private apiUrl =
-    `${environment.apiUrl}/api/departamento/notices/list `;
+  private apiUrl = `${environment.apiUrl}/api/departamento/notices/list`;
 
   constructor(private http: HttpClient) {}
 

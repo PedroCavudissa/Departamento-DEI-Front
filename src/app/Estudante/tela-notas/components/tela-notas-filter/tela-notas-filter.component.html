@@ -1,0 +1,26 @@
+<!-- src/app/tela-notas/components/tela-notas-filter/tela-notas-filter.component.html -->
+  <app-barralateral></app-barralateral>
+<div class="filter-container">
+
+  <div class="filter-group">
+    <label for="modelo">Modelo:</label>
+    <select id="modelo" [(ngModel)]="selectedModelo" (change)="applyFilters()" required>
+      <option value="" disabled selected>Selecione o modelo</option>
+      <option *ngFor="let modelo of modelos" [value]="modelo">
+        Modelo {{ modelo }}
+      </option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="ano">Ano Letivo:</label>
+    <select id="ano" [(ngModel)]="selectedAno" (change)="applyFilters()">
+      <option [ngValue]="null">Todos os anos</option>
+      <option *ngFor="let ano of anosLetivos" [value]="ano">
+        {{ ano }}/{{ ano + 1 }}
+      </option>
+    </select>
+  </div>
+</div>
+
+

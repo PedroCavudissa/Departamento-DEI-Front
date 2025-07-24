@@ -1,11 +1,9 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { LateralComponent } from '../lateral/lateral.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PerfilestudanteService } from '../../services/perfilestudante.service';
-import { Estudante, EstudanteService } from '../../services/estudante.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Viestudante, ViestudanteService } from '../../services/viestudante.service';
 
@@ -15,28 +13,30 @@ import { Viestudante, ViestudanteService } from '../../services/viestudante.serv
   imports: [LateralComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './perfil-estudante.component.html',
   styleUrl: './perfil-estudante.component.css',
-  providers: [EstudanteService, PerfilestudanteService]
+  providers: [ViestudanteService, PerfilestudanteService]
 })
 export class PerfilEstudanteComponent implements OnInit {
+
+  estudanteSelecionado: Viestudante | undefined;
   mostrarModal = false;
   mostrarMensagens = false; 
   formulario: FormGroup;
-mensagemSucesso: string = '';
-mensagemErro: string = '';
+  mensagemSucesso: string = '';
+  mensagemErro: string = '';
   mensagemErroSenha = '';
   mensagemSucessoSenha = '';
-  viestudante?: Viestudante
   formularioSenha: FormGroup;
-
+  errorMessage: null | undefined;
+  viestudante?: Viestudante;
   constructor(
     private fb: FormBuilder,
     private viestudanteService: ViestudanteService,
     private perfilestudanteService: PerfilestudanteService
   ) {
     this.viestudante = {
-      email: '', 
-      nome: '',
-      userDetails: {
+       email: '', 
+        nome: '',
+        userDetails: {
         id: 0,
         dataNascimento: '',
         numIdentificacao: '',
@@ -91,22 +91,7 @@ mensagemErro: string = '';
     return data > hoje ? { dataFutura: true } : null;
   }
 
-  // Validador para idade mínima (parametrizável)
-  validarIdadeMinima(idadeMinima: number) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) return null;
-      const dataNasc = new Date(control.value);
-      const hoje = new Date();
-      let idade = hoje.getFullYear() - dataNasc.getFullYear();
-      const mes = hoje.getMonth() - dataNasc.getMonth();
-      
-      if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
-        idade--;
-      }
-      
-      return idade >= idadeMinima ? null : { idadeMinima: true };
-    };
-  }
+
 
   abrirModal() {
     this.mostrarModal = true;
@@ -144,6 +129,7 @@ mensagemErro: string = '';
 
   ngOnInit(): void {
     this.carregarDadosEstudante();
+     this.buscarEstudante();
   }
 carregarDadosEstudante(): void {
   this.viestudanteService.getEstudante().subscribe({
@@ -194,63 +180,7 @@ carregarDadosEstudante(): void {
     }
   });
 }
-/*
-accao(): void {
-  // Verifica apenas se os campos preenchidos são válidos (não verifica required)
-  if (this.formulario.invalid) {
-    this.mensagemErro = 'Por favor, corrija os campos inválidos';
-    this.formulario.markAllAsTouched();
-    return;
-  }
 
-  if (!this.viestudante) {
-    alert('Dados atualizados com sucesso!');
-    return;
-  }
-
-  // Prepara os dados alterados (mesmo código anterior)
-  const dadosAlterados: any = {};
-  
-  if (this.formulario.value.contato !== this.viestudante.userDetails.contacto) {
-    dadosAlterados.contacto = this.formulario.value.contato;
-  }
-  
-  if (this.formulario.value.endereco !== this.viestudante.userDetails.endereco) {
-    dadosAlterados.endereco = this.formulario.value.endereco;
-  }
-  
-  if (this.formulario.value.email !== this.viestudante['email']) {
-    dadosAlterados.email = this.formulario.value.email;
-  }
-
-  // Verifica se há algo para atualizar
-  if (Object.keys(dadosAlterados).length === 0) {
-    this.mensagemErro = 'Nenhum dado foi alterado';
-    return;
-  }
-
-
-  if (this.viestudante&& this.viestudante.userDetails) {
-    this.viestudanteService.atualizarPerfil(this.viestudante.userDetails.id, dadosAlterados)
-      .subscribe({
-        next: (resposta: any) => {
-          // Atualiza os dados localmente
-          if (this.viestudante) {
-            if (dadosAlterados.contacto) this.viestudante.userDetails.contacto = dadosAlterados.contacto;
-            if (dadosAlterados.endereco) this.viestudante.userDetails.endereco = dadosAlterados.endereco;
-            if (dadosAlterados.email) this.viestudante['email'] = dadosAlterados.email;
-          }
-          
-          this.mensagemSucesso = 'Dados atualizados com sucesso!';
-          setTimeout(() => this.carregarDadosEstudante(), 1000);
-        },
-        error: (err: HttpErrorResponse) => {
-          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-        }
-      });
-  } 
-}
-}*/
 accao(): void {
   // Limpa mensagens anteriores e mostra a área de mensagens
   this.mostrarMensagens = true;
@@ -301,27 +231,38 @@ accao(): void {
             if (dadosAlterados.email) this.viestudante['email'] = dadosAlterados.email;
           }
           
-          // Mostra mensagem de sucesso
           this.mensagemSucesso = 'Dados atualizados com sucesso!';
           
-          // Limpa a mensagem após 5 segundos
+          // Limpa a mensagem após 3 segundos
           setTimeout(() => {
             this.mensagemSucesso = '';
-          }, 5000);
+          }, 3000);
           
           // Recarrega os dados do estudante
           setTimeout(() => this.carregarDadosEstudante(), 1000);
         },
         error: (err: HttpErrorResponse) => {
           this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-          
-          // Limpa a mensagem de erro após 5 segundos
+        
           setTimeout(() => {
             this.mensagemErro = '';
-          }, 5000);
+          }, 3000);
         }
+        
       });
   } 
-} }
+}
+  buscarEstudante(): void {
+    this.viestudanteService.getEstudante().subscribe({
+      next: (data: Viestudante) => {
+        this.estudanteSelecionado = data;
+        this.errorMessage = null;
+      },
+      error: (err: { message: string }) => {
+        console.error('Erro ao buscar estudante:', err);
+        this.estudanteSelecionado = undefined;
+      }
+    });
+  }
 
-
+}

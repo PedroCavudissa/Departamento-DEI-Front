@@ -139,7 +139,7 @@
     transform: translateX(0);
   }
 
-<<<<<<< HEAD
+
   .sidebar h2 {
     font-size: 18px;
   }
@@ -169,20 +169,6 @@
 
   .hamburger {
     display: block;
-=======
-  .supbar {
-    width: 100%;
-    position: fixed;/*Faz com que a barra superior não se movimenta*/
-  }
-  .scroll-container {
-    max-height: 80vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  .supbar .icons {
-    top: 11%;
- 
->>>>>>> 46f4c6bbc9486c55f0c5325a67c6f3fb90f2a81f
   }
   
   

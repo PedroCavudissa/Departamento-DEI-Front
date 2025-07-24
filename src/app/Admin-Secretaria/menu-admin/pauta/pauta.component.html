@@ -3,7 +3,6 @@
     <div class="cabecalho-azul">
       <strong>Gestão de Pautas</strong>
     </div>
-
     <div class="titulo-caixa">
       <div class="titulo-principal">Visualização da Pauta</div>
     </div>
@@ -14,11 +13,12 @@
         <select id="disciplinaSelect" [(ngModel)]="disciplinaSelecionada" (change)="onDisciplinaChange()">
           <option *ngFor="let d of disciplinas" [ngValue]="d">{{ d.nome }}</option>
         </select>
-      </div>
-    </div>
+
+<body>
+ 
 
     <div class="info-cadeira">
-      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada?.nome }}</p>
+      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada }}</p>
     </div>
 
     <div class="tabela-container">
@@ -57,5 +57,9 @@
       <button class="btn-azul" (click)="aprovar()">✅ Aprovar Edição de Pauta</button>
       <button class="btn-vermelho" (click)="rejeitar()">❌ Rejeitar Edição Pauta</button>
     </div>
-  </div>
-</div>
+
+
+
+</body>
+
+  <app-barralateral></app-barralateral>
