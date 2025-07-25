@@ -28,7 +28,7 @@ export class DisciplinaService {
       'ngrok-skip-browser-warning': 'true'
     });
   
-    const url = `${environment.apiUrl}/api/subject/list?page=0&size=1000`; 
+    const url = `${environment.apiUrl}/api/subject/list?`; 
     return this.http.get<any>(url, { headers }).pipe(
       map((res: any) => res.content || []) 
     );

@@ -3,6 +3,7 @@ import { BarralateralSecretariaComponent } from "../../barralateral-secretaria/b
 
 @Component({
   selector: 'app-horario-secretaria',
+  standalone: true,
   imports: [BarralateralSecretariaComponent],
   templateUrl: './horario-secretaria.component.html',
   styleUrl: './horario-secretaria.component.css'

@@ -1,130 +1,144 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { CommonModule } from '@angular/common';
+import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
-import { BarralateralComponent } from '../../../Admin-Secretaria/barralateral/barralateral.component';
-import { BarralateralSecretariaComponent } from "../../barralateral-secretaria/barralateral-secretaria.component";
+import { BarralateralSecretariaComponent } from "../../../Admin-Secretarias/barralateral-secretaria/barralateral-secretaria.component";
+
 
 @Component({
   selector: 'app-pauta-secretaria',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, BarralateralComponent, BarralateralSecretariaComponent],
+  imports: [ CommonModule, FormsModule, BarralateralSecretariaComponent],
   templateUrl: './pauta-secretaria.component.html',
-  styleUrls: ['./pauta-secretaria.component.css'],
+  styleUrl: './pauta-secretaria.component.css'
 })
-export class PautaSecretariaComponent {
-  categoriaSelecionada = '3º ano';
+export class VerPautaComponent implements OnInit {
+   modelo = 'A';
+    anoLetivo!: number;
+    disciplinaId!: number;
+  
+    modelos = ['A', 'B', 'C', 'D', 'E'];
+    disciplinas: Disciplina[] = [];
+    alunos: AlunoPauta[] = [];
+  
+    paginaAtual: number = 0;
+    totalPaginas: number = 0;
+    tamanhoPagina: number = 10;
+  
+    constructor(private pautaService: MenuService, private router: Router) {}
+  
+    ngOnInit(): void {
+      this.carregarDisciplinas();
+    }
+  
+    carregarDisciplinas(pagina: number = 0): void {
+      this.pautaService.getDisciplinas(pagina, this.tamanhoPagina).subscribe({
+        next: (res) => {
+          this.disciplinas = res.content;
+          this.paginaAtual = res.number;
+          this.totalPaginas = res.totalPages;
+        },
+        error: (err) => {
+          console.error('Erro ao carregar disciplinas:', err);
+          this.disciplinas = [];
+        }
+      });
+    }
+  
+    carregarPautas(): void {
+      if (!this.modelo || !this.anoLetivo || !this.disciplinaId) return;
+  
+      this.pautaService.listarPautas(this.modelo, this.anoLetivo, this.disciplinaId).subscribe({
+        next: (data) => {
+          this.alunos = data;
+        },
+        error: (erro) => {
+          console.error('Erro ao buscar pautas:', erro);
+          this.alunos = [];
+        }
+      });
+    }
+  
+    nomeDisciplinaSelecionada(): string {
+      const d = this.disciplinas.find(d => d.id === this.disciplinaId);
+      return d ? d.nome: '';
+    }
+  
+    paginaAnterior(): void {
+      if (this.paginaAtual > 0) {
+        this.carregarDisciplinas(this.paginaAtual - 1);
+      }
+    }
+  
+    proximaPagina(): void {
+      if (this.paginaAtual + 1 < this.totalPaginas) {
+        this.carregarDisciplinas(this.paginaAtual + 1);
+      }
+    }
+  }
+  /*
+  modelo = 'A';
+  anoLetivo!: number;
+  disciplinaId!: number;
 
-  constructor(private router: Router) {}
+  modelos = ['A', 'B', 'C', 'D', 'E'];
+  disciplinas: Disciplina[] = [];
+  alunos: AlunoPauta[] = [];
 
-  alunos = [
-    {
-      nome: 'Alfredo Kindai',
-      ac1: 7.0,
-      ac2: 0.9,
-      pt: 8.0,
-      pe: 18.0,
-      ms: 5.5,
-      rs: 'CIM',
-    },
-    {
-      nome: 'Ana Edivânia da Silva Capita',
-      ac1: 16.0,
-      ac2: 17.0,
-      pt: 15.0,
-      pe: 14.0,
-      ms: 15.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'David Orlando A. Almeida Tomás',
-      ac1: 7.0,
-      ac2: 11.0,
-      pt: 10.0,
-      pe: 13.0,
-      ms: 10.3,
-      rs: 'CIM',
-    },
-    {
-      nome: 'Firmino da Silva Guerra',
-      ac1: 12.0,
-      ac2: 14.0,
-      pt: 14.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Firmino Sofulano Sayengana',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Frederico Nanima Jerica',
-      ac1: 12.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Isabel Teixeira',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Kesia Marelis dos Santos',
-      ac1: 12.0,
-      ac2: 14.0,
-      pt: 14.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Luis Alberto  Domingos',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Nunes Pascal Gomes ',
-      ac1: 12.0,
-      ac2: 13.0,
-      pt: 14.0,
-      pe: 11.0,
-      ms: 12.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Odete Vieira Mangumbala',
-      ac1: 16.0,
-      ac2: 11.0,
-      pt: 12.0,
-      pe: 13.0,
-      ms: 13.0,
-      rs: 'CIM',
-    },
-  ];
+  paginaAtual: number = 0;
+  totalPaginas: number = 0;
+  tamanhoPagina: number = 10;
 
-  pedirRevisao() {
-    this.router.navigate(['/chat'], {
-      queryParams: {
-        destinatario: 'Pedro',
-        assunto: 'Revisão de Pauta ',
+  constructor(private pautaService: MenuService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.carregarDisciplinas();
+  }
+
+  carregarDisciplinas(pagina: number = 0): void {
+    this.pautaService.getDisciplinas(pagina, this.tamanhoPagina).subscribe({
+      next: (res) => {
+        this.disciplinas = res.content;
+        this.paginaAtual = res.number;
+        this.totalPaginas = res.totalPages;
       },
+      error: (err) => {
+        console.error('Erro ao carregar disciplinas:', err);
+        this.disciplinas = [];
+      }
     });
   }
-}
+
+  carregarPautas(): void {
+    if (!this.modelo || !this.anoLetivo || !this.disciplinaId) return;
+
+    this.pautaService.listarPautas(this.modelo, this.anoLetivo, this.disciplinaId).subscribe({
+      next: (data) => {
+        this.alunos = data;
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar pautas:', erro);
+        this.alunos = [];
+      }
+    });
+  }
+
+  nomeDisciplinaSelecionada(): string {
+    const d = this.disciplinas.find(d => d.id === this.disciplinaId);
+    return d ? d.nome: '';
+  }
+
+  paginaAnterior(): void {
+    if (this.paginaAtual > 0) {
+      this.carregarDisciplinas(this.paginaAtual - 1);
+    }
+  }
+
+  proximaPagina(): void {
+    if (this.paginaAtual + 1 < this.totalPaginas) {
+      this.carregarDisciplinas(this.paginaAtual + 1);
+    }
+  }
+*/

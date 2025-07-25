@@ -46,6 +46,15 @@ export interface Rupe {
   status: string;
   paymentReasons: string[];
 }
+export interface Confirmacao {
+  id: number;
+  anoLetivo: number;
+  semestre: number;
+  estado: 'PAGO' | 'NÃO_PAGO'; 
+  estudanteId: number;
+  nomeEstudante: string;
+  active?: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
@@ -92,4 +101,10 @@ export class ConfirmacaoService {
   );
 }
 
+atualizarEstado(id: number, dados: Partial<Confirmacao>): Observable<any> {
+  return this.http.put(`${this.baseUrl}/payments/confirmacoes/${id}`, dados, this.getHeaders());
+}
+  getConfirmacoesPendentes(): Observable<Confirmacao[]> {
+    return this.http.get<Confirmacao[]>(`${this.baseUrl}/payments/confirmacoes/pendentes`, this.getHeaders());
+  }
 }

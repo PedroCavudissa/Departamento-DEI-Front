@@ -137,15 +137,6 @@ width: 300px;
     
   }
 }
-/Mensagem e/ 
-.error-message {
-color: red !important;
-font-size: 0.9em;
-margin-top: 4px;
-display: block;
-
-}
-
 /* Estilos do Modal */
 
 .modal {

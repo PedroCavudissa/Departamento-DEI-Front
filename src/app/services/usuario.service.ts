@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UsuarioService {
-  private baseUrl = 'https://479c7344b8ab.ngrok-free.app/api/auth';
+  private baseUrl = `${environment.apiUrl}/api/auth`;
 
   constructor(private http: HttpClient) {}
 
@@ -19,7 +20,7 @@ export class UsuarioService {
   }
 
   listarUsuarios(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users?page=0&size=100`, {
+    return this.http.get(`${this.baseUrl}/users`, {
       headers: this.getHeaders()
     });
   }
@@ -44,5 +45,15 @@ export class UsuarioService {
     );
   }
   
-  
+  enviarEmail(email: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/forgot-password`, { email }, {
+      headers: this.getHeaders()
+    }).pipe(
+      tap(response => console.log('Email enviado com sucesso:', response)),
+      catchError(error => {
+        console.error('Erro ao enviar email:', error);
+        throw error;
+      })
+    );
+  }
 }

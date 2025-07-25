@@ -10,6 +10,7 @@ import 'notyf/notyf.min.css';
 
 import { LoginService } from '../services/login.service';
 import { NotificationService } from '../services/notification.service';
+import { UsuarioService } from '../services/usuario.service';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private loginService: LoginService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private usuarioService: UsuarioService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -62,9 +64,9 @@ export class LoginComponent implements OnInit {
     });
 
     this.recuperarForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.email]]
     });
+    
 
 localStorage.removeItem('token');
 }
@@ -90,10 +92,17 @@ entrar() {
     this.loginService.entrar(usuario).subscribe({
       next: (res: unknown) => {
         const response = res as { token: string; email: string; role: string };
+        
+        // Armazenar APENAS o objeto completo
+        const usuarioLogado = {
+          token: response.token,
+          email: response.email,
+          role: response.role
+        };
+        localStorage.setItem('usuario', JSON.stringify(usuarioLogado));       
         this.notification.success('Login realizado com sucesso!');
 
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('usuario', response.email);
+      
 
         const role = response.role;
         switch (role) {
@@ -128,17 +137,24 @@ entrar() {
 
 
 recuperar(): void {
+  console.log('Tentando recuperar...');
   if (this.recuperarForm.invalid) {
     this.recuperarForm.markAllAsTouched();
-    this.notification.success('Verifique a sua caixa de email!');
-      this.fecharModal();
+    console.error('Formulário inválido');
     return;
-
   }
+
   const email = this.recuperarForm.get('email')?.value;
- 
- 
-
-
+  this.usuarioService.enviarEmail(email).subscribe({
+    next: () => {
+      this.notification.success('Verifique a sua caixa de email!');
+      this.fecharModal();
+    },
+    error: () => {
+      this.notification.error('Erro ao enviar o email de recuperação.');
+    }
+  });
 }
+
+
 }

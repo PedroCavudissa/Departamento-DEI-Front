@@ -10,6 +10,7 @@ import { BarralateralSecretariaComponent } from "../../../Admin-Secretarias/barr
 
 @Component({
   selector: 'app-ver-pauta',
+  standalone: true,
   imports: [BarralateralComponent, CommonModule, FormsModule, BarralateralSecretariaComponent],
   templateUrl: './ver-pauta.component.html',
   styleUrl: './ver-pauta.component.css'

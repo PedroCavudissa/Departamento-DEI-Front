@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
 
-    apiUrl: 'https://479c7344b8ab.ngrok-free.app'  
+    apiUrl: 'https://ece4065c7b7b.ngrok-free.app'  
 }

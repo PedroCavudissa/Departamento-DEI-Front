@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-detalhes-estudantes-secretaria',
+  standalone: true,
   imports: [BarralateralSecretariaComponent,CommonModule,FormsModule],
   templateUrl: './detalhes-estudantes-secretaria.component.html',
   styleUrl: './detalhes-estudantes-secretaria.component.css',

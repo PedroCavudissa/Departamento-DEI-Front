@@ -7,10 +7,11 @@ import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/b
 
 @Component({
   selector: 'app-ver-pauta-secretaria',
+  standalone: true,
+  imports: [BarralateralSecretariaComponent, FormsModule, CommonModule],
   templateUrl: './ver-pauta-secretaria.component.html',
   styleUrls: ['./ver-pauta-secretaria.component.css'],
-  standalone: true,
-  imports: [BarralateralSecretariaComponent, FormsModule, CommonModule]
+
 })
 export class VerPautaSecretariaComponent implements OnInit {
   modelo = 'A';
