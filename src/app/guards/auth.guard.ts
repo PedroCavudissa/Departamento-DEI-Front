@@ -26,7 +26,7 @@ export class AuthGuard implements CanActivate {
       const rolesExigidos = route.data['role'] as string[];
 
       if (!token || !roleUsuario) {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/acesso-negado']);
         return false;
       }
 

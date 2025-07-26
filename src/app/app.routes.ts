@@ -50,6 +50,7 @@ import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/TelaFuncion
 import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
 import { CadastroComponent } from './Admin-Secretarias/menu-secretaria/cadastro/cadastro.component';
 import { ConfirmacoesComponent } from './Admin-Secretarias/menu-secretaria/confirmacoes/confirmacoes.component';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -57,26 +58,26 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
 
   // Rotas para Admin-Master (Acesso Geral)
-  { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'aprovar-comunicado', component: AprovarComunicadoComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'comunicado', component: ComunicadoComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'menu-estudantes', component: MenuEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
+  { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'aprovar-comunicado', component: AprovarComunicadoComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'comunicado', component: ComunicadoComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'menu-estudantes', component: MenuEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   { path: 'Configuracoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
   { path: 'Gerirperfis', component: GerirPerfilComponent, canActivate: [AuthGuard] },
-  { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'funcionarios', component: FuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'pauta', component: PautaComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
-  { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard],data: { role: ['ADMINSTRADOR'] } },
+  { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'funcionarios', component: FuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'pauta', component: PautaComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
 
   // Estudante
   { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] } },
@@ -112,4 +113,5 @@ export const routes: Routes = [
   { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'horario-secretaria', component: HorarioSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
+  {path:'acesso-negado',component: AcessoNegadoComponent}
 ];

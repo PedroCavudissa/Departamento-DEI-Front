@@ -100,9 +100,7 @@ entrar() {
           role: response.role
         };
         localStorage.setItem('usuario', JSON.stringify(usuarioLogado));       
-        this.notification.success('Login realizado com sucesso!');
-
-      
+     
 
         const role = response.role;
         switch (role) {
@@ -121,6 +119,9 @@ entrar() {
           default:
             this.router.navigate(['/']);
         }
+        this.notification.success('Login realizado com sucesso!');
+       
+      
       },
       error: (error: unknown) => {
         console.error('Erro ao logar:', error);
