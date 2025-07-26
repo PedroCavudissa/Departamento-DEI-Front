@@ -7,7 +7,7 @@
 
         <select  id="disciplina" (change)="visualizarPauta()" [(ngModel)]="disciplinaSelecionadaNome" class="form-control">
           <option [ngValue]="null">-- Selecione a Disciplina --</option>
-          <option *ngFor="let d of disciplinas" [value]="d.disciplinaNome">{{ d.disciplinaNome }}</option>
+          <option *ngFor="let d of disciplinas" [value]="d.nome">{{ d.nome}}</option>
         </select><br><br><br>
 
         <table *ngIf="pauta.length > 0" class="table table-bordered mt-4">
@@ -26,39 +26,35 @@
               <th>Ações</th>
             </tr>
           </thead>
-            
           <tbody>
             <tr *ngFor="let linha of pauta; let i = index">
               <td>{{ linha.estudanteNome }}</td>
-              <ng-container *ngFor="let campo of camposNota">
-                <td>
-                    <ng-container *ngIf="linha.editando && campoTemNota(linha[campo]); else modoLeitura">
-                    <input type="number" [(ngModel)]="linha[campo]" style="width: 60px;" />
-                    </ng-container>
+                <ng-container *ngFor="let campo of camposNota">
+                      <td>
+                        <ng-container *ngIf="linha.editando && campo !== 'ms' && (linha[campo] !== null || campo === campoEmEdicao); else modoLeitura">
+                          <input type="number" [(ngModel)]="linha[campo]" style="width: 60px;" (focus)="campoEmEdicao = campo" />
+                        </ng-container>
 
-                    <ng-template #modoLeitura>
-                      {{ linha[campo] ?? '-' }}
-                    </ng-template>
-                </td>
-              </ng-container>
+                        <ng-template #modoLeitura>
+                          {{ linha[campo] ?? '-' }}
+                        </ng-template>
+                      </td>
+                    </ng-container>
               <td>
                   <button class="confirm-btn" (click)="editarLinha(i)" *ngIf="!linha.editando">Editar</button>
-                  <button class="confirm-btn" (click)="salvarLinha(i)" *ngIf="linha.editando">Salvar</button>
+                  <button class="confirm-btn" (click)="salvarLinha(i)" *ngIf="linha.editando">Enviar</button>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
   </section>  
-</div>
-
-
-
-<!-- Botão para abrir o modal -->
+  <!-- Botão para abrir o modal -->
 <button class="confirm-btn" (click)="abrirModal()" [disabled]="!disciplinaSelecionadaNome">
   Ver Pedidos de Edição de Nota
 </button>
 
+</div>
 <!-- Modal -->
 <div class="modal-overlay" *ngIf="mostrarModal">
   <div class="modal-content">
@@ -178,4 +174,13 @@
   </div>
 </div>
 
+<!-- Modal de mensagem -->
+<div class="mensagem-modal-overlay" *ngIf="mostrarMensagem">
+  <div class="mensagem-modal" [ngClass]="tipoMensagem">
+    <h3 *ngIf="tipoMensagem === 'sucesso'">Sucesso</h3>
+    <h3 *ngIf="tipoMensagem === 'erro'">Erro</h3>
+    <p>{{ mensagemTexto }}</p>
+    <button class="btn-ok" (click)="mostrarMensagem = false">OK</button>
+  </div>
+</div>
 <app-lateral-professor></app-lateral-professor>

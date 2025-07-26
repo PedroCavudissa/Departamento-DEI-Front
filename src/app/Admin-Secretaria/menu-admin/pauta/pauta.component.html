@@ -1,28 +1,19 @@
-<div class="pauta-container">
-  <div class="conteudo-exato">
-    <div class="cabecalho-azul">
-      <strong>Gestão de Pautas</strong>
-    </div>
-    <div class="titulo-caixa">
-      <div class="titulo-principal">Visualização da Pauta</div>
-    </div>
+<div class="container">
+  <section class="form-section"> 
+    <div class="table-section">
+        <h3 class="secao-titulo">Visualização da Pauta</h3>
 
-    <div class="controle-acoes">
-      <div class="seletor-categoria">
-        <label for="disciplinaSelect">Selecione a disciplina:</label>
-        <select id="disciplinaSelect" [(ngModel)]="disciplinaSelecionada" (change)="onDisciplinaChange()">
+        <label for="disciplinaSelect"><strong>Disciplina</strong></label>
+
+        <select id="disciplinaSelect" *ngIf="disciplinaSelecionada" [(ngModel)]="disciplinaSelecionada" (change)="onDisciplinaChange()" class="form-control">
           <option *ngFor="let d of disciplinas" [ngValue]="d">{{ d.nome }}</option>
         </select>
 
-<body>
- 
-
     <div class="info-cadeira">
-      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada }}</p>
+      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada.nome }}</p>
     </div>
 
-    <div class="tabela-container">
-      <table class="tabela-pauta">
+      <table class="table table-bordered mt-4">
         <thead>
           <tr>
             <th>Nome</th>
@@ -32,9 +23,8 @@
             <th>PF2</th>
             <th>Exame Época Normal</th>
             <th>Exame de Recurso</th>
-
             <th>Exame Oral</th>
-             <th>Exame Especial</th>
+            <th>Exame Especial</th>
           </tr>
         </thead>
         <tbody>
@@ -52,14 +42,45 @@
         </tbody>
       </table>
     </div>
+</section>
+   <div class="button-container">
+      <button class="confirm-btn" (click)="aprovar()">✅ Aprovar Edição de Pauta</button>
+      <button class="back-btn" (click)="rejeitar()">❌ Rejeitar Edição de Pauta</button>
+   </div>
+</div>
 
-    <div class="botoes">
-      <button class="btn-azul" (click)="aprovar()">✅ Aprovar Edição de Pauta</button>
-      <button class="btn-vermelho" (click)="rejeitar()">❌ Rejeitar Edição Pauta</button>
+<!-- Modal de Alerta com botão OK -->
+<div class="modal-overlay" *ngIf="mostrarModalOk">
+  <div class="modal-content">
+    <h4>{{ tituloModal }}</h4>
+    <p>{{ mensagemModal }}</p>
+    <div class="modal-actions">
+      <button (click)="fecharModalOk()">OK</button>
     </div>
+  </div>
+</div>
 
+<!-- Modal de Confirmação -->
+<div class="modal-overlay" *ngIf="mostrarModalConfirmacao">
+  <div class="modal-content">
+    <h4>{{ tituloModal }}</h4>
+    <p>{{ mensagemModal }}</p>
+    <div class="modal-actions">
+      <button (click)="confirmarAcao()">Confirmar</button>
+      <button (click)="cancelarAcao()">Cancelar</button>
+    </div>
+  </div>
+</div>
 
-
-</body>
-
+<!-- Modal de Motivo de Rejeição -->
+<div class="modal-overlay" *ngIf="mostrarModalRejeicao">
+  <div class="modal-content">
+    <h4>Motivo da Rejeição</h4>
+    <textarea [(ngModel)]="motivoRejeicao" rows="4" class="form-control"></textarea>
+    <div class="modal-actions">
+      <button (click)="confirmarRejeicao()">Enviar</button>
+      <button (click)="cancelarRejeicao()">Cancelar</button>
+    </div>
+  </div>
+</div>
   <app-barralateral></app-barralateral>

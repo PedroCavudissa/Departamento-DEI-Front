@@ -1,99 +1,110 @@
-/* Layout base */
-.pauta-container {
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
+.container {
+  max-width: 800px;
+margin: 80px auto;
+padding: 8px;
 }
 
-.btn-vermelho {
-  background-color: #e74c3c;
+.form-section {
+position: relative;
+border: 1px solid #ccc;
+border-radius: 20px;
+padding: 8px;
+margin-bottom: 15px;
+background-color: #fff;
+ overflow: hidden;
+ padding-top: 40px;
+
+}
+
+select.form-control {
+width: 100%;
+max-width: 98%;
+min-height: 40px;     /* Altura mínima consistente */
+font-size: 15px;
+border-radius: 6px;
+border: 1px solid #ccc;
+padding: 8px 12px;
+box-sizing: border-box;
+}
+
+select.form-control:focus {
+border-color: #2980b9;
+box-shadow: 0 0 4px rgba(41, 128, 185, 0.3);
+outline: none;
+}
+
+.secao-titulo {
+ position: absolute;
+top: 0;
+left: 0;
+background-color: #47B5FF;
+text-align: center;
+padding: 10px;
+border-radius: 4px;
+margin: 0px;
+font-size: 14px;
+width: 98%;
+}
+
+.table-section table {
+width: 100%;
+border-collapse: separate;
+margin-bottom: 20px;
+border-radius: 20px;
+border-spacing: 0;
+overflow: hidden;
+}
+
+.table-section table thead tr:first-child th:first-child {
+border-top-left-radius: 20px;
+}
+
+.table-section table thead tr:first-child th:last-child {
+border-top-right-radius: 20px;
+}
+
+.table-section table tbody tr:last-child td:first-child {
+border-bottom-left-radius: 20px;
+}
+
+.table-section table tbody tr:last-child td:last-child {
+border-bottom-right-radius: 20px;
+}
+
+.table-section table th, .table-section table td {
+border: 1px solid #ddd;
+padding: 8px 10px;
+text-align: center;
+font-size: 14px;
+background-color: white; 
+}
+
+  /* Botão */
+.back-btn,
+.confirm-btn {
+  padding: 10px 16px;
+  background-color: #47B5FF;
   color: white;
-  padding: 8px 16px;
   border: none;
+  border-radius: 6px;
+  font-size: 14px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background 0.3s ease;
+  margin: 0; /* Remove margens desnecessárias */
 }
 
-.btn-vermelho:hover {
-  background-color: #c0392b;
+.confirm-btn:hover {
+  background-color: #0056b3;
 }
 
-.btn-azul {
-  background-color: #3aaaf3;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+.back-btn:hover {
+  background-color: #0056b3;
 }
-
-.btn-azul:hover {
-  background-color: #3498db;
-}
-
-.conteudo-exato {
-  flex: 1;
-  margin-left: 250px;
-  background-color: white;
-}
-
-.cabecalho-azul {
-  background-color: #3aaaf3;
-  padding: 15px 20px;
-  text-align: right;
-}
-
-.titulo-caixa {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.titulo-principal {
-  background-color: #3aaaf3;
-  color: white;
-  padding: 10px 40px;
-  border-radius: 30px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.controle-acoes {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.seletor-categoria label {
-  display: block;
-  margin-bottom: 5px;
-  color: #444;
-}
-
-.seletor-categoria select {
-  padding: 6px;
-  width: 180px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
-
-.botoes {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.btn-preto {
-  padding: 6px 14px;
-  font-size: 12px;
-  border-radius: 2px;
-  border: none;
-  cursor: pointer;
-  background-color: black;
-  color: white;
+.button-container {
+   display: flex;
+  justify-content: center; /* Centraliza os botões horizontalmente */
+  gap: 20px; /* Espaçamento entre os botões */
+  margin-top: 20px; /* Espaço superior opcional */ 
 }
 
 .info-cadeira {
@@ -102,118 +113,160 @@
   color: #444;
 }
 
-.tabela-container {
-  padding: 0 20px 40px;
-  overflow-x: auto;
+/*Modal Estilo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
-.tabela-pauta {
+.modal-content {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 100%;
   width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-
-.tabela-pauta thead {
-  background-color: #e1e1e1;
-}
-
-.tabela-pauta th {
-  background-color: #f2f2f2;
-  padding: 8px;
+  max-width: 400px;
+  box-sizing: border-box;
   text-align: center;
-  border-bottom: 2px solid #ccc;
-  border-left: 1px solid #ccc;
+  word-wrap: break-word;
 }
 
-.tabela-pauta td {
-  padding: 2px;
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  border-left: 1px solid #eee;
+.modal-content h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
-.tabela-pauta th:first-child,
-.tabela-pauta td:first-child {
-  border-left: none;
+.modal-content textarea {
+  width: 100%;
+  resize: vertical;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 
-/* Responsividade até 1024px */
-@media (max-width: 1024px) {
-  .pauta-container {
-    flex-direction: column;
-  }
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-  .conteudo-exato {
-    margin-left: 0;
-    padding: 10px;
-  }
+.modal-actions button {
+  flex: 1;
+  min-width: 45%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #1976d2;
+  color: white;
+  font-weight: bold;
+}
 
-  .controle-acoes {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
+.modal-actions button:hover {
+  background-color: #155a9c;
+}
 
-  .botoes {
-    flex-direction: column;
-    width: 100%;
-  }
 
-  .btn-azul,
-  .btn-preto,
-  .btn-vermelho {
-    width: 100%;
-  }
-
-  .titulo-caixa {
-    padding: 0 10px;
-  }
-
-  .seletor-categoria select {
-    width: 100%;
-  }
-
-  .tabela-container {
-    overflow-x: auto;
-  }
-
-  .tabela-pauta {
-    font-size: 12px;
-    display: block;
-    white-space: nowrap;
-  }
-
-  .tabela-pauta th,
-  .tabela-pauta td {
-    text-align: left;
-    padding: 6px;
+/* Responsividade */
+  
+@media screen and (width: 375px) and (height: 667px){
+  .container  {
+    padding: 16px;
+    margin-top: 91px;
   }
 }
 
-/* Responsividade para celulares (até 480px) */
-@media (max-width: 480px) {
-  .titulo-principal {
-    font-size: 16px;
-    padding: 8px 20px;
-  }
+@media screen and (width: 414px) and (height: 896px) {
+      .container {
+        margin-top: 100px;
+      }
+    }
+    @media screen and (width: 390px) and (height: 844px) {
+      .container  {
+        margin-top: 100px;
+      }
+    }
 
-  .cabecalho-azul {
-    text-align: center;
-    padding: 10px;
-  }
+ @media screen and (width: 430px) and (height: 932px) {
+      .container  {
+        margin-top: 100px;
+      }
+    }
+     @media screen and (width: 412px) and (height: 914px) {
+      .container {
+        margin-top: 100px;
+      }
+    }
 
-  .info-cadeira {
-    padding: 0 10px;
-    font-size: 13px;
-  }
+  @media screen and (width: 412px) and (height: 915px) {
+      .container {
+        margin-top: 100px;
+      }
+    }
 
-  .seletor-categoria select {
-    font-size: 14px;
-  }
+ @media screen and (width: 360px) and (height: 740px) {
+      .container  {
+        margin-top: 80px;
+      }
+    }
+     @media screen and (width: 768px) and (height: 1024px) {
+      .container  {
+        margin-top: 100px;
+      }
+    }
+     @media screen and (width: 820px) and (height: 1180px) {
+      .container {
+        margin-top: 150px;
+      }
+    }
+     @media screen and (width: 1024px) and (height: 1366px) {
+      .container  {
+        margin-top: 180px;
+      }
+    }
 
-  .btn-azul,
-  .btn-preto,
-  .btn-vermelho {
-    font-size: 14px;
-  }
-}
+ @media screen and (width: 912px) and (height: 1368px) {
+     .container  {
+        margin-top: 180px;
+      }
+    }
+ @media screen and (width: 540px) and (height: 720px) {
+      .container {
+        margin-top: 100px;
+      }
+    }
+
+ @media screen and (width: 344px) and (height: 882px) {
+      .container  {
+        margin-top: 100px;
+      }
+    }
+ @media screen and (width: 853px) and (height: 1280px) {
+      .container {
+        margin-top: 150px;
+      }
+    }
+ @media screen and (width: 1024px) and (height: 600px) {
+      .container  {
+        margin-top: 80px;
+      }
+    }
+
+ @media screen and (width: 1280px) and (height: 800px) {
+      .container  {
+        margin-top: 100px;
+        
+      }
+    }

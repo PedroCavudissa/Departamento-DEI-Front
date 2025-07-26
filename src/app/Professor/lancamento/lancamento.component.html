@@ -1,8 +1,8 @@
 <div class="container">
   <section class="secao">
-    <h3 class="secao-titulo">Lancamento de Notas</h3>
+    <h3 class="secao-titulo">Lançamento de Notas</h3>
 <br>
-    <!-- SELECAO DE DISCIPLINA -->
+    <!-- SELEÇÃO DE DISCIPLINA -->
     <div class="form-group mt-3">
       <label for="disciplina"><strong>1. Disciplina</strong></label>
       <select
@@ -12,14 +12,15 @@
         (change)="onDisciplinaChange()">
         <option [ngValue]="null">-- Selecione a Disciplina --</option>
         <option *ngFor="let disciplina of disciplinas" [ngValue]="disciplina.disciplinaId">
-          {{ disciplina.disciplinaNome}}
+          {{ disciplina.nome}}
         </option>
       </select>
     </div>
+    
     <!-- TIPO DE PAUTA -->
-    <div class="form-group mt-3" *ngIf="tipos.length > 0">
-      <label for="tipoPauta"><strong>2. Modelo Da Pauta</strong></label>
-      <select
+<div class="form-group mt-3" *ngIf="tipos.length > 0">
+  <label for="tipoPauta"><strong>2. Modelo Da Pauta</strong></label>
+ <select
   id="tipoPauta"
   class="form-control"
   [(ngModel)]="tipoSelecionado"
@@ -28,20 +29,22 @@
   <option 
     *ngFor="let tipo of tipos" 
     [ngValue]="tipo.codigo"
-   >
-    {{ tipo.descricao }}
+    [disabled]="tiposDesabilitados.includes(tipo.codigo)">
+    {{ tipo.descricao }} {{ tiposDesabilitados.includes(tipo.codigo) ? ' (Já lançado)' : '' }}
+    
   </option>
 </select>
-    </div>
 
-    <!-- BOTAO DE BAIXAR MODELO -->
+</div>
+
+    <!-- BOTÃO DE BAIXAR MODELO -->
     <div class="mt-4">
       <button
         class="btn btn-primary"
         [disabled]="!disciplinaSelecionadaId || !tipoSelecionado"
         (click)="baixarModelo()"
       >
-        ?? Baixar Modelo Da Pauta
+        📥 Baixar Modelo Da Pauta
       </button>
     </div><br>
 
@@ -53,15 +56,16 @@
   </div>
     <!-- ALERTAS -->
     <div *ngIf="mensagem" class="alert alert-success">
-      ? {{ mensagem }}
+       {{ mensagem }}
     </div>
     <p *ngIf="erro" style="color: red">{{ erro }}</p>
+    
   </section>
 
   <!-- MODAL DE CARREGAMENTO -->
 <div *ngIf="carregando" class="modal-overlay">
   <div class="modal-content">
-    <p>?? Carregando a pagina, por favor aguarde...</p>
+    <p>🔄 Carregando a página, por favor aguarde...</p>
   </div>
 </div> 
 </div>
