@@ -9,7 +9,7 @@ import 'notyf/notyf.min.css';
 @Component({
   selector: 'app-confirmacoes',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarralateralSecretariaComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './confirmacoes.component.html',
   styleUrls: ['./confirmacoes.component.css']
 })

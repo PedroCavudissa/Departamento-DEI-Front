@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-import { CalendarioService, Evento } from '../../../Services/calendario.service';
+import { CalendarioService, Evento } from '../../../services/calendario.service';
 import { NotificationService } from '../../../services/notification.service';
 
 

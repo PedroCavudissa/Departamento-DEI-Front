@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Professor, ProfessorService } from '../../Services/professor.service';
-import { PerfiprofService } from '../../Services/perfiprof.service';
+import { Professor, ProfessorService } from '../../services/professor.service';
+import { PerfiprofService } from '../../services/perfiprof.service';
 import { CommonModule } from '@angular/common';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
 
