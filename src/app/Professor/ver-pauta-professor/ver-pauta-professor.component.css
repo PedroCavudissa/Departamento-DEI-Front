@@ -1,5 +1,5 @@
 .container {
-    max-width: 65%;
+    max-width: 900px;
   margin: 80px auto;
   padding: 8px;
 }
@@ -251,8 +251,7 @@ select.form-control:focus {
 
 }
 
-/* Responsividade */
-  
+/* RESPONSIVIDADE*/
 @media screen and (width: 375px) and (height: 667px){
   .container  {
     padding: 16px;
@@ -300,7 +299,7 @@ select.form-control:focus {
     }
      @media screen and (width: 820px) and (height: 1180px) {
       .container {
-        margin-top: 150px;
+        margin-top: 200px;
       }
     }
      @media screen and (width: 1024px) and (height: 1366px) {
@@ -342,3 +341,89 @@ select.form-control:focus {
         
       }
     }
+
+  /* Responsividade para .form-section e tabelas */
+
+@media screen and (max-width: 1024px) {
+  .container {
+    margin-left: 0;
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .form-section {
+    padding: 16px 12px 12px 12px;
+    border-radius: 16px;
+  }
+
+  .table-section {
+    overflow-x: auto;
+  }
+
+  .table-section table {
+    min-width: 700px; /* Força scroll horizontal em telas pequenas */
+  }
+
+  .table-section table th,
+  .table-section table td {
+    white-space: nowrap; /* Impede quebra de conteúdo */
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    margin-left: 0;
+    padding: 12px;
+    max-width: 100%;
+  }
+
+  .form-section {
+    padding: 16px 12px 12px 12px;
+    border-radius: 16px;
+  }
+
+  /* Tabelas responsivas */
+  .table-section {
+    overflow-x: auto;
+  }
+
+  .table-section table {
+    min-width: 700px;
+  }
+
+  .table-section table th,
+  .table-section table td {
+    white-space: nowrap;
+  }
+
+  /* Inputs e selects */
+  select.form-control,
+  .input-custom,
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="date"],
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* Botões */
+  .btn-azul,
+  .confirm-btn,
+  .btn-ok {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Option em navegadores que suportam */
+  select.form-control option {
+    font-size: 14px;
+  }
+}

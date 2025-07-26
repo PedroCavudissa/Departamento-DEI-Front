@@ -1,5 +1,5 @@
 .container {
-  max-width: 800px;
+  max-width: 900px;
 margin: 80px auto;
 padding: 8px;
 }
@@ -270,3 +270,98 @@ background-color: white;
         
       }
     }
+
+  @media screen and (max-width: 1024px) {
+  .container {
+    padding: 16px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .form-section {
+    padding: 20px 12px 12px 12px;
+    border-radius: 16px;
+  }
+
+  .secao-titulo {
+    font-size: 14px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  /* TABELA */
+  .table-section {
+    overflow-x: auto;
+  }
+
+  .table-section table {
+    min-width: 700px;
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .table-section table th,
+  .table-section table td {
+    padding: 6px;
+    white-space: nowrap;
+  }
+
+  /* INPUTS & TEXTAREAS */
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="date"],
+  textarea,
+  .input-custom {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+  }
+
+  /* SELECTS */
+  select.form-control {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  /* OPTION (onde aplicável) */
+  select.form-control option {
+    font-size: 14px;
+  }
+
+  /* BOTÕES */
+  .btn-azul,
+  .confirm-btn,
+  .back-btn,
+  .btn-ok,
+  .modal-actions button {
+    width: 100%;
+    max-width: 100%;
+    font-size: 14px;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* MODAL */
+  .modal-content {
+    width: 100%;
+    max-width: 95vw;
+    padding: 1rem;
+  }
+
+  .modal-content textarea {
+    font-size: 14px;
+  }
+}

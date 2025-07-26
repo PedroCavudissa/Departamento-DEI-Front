@@ -41,8 +41,7 @@ export interface Disciplina {
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-
-  private baseUrl = ` ${environment.apiUrl}/api`;
+  private baseUrl =  `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -51,12 +50,12 @@ export class MenuService {
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'ngrok-skip-browser-warning': 'true'
       })
     };
   }
-
 
   listarPautas(modelo: string, anoLetivo: number, disciplinaId: number): Observable<AlunoPauta[]> {
     const params = new HttpParams()

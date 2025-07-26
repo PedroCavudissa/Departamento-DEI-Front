@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import { Confirmacao, ConfirmacaoService } from '../../../services/confirmacao.service';
+
 
 @Component({
   selector: 'app-confirmacoes',
@@ -18,18 +18,18 @@ export class ConfirmacoesComponent implements OnInit {
     duration: 3000,
     position: { x: 'right', y: 'top' }
   });
-  pendentes: Confirmacao[] = [];
+  /*pendentes: Confirmacao[] = [];*/
   carregando = false;
   erro = '';
 
-  constructor(private confirmacaoService: ConfirmacaoService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.carregarPendentes();
+   /* this.carregarPendentes();*/
     console.log('ngOnInit chamado!');
   }
 
-  carregarPendentes(): void {
+ /* carregarPendentes(): void {
     this.carregando = true;
     this.confirmacaoService.getConfirmacoesPendentes().subscribe({
       next: (res) => {
@@ -42,9 +42,9 @@ export class ConfirmacoesComponent implements OnInit {
         this.carregando = false;
       }
     });
-  }
+  }*/
 
-  confirmar(confirmacao: Confirmacao): void {
+  /*confirmar(confirmacao: Confirmacao): void {
     const confirmarAcao = confirm('Tem certeza que deseja alterar o Estado de Pagamento?');
     if (!confirmarAcao) return;
     
@@ -59,5 +59,5 @@ export class ConfirmacoesComponent implements OnInit {
         this.notyf.error('Erro ao confirmar pagamento.');
       }
     });
-  }
+  }*/
 }

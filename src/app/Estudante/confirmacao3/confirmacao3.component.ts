@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ConfirmacaoService, Rupe, DadosAcademicos, Disciplina } from '../../services/confirmacao.service';
 import { LateralComponent } from '../lateral/lateral.component';
+import { HttpErrorResponse } from '@angular/common/http';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
@@ -34,17 +35,15 @@ export class Confirmacao3Component implements OnInit {
     this.confirmacaoService.getDadosAcademicos().subscribe({
       next: (data) => {
         this.dadosAcademicos = data;
-        const estudanteId = data.userDetails.id;
-        const ano = data.userDetails.anoAcademico;
         this.carregarRupe();
-        this.carregarDisciplinasPorFazer(estudanteId, ano, 1); // <- semestre fixo ou dinâmico
+        this.carregarDisciplinasPorFazer();
       },
       error: (err) => console.error('Erro ao carregar dados:', err)
     });
   }
 
-  carregarDisciplinasPorFazer(estudanteId: number, ano: number, semestre: number): void {
-    this.confirmacaoService.getDisciplinasFazer(estudanteId, ano, semestre).subscribe({
+  carregarDisciplinasPorFazer(): void {
+    this.confirmacaoService.getDisciplinasFazer().subscribe({
       next: (disciplinas) => {
         this.disciplinasPorFazer = disciplinas;
       },
@@ -82,7 +81,7 @@ export class Confirmacao3Component implements OnInit {
       return;
     }
 
-    html2canvas(elemento as HTMLElement, { scale: 2 } as any).then(canvas => {
+     html2canvas(elemento as HTMLElement, { scale: 2 } as any).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgProps = pdf.getImageProperties(imgData);
@@ -103,35 +102,38 @@ export class Confirmacao3Component implements OnInit {
       return;
     }
 
-    const disciplinasIds = this.disciplinasPorFazer.map(d => d.id);
+    const disciplinasIds = this.disciplinasPorFazer.map(d => d.disciplinaId);
+
     if (disciplinasIds.length === 0) {
-      this.mensagem = 'Nenhuma disciplina disponível para confirmar.';
+      this.mensagem = 'Nenhuma disciplina para confirmar.';
       return;
     }
 
-    console.log('Enviando matrícula do estudante', estudanteId, 'com disciplinas:', disciplinasIds);
-
     this.finalizando = true;
 
-    this.confirmacaoService.finalizarConfirmacao(estudanteId, disciplinasIds).subscribe({
+    this.confirmacaoService.finalizarConfirmacao(disciplinasIds).subscribe({
       next: () => {
-        this.mensagem = 'Confirmação Finalizada Com Sucesso!';
+        this.mensagem = 'Pedido de confirmação enviado com sucesso!';
         this.finalizando = false;
       },
-      error: (err) => {
-        console.error('Erro Ao Finalizar Confirmação:', err);
+      error: (error: HttpErrorResponse) => {
+        console.error('❌ Erro ao confirmar disciplinas:', error);
+        this.mensagem = 'Erro ao confirmar disciplinas.';
         this.finalizando = false;
-
-        if (err.status === 409) {
-          this.mensagem = err.error?.message || 'Confirmação Já Foi Realizada.';
-        } else {
-          this.mensagem = 'Erro Ao Finalizar Confirmação.';
-        }
       }
     });
+  }
+
+  confi1(): void {
+    this.router.navigate(['/confirmacao1']);
   }
 
   confi2(): void {
     this.router.navigate(['/confirmacao2']);
   }
+
+  confi3(): void {
+    this.router.navigate(['/confirmacao3']);
+  }
 }
+ 

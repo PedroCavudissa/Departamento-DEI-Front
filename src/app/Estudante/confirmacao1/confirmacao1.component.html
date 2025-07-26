@@ -7,21 +7,12 @@
           <tr>
             <th>Código</th>
             <th>Nome da Disciplina</th>
-            <th>Pré-requisito</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let disciplina of disciplinasfaze">
-            <td>{{ disciplina.sigla }}</td>
+            <td>{{ disciplina.disciplinaId }}</td>
             <td>{{ disciplina.nome }}</td>
-            <td>
-              <span *ngIf="disciplina.precedenciasDisciplinaNome && disciplina.precedenciasDisciplinaNome.length > 0; else semPreReq">
-                {{ disciplina.precedenciasDisciplinaNome }}
-              </span>
-              <ng-template #semPreReq>
-                <span style="color: gray;">Nenhum</span>
-              </ng-template>
-            </td>
           </tr>
         </tbody>
       </table>
@@ -29,12 +20,33 @@
   </section>
 
   <div class="pagination">
-    <span class="page active">1</span>
-    <span class="page">2</span>
-    <span class="page">3</span>
+    <span  class="page active" (click)="confi1()">1</span>
+    <span class="page" (click)="confi2()">2</span>
+    <span class="page" (click)="confi3()">3</span>
   </div>
 
   <button class="confirm-btn" (click)="confi2()">Continuar</button>
+
+  <button class="modal-btn" (click)="abrirModal()">Disciplinas Inscritas</button>
+
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>Disciplinas Inscritas</h3>
+
+    <ul *ngIf="disciplinasInscritas.length > 0; else nenhuma">
+      <li *ngFor="let disciplina of disciplinasInscritas">
+        <strong>{{ disciplina.nomeDisciplina }}</strong> 
+        ({{ disciplina.siglaDisciplina }})
+      </li>
+    </ul>
+
+    <ng-template #nenhuma>
+      <p>O estudante ainda não está inscrito em nenhuma disciplina.</p>
+    </ng-template>
+
+    <button class="close-btn" (click)="fecharModal()">Fechar</button>
+  </div>
 </div>
+
 
 <app-lateral></app-lateral>

@@ -98,7 +98,7 @@ tentarAtualizarPautas(): void {
 
     // Validação da disciplina
     if (!this.disciplinaSelecionada || !this.disciplinaId) {
-      this.mensagemErroDisciplina = 'Selecione a disciplina.';
+      this.mensagemErroDisciplina = 'Selecione uma disciplina.';
       camposValidos = false;
     }
 

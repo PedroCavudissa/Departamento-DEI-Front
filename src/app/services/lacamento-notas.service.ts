@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-
 
 export interface PedidoEdicaoNota {
   motivoRejeicao: string;
@@ -62,7 +61,7 @@ export interface TipoPauta {
   providedIn: 'root'
 })
 export class LacamentoNotasService {
-  private baseUrl = ` ${environment.apiUrl}/api`;
+  private baseUrl =  `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
@@ -71,12 +70,13 @@ export class LacamentoNotasService {
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'ngrok-skip-browser-warning': 'true'
       })
     };
   }
-
+  
   getDadosDoProfessor(): Observable<any> {
     return this.http.get(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
@@ -141,6 +141,8 @@ atualizarNotas(id: number, payload: any): Observable<any> {
   return this.http.patch(`${this.baseUrl}/departamento/studentsubject/${id}`, payload, { headers });
 }
 
+/////////////////////////////////////////////////////////////////////
+
 getPedidosPendentes(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
   return this.http.get<PedidoEdicaoNota[]>(
     `${this.baseUrl}/departamento/StudentSubjectEdit/${disciplinaId}`,
@@ -161,4 +163,5 @@ getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
     this.getHeaders()
   );
 }
+
 }

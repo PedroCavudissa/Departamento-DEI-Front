@@ -1,30 +1,30 @@
 .matricula-container {
-  max-width: 600px;
-  margin: 150px auto;
+  max-width: 900px;
+  margin: 80px auto;
   padding: 8px;
-  margin-left: 550px;
 }
-
 .secao {
   position: relative;
   border: 1px solid #ccc;
   border-radius: 20px;
-  padding: 40px 8px 8px 8px;
+  padding: 8px;
   margin-bottom: 15px;
   background-color: #fff;
-  overflow: hidden;
+   overflow: hidden;
+   padding-top: 40px;
 }
 
 .secao-titulo {
   position: absolute;
   top: 0;
   left: 0;
+  background-color: #47B5FF;
   text-align: center;
   padding: 10px;
   border-radius: 4px;
+  margin: 0px;
   font-size: 14px;
   width: 98%;
-  margin: 0;
 }
 
 .grid-dados {
@@ -40,13 +40,13 @@
   font-weight: bold;
 }
 
+/* Paginação */
 .pagination {
-  display: flex;
+ display: flex;
   justify-content: center;
   gap: 8px;
   margin-bottom: 20px;
 }
-
 .page {
   width: 28px;
   height: 28px;
@@ -59,28 +59,18 @@
   color: #47B5FF;
   background-color: white;
 }
-
+.page:hover{
+  cursor: pointer;
+}
 .page.active {
   background-color: #47B5FF;
   color: white;
 }
 
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-.print-container {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.back-btn,
-.confirm-btn,
-.print-btn {
+/* Botão */
+.back-btn{
+  display: block;
+  margin: 0 auto;
   padding: 10px 16px;
   background-color: #47B5FF;
   color: white;
@@ -89,11 +79,43 @@
   font-size: 14px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-left: 210px;
+}
+.confirm-btn {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 16px;
+  background-color: #47B5FF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-right: 210px;
+  }
+  .print-btn {
+  background-color: #47B5FF;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
-.back-btn:hover,
-.confirm-btn:hover,
 .print-btn:hover {
+  background-color: #0056b3;
+}
+
+.button-container {
+  display: flex;  
+}
+
+.confirm-btn:hover {
+  background-color: #0056b3;
+}
+.back-btn:hover {
   background-color: #0056b3;
 }
 
@@ -102,23 +124,109 @@ button:disabled {
   cursor: not-allowed;
 }
 
-
-/* Responsivo geral */
-@media (max-width: 600px) {
+/* Responsividade */
+@media screen and (width: 375px) and (height: 667px){
   .matricula-container {
-    padding: 12px;
-    margin: 100px auto;
-    overflow-y: hidden;
-  }
+    margin-top: 91px;
 
-  .secao-titulo {
-    font-size: 13px;
-    padding: 6px 10px;
-  }
-
-  .page {
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
+    .back-btn{
+      margin-left: 85px;
+    }
   }
 }
+@media screen and (width: 414px) and (height: 896px) {
+      .matricula-container {
+        margin-top: 105px;
+        padding: 18px;
+      }
+      .back-btn{
+      margin-left: 95px;
+    }
+
+    }
+   @media screen and (width: 390px) and (height: 844px) {
+      .back-btn{
+      margin-left: 90px;
+    }
+    }
+
+ @media screen and (width: 430px) and (height: 932px) {
+      .matricula-container {
+        margin-top: 100px;
+        padding: 18px;
+      }
+      .back-btn{
+      margin-left: 95px;
+    }
+    }
+     @media screen and (width: 412px) and (height: 914px) {
+     .matricula-container {
+        margin-top: 100px;
+      }
+      .back-btn{
+      margin-left: 110px;
+    }
+
+    }
+  @media screen and (width: 412px) and (height: 915px) {
+       .matricula-container {
+        margin-top: 100px;
+        padding: 18px;
+      }
+      .back-btn{
+      margin-left: 95px;
+    }
+    }
+
+ @media screen and (width: 360px) and (height: 740px) {
+      .matricula-container {
+        margin-top: 80px;
+      }
+      .back-btn{
+      margin-left: 80px;
+    }
+    }
+     @media screen and (width: 768px) and (height: 1024px) {
+      .matricula-container{
+        margin-top: 105px;
+      }
+    }
+     @media screen and (width: 820px) and (height: 1180px) {
+      .matricula-container {
+        margin-top: 150px;
+      }
+
+    }
+     @media screen and (width: 1024px) and (height: 1366px) {
+      .matricula-container {
+        margin-top: 130px;
+      }
+    }
+
+ @media screen and (width: 912px) and (height: 1368px) {
+      .matricula-container {
+        margin-top: 180px;
+      }
+    }
+ @media screen and (width: 540px) and (height: 720px) {
+    .back-btn{
+      margin-left: 170px;
+    }
+    }
+
+ @media screen and (width: 344px) and (height: 882px) {
+      .matricula-container {
+        margin-top: 130px;
+     margin-left: 05px;
+      }
+
+      .back-btn{
+      margin-left: 80px;
+    }
+
+    }
+ @media screen and (width: 853px) and (height: 1280px) {
+      .matricula-container {
+        margin-top: 150px;
+      }
+    }
