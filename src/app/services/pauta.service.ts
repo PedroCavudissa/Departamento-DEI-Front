@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 export interface Estudante {
   estudanteNome: string;
@@ -19,7 +19,6 @@ export interface Disciplina {
   disciplinaId: number;
   nome: string;
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +40,7 @@ export class PautaService {
     };
   }
 
-  getDisciplinas(): Observable<Disciplina[]> {
+getDisciplinas(): Observable<Disciplina[]> {
     return this.http.get<Disciplina[]>(`${this.baseUrl}/solicitacoes-edicao-notas/listar`, this.getHeaders());
   }
 

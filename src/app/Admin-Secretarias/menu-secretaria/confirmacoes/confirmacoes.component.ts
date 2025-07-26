@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Confirmacao, ConfirmacaoService } from '../../../services/confirmacao.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
+import { Confirmacao, ConfirmacaoService } from '../../../services/confirmacao.service';
+
 @Component({
   selector: 'app-confirmacoes',
   standalone: true,
-  imports:[CommonModule,FormsModule,BarralateralSecretariaComponent],
-  templateUrl:'./confirmacoes.component.html',
+  imports: [CommonModule, FormsModule, BarralateralSecretariaComponent],
+  templateUrl: './confirmacoes.component.html',
   styleUrls: ['./confirmacoes.component.css']
 })
 export class ConfirmacoesComponent implements OnInit {
@@ -20,7 +21,6 @@ export class ConfirmacoesComponent implements OnInit {
   pendentes: Confirmacao[] = [];
   carregando = false;
   erro = '';
-  
 
   constructor(private confirmacaoService: ConfirmacaoService) {}
 
@@ -31,13 +31,10 @@ export class ConfirmacoesComponent implements OnInit {
 
   carregarPendentes(): void {
     this.carregando = true;
-    this.confirmacaoService.listarConfirmacoes().subscribe({
-    
-   
+    this.confirmacaoService.getConfirmacoesPendentes().subscribe({
       next: (res) => {
-     
-        console.log('Confirmacoes recebidas:',res);
-        this.pendentes = res.content.filter(c => c.estado === 'NÃO_PAGO');
+        console.log('Confirmacoes recebidas:', res);
+        this.pendentes = res.filter((c: Confirmacao) => c.estado === 'NÃO_PAGO');
         this.carregando = false;
       },
       error: () => {
@@ -47,14 +44,15 @@ export class ConfirmacoesComponent implements OnInit {
     });
   }
 
-
   confirmar(confirmacao: Confirmacao): void {
     const confirmarAcao = confirm('Tem certeza que deseja alterar o Estado de Pagamento?');
     if (!confirmarAcao) return;
+    
     const atualizada: Confirmacao = { ...confirmacao, estado: 'PAGO' };
+
     this.confirmacaoService.atualizarEstado(confirmacao.id, atualizada).subscribe({
       next: () => {
-        this.pendentes = this.pendentes.filter(c => c.id !== confirmacao.id);
+        this.pendentes = this.pendentes.filter((c: Confirmacao) => c.id !== confirmacao.id);
         this.notyf.success('Pagamento confirmado com sucesso!');
       },
       error: () => {

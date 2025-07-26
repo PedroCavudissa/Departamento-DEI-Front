@@ -8,7 +8,7 @@
 /* Cor de fundo e centralização */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f7fc;
+  background-color: #1969f3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
-  margin: 20px auto;
+  margin: 100px auto;
 }
 /* Caixa de login */
 .login-box {

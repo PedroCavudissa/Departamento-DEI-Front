@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MenuAdminComponent } from './Admin-Secretaria/menu-admin/menu-admin.component';
@@ -21,7 +20,7 @@ import { CalendarioNormalComponent } from './Admin-Secretarias/menu-secretaria/c
 import { MenuSecretariaComponent } from './Admin-Secretarias/menu-secretaria/menu-secretaria.component';
 import { ChatSecretariaComponent } from './Admin-Secretarias/menu-secretaria/chat-secretaria/chat-secretaria.component';
 import { ChatComponent } from './Admin-Secretaria/menu-admin/chat/chat.component';
-
+import { ComunicadoSecretariaComponent } from './Admin-Secretarias/menu-secretaria/comunicado-secretaria/comunicado-secretaria.component';
 import { DetalhesCadeirasSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-cadeiras-secretaria/detalhes-cadeiras-secretaria.component';
 import { DetalhesEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-estudantes-secretaria/detalhes-estudantes-secretaria.component';
 import { DetalhesFuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/detalhes-funcionarios-secretaria/detalhes-funcionarios-secretaria.component';
@@ -38,103 +37,82 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
- import { CadastroComponent } from './Admin-Secretarias/menu-secretaria/cadastro/cadastro.component';
+
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
-import { VerPautaProfessorComponent } from './Professor/ver-pauta-professor/ver-pauta-professor.component';
 import { CadastroFuncionarioComponent } from './Admin-Secretaria/menu-admin/Configuracoes/cadastro-funcionario/cadastro-funcionario.component';
 import { TelaEstudanteComponent } from './Estudante/tela-estudante/tela-estudante.component';
 import { AuthGuard } from './guards/auth.guard';
-
+import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
 import { ComunicadoEstudanteComponent } from './Estudante/comunicado-estudante/comunicado-estudante.component';
 import { FuncionariosComponent } from './Admin-Secretaria/menu-admin/TelaFuncionario/TelaFuncionario.component';
-
-import { ComunicadoProfessorComponent } from './Professor/comunicado-professor/comunicado-professor.component';
+import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/mais-detalhes-estudantes/mais-detalhes-estudantes.component';
+import { CadastroComponent } from './Admin-Secretarias/menu-secretaria/cadastro/cadastro.component';
 import { ConfirmacoesComponent } from './Admin-Secretarias/menu-secretaria/confirmacoes/confirmacoes.component';
-import { ComunicadoSecretariaComponent } from './Admin-Secretarias/menu-secretaria/comunicado-secretaria/comunicado-secretaria.component';
+import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+
   { path: 'login', component: LoginComponent },
-  //Rotas para o Admin-Master(Acesso Geral)
 
-
-
-{path:'cadastro-funcionario', component: CadastroFuncionarioComponent, canActivate: [AuthGuard]},
-  { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] },
-  { path: 'aprovar-comunicado', component: AprovarComunicadoComponent, canActivate: [AuthGuard] },
-  { path: 'comunicado', component: ComunicadoComponent, canActivate: [AuthGuard] },
-  { path: 'menu-estudantes', component: MenuEstudantesComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard] },
-  { path: 'Configuracoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] },
+  // Rotas para Admin-Master (Acesso Geral)
+  { path: 'cadastro-funcionario', component: CadastroFuncionarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'menu-admin', component: MenuAdminComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'aprovar-comunicado', component: AprovarComunicadoComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'comunicado', component: ComunicadoComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'menu-estudantes', component: MenuEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'Configuracoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
   { path: 'Gerirperfis', component: GerirPerfilComponent, canActivate: [AuthGuard] },
-  { path: 'funcionarios', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard]},
-  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard] },
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
-  { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard] },
-  { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard] },
-  { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] },
-  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
-{path:'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard]},
-
-
-
-  { path: 'menu-admin', component: MenuAdminComponent , canActivate: [AuthGuard]},
-  { path: 'aprovarComunicado', component: AprovarComunicadoComponent , canActivate: [AuthGuard] },
-  { path: 'comunicado', component: ComunicadoComponent , canActivate: [AuthGuard] },
-  { path: 'menu-estudantes', component: MenuEstudantesComponent , canActivate: [AuthGuard] },
-  { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent , canActivate: [AuthGuard]},
-  { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard] },
-  { path: 'Configuracoes', component: ConfiguracoesComponent , canActivate: [AuthGuard]},
-  { path: 'Gerirperfis', component: GerirPerfilComponent , canActivate: [AuthGuard]},
-  { path: 'calendario', component: CalendarioComponent , canActivate: [AuthGuard]},
-  { path: 'chat', component: ChatComponent , canActivate: [AuthGuard]},
-  { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard] },
-  { path: 'horario', component: HorarioComponent , canActivate: [AuthGuard]},
-  { path: 'cadastro', component: CadastroComponent , canActivate: [AuthGuard]},
-  { path: 'pauta', component: PautaComponent , canActivate: [AuthGuard]},
-  { path: 'pautas', component: PautaComponent , canActivate: [AuthGuard]},
-  { path: 'ver-pauta', component: VerPautaComponent , canActivate: [AuthGuard]},
-  { path: 'horario', component: HorarioComponent , canActivate: [AuthGuard]},
- { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] },
+  { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'funcionarios', component: FuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'pauta', component: PautaComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
+  { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
 
   // Estudante
-  { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard] },
-  { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] },
-  { path: 'cadeira', component: CadeiraComponent , canActivate: [AuthGuard]},
-  { path: 'confirmacao1', component: Confirmacao1Component, canActivate: [AuthGuard] },
-  { path: 'confirmacao2', component: Confirmacao2Component, canActivate: [AuthGuard] },
-  { path: 'confirmacao3', component: Confirmacao3Component , canActivate: [AuthGuard]},
-  { path: 'perfil-estudante', component: PerfilEstudanteComponent , canActivate: [AuthGuard]},
-  { path: 'horario-estudante', component: HorarioEstudanteComponent , canActivate: [AuthGuard]},
-  { path: 'chat-estudante', component: ChatEstudanteComponent , canActivate: [AuthGuard]},
-  { path: 'calendario-estudante', component: CalendarioEstudanteComponent , canActivate: [AuthGuard]},
-  { path: 'comunicado-estudante', component: ComunicadoEstudanteComponent, canActivate: [AuthGuard] },
+  { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] } },
+  { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
+  { path: 'cadeira', component: CadeiraComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] }  },
+  { path: 'confirmacao1', component: Confirmacao1Component, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] }  },
+  { path: 'confirmacao2', component: Confirmacao2Component, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] }  },
+  { path: 'confirmacao3', component: Confirmacao3Component, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
+  { path: 'perfil-estudante', component: PerfilEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
+  { path: 'horario-estudante', component: HorarioEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
+  { path: 'chat-estudante', component: ChatEstudanteComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] }  },
+  { path: 'calendario-estudante', component: CalendarioEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
+  { path: 'comunicado-estudante', component: ComunicadoEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
+
   // Professor
-  { path: 'tela-professor', component: TelaProfessorComponent , canActivate: [AuthGuard]},
-  { path: 'perfil-professor', component: PerfilProfessorComponent, canActivate: [AuthGuard] },
-  { path: 'horario-professor', component: HorarioProfessorComponent, canActivate: [AuthGuard] },
-  { path: 'chat-professor', component: ChatProfessorComponent, canActivate: [AuthGuard] },
-  { path: 'lancamento', component: LancamentoComponent , canActivate: [AuthGuard]},
-  { path: 'calendario-professor', component: CalendarioProfessorComponent, canActivate: [AuthGuard] },
+  { path: 'tela-professor', component: TelaProfessorComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
+  { path: 'perfil-professor', component: PerfilProfessorComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
+  { path: 'horario-professor', component: HorarioProfessorComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
+  { path: 'chat-professor', component: ChatProfessorComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
+  { path: 'lancamento', component: LancamentoComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
+  { path: 'calendario-professor', component: CalendarioProfessorComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
+  { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
 
-  { path: 'ver-pauta-professor', component: VerPautaProfessorComponent, canActivate: [AuthGuard] },
 
-  { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] },
   // Secretaria
-  { path: 'menu-secretaria', component: MenuSecretariaComponent , canActivate: [AuthGuard]},
-  { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] },
-  { path: 'calendario-normal', component: CalendarioNormalComponent, canActivate: [AuthGuard] },
-  { path: 'comunicado-secretaria', component: ComunicadoSecretariaComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-cadeiras-secretaria', component: DetalhesCadeirasSecretariaComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-estudantes-secretaria', component: DetalhesEstudantesSecretariaComponent, canActivate: [AuthGuard] },
-  { path: 'detalhes-funcionarios-secretaria', component: DetalhesFuncionariosSecretariaComponent, canActivate: [AuthGuard] },
-  { path: 'ver-pauta-secretaria', component: VerPautaSecretariaComponent , canActivate: [AuthGuard]},
-  { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard] },
-  { path: 'horario-secretaria', component: HorarioSecretariaComponent , canActivate: [AuthGuard]},
-  {path:'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard]},
-
+  { path: 'menu-secretaria', component: MenuSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'calendario-normal', component: CalendarioNormalComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'comunicado-secretaria', component: ComunicadoSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'detalhes-cadeiras-secretaria', component: DetalhesCadeirasSecretariaComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
+  { path: 'detalhes-estudantes-secretaria', component: DetalhesEstudantesSecretariaComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
+  { path: 'detalhes-funcionarios-secretaria', component: DetalhesFuncionariosSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'ver-pauta-secretaria', component: VerPautaSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'horario-secretaria', component: HorarioSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
+  {path:'acesso-negado',component: AcessoNegadoComponent}
 ];

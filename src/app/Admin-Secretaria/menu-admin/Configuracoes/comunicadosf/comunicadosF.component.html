@@ -1,0 +1,57 @@
+<!-- comunicados.component.html -->
+<div class="container">
+  <h2>Comunicados</h2>
+
+  <div class="filtro-container">
+    <label for="destino">Filtrar por:</label>
+    <select
+      id="destino"
+      [(ngModel)]="destinoSelecionado"
+      (change)="carregarComunicados()"
+      [disabled]="estado === 'carregando'"
+    >
+      <option *ngFor="let opcao of opcoesDestino" [value]="opcao.valor">
+        {{ opcao.label }}
+      </option>
+    </select>
+  </div>
+
+  <div class="estado-container">
+    <!-- Estado de Carregamento -->
+    <div *ngIf="estado === 'carregando'" class="carregando">
+      <div class="spinner"></div>
+      <p>Carregando comunicados...</p>
+    </div>
+
+    <!-- Estado de Erro -->
+    <div *ngIf="estado === 'erro'" class="erro">
+      <p>⚠️ {{ mensagemErro }}</p>
+      <button (click)="carregarComunicados()">Tentar novamente</button>
+    </div>
+
+    <!-- Estado Vazio -->
+    <div *ngIf="estado === 'vazio'" class="vazio">
+      <p>Nenhum comunicado encontrado para este público.</p>
+    </div>
+
+    <!-- Estado de Sucesso -->
+    <div *ngIf="estado === 'sucesso'" class="lista-comunicados">
+      <div *ngFor="let comunicado of comunicados" class="comunicado-card">
+        <h3>{{ comunicado.titulo }}</h3>
+        <div class="meta-info">
+          <span>Por: {{ comunicado.nomeFuncionario }}</span>
+          <span>Em: {{ formatarData(comunicado.dataPublicacao) }}</span>
+        </div>
+        <div class="conteudo">
+          <p>{{ comunicado.conteudo }}</p>
+        </div>
+        <div class="rodape">
+          <span class="destino">Para: {{ comunicado.destinado | lowercase }}</span>
+          <span class="status" [class.valido]="comunicado.noticeStatus === 'VALIDO'">
+            {{ comunicado.noticeStatus === 'VALIDO' ? 'Válido' : 'Inválido' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

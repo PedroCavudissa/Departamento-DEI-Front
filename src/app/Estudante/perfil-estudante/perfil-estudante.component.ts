@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { LateralComponent } from '../lateral/lateral.component';
@@ -28,7 +27,9 @@ export class PerfilEstudanteComponent implements OnInit {
   mensagemSucessoSenha = '';
   formularioSenha: FormGroup;
   errorMessage: null | undefined;
-  viestudante?: Viestudante
+
+  viestudante?: Viestudante;
+
   constructor(
     private fb: FormBuilder,
     private viestudanteService: ViestudanteService,
@@ -91,7 +92,11 @@ export class PerfilEstudanteComponent implements OnInit {
     const hoje = new Date();
     return data > hoje ? { dataFutura: true } : null;
   }
-  
+
+
+
+
+
   abrirModal() {
     this.mostrarModal = true;
     this.formularioSenha.reset();
@@ -242,11 +247,14 @@ accao(): void {
         },
         error: (err: HttpErrorResponse) => {
           this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-          
+
+        
+
           setTimeout(() => {
             this.mensagemErro = '';
           }, 3000);
         }
+        
       });
   } 
 }
@@ -263,6 +271,6 @@ accao(): void {
     });
   }
 
+
+
 }
-
-

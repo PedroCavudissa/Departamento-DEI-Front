@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
+
 
 export interface PedidoEdicaoNota {
   motivoRejeicao: string;
@@ -16,6 +17,7 @@ export interface PedidoEdicaoNota {
   exameOral: number;
   exameEspecial: number;
 }
+
 
 export interface PautaEstudante {
   id: number;
@@ -34,8 +36,7 @@ export interface PautaEstudante {
 
 export interface Disciplina {
   disciplinaId: number;
-  funcionarioNome: string;
-  disciplinaNome: string;
+  nome: string;
 }
 
 export interface PaginatedResponse<T> {
@@ -57,7 +58,6 @@ export interface TipoPauta {
   descricao: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -77,18 +77,13 @@ export class LacamentoNotasService {
     };
   }
 
- getDadosDoProfessor(): Observable<any> {
+  getDadosDoProfessor(): Observable<any> {
     return this.http.get(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
 
   getDisciplinasDoProfessor(): Observable<Disciplina[]> {
-    return this.http.get<PaginatedResponse<Disciplina>>(
-      `${this.baseUrl}/departamento/staffsubject`,
-      this.getHeaders()
-    ).pipe(
-      map(resposta => resposta.content)
-    );
-  }
+  return this.http.get<Disciplina[]>(`${this.baseUrl}/staff/MySubjects`, this.getHeaders());
+}
 
 enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
   const formData = new FormData();
@@ -116,15 +111,29 @@ enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
     });
   }
 
-buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
+
+  buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'ngrok-skip-browser-warning': 'true'
+    });
+  
+    const nomeCodificado = encodeURIComponent(disciplina.trim());
+    const url = `${this.baseUrl}/staff/buscarpauta/${nomeCodificado}`;
+  
+    return this.http.get<PautaEstudante[]>(url, { headers });
+  }
+
+ buscarPautaPorDisciplinaId(disciplinaId: number): Observable<PautaEstudante[]> {
+
   const token = localStorage.getItem('token') || '';
   const headers = new HttpHeaders({
     Authorization: `Bearer ${token}`,
     'ngrok-skip-browser-warning': 'true'
   });
 
-  const nomeCodificado = encodeURIComponent(disciplina.trim());
-  const url = `${this.baseUrl}/staff/buscarpauta/${nomeCodificado}`;
+  const url = `${this.baseUrl}/staff/minhapauta/${disciplinaId}`;
 
   return this.http.get<PautaEstudante[]>(url, { headers });
 }
@@ -133,8 +142,6 @@ atualizarNotas(id: number, payload: any): Observable<any> {
   const headers = this.getHeaders().headers;
   return this.http.patch(`${this.baseUrl}/departamento/studentsubject/${id}`, payload, { headers });
 }
-
-/////////////////////////////////////////////////////////////////////
 
 getPedidosPendentes(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
   return this.http.get<PedidoEdicaoNota[]>(
@@ -157,4 +164,5 @@ getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
   );
 }
 }
+
 

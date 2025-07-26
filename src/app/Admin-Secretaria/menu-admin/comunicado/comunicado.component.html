@@ -3,7 +3,7 @@
     <app-barralateral></app-barralateral>
 
     <div class="content-area">
-      <h1 style="text-align: center; margin: 32px 0;">Listas de Comunicados</h1>
+      <h1 style="text-align: center; margin: 32px 0; margin-top:20%; font-size: 1.3rem;">Listas de Comunicados</h1>
 
       <!-- Loading state -->
       <div *ngIf="isLoading" class="loading-state">
@@ -19,7 +19,12 @@
       <!-- Empty state -->
       <ng-container *ngIf="!isLoading && !errorMessage">
         <ng-container *ngIf="(comunicados?.length ?? 0) > 0; else noComunicados">
-          <section *ngFor="let comunicado of comunicados" class="comunicado-card">
+          <section *ngFor="let comunicado of comunicados"
+                   class="comunicado-card"
+                   [ngClass]="{
+                     'invalid-card': comunicado.noticeStatus === 'INVALIDO',
+                     'strikethrough-text': comunicado.noticeStatus === 'INVALIDO'
+                   }">
             <div class="comunicado-header">
               <h2>{{ comunicado.titulo }}</h2>
               <span class="status-badge" [ngClass]="getStatusClass(comunicado.noticeStatus)">
@@ -58,7 +63,6 @@
           </div>
         </ng-template>
       </ng-container>
-
     </div>
   </div>
 </main>

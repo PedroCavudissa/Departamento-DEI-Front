@@ -1,109 +1,101 @@
-<app-barralateral-secretaria></app-barralateral-secretaria>
-<div class="pauta-container">
-  <main class="conteudo-exato">
-    <div class="titulo-caixa">
-      <h2>Visualização de Pauta</h2>
-    </div>
+<app-barralateral></app-barralateral>
 
-    <div class="controle-acoes">
-      <div class="seletor-categoria">
-        <label for="modelo">Modelo</label>
-        <select id="modelo" [(ngModel)]="modelo">
+<div class="container">
+  <section class="form-section">
+    <div class="table-section">
+      <h3 class="secao-titulo">Visualização de Pauta</h3>
+
+      <!-- CAMPO DE DISCIPLINA -->
+      <div class="form-group mt-3">
+        <label for="disciplina"><strong>1. Disciplina</strong></label>
+        <select class="form-control" id="disciplina"
+        [(ngModel)]="disciplinaSelecionada"
+        (ngModelChange)="disciplinaAlterada($event)">
+        <option [ngValue]="null">-- Selecione a Disciplina --</option>
+        <option *ngFor="let d of disciplinas" [ngValue]="d">{{ d.nome }}</option>
+    </select>
+
+        <small class="text-danger" *ngIf="mensagemErroDisciplina">{{ mensagemErroDisciplina }}</small>
+      </div>
+
+      <!-- PAGINAÇÃO -->
+      <div class="pagination">
+        <button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Anterior</button>
+        <span>{{ paginaAtual + 1 }}º Ano Letivo de {{ totalPaginas }}</span>
+        <button (click)="proximaPagina()" [disabled]="paginaAtual + 1 >= totalPaginas">Próxima</button>
+      </div><br>
+
+    <!-- MODELO -->
+      <div class="form-group mt-3">
+        <label for="modelo"><strong>2. Modelo</strong></label>
+        <select class="form-control" id="modelo"
+                [(ngModel)]="modelo"
+                (ngModelChange)="modeloAlterado()">
+          <option [ngValue]="null">-- Selecione o Modelo --</option>
           <option *ngFor="let m of modelos" [value]="m">Modelo {{ m }}</option>
         </select>
+        <small class="text-danger" *ngIf="mensagemErroModelo">{{ mensagemErroModelo }}</small>
       </div>
 
-      <div class="seletor-categoria">
-        <label for="ano">Ano Letivo</label>
-        <input type="number" id="ano" [(ngModel)]="anoLetivo" placeholder="Digite o ano" />
+
+      <!-- ANO LETIVO -->
+      <div class="form-group mt-3">
+        <label for="ano"><strong>3. Ano Letivo</strong></label>
+        <input class="form-control input-custom" type="number" id="ano"
+       [(ngModel)]="anoLetivo"
+       (ngModelChange)="anoLetivoAlterado()"
+       placeholder="Exem.: 2025" />
+        <small class="text-danger" *ngIf="mensagemErroAno">{{ mensagemErroAno }}</small>
       </div>
-
-      <div class="seletor-categoria">
-        <label for="disciplina">Disciplina</label>
-        <select id="disciplina" [(ngModel)]="disciplinaId">
-          <option *ngFor="let d of disciplinas" [value]="d.id">{{ d.nome }}</option>
-        </select>
-
-        <!-- Paginação das disciplinas -->
-        <div class="paginacao">
-          <button (click)="paginaAnterior()" [disabled]="paginaAtual === 0">Anterior</button>
-          <span>Página {{ paginaAtual + 1 }} de {{ totalPaginas }}</span>
-          <button (click)="proximaPagina()" [disabled]="paginaAtual + 1 >= totalPaginas">Próxima</button>
-        </div>
-      </div>
-
+      <!-- BOTÃO -->
       <button class="btn-azul" (click)="carregarPautas()">Buscar</button>
-    </div>
-
-    <div class="info-cadeira" *ngIf="disciplinaId">
-      <strong>Cadeira:</strong> {{ nomeDisciplinaSelecionada() }}
-    </div>
-
-    <div class="tabela-container" *ngIf="alunos.length > 0">
-  <table class="tabela-pauta">
-    <thead>
-  <tr>
-    <th>Nome</th>
-
-    <!-- Modelo A e B -->
-    <th *ngIf="modelo === 'A' || modelo === 'B'">AC1</th>
-    <th *ngIf="modelo === 'B'">AC2</th>
-    <th *ngIf="modelo === 'A' || modelo === 'B'">P1</th>
-    <th *ngIf="modelo === 'B'">P2</th>
-
-    <!-- MS -->
-    <th *ngIf="['B','C','D','E','F'].includes(modelo)">MS</th>
-
-    <!-- Exames -->
-    <th *ngIf="modelo === 'C'">Exame</th>
-    <th *ngIf="modelo === 'D'">Exame Época de Recurso</th>
-    <th *ngIf="modelo === 'E'">Exame Oral</th>
-    <th *ngIf="modelo === 'F'">Exame Especial</th>
-
-    <!-- Pagamento -->
-    <th *ngIf="['D','E','F'].includes(modelo)">Pagamento</th>
-
-    <!-- RS -->
-    <th *ngIf="['B','C','D','E','F'].includes(modelo)">RS</th>
-
-    <!-- Média Final -->
-    <th *ngIf="['C','D','E','F'].includes(modelo)">Média Final</th>
-  </tr>
-</thead>
-   <tbody>
-  <tr *ngFor="let aluno of alunos">
-    <td>{{ aluno.estudanteNome }}</td>
-
-    <!-- Modelo A e B -->
-    <td *ngIf="modelo === 'A' || modelo === 'B'">{{ aluno.ac1 }}</td>
-    <td *ngIf="modelo === 'B'">{{ aluno.ac2 }}</td>
-    <td *ngIf="modelo === 'A' || modelo === 'B'">{{ aluno.p1 }}</td>
-    <td *ngIf="modelo === 'B'">{{ aluno.p2 }}</td>
-
-    <!-- MS -->
-    <td *ngIf="['B','C','D','E','F'].includes(modelo)">{{ aluno.ms }}</td>
-
-    <!-- Exame -->
-    <td *ngIf="modelo === 'C'">{{ aluno.exame }}</td>
-    <td *ngIf="modelo === 'D'">{{ aluno.exameRecurso }}</td>
-    <td *ngIf="modelo === 'E'">{{ aluno.exameOral }}</td>
-    <td *ngIf="modelo === 'F'">{{ aluno.exameEspecial }}</td>
-
-    <!-- Pagamento -->
-    <td *ngIf="['D','E','F'].includes(modelo)">{{ aluno.pagamento }}</td>
-
-    <!-- RS -->
-    <td *ngIf="['B','C','D','E','F'].includes(modelo)">{{ aluno.rs }}</td>
-
-    <!-- Média Final -->
-    <td *ngIf="['C','D','E','F'].includes(modelo)">{{ aluno.mediaFinal }}</td>
-  </tr>
-</tbody>
-
-  </table>
+<br><br>
+<div class="info-cadeira" *ngIf="disciplinaId">
+  <strong>Cadeira:</strong> {{ nomeDisciplinaSelecionada() }}
 </div>
-    <p *ngIf="alunos.length === 0" style="padding-left: 2rem;">Nenhuma pauta encontrada.</p>
-  </main>
-</div>
-  <app-barralateral></app-barralateral>
 
+<!-- TABELA DE PAUTA -->
+<table *ngIf="alunos.length > 0" class="table table-bordered mt-4">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th *ngIf="modelo === 'A' || modelo === 'B'">AC1</th>
+      <th *ngIf="modelo === 'B'">AC2</th>
+      <th *ngIf="modelo === 'A' || modelo === 'B'">P1</th>
+      <th *ngIf="modelo === 'B'">P2</th>
+      <th *ngIf="['B','C','D','E','F'].includes(modelo)">MS</th>
+      <th *ngIf="modelo === 'C'">Exame</th>
+      <th *ngIf="modelo === 'D'">Exame Época de Recurso</th>
+      <th *ngIf="modelo === 'E'">Exame Oral</th>
+      <th *ngIf="modelo === 'F'">Exame Especial</th>
+      <th *ngIf="['D','E','F'].includes(modelo)">Pagamento</th>
+      <th *ngIf="['B','C','D','E','F'].includes(modelo)">RS</th>
+      <th *ngIf="['C','D','E','F'].includes(modelo)">Média Final</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let aluno of alunos">
+      <td>{{ aluno.estudanteNome }}</td>
+      <td *ngIf="modelo === 'A' || modelo === 'B'">{{ aluno.ac1 }}</td>
+      <td *ngIf="modelo === 'B'">{{ aluno.ac2 }}</td>
+      <td *ngIf="modelo === 'A' || modelo === 'B'">{{ aluno.p1 }}</td>
+      <td *ngIf="modelo === 'B'">{{ aluno.p2 }}</td>
+      <td *ngIf="['B','C','D','E','F'].includes(modelo)">{{ aluno.ms }}</td>
+      <td *ngIf="modelo === 'C'">{{ aluno.exame }}</td>
+      <td *ngIf="modelo === 'D'">{{ aluno.exameRecurso }}</td>
+      <td *ngIf="modelo === 'E'">{{ aluno.exameOral }}</td>
+      <td *ngIf="modelo === 'F'">{{ aluno.exameEspecial }}</td>
+      <td *ngIf="['D','E','F'].includes(modelo)">{{ aluno.pagamento }}</td>
+      <td *ngIf="['B','C','D','E','F'].includes(modelo)">{{ aluno.rs }}</td>
+      <td *ngIf="['C','D','E','F'].includes(modelo)">{{ aluno.mediaFinal }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- MENSAGEM QUANDO NÃO HÁ RESULTADOS -->
+    <p *ngIf="alunos.length === 0 && buscaRealizada" class="text-danger" style="padding-left: 2rem;">
+      Nenhuma pauta encontrada.
+    </p>
+</div>
+</section>
+</div>

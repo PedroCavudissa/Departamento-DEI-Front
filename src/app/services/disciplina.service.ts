@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 export interface Disciplina {
   id: number;
@@ -28,7 +28,7 @@ export class DisciplinaService {
       'ngrok-skip-browser-warning': 'true'
     });
   
-    const url = `${environment.apiUrl}/api/subject/list?page=0&size=1000`; 
+    const url = `${environment.apiUrl}/api/subject/list?`; 
     return this.http.get<any>(url, { headers }).pipe(
       map((res: any) => res.content || []) 
     );

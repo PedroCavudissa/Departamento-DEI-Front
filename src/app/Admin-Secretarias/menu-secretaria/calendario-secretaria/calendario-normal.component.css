@@ -5,11 +5,11 @@
   color: #fff;
   padding: 20px;
 
-  border-radius: 14px; /* ✅ Cantos mais arredondados */
+  border-radius: 14px; 
   text-align: center;
-  margin: 120px auto 30px;
+  margin: 100px auto 30px;
   width: calc(100% - 300px);
-  max-width: 500px; /* ✅ Ligeiramente menor para ficar centralizado e distinto */
+  max-width: 500px; 
 
   border-radius: 14px; 
   text-align: center;
@@ -110,8 +110,8 @@
   position: fixed;
   inset: 0;
   backdrop-filter: blur(3px);
-  background-color: rgba(0, 0, 0, 0.35);
-  z-index: 999;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1200;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -127,10 +127,8 @@
   position: relative;
   animation: fadeIn 0.3s ease-in-out;
 
-  margin-left: auto;
+  margin-left: 650px;
   margin-right: auto;
-
-  margin-left: 250px; 
 
 }
 
@@ -265,8 +263,6 @@ input[type="text"] {
 
   .quadro {
 
-  .quadro {
-
     width: 80%;
     margin: 120px auto;
 
@@ -282,6 +278,7 @@ input[type="text"] {
     margin-left: 150px; 
     width: calc(100% - 200px); 
     max-width: 300px;
+    margin: 100px auto;
   }
   .titulo-container {
     margin-left: 180px;
@@ -317,4 +314,3 @@ input[type="text"] {
   }
 }
 
-}

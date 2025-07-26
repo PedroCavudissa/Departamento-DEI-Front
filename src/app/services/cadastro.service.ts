@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, generate, map, Observable, of } from 'rxjs';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 export interface Funcionario {
   nome: string;
@@ -30,7 +30,8 @@ export interface Funcionario {
      
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+       'ngrok-skip-browser-warning': 'true'
 
     });
       return this.http.post(url, funcionario, { headers });

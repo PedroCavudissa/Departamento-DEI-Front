@@ -4,7 +4,7 @@ export interface Comunicado {
   conteudo: string;
   nomeFuncionario?: string;
   noticeStatus: 'VALIDO' | 'INVALIDO';
-  destinado: 'PROFESSOR' | 'ALUNO' | 'TODOS';
+  destinado: 'PROFESSOR' | 'ESTUDANTE' | 'SECRETARIA' | 'ADMINISTRADOR' | 'TODOS';
   dataAcontecimento: string;
   dataPublicacao?: string;
 }

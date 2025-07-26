@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 export interface Estudante {
   nome: string;
@@ -40,7 +40,8 @@ export class EstudanteService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json'
+      'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
 
     });
 

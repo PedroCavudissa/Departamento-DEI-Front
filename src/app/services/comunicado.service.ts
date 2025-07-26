@@ -7,14 +7,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { Comunicado } from '../models/comunicado.model';
-import { environment } from '../../enviroments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComunicadoService {
-  private apiUrl =
-    `${environment.apiUrl}/api/departamento/notices/list `;
+  private apiUrl = `${environment.apiUrl}/api/departamento/notices/list`;
 
   constructor(private http: HttpClient) {}
 

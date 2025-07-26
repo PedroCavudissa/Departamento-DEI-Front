@@ -59,9 +59,7 @@
   color: #47B5FF;
   background-color: white;
 }
-.page:hover{
-  cursor: pointer;
-}
+
 .page.active {
   background-color: #47B5FF;
   color: white;
@@ -108,16 +106,7 @@
   background-color: #0056b3;
 }
 
-.button-container {
-  display: flex;  
-}
 
-.confirm-btn:hover {
-  background-color: #0056b3;
-}
-.back-btn:hover {
-  background-color: #0056b3;
-}
 
 button:disabled {
   background-color: #cccccc;
@@ -127,106 +116,15 @@ button:disabled {
 /* Responsividade */
 @media screen and (width: 375px) and (height: 667px){
   .matricula-container {
-    margin-top: 91px;
+
+    padding: 12px;
+    margin: 100px auto;
+    overflow-y: hidden;
+  }
 
     .back-btn{
       margin-left: 85px;
     }
   }
-}
-@media screen and (width: 414px) and (height: 896px) {
-      .matricula-container {
-        margin-top: 105px;
-        padding: 18px;
-      }
-      .back-btn{
-      margin-left: 95px;
-    }
 
-    }
-   @media screen and (width: 390px) and (height: 844px) {
-      .back-btn{
-      margin-left: 90px;
-    }
-    }
 
- @media screen and (width: 430px) and (height: 932px) {
-      .matricula-container {
-        margin-top: 100px;
-        padding: 18px;
-      }
-      .back-btn{
-      margin-left: 95px;
-    }
-    }
-     @media screen and (width: 412px) and (height: 914px) {
-     .matricula-container {
-        margin-top: 100px;
-      }
-      .back-btn{
-      margin-left: 110px;
-    }
-
-    }
-  @media screen and (width: 412px) and (height: 915px) {
-       .matricula-container {
-        margin-top: 100px;
-        padding: 18px;
-      }
-      .back-btn{
-      margin-left: 95px;
-    }
-    }
-
- @media screen and (width: 360px) and (height: 740px) {
-      .matricula-container {
-        margin-top: 80px;
-      }
-      .back-btn{
-      margin-left: 80px;
-    }
-    }
-     @media screen and (width: 768px) and (height: 1024px) {
-      .matricula-container{
-        margin-top: 105px;
-      }
-    }
-     @media screen and (width: 820px) and (height: 1180px) {
-      .matricula-container {
-        margin-top: 150px;
-      }
-
-    }
-     @media screen and (width: 1024px) and (height: 1366px) {
-      .matricula-container {
-        margin-top: 130px;
-      }
-    }
-
- @media screen and (width: 912px) and (height: 1368px) {
-      .matricula-container {
-        margin-top: 180px;
-      }
-    }
- @media screen and (width: 540px) and (height: 720px) {
-    .back-btn{
-      margin-left: 170px;
-    }
-    }
-
- @media screen and (width: 344px) and (height: 882px) {
-      .matricula-container {
-        margin-top: 130px;
-     margin-left: 05px;
-      }
-
-      .back-btn{
-      margin-left: 80px;
-    }
-
-    }
- @media screen and (width: 853px) and (height: 1280px) {
-      .matricula-container {
-        margin-top: 150px;
-      }
-    }
