@@ -41,17 +41,25 @@ export class VerPautaProfessorComponent implements OnInit {
   pedidosPendentes: PedidoEdicaoNota[] = [];
   pedidosAprovados: PedidoEdicaoNota[] = [];
   pedidosRejeitados: PedidoEdicaoNota[] = [];
-
+  mostrarMensagem = false;
+  mensagemTexto = '';
+  tipoMensagem: 'sucesso' | 'erro' = 'sucesso';
   abaSelecionada: 'pendentes' | 'aprovados' | 'rejeitados' = 'pendentes';
 
   constructor(private notasService: LacamentoNotasService) {}
 
+exibirMensagem(mensagem: string, tipo: 'sucesso' | 'erro' = 'sucesso') {
+  this.mensagemTexto = mensagem;
+  this.tipoMensagem = tipo;
+  this.mostrarMensagem = true;
+    }
+
 abrirModal(): void {
-  const disciplinaSelecionada = this.disciplinas.find(d => d.disciplinaNome === this.disciplinaSelecionadaNome);
-  if (!disciplinaSelecionada) {
-    alert("Disciplina inválida.");
-    return;
-  }
+  const disciplinaSelecionada = this.disciplinas.find(d => d.nome === this.disciplinaSelecionadaNome);
+   if (!disciplinaSelecionada) {
+  this.exibirMensagem('Disciplina inválida.', 'erro');
+  return;
+}
 
   const disciplinaId = disciplinaSelecionada.disciplinaId;
   this.mostrarModal = true;
@@ -103,19 +111,32 @@ fecharModal(): void {
   editarLinha(index: number): void {
     this.pauta[index].editando = true;
   }
+  campoEmEdicao: string | null = null;
 
-  salvarLinha(index: number): void {
-    const estudante = this.pauta[index];
-    estudante.editando = false;
-
-    const payload: Partial<PautaEstudante> = {};
-    this.camposNota.forEach(campo => {
-      payload[campo] = estudante[campo];
-    });
-
-    this.notasService.atualizarNotas(estudante.id, payload).subscribe({
-      next: () => alert('Pedido Para Edição de Nota Enviado!'),
-      error: () => alert('Erro Ao Enviar o Pedido.')
-    });
+ salvarLinha(index: number): void {
+  const confirmacao = confirm("Tem certeza que deseja enviar o pedido de edição de nota?");
+  if (!confirmacao) {
+    this.pauta[index].editando = false;
+    return;
   }
+
+  const estudante = this.pauta[index];
+  estudante.editando = false;
+
+  const payload: Partial<PautaEstudante> = {};
+  this.camposNota.forEach(campo => {
+    // Ignorar 'ms' no payload
+    if (campo !== 'ms') {
+      payload[campo] = estudante[campo];
+    }
+  });
+
+  this.notasService.atualizarNotas(estudante.id, payload).subscribe({
+    next: () => alert('Pedido para edição de nota enviado com sucesso!'),
+    error: () => alert('Erro ao enviar o pedido.')
+  });
 }
+}
+
+
+

@@ -20,7 +20,6 @@ export interface Disciplina {
   nome: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,7 +40,7 @@ export class PautaService {
     };
   }
 
-  getDisciplinas(): Observable<Disciplina[]> {
+getDisciplinas(): Observable<Disciplina[]> {
     return this.http.get<Disciplina[]>(`${this.baseUrl}/solicitacoes-edicao-notas/listar`, this.getHeaders());
   }
 

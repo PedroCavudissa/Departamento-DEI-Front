@@ -3,34 +3,71 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
 import { CommonModule } from '@angular/common';
-import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
+import { BarralateralSecretariaComponent } from "../../barralateral-secretaria/barralateral-secretaria.component";
 
 @Component({
   selector: 'app-ver-pauta-secretaria',
-  standalone: true,
-  imports: [BarralateralSecretariaComponent, FormsModule, CommonModule],
   templateUrl: './ver-pauta-secretaria.component.html',
   styleUrls: ['./ver-pauta-secretaria.component.css'],
-
+  standalone: true,
+  imports: [
+    BarralateralSecretariaComponent,
+    FormsModule,
+    CommonModule
+  ]
 })
 export class VerPautaSecretariaComponent implements OnInit {
-  modelo = 'A';
+  // Dados do formulário
+  modelo: string = '';
+  disciplinaSelecionada: Disciplina | null = null;
   anoLetivo!: number;
   disciplinaId!: number;
 
-  modelos = ['A', 'B', 'C', 'D', 'E'];
+  // Listas
+  modelos = ['A', 'B', 'C', 'D', 'E', 'F'];
   disciplinas: Disciplina[] = [];
   alunos: AlunoPauta[] = [];
 
+  // Paginação
   paginaAtual: number = 0;
   totalPaginas: number = 0;
   tamanhoPagina: number = 10;
+
+  // Mensagens de erro
+  mensagemErroDisciplina: string = '';
+  mensagemErroModelo: string = '';
+  mensagemErroAno: string = '';
+
+  // Flag para saber se o usuário clicou em "Buscar"
+  buscaRealizada: boolean = false;
 
   constructor(private pautaService: MenuService, private router: Router) {}
 
   ngOnInit(): void {
     this.carregarDisciplinas();
   }
+
+ disciplinaAlterada(disciplina: Disciplina | null): void {
+  this.disciplinaId = disciplina ? disciplina.id : 0;
+  this.tentarAtualizarPautas();
+}
+
+modeloAlterado(): void {
+  this.tentarAtualizarPautas();
+}
+
+anoLetivoAlterado(): void {
+  this.tentarAtualizarPautas();
+}
+
+tentarAtualizarPautas(): void {
+  const anoAtual = new Date().getFullYear();
+  const anoValido = this.anoLetivo && this.anoLetivo >= 1900 && this.anoLetivo <= anoAtual + 1;
+
+  if (this.disciplinaSelecionada && this.modelo && this.disciplinaId && anoValido) {
+    this.carregarPautas();
+  }
+}
 
   carregarDisciplinas(pagina: number = 0): void {
     this.pautaService.getDisciplinas(pagina, this.tamanhoPagina).subscribe({
@@ -46,23 +83,58 @@ export class VerPautaSecretariaComponent implements OnInit {
     });
   }
 
-  carregarPautas(): void {
-    if (!this.modelo || !this.anoLetivo || !this.disciplinaId) return;
+  selecionarDisciplina(disciplina: Disciplina | null): void {
+    this.disciplinaId = disciplina ? disciplina.id : 0;
+  }
 
+  carregarPautas(): void {
+    // Resetar mensagens de erro
+    this.mensagemErroDisciplina = '';
+    this.mensagemErroModelo = '';
+    this.mensagemErroAno = '';
+    this.buscaRealizada = false; // Resetar antes da busca
+
+    let camposValidos = true;
+
+    // Validação da disciplina
+    if (!this.disciplinaSelecionada || !this.disciplinaId) {
+      this.mensagemErroDisciplina = 'Selecione a disciplina.';
+      camposValidos = false;
+    }
+
+    // Validação do modelo
+    if (!this.modelo) {
+      this.mensagemErroModelo = 'Selecione um modelo.';
+      camposValidos = false;
+    }
+
+    // Validação do ano letivo
+    const anoAtual = new Date().getFullYear();
+    if (!this.anoLetivo || this.anoLetivo < 1900 || this.anoLetivo > anoAtual + 1) {
+      this.mensagemErroAno = 'Digite um ano letivo válido (ex: 2025).';
+      camposValidos = false;
+    }
+
+    // Se houver erros, não prosseguir
+    if (!camposValidos) return;
+
+    // Chamada ao serviço
     this.pautaService.listarPautas(this.modelo, this.anoLetivo, this.disciplinaId).subscribe({
       next: (data) => {
         this.alunos = data;
+        this.buscaRealizada = true;
       },
       error: (erro) => {
         console.error('Erro ao buscar pautas:', erro);
         this.alunos = [];
+        this.buscaRealizada = true;
       }
     });
   }
 
   nomeDisciplinaSelecionada(): string {
     const d = this.disciplinas.find(d => d.id === this.disciplinaId);
-    return d ? d.nome: '';
+    return d ? d.nome : '';
   }
 
   paginaAnterior(): void {
