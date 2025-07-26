@@ -92,46 +92,59 @@ export class PerfilProfessorComponent implements OnInit {
     }
   }
 
-  accao(): void {
-    if (!this.professor) return;
+ accao(): void {
+  if (!this.professor) return;
 
-    if (this.formulario.invalid) {
-      this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
-      this.formulario.markAllAsTouched();
-      return;
-    }
-
-    const dadosAlterados: any = {};
-
-    if (this.formulario.value.email !== this.professor.email) {
-      dadosAlterados.email = this.formulario.value.email;
-    }
-
-    if (this.formulario.value.endereco !== this.professor.userDetails.endereco) {
-      dadosAlterados.endereco = this.formulario.value.endereco;
-    }
-
-    if (Object.keys(dadosAlterados).length === 0) {
-      this.mensagemErro = 'Nenhum dado foi alterado';
-      return;
-    }
-
-    this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados).subscribe({
-      next: (res: any) => {
-        this.mostrarMensagens = true;
-        this.mensagemSucesso = 'Dados atualizados com sucesso!';
-        if (dadosAlterados.email) this.professor!.email = dadosAlterados.email;
-        if (dadosAlterados.endereco) this.professor!.userDetails.endereco = dadosAlterados.endereco;
-
-        setTimeout(() => this.carregarDadosProfessor(), 1000);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Erro ao atualizar:', err);
-        this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-      }
-    });
+  if (this.formulario.invalid) {
+    this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
+    this.formulario.markAllAsTouched();
+    return;
   }
 
+  const dadosAlterados: any = {};
+
+  if (this.formulario.value.email !== this.professor.email) {
+    dadosAlterados.email = this.formulario.value.email;
+  }
+
+  if (this.formulario.value.endereco !== this.professor.userDetails.endereco) {
+    dadosAlterados.endereco = this.formulario.value.endereco;
+  }
+
+  if (Object.keys(dadosAlterados).length === 0) {
+    this.mensagemErro = 'Nenhum dado foi alterado';
+    this.mostrarMensagens = true;
+    setTimeout(() => this.mostrarMensagens = false, 3000);
+    return;
+  }
+
+  this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados).subscribe({
+    next: (res: any) => {
+      this.mostrarMensagens = true;
+      this.mensagemSucesso = 'Dados atualizados com sucesso!';
+      this.mensagemErro = '';
+      
+      if (dadosAlterados.email) this.professor!.email = dadosAlterados.email;
+      if (dadosAlterados.endereco) this.professor!.userDetails.endereco = dadosAlterados.endereco;
+
+      setTimeout(() => {
+        this.mostrarMensagens = false;
+        this.mensagemSucesso = '';
+      }, 3000);
+    },
+    error: (err: HttpErrorResponse) => {
+      console.error('Erro ao atualizar:', err);
+      this.mostrarMensagens = true;
+      this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
+      this.mensagemSucesso = '';
+      
+      setTimeout(() => {
+        this.mostrarMensagens = false;
+        this.mensagemErro = '';
+      }, 3000);
+    }
+  });
+}
   abrirModal(): void {
     this.mostrarModal = true;
     this.formularioSenha.reset();
