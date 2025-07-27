@@ -93,10 +93,6 @@ export class PerfilEstudanteComponent implements OnInit {
     return data > hoje ? { dataFutura: true } : null;
   }
 
-
-
-
-
   abrirModal() {
     this.mostrarModal = true;
     this.formularioSenha.reset();

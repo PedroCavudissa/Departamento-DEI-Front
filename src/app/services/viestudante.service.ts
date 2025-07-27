@@ -40,7 +40,10 @@ export class ViestudanteService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token') || '';
+   // const token = localStorage.getItem('token') || '';
+    const usuarioString = localStorage.getItem('usuario');
+    const usuario = usuarioString ? JSON.parse(usuarioString) : null;
+    const token = usuario?.token; // Optional chaining in case usuario is null
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
@@ -55,8 +58,7 @@ export class ViestudanteService {
     return this.http.get<Viestudante>(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
 
-
-atualizarPerfil(id: number, dadosAtualizados: Partial<Viestudante>): Observable<Viestudante> {
+  atualizarPerfil(id: number, dadosAtualizados: Partial<Viestudante>): Observable<Viestudante> {
   return this.http.patch<Viestudante>(`${this.baseUrl}/departamento/students/${id}`, dadosAtualizados, 
     this.getHeaders()
   );
