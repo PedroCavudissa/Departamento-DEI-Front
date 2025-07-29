@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
+//import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { CommonModule } from '@angular/common';
 import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
 import { FormsModule } from '@angular/forms';
