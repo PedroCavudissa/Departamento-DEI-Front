@@ -1,10 +1,8 @@
 .container {
-<<<<<<< HEAD
-  max-width: 900px;
-=======
 
-   max-width: 600px;
->>>>>>> OdeteVieira
+  max-width: 900px;
+
+
   margin: 80px auto;
   padding: 8px;
 }
