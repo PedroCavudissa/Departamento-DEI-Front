@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-gerirperfilsecretaria',
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './gerirperfilsecretaria.component.html',
   styleUrl: './gerirperfilsecretaria.component.css'
 })

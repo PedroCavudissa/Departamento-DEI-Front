@@ -1,72 +1,90 @@
+<div class="container">
+  <section class="form-section"> 
+    <div class="table-section">
+        <h3 class="secao-titulo">Visualização da Pauta</h3>
 
+        <label for="disciplinaSelect"><strong>Disciplina</strong></label>
 
-<body>
-  
-<div class="pauta-container"> 
+        <select id="disciplinaSelect" *ngIf="disciplinaSelecionada" [(ngModel)]="disciplinaSelecionada" (change)="onDisciplinaChange()" class="form-control">
+          <option *ngFor="let d of disciplinas" [ngValue]="d">{{ d.nome }}</option>
+        </select>
 
-  
-    <main class="conteudo-exato">
-      <!-- Cabeçalho azul com botão -->
-      <div class="cabecalho-azul"></div>
-  
+    <div class="info-cadeira">
+      <p><strong>Disciplina selecionada:</strong> {{ disciplinaSelecionada.nome }}</p>
+    </div>
 
+      <table class="table table-bordered mt-4">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>AC1</th>
+            <th>AC2</th>
+            <th>PF1</th>
+            <th>PF2</th>
+            <th>Exame Época Normal</th>
+            <th>Exame de Recurso</th>
+            <th>Exame Oral</th>
+            <th>Exame Especial</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let e of estudantes">
+            <td>{{ e.estudanteNome }}</td>
+            <td>{{ e.ac1 }}</td>
+            <td>{{ e.ac2 }}</td>
+            <td>{{ e.p1 }}</td>
+            <td>{{ e.p2 }}</td>
+            <td>{{ e.exame }}</td>
+            <td>{{ e.exameRecurso }}</td>
+            <td>{{ e.exameOral }}</td>
+            <td>{{ e.exameEspecial }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</section>
+   <div class="button-container">
+      <button class="confirm-btn" (click)="aprovar()">✅ Aprovar Edição de Pauta</button>
+      <button class="back-btn" (click)="rejeitar()">❌ Rejeitar Edição de Pauta</button>
+   </div>
+</div>
 
-      <!-- Controles -->
-      <div class="controle-acoes">
-        <div class="seletor-categoria">
-         
-          <select [(ngModel)]="categoriaSelecionada">
-            <option>1º ano</option>
-            <option>2º ano</option>
-            <option>3º ano</option>
-            <option>4º ano</option>
-            <option>5º ano</option>
-          </select>
-        </div>
-  
-        <div class="botoes">
-          <button class="btn-azul">Aprovar Pauta</button>
-          <button class="btn-preto" (click)="pedirRevisao()">Pedir Revisão</button>
-        </div>
-      </div>
-  
-      <!-- Informações da cadeira -->
-      <div class="info-cadeira">
-        <strong>Cadeira:</strong> IHC
-        &nbsp;&nbsp;&nbsp;
-        <strong>Docente:</strong> Ms. Panzo Rafael Chiló
-      </div>
-  
-      <!-- Tabela -->
-      <div class="tabela-container">
-        <table class="tabela-pauta">
-          <thead>
-            <tr>
-              <th>NOME</th>
-              <th>AC1</th>
-              <th>AC2</th>
-              <th>PT</th>
-              <th>PE</th>
-              <th>MS</th>
-              <th>RS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let aluno of alunos">
-              <td>{{ aluno.nome }}</td>
-              <td>{{ aluno.ac1 }}</td>
-              <td>{{ aluno.ac2 }}</td>
-              <td>{{ aluno.pt }}</td>
-              <td>{{ aluno.pe }}</td>
-              <td>{{ aluno.ms }}</td>
-              <td>{{ aluno.rs }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </main>
+<!-- Modal de Alerta com botão OK -->
+<div class="modal-overlay" *ngIf="mostrarModalOk">
+  <div class="modal-content">
+    <h4>{{ tituloModal }}</h4>
+    <p>{{ mensagemModal }}</p>
+    <div class="modal-actions">
+      <button (click)="fecharModalOk()">OK</button>
+    </div>
   </div>
+</div>
+<<<<<<< HEAD
+<app-barralateral></app-barralateral>
+=======
 
-</body>
+<!-- Modal de Confirmação -->
+<div class="modal-overlay" *ngIf="mostrarModalConfirmacao">
+  <div class="modal-content">
+    <h4>{{ tituloModal }}</h4>
+    <p>{{ mensagemModal }}</p>
+    <div class="modal-actions">
+      <button (click)="confirmarAcao()">Confirmar</button>
+      <button (click)="cancelarAcao()">Cancelar</button>
+    </div>
+  </div>
+</div>
 
+<!-- Modal de Motivo de Rejeição -->
+<div class="modal-overlay" *ngIf="mostrarModalRejeicao">
+  <div class="modal-content">
+    <h4>Motivo da Rejeição</h4>
+    <textarea [(ngModel)]="motivoRejeicao" rows="4" class="form-control"></textarea>
+    <div class="modal-actions">
+      <button (click)="confirmarRejeicao()">Enviar</button>
+      <button (click)="cancelarRejeicao()">Cancelar</button>
+    </div>
+  </div>
+</div>
   <app-barralateral></app-barralateral>
+>>>>>>> 6234664536fb5aed7f9fd3c4c3c15e3161cffb4a

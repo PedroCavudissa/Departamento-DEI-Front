@@ -8,17 +8,22 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 
-import { LoginService } from './Services/login.service';
-import { LancamentoService } from './Services/lacamento-notas.service';
-//import { DisciplinaService } from './Services/disciplina.service';
-import { provideHttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { MenuService } from './Services/menu.service';
-import { DisciplinaService } from './Services/disciplina.service';
+
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  provideHttpClient,
+} from '@angular/common/http';
 
 
+import { LoginService } from './services/login.service';
+import { LacamentoNotasService } from './services/lacamento-notas.service';
+import { DisciplinaService } from './services/disciplina.service';
+import { MenuService } from './services/menu.service';
 
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+
+// Interface de resposta de login
 export interface LoginResponse {
   token: string;
   role: 'admin' | 'secretaria' | 'estudante' | 'professor';
@@ -28,11 +33,16 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-
-
-    importProvidersFrom(HttpClientModule),LoginService,LancamentoService,DisciplinaService,MenuService
-
-  ]
-
-
+    provideHttpClient(),
+    importProvidersFrom(HttpClientModule),
+    LoginService,
+    LacamentoNotasService,
+    DisciplinaService,
+    MenuService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
 };

@@ -1,13 +1,11 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { LateralComponent } from '../lateral/lateral.component';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PerfilestudanteService } from '../../Services/perfilestudante.service';
-import { Estudante, EstudanteService } from '../../Services/estudante.service';
+import { PerfilestudanteService } from '../../services/perfilestudante.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Viestudante, ViestudanteService } from '../../services/viestudante.service';
 
 @Component({
   selector: 'app-perfil-estudante',
@@ -15,28 +13,32 @@ import { HttpErrorResponse } from '@angular/common/http';
   imports: [LateralComponent, CommonModule, ReactiveFormsModule],
   templateUrl: './perfil-estudante.component.html',
   styleUrl: './perfil-estudante.component.css',
-  providers: [EstudanteService, PerfilestudanteService]
+  providers: [ViestudanteService, PerfilestudanteService]
 })
 export class PerfilEstudanteComponent implements OnInit {
+
+  estudanteSelecionado: Viestudante | undefined;
   mostrarModal = false;
   mostrarMensagens = false; 
   formulario: FormGroup;
-mensagemSucesso: string = '';
-mensagemErro: string = '';
+  mensagemSucesso: string = '';
+  mensagemErro: string = '';
   mensagemErroSenha = '';
   mensagemSucessoSenha = '';
-  estudante?: Estudante;
   formularioSenha: FormGroup;
+  errorMessage: null | undefined;
+
+  viestudante?: Viestudante;
 
   constructor(
     private fb: FormBuilder,
-    private estudanteService: EstudanteService,
+    private viestudanteService: ViestudanteService,
     private perfilestudanteService: PerfilestudanteService
   ) {
-    this.estudante = {
-      email: '', 
-      nome: '',
-      userDetails: {
+    this.viestudante = {
+       email: '', 
+        nome: '',
+        userDetails: {
         id: 0,
         dataNascimento: '',
         numIdentificacao: '',
@@ -46,16 +48,28 @@ mensagemErro: string = '';
         anoAcademico: 0,
         dataIngresso: '',
         dataConclusao: '',
-        statusEstudante: ''
+        statusEstudante: '',
+       instituicaoAnterior: '',
+       notaExameAcesso: 0,
+        notaEnsinoMedio: 0,
+        regimeIngresso: ''
       }
     };
     
     this.formulario = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      contato: ['', ],
-      endereco: ['', [ Validators.minLength(5)]],
-     
-    });
+  email: ['', [Validators.required, Validators.email]],
+  contato: [''],
+  endereco: ['', [Validators.minLength(5)]],
+  anoAcademico: [''],
+  dataNascimento: [{value: '', disabled: true}],
+  tipoDocumento: [{value: '', disabled: true}],
+  numDocumento: [{value: '', disabled: true}],
+  notaExameAcesso: [''],
+  regimeIngresso: [''],
+  notaEnsinoMedio: [{value: '', disabled: true}],
+  instituicaoAnterior: [{value: '', disabled: true}],
+  dataIngresso: [{value: '', disabled: true}]
+});
 
     this.formularioSenha = this.fb.group({
       senhaAtual: ['', Validators.required],
@@ -77,23 +91,6 @@ mensagemErro: string = '';
     const data = new Date(control.value);
     const hoje = new Date();
     return data > hoje ? { dataFutura: true } : null;
-  }
-
-  // Validador para idade mínima (parametrizável)
-  validarIdadeMinima(idadeMinima: number) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) return null;
-      const dataNasc = new Date(control.value);
-      const hoje = new Date();
-      let idade = hoje.getFullYear() - dataNasc.getFullYear();
-      const mes = hoje.getMonth() - dataNasc.getMonth();
-      
-      if (mes < 0 || (mes === 0 && hoje.getDate() < dataNasc.getDate())) {
-        idade--;
-      }
-      
-      return idade >= idadeMinima ? null : { idadeMinima: true };
-    };
   }
 
   abrirModal() {
@@ -132,251 +129,46 @@ mensagemErro: string = '';
 
   ngOnInit(): void {
     this.carregarDadosEstudante();
+     this.buscarEstudante();
   }
-
-  carregarDadosEstudante(): void {
-    this.estudanteService.getEstudante().subscribe({
-      next: (resposta: any) => {
-        if (resposta && (resposta.userDetails || resposta.contacto)) {
-          this.estudante = {
-            nome: resposta.nome || '',
-            userDetails: {
-              id: resposta.userDetails?.id || resposta.id || 0,
-              contacto: resposta.userDetails?.contacto || resposta.contacto || '',
-              endereco: resposta.userDetails?.endereco || resposta.endereco || '',
-              dataNascimento: resposta.userDetails?.dataNascimento || '',
-              numIdentificacao: resposta.userDetails?.numIdentificacao || '',
-              tipoDocumento: resposta.userDetails?.tipoDocumento || '',
-              anoAcademico: resposta.userDetails?.anoAcademico || 0,
-              dataIngresso: resposta.userDetails?.dataIngresso || '',
-              dataConclusao: resposta.userDetails?.dataConclusao || '',
-              statusEstudante: resposta.userDetails?.statusEstudante || ''
-            }
-          };
-          
-          this.formulario.patchValue({
-            email: resposta.email || '',
-            contato: this.estudante.userDetails.contacto,
-            endereco: this.estudante.userDetails.endereco,
-            anoAcademico: this.estudante.userDetails.anoAcademico,
-            dataIngresso: this.estudante.userDetails.dataIngresso,
-            dataNascimento: this.estudante.userDetails.dataNascimento
-          });
-        } else {
-          this.mensagemErro = 'Estrutura de dados inválida da API';
-        }
-      },
-      error: (err) => {
-        this.mensagemErro = 'Erro ao carregar dados: ' + err.message;
-        console.error('Erro completo:', err);
-      }
-    });
-  }
-
-accao(): void {
-  // Verifica apenas se os campos preenchidos são válidos (não verifica required)
-  if (this.formulario.invalid) {
-    this.mensagemErro = 'Por favor, corrija os campos inválidos';
-    this.formulario.markAllAsTouched();
-    return;
-  }
-
-  if (!this.estudante) {
-    alert('Dados atualizados com sucesso!');
-    return;
-  }
-
-  // Prepara os dados alterados (mesmo código anterior)
-  const dadosAlterados: any = {};
-  
-  if (this.formulario.value.contato !== this.estudante.userDetails.contacto) {
-    dadosAlterados.contacto = this.formulario.value.contato;
-  }
-  
-  if (this.formulario.value.endereco !== this.estudante.userDetails.endereco) {
-    dadosAlterados.endereco = this.formulario.value.endereco;
-  }
-  
-  if (this.formulario.value.email !== this.estudante['email']) {
-    dadosAlterados.email = this.formulario.value.email;
-  }
-
-  // Verifica se há algo para atualizar
-  if (Object.keys(dadosAlterados).length === 0) {
-    this.mensagemErro = 'Nenhum dado foi alterado';
-    return;
-  }
-
-  // Restante do código permanece igual...
-  if (this.estudante && this.estudante.userDetails) {
-    this.estudanteService.atualizarPerfil(this.estudante.userDetails.id, dadosAlterados)
-      .subscribe({
-        next: (resposta: any) => {
-          // Atualiza os dados localmente
-          if (this.estudante) {
-            if (dadosAlterados.contacto) this.estudante.userDetails.contacto = dadosAlterados.contacto;
-            if (dadosAlterados.endereco) this.estudante.userDetails.endereco = dadosAlterados.endereco;
-            if (dadosAlterados.email) this.estudante['email'] = dadosAlterados.email;
-          }
-          
-          this.mensagemSucesso = 'Dados atualizados com sucesso!';
-          setTimeout(() => this.carregarDadosEstudante(), 1000);
-        },
-        error: (err: HttpErrorResponse) => {
-          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-        }
-      });
-  } 
-}
-}
-
-
-
-/*
-import { Component, OnInit } from '@angular/core';
-
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LateralComponent } from '../lateral/lateral.component';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { PerfilestudanteService } from '../../Services/perfilestudante.service';
-import { Estudante, EstudanteService } from '../../Services/estudante.service';
-import { HttpErrorResponse } from '@angular/common/http';
-
-
-@Component({
-  selector: 'app-perfil-estudante',
-  standalone: true,
-  imports: [LateralComponent, CommonModule, ReactiveFormsModule],
-  templateUrl: './perfil-estudante.component.html',
-  styleUrl: './perfil-estudante.component.css',
-  providers: [EstudanteService, PerfilestudanteService] // Adicione os serviços aqui
-})
-export class PerfilEstudanteComponent implements OnInit {
-  mostrarModal = false;
-   mostrarMensagens = false; 
-  formulario: FormGroup;
-  mensagemErro = '';
-  mensagemSucesso = '';
-   mensagemErroSenha = '';
-  mensagemSucessoSenha = '';
-  estudante?: Estudante;
-  formularioSenha: FormGroup; // Novo formulário para senha
-
-
-
- constructor(
-  private fb: FormBuilder,
-  private estudanteService: EstudanteService,
-  private perfilestudanteService: PerfilestudanteService
-
-) {
-  this.estudante = {
-      nome: '',
-      userDetails: {
-      id: 0,
-      dataNascimento: '',
-      numIdentificacao: '',
-      tipoDocumento: '',
-      endereco: '',
-      contacto: '',
-      anoAcademico: 0,
-      dataIngresso: '',
-      dataConclusao: '',
-      statusEstudante: ''
-    }
-  };
-  
-  this.formulario = this.fb.group({
-    contato: ['', Validators.required],
-    endereco: ['', [Validators.required, Validators.minLength(5)]]
-  });
-
- // Novo formulário para alteração de senha
-    this.formularioSenha = this.fb.group({
-      senhaAtual: ['', Validators.required],
-      novaSenha: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarSenha: ['', Validators.required]
-    }, { validator: this.confirmarSenhaValidator });
-
-}
- 
-  // Validador personalizado para verificar se as senhas coincidem
-  confirmarSenhaValidator(group: FormGroup): { [key: string]: any } | null {
-    const novaSenha = group.get('novaSenha')?.value;
-    const confirmarSenha = group.get('confirmarSenha')?.value;
-    return novaSenha === confirmarSenha ? null : { senhasNaoCoincidem: true };
-  }
-
-  abrirModal() {
-    this.mostrarModal = true;
-     this.formularioSenha.reset(); // Limpa o formulário ao abrir
-    this.mensagemErroSenha = '';
-    this.mensagemSucessoSenha = '';
-  }
-
-  fecharModal() {
-    this.mostrarModal = false;
-  }
-
-  salvarSenha() {
-  if (this.formularioSenha.invalid) {
-    this.formularioSenha.markAllAsTouched();
-    this.mensagemErroSenha = 'Por favor, preencha todos os campos corretamente';
-    return;
-  }
-
-  const { senhaAtual, novaSenha } = this.formularioSenha.value;
-  
-  this.perfilestudanteService.alterarSenha(senhaAtual, novaSenha).subscribe({
-    next: (response) => {
-      // Se a resposta for texto ou JSON
-      const successMessage = typeof response === 'string' ? response : 'Senha alterada com sucesso!';
-      this.mensagemSucessoSenha = successMessage;
-      this.formularioSenha.reset();
-      setTimeout(() => this.fecharModal(), 2000);
-    },
-    error: (err) => {
-      console.error('Erro completo:', err);
-      // Tenta pegar a mensagem de erro mesmo em respostas não-JSON
-      this.mensagemErroSenha = err.error.text || err.error || 'Erro ao alterar senha';
-    }
-  });
-}
-
-  ngOnInit(): void {
-    this.carregarDadosEstudante();
-  }
-
-
-   carregarDadosEstudante(): void {
-  this.estudanteService.getEstudante().subscribe({
+carregarDadosEstudante(): void {
+  this.viestudanteService.getEstudante().subscribe({
     next: (resposta: any) => {
-      console.log('Resposta completa:', resposta); // Debug
-      
-      // Verificação segura da estrutura
-      if (resposta && (resposta.userDetails || resposta.contacto)) {
-        this.estudante = {
+      if (resposta) {
+        this.viestudante = {
+          email: resposta.email || '',
           nome: resposta.nome || '',
           userDetails: {
             id: resposta.userDetails?.id || resposta.id || 0,
             contacto: resposta.userDetails?.contacto || resposta.contacto || '',
             endereco: resposta.userDetails?.endereco || resposta.endereco || '',
-            // Outros campos com fallback
             dataNascimento: resposta.userDetails?.dataNascimento || '',
             numIdentificacao: resposta.userDetails?.numIdentificacao || '',
             tipoDocumento: resposta.userDetails?.tipoDocumento || '',
             anoAcademico: resposta.userDetails?.anoAcademico || 0,
             dataIngresso: resposta.userDetails?.dataIngresso || '',
             dataConclusao: resposta.userDetails?.dataConclusao || '',
-            statusEstudante: resposta.userDetails?.statusEstudante || ''
+            statusEstudante: resposta.userDetails?.statusEstudante || '',
+            instituicaoAnterior: resposta.userDetails?.instituicaoAnterior || '',
+            notaExameAcesso: resposta.userDetails?.notaExameAcesso || 0,
+            notaEnsinoMedio: resposta.userDetails?.notaEnsinoMedio || 0,
+            regimeIngresso: resposta.userDetails?.regimeIngresso || ''
           }
         };
-        
+
         this.formulario.patchValue({
-          contato: this.estudante.userDetails.contacto,
-          endereco: this.estudante.userDetails.endereco
+          email: this.viestudante['email'],
+          contato: this.viestudante.userDetails.contacto,
+          endereco: this.viestudante.userDetails.endereco,
+          anoAcademico: this.viestudante.userDetails.anoAcademico,
+          dataIngresso: this.viestudante.userDetails.dataIngresso,
+          dataNascimento: this.viestudante.userDetails.dataNascimento,
+          tipoDocumento: this.viestudante.userDetails.tipoDocumento,
+          numDocumento: this.viestudante.userDetails.numIdentificacao,
+          instituicaoAnterior: this.viestudante.userDetails.instituicaoAnterior,
+          notaExameAcesso: this.viestudante.userDetails.notaExameAcesso,
+          notaEnsinoMedio: this.viestudante.userDetails.notaEnsinoMedio,
+          regimeIngresso: this.viestudante.userDetails.regimeIngresso
         });
       } else {
         this.mensagemErro = 'Estrutura de dados inválida da API';
@@ -389,117 +181,92 @@ export class PerfilEstudanteComponent implements OnInit {
   });
 }
 
-
 accao(): void {
-  // Resetar mensagens antes de começar
-  this.mostrarMensagens = false;
+  // Limpa mensagens anteriores e mostra a área de mensagens
+  this.mostrarMensagens = true;
   this.mensagemSucesso = '';
   this.mensagemErro = '';
 
+  // Verifica se o formulário é inválido
   if (this.formulario.invalid) {
-    this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
-    this.mostrarMensagens = true;
+    this.mensagemErro = 'Por favor, corrija os campos inválidos';
     this.formulario.markAllAsTouched();
     return;
   }
 
-  if (!this.estudante) {
+  if (!this.viestudante) {
     this.mensagemSucesso = 'Dados atualizados com sucesso!';
-    this.mostrarMensagens = true;
     return;
   }
 
+  // Prepara os dados alterados
   const dadosAlterados: any = {};
-  if (this.formulario.value.contato !== this.estudante.userDetails.contacto) {
+  
+  if (this.formulario.value.contato !== this.viestudante.userDetails.contacto) {
     dadosAlterados.contacto = this.formulario.value.contato;
   }
-  if (this.formulario.value.endereco !== this.estudante.userDetails.endereco) {
+  
+  if (this.formulario.value.endereco !== this.viestudante.userDetails.endereco) {
     dadosAlterados.endereco = this.formulario.value.endereco;
   }
+  
+  if (this.formulario.value.email !== this.viestudante['email']) {
+    dadosAlterados.email = this.formulario.value.email;
+  }
 
-  this.estudanteService.atualizarPerfil(this.estudante.userDetails.id, dadosAlterados)
-    .subscribe({
-      next: (resposta: any) => {
-        if (this.estudante) {
-          this.estudante.userDetails.contacto = this.formulario.value.contato;
-          this.estudante.userDetails.endereco = this.formulario.value.endereco;
+  // Verifica se há algo para atualizar
+  if (Object.keys(dadosAlterados).length === 0) {
+    this.mensagemErro = 'Nenhum dado foi alterado';
+    return;
+  }
+
+  if (this.viestudante && this.viestudante.userDetails) {
+    this.viestudanteService.atualizarPerfil(this.viestudante.userDetails.id, dadosAlterados)
+      .subscribe({
+        next: (resposta: any) => {
+          // Atualiza os dados localmente
+          if (this.viestudante) {
+            if (dadosAlterados.contacto) this.viestudante.userDetails.contacto = dadosAlterados.contacto;
+            if (dadosAlterados.endereco) this.viestudante.userDetails.endereco = dadosAlterados.endereco;
+            if (dadosAlterados.email) this.viestudante['email'] = dadosAlterados.email;
+          }
+          
+          this.mensagemSucesso = 'Dados atualizados com sucesso!';
+          
+          // Limpa a mensagem após 3 segundos
+          setTimeout(() => {
+            this.mensagemSucesso = '';
+          }, 3000);
+          
+          // Recarrega os dados do estudante
+          setTimeout(() => this.carregarDadosEstudante(), 1000);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
+
+        
+
+          setTimeout(() => {
+            this.mensagemErro = '';
+          }, 3000);
         }
         
-        this.mensagemSucesso = 'Dados atualizados com sucesso!';
-        this.mostrarMensagens = true;
-        
-        // Esconder as mensagens após 5 segundos
-        setTimeout(() => {
-          this.mostrarMensagens = false;
-        }, 5000);
-        
-        setTimeout(() => this.carregarDadosEstudante(), 1000);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Erro completo:', err);
-        this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-        this.mostrarMensagens = true;
-        
-        // Esconder a mensagem de erro após 5 segundos
-        setTimeout(() => {
-          this.mostrarMensagens = false;
-        }, 5000);
-      }
-    });
+      });
+  } 
 }
-}*/
-
-
-
-
-/*
-accao(): void {
-  if (this.formulario.invalid) {
-    this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
-    this.formulario.markAllAsTouched();
-    return;
-  }
-
-  if (!this.estudante) {
-  alert('Dados atualizados com sucesso!');
-
-    return;
-  }
-
-  // Cria payload mínimo necessário para a API
-  const payload = {
-    contacto: this.formulario.value.contato,
-    endereco: this.formulario.value.endereco
-  };
-
-  // Alternativa: enviar só o que foi alterado
-  const dadosAlterados: any = {};
-  if (this.formulario.value.contato !== this.estudante.userDetails.contacto) {
-    dadosAlterados.contacto = this.formulario.value.contato;
-  }
-  if (this.formulario.value.endereco !== this.estudante.userDetails.endereco) {
-    dadosAlterados.endereco = this.formulario.value.endereco;
-  }
-
-  this.estudanteService.atualizarPerfil(this.estudante.userDetails.id, dadosAlterados)
-    .subscribe({
-      next: (resposta: any) => {
-        console.log('Resposta da atualização:', resposta); // Debug
-        
-        // Atualiza localmente apenas os campos alterados
-        if (this.estudante) {
-          this.estudante.userDetails.contacto = this.formulario.value.contato;
-          this.estudante.userDetails.endereco = this.formulario.value.endereco;
-        }
-        
-        this.mensagemSucesso = 'Dados atualizados com sucesso!';
-        
-        // Opcional: recarregar dados completos
-        setTimeout(() => this.carregarDadosEstudante(), 1000);
+  buscarEstudante(): void {
+    this.viestudanteService.getEstudante().subscribe({
+      next: (data: Viestudante) => {
+        this.estudanteSelecionado = data;
+        this.errorMessage = null;
       },
-      error: (err: HttpErrorResponse) => {
-        console.error('Erro completo:', err);
-        this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
+      error: (err: { message: string }) => {
+        console.error('Erro ao buscar estudante:', err);
+        this.estudanteSelecionado = undefined;
       }
     });
-}*/
+  }
+
+
+
+}

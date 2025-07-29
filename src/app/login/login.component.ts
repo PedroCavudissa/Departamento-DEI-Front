@@ -6,8 +6,11 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import {  NavigationEnd } from '@angular/router';
 
 import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css'; 
-import { LoginService } from '../Services/login.service';
+import 'notyf/notyf.min.css';
+
+import { LoginService } from '../services/login.service';
+import { NotificationService } from '../services/notification.service';
+import { UsuarioService } from '../services/usuario.service';
 
 
 @Component({
@@ -23,7 +26,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private notification: NotificationService,
+    private usuarioService: UsuarioService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -33,15 +38,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  
  notyf = new Notyf({
-  duration: 3000, 
+  duration: 3000,
   position: {
     x: 'right',
-    y: 'top',     
+    y: 'top',
   },
 });
-  
+
   mostrarSidebar = true;
   mensagemLogin = '';
   tipoMensagem: 'erro' | 'sucesso' | '' = '';
@@ -51,7 +55,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
- 
+
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -60,13 +64,13 @@ export class LoginComponent implements OnInit {
     });
 
     this.recuperarForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      senha: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [Validators.required, Validators.email]]
     });
     
 
+localStorage.removeItem('token');
 }
-  
+
 // Senha esquecida
   abrirModal(event: Event) {
       event.preventDefault();
@@ -77,6 +81,7 @@ fecharModal() {
 }
 
 alterarSenha(){}
+
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -85,17 +90,24 @@ entrar() {
     };
 
     this.loginService.entrar(usuario).subscribe({
-      next: (res: any) => {
-        this.notyf.success('Login realizado com sucesso!');
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', res.email);
+      next: (res: unknown) => {
+        const response = res as { token: string; email: string; role: string };
+        
+        // Armazenar APENAS o objeto completo
+        const usuarioLogado = {
+          token: response.token,
+          email: response.email,
+          role: response.role
+        };
+        localStorage.setItem('usuario', JSON.stringify(usuarioLogado));       
+     
 
-        const role = res.role;
+        const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
             this.router.navigate(['/menu-admin']);
             break;
-          case 'admin':
+          case 'SECRETARIA':
             this.router.navigate(['/menu-secretaria']);
             break;
           case 'PROFESSOR':
@@ -107,36 +119,43 @@ entrar() {
           default:
             this.router.navigate(['/']);
         }
+        this.notification.success('Login realizado com sucesso!');
+       
+      
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Erro ao logar:', error);
-        this.notyf.error('E-mail ou senha inválidos');
+        this.notification.error('E-mail ou senha inválidos');
       }
     });
 
   } else {
     this.loginForm.markAllAsTouched();
-    this.notyf.error('Preencha todos os campos corretamente.');
+    this.notification.error('Preencha todos os campos corretamente.');
   }
 }
 
 
-  cadastro(){
-   
-    this.router.navigate(['/cadastro']);
+
+recuperar(): void {
+  console.log('Tentando recuperar...');
+  if (this.recuperarForm.invalid) {
+    this.recuperarForm.markAllAsTouched();
+    console.error('Formulário inválido');
+    return;
   }
 
-  continuarRecuperacao() {
-    if (this.recuperarForm.valid) {
-      const email = this.recuperarForm.get('gmail')?.value;
-      console.log('Redirecionar com email:', email);
-      this.mostrarModal = false;
-      this.router.navigate(['/recuperar-senha']);
-    } else {
-      this.recuperarForm.markAllAsTouched();
-
+  const email = this.recuperarForm.get('email')?.value;
+  this.usuarioService.enviarEmail(email).subscribe({
+    next: () => {
+      this.notification.success('Verifique a sua caixa de email!');
+      this.fecharModal();
+    },
+    error: () => {
+      this.notification.error('Erro ao enviar o email de recuperação.');
     }
-  }
+  });
+}
 
-  
+
 }

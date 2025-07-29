@@ -8,76 +8,8 @@
 body, html {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
-}
-  /* Sidebar */
-.sidebar {
-  width: 250px;
-  background-color: #47B5FF;
-  color: white;
-  padding: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  overflow-y: auto;
-  z-index: 1000;
-  transition: transform 0.3s ease;
-}
-
-.sidebar img {
-  width: 85%;
-  margin-left: 8%;
-}
-
-.menu-link {
-  display: flex;
-  gap: 12px;
-  cursor: pointer;
-  padding: 12px;
-  font-size: 20px;
-  text-decoration: none;
-  color: white;
-}
-
-.menu-link img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-
-.sidebar h2 {
-  margin-top: 0;
-  font-size: 30px;
-  text-align: center;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  margin: 15px 0;
-}
-
-.sidebar ul li a:hover {
-  background-color: #c3d8f1;
-  border-radius: 5px;
-}
-
-/* Top Bar */
-.supbar {
-  margin-left: 200px;
-  background-color: #4DB8FF;
-  padding: 10px;
-  color: white;
-  text-align: center;
-  font-size: 18px;
-}
-
-/* Seccão principal */
-.main-content {
-  margin-left: 200px;
+}.main-content {
+  margin-left: 250px;
   padding: 20px;
 }
 
@@ -87,10 +19,12 @@ body, html {
   border: 1px solid #ccc;
   border-radius: 10px;
   max-width: 900px;
-  margin: auto;
-  margin-top: 80px;
+  margin: 80px auto 0 auto;
 }
 
+/* ===========================
+   BOTÃO DE AÇÃO
+=========================== */
 .action-button {
   background-color: #4DB8FF;
   color: white;
@@ -98,25 +32,44 @@ body, html {
   padding: 10px 20px;
   border-radius: 20px;
   font-size: 16px;
-  margin-bottom: 20px;
-  margin-left: 300px;
-  margin-top: 20px;
+  margin: 20px auto;
+  display: block;
   width: 400px;
   cursor: pointer;
 }
 
+/* ===========================
+   FILTROS E SELECTS
+=========================== */
 .filtros {
   display: flex;
-  gap: 10px;
-  margin-bottom: 5px;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+  justify-content: center;
 }
 
 .filtros select {
-  padding: 8px;
+  padding: 10px 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  min-width: 180px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+.filtros select:focus {
+  border-color: #4DB8FF;
+  box-shadow: 0 0 5px rgba(77, 184, 255, 0.6);
+}
+
+/* ===========================
+   TABELA
+=========================== */
 .table-box {
   margin-top: 0;
   background-color: #f9f9f9;
@@ -130,15 +83,16 @@ body, html {
   background-color: white;
 }
 
-.tabela th, .tabela td {
+.tabela th,
+.tabela td {
   border: 1px solid #ddd;
-  padding: 4px;
+  padding: 8px;
   text-align: center;
-  min-height: auto;
 }
+
 .table-box h3 {
   text-align: center;
-  margin-bottom: 10px; /* opcional para afastar da tabela */
+  margin-bottom: 10px;
 }
 
 .tabela thead {
@@ -152,6 +106,9 @@ body, html {
   font-weight: bold;
 }
 
+/* ===========================
+   BOTÃO MENU (Hamburguer)
+=========================== */
 .menu-toggle {
   display: none;
   position: absolute;
@@ -166,12 +123,14 @@ body, html {
   cursor: pointer;
   z-index: 1100;
 }
-/* Responsividade */
+
+/* ===========================
+   RESPONSIVIDADE
+=========================== */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    display: block; /* volta a exibir, mas fora da tela */
+    display: block;
   }
 
   .sidebar.active {
@@ -184,16 +143,9 @@ body, html {
   }
 
   .action-button {
-    background-color: #4DB8FF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    margin-left: 65px;
-    width: 200px;
-    cursor: pointer;
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
   }
 
   .content-box {
@@ -201,14 +153,17 @@ body, html {
   }
 
   .filtros {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
   }
 
   .filtros select {
-    flex: 1;
-    min-width: 140px;
+    width: 100%;
+    min-width: unset;
+  }
+
+  .menu-toggle {
+    display: block;
   }
 }

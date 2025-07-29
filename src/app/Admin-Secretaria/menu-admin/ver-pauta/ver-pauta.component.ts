@@ -1,121 +1,157 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
+
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-ver-pauta',
-  imports: [BarralateralComponent,CommonModule,FormsModule],
   templateUrl: './ver-pauta.component.html',
-  styleUrl: './ver-pauta.component.css'
+  styleUrl: './ver-pauta.component.css',
+  imports: [
+    BarralateralComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
+  ]
 })
-export class VerPautaComponent {
-  categoriaSelecionada = '3º ano';
 
-  constructor(private router: Router) {}
+export class VerPautaComponent implements OnInit {
 
-  alunos = [
-    {
-      nome: 'Alfredo Kindai',
-      ac1: 7.0,
-      ac2: 0.9,
-      pt: 8.0,
-      pe: 18.0,
-      ms: 5.5,
-      rs: 'CIM',
-    },
-    {
-      nome: 'Ana Edivânia da Silva Capita',
-      ac1: 16.0,
-      ac2: 17.0,
-      pt: 15.0,
-      pe: 14.0,
-      ms: 15.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'David Orlando A. Almeida Tomás',
-      ac1: 7.0,
-      ac2: 11.0,
-      pt: 10.0,
-      pe: 13.0,
-      ms: 10.3,
-      rs: 'CIM',
-    },
-    {
-      nome: 'Firmino da Silva Guerra',
-      ac1: 12.0,
-      ac2: 14.0,
-      pt: 14.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Firmino Sofulano Sayengana',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Frederico Nanima Jerica',
-      ac1: 12.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Isabel Teixeira',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Kesia Marelis dos Santos',
-      ac1: 12.0,
-      ac2: 14.0,
-      pt: 14.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Luis Alberto  Domingos',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Nunes Pascal Gomes ',
-      ac1: 12.0,
-      ac2: 13.0,
-      pt: 14.0,
-      pe: 11.0,
-      ms: 12.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Odete Vieira Mangumbala',
-      ac1: 16.0,
-      ac2: 11.0,
-      pt: 12.0,
-      pe: 13.0,
-      ms: 13.0,
-      rs: 'CIM',
-    },
-  ];
+  // Dados do formulário
+  modelo: string = '';
+  disciplinaSelecionada: Disciplina | null = null;
+  anoLetivo!: number;
+  disciplinaId!: number;
 
- 
+  // Listas
+  modelos = ['A', 'B', 'C', 'D', 'E', 'F'];
+  disciplinas: Disciplina[] = [];
+  alunos: AlunoPauta[] = [];
+
+  // Paginação
+  paginaAtual: number = 0;
+  totalPaginas: number = 0;
+  tamanhoPagina: number = 10;
+
+  // Mensagens de erro
+  mensagemErroDisciplina: string = '';
+  mensagemErroModelo: string = '';
+  mensagemErroAno: string = '';
+
+  // Flag para saber se o usuário clicou em "Buscar"
+  buscaRealizada: boolean = false;
+
+  constructor(private pautaService: MenuService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.carregarDisciplinas();
+  }
+
+ disciplinaAlterada(disciplina: Disciplina | null): void {
+  this.disciplinaId = disciplina ? disciplina.id : 0;
+  this.tentarAtualizarPautas();
+}
+
+modeloAlterado(): void {
+  this.tentarAtualizarPautas();
+}
+
+anoLetivoAlterado(): void {
+  this.tentarAtualizarPautas();
+}
+
+tentarAtualizarPautas(): void {
+  const anoAtual = new Date().getFullYear();
+  const anoValido = this.anoLetivo && this.anoLetivo >= 1900 && this.anoLetivo <= anoAtual + 1;
+
+  if (this.disciplinaSelecionada && this.modelo && this.disciplinaId && anoValido) {
+    this.carregarPautas();
+  }
+}
+
+  carregarDisciplinas(pagina: number = 0): void {
+    this.pautaService.getDisciplinas(pagina, this.tamanhoPagina).subscribe({
+      next: (res) => {
+        this.disciplinas = res.content;
+        this.paginaAtual = res.number;
+        this.totalPaginas = res.totalPages;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar disciplinas:', err);
+        this.disciplinas = [];
+      }
+    });
+  }
+
+  selecionarDisciplina(disciplina: Disciplina | null): void {
+    this.disciplinaId = disciplina ? disciplina.id : 0;
+  }
+
+  carregarPautas(): void {
+    // Resetar mensagens de erro
+    this.mensagemErroDisciplina = '';
+    this.mensagemErroModelo = '';
+    this.mensagemErroAno = '';
+    this.buscaRealizada = false; // Resetar antes da busca
+
+    let camposValidos = true;
+
+    // Validação da disciplina
+    if (!this.disciplinaSelecionada || !this.disciplinaId) {
+      this.mensagemErroDisciplina = 'Selecione uma disciplina.';
+      camposValidos = false;
+    }
+
+    // Validação do modelo
+    if (!this.modelo) {
+      this.mensagemErroModelo = 'Selecione um modelo.';
+      camposValidos = false;
+    }
+
+    // Validação do ano letivo
+    const anoAtual = new Date().getFullYear();
+    if (!this.anoLetivo || this.anoLetivo < 1900 || this.anoLetivo > anoAtual + 1) {
+      this.mensagemErroAno = 'Digite um ano letivo válido (ex: 2025).';
+      camposValidos = false;
+    }
+
+    // Se houver erros, não prosseguir
+    if (!camposValidos) return;
+
+    // Chamada ao serviço
+    this.pautaService.listarPautas(this.modelo, this.anoLetivo, this.disciplinaId).subscribe({
+      next: (data) => {
+        this.alunos = data;
+        this.buscaRealizada = true;
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar pautas:', erro);
+        this.alunos = [];
+        this.buscaRealizada = true;
+      }
+    });
+  }
+
+  nomeDisciplinaSelecionada(): string {
+    const d = this.disciplinas.find(d => d.id === this.disciplinaId);
+    return d ? d.nome : '';
+  }
+
+  paginaAnterior(): void {
+    if (this.paginaAtual > 0) {
+      this.carregarDisciplinas(this.paginaAtual - 1);
+    }
+  }
+
+  proximaPagina(): void {
+    if (this.paginaAtual + 1 < this.totalPaginas) {
+      this.carregarDisciplinas(this.paginaAtual + 1);
+    }
+  }
 }

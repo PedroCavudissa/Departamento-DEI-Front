@@ -1,58 +1,88 @@
+
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { TelaNotasService } from '../../services/tela-notas.service';
+import { DisciplinaNota, NotaFilter, ModeloNota } from '../../models/nota.model';
+import { TelaNotasFilterComponent } from './components/tela-notas-filter/tela-notas-filter.component';
+import { NotaDisciplinaComponent } from "./nota-disciplina/nota-disciplina.component";
 import { LateralComponent } from '../lateral/lateral.component';
 
+
 @Component({
-  selector: 'app-tela-notas',
+  selector: 'app-notas',
   standalone: true,
-  imports: [CommonModule, FormsModule, LateralComponent],
+  imports: [CommonModule, TelaNotasFilterComponent,LateralComponent],
   templateUrl: './tela-notas.component.html',
   styleUrls: ['./tela-notas.component.css']
 })
 export class TelaNotasComponent {
-  filtroDisciplina = '';
-  filtroSemestre = '';
+  disciplinas: DisciplinaNota[] = [];
+  loading = false;
+  error: string | null = null;
+  currentYear = new Date().getFullYear();
+  currentModel: ModeloNota | null = null;
 
-  disciplinas = [
-    'Análise Matemática I',
-    'FTI',
-    'Fundamento de Programação',
-    'Inglês Técnico 1',
-    'Algoritmos',
-    'Inglês Técnico 2',
-    'Análise Matemática II'
-  ];
+  constructor(private telaNotasService: TelaNotasService) {}
 
-  semestres = ['1º', '2º'];
-
-  notas = [
-    { cadeira: 'Análise Matemática I', semestre: '1º', ac1: 15, ac2: 14, p1: 16, p2: 17, ms: 15, exame: 16 },
-    { cadeira: 'FTI', semestre: '1º', ac1: 13, ac2: 12, p1: 14, p2: 13, ms: 13, exame: 14 },
-    { cadeira: 'Fundamento de Programação', semestre: '1º', ac1: 18, ac2: 19, p1: 17, p2: 18, ms: 18, exame: 19 },
-    { cadeira: 'Inglês Técnico 1', semestre: '1º', ac1: 14, ac2: 13, p1: 15, p2: 14, ms: 14, exame: 15 },
-    { cadeira: 'Algoritmos', semestre: '2º', ac1: 16, ac2: 16, p1: 16, p2: 16, ms: 16, exame: 16 },
-    { cadeira: 'FTI', semestre: '2º', ac1: 12, ac2: 13, p1: 14, p2: 12, ms: 13, exame: 14 },
-    { cadeira: 'Inglês Técnico 2', semestre: '2º', ac1: 15, ac2: 14, p1: 15, p2: 16, ms: 15, exame: 15 },
-    { cadeira: 'Análise Matemática II', semestre: '2º', ac1: 13, ac2: 12, p1: 14, p2: 15, ms: 13, exame: 14 }
-  ];
-
-  get notasFiltradas() {
-    return this.notas.filter(n =>
-      (this.filtroDisciplina === '' || n.cadeira === this.filtroDisciplina) &&
-      (this.filtroSemestre === '' || n.semestre === this.filtroSemestre)
-    );
+  onFilterChange(filters: NotaFilter): void {
+    this.currentModel = filters.modelo;
+    this.loadDisciplinas(filters);
   }
 
-  limparFiltros() {
-    this.filtroDisciplina = '';
-    this.filtroSemestre = '';
-    this.scrollTabela();
+  private loadDisciplinas(filters: NotaFilter): void {
+    this.loading = true;
+    this.error = null;
+    this.disciplinas = [];
+
+    this.telaNotasService.getNotas(filters).subscribe({
+      next: (data) => {
+        this.disciplinas = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err;
+        this.loading = false;
+      }
+    });
   }
 
-  scrollTabela() {
-    setTimeout(() => {
-      document.getElementById('tabela')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+  formatNota(nota: number | null | undefined): string {
+    return nota !== null && nota !== undefined ? nota.toString() : '-';
+  }
+
+  getModelFields(): string[] {
+    switch (this.currentModel) {
+      case 'A':
+        return ['AC1', 'P1'];
+      case 'B':
+        return ['AC1', 'P1', 'AC2', 'P2', 'MS', 'RS'];
+      case 'C':
+        return ['MS', 'Exame', 'MF', 'RS'];
+      case 'D':
+        return ['MS', 'Recurso', 'MF', 'RS'];
+      case 'E':
+        return ['Exame Oral', 'MF', 'RS'];
+      case 'F':
+        return ['Exame Especial', 'MF', 'RS'];
+      default:
+        return [];
+    }
+  }
+
+  getNotaValue(disciplina: DisciplinaNota, field: string): string {
+    switch (field.toLowerCase()) {
+      case 'ac1': return this.formatNota(disciplina.ac1);
+      case 'p1': return this.formatNota(disciplina.p1);
+      case 'ac2': return this.formatNota(disciplina.ac2);
+      case 'p2': return this.formatNota(disciplina.p2);
+      case 'ms': return this.formatNota(disciplina.ms);
+      case 'rs': return disciplina.rs || '-';
+      case 'exame': return this.formatNota(disciplina.exame);
+      case 'mf': return this.formatNota(disciplina.mf);
+      case 'recurso': return this.formatNota(disciplina.recurso);
+      case 'exame oral': return this.formatNota(disciplina.exameOral);
+      case 'exame especial': return this.formatNota(disciplina.exameEspecial);
+      default: return '-';
+    }
   }
 }

@@ -1,147 +1,101 @@
 import { Router } from '@angular/router';
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
-
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
-import { MenuService } from '../../Services/menu.service';
-
+import { MenuService } from '../../services/menu.service';
+import { forkJoin } from 'rxjs';
+import { RelatorioService } from '../../services/relatorio.service';
 
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
-
   imports: [BarralateralSecretariaComponent],
-
   templateUrl: './menu-secretaria.component.html',
   styleUrls: ['./menu-secretaria.component.css'],
 })
-export class MenuSecretariaComponent implements AfterViewInit {
-  colors: Record<string, string> = {
-    '1º Ano': '#009cff',
-    '2º Ano': '#ff9400',
-    '3º Ano': '#808080',
-    '4º Ano': '#ffe600',
-    '5º Ano': '#004080',
-  };
+export class MenuSecretariaComponent implements OnInit, OnDestroy {
+  totalFuncionarios = 0;
+  totalCadeiras = 0;
+  totalEstudantes = 0;
 
-  opts: ChartConfiguration['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-  };
+  private pieChart!: Chart;
 
-  async ngAfterViewInit(): Promise<void> {
-    const funcionarios = await this.menuService.getTotalFuncionarios();
-    const estudantes = await this.menuService.getTotalEstudantes();
-    const cadeiras = await this.menuService.getTotalCadeiras();; // Substitua se tiver endpoint
-    const salas = 70;    // Substitua se tiver endpoint
-  
-
-    const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
-    new Chart(pieCtx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Funcionários', 'Estudantes', 'Cadeiras', 'Salas'],
-        datasets: [
-          {
-
-            
-            data: [funcionarios, estudantes, cadeiras, salas],
-
-            
-            backgroundColor: ['#009cff', 'orange', 'gray', 'gold'],
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'right',
-            align: 'start',
-            labels: {
-              boxWidth: 30,
-              padding: 10,
-            },
-          },
-        },
-      },
-    });
-
-    
-  
-
-    
-    const barLabels = Object.keys(this.colors);
-    const barCtx = document.getElementById('bar-chart') as HTMLCanvasElement;
-    new Chart(barCtx, {
-      type: 'bar',
-      data: {
-        labels: barLabels,
-        datasets: [
-          {
-
-            
-            data: [100, 68, 38, 25, 10], // substitua se quiser também via API
-
-            
-            backgroundColor: barLabels.map((label) => this.colors[label]),
-          },
-        ],
-      },
-      options: {
-        ...this.opts,
-        plugins: {
-          legend: { display: false },
-        },
-        scales: {
-          y: { beginAtZero: true },
-        },
-      },
-    });
-  }
-
-  
-  
 
   constructor(
     private router: Router,
-    private menuService: MenuService
+    private relatorioService: RelatorioService
   ) {}
-  
 
-  verDetalhes(nome: string): void {
-    switch (nome) {
-      case 'funcionarios': {
-        this.router.navigate(['/detalhes-funcionarios']);
-        break;
-      }
-      case 'estudantes': {
-        this.router.navigate(['/detalhes-estudantes']);
-        break;
-      }
 
-      case 'cadeiras': {
-        this.router.navigate(['/detalhes-cadeiras']);
-        break;
-      }
-      case 'salas':
-        alert('Dados Indisponíveis');
-        break;
-      default:
-        alert('Dados não disponíveis');
-    }
+  ngOnInit(): void {
+    this.carregarDadosGrafico();
   }
 
-  toggleTheme(): void {
-    alert('Fui clicado');
-    const isDark = document.body.classList.contains('dark-theme');
-    if (isDark) {
-      document.body.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.body.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
+  carregarDadosGrafico(): void {
+    const pieCtx = document.getElementById('pie-chart') as HTMLCanvasElement;
+    if (!pieCtx) return;
+
+    if (this.pieChart) {
+      this.pieChart.destroy();
+    }
+
+    forkJoin({
+      estudantes: this.relatorioService.getTotalEstudantes(),
+      cadeiras: this.relatorioService.getTotalCadeiras(),
+      funcionarios: this.relatorioService.getTotalFuncionarios(),
+    }).subscribe({
+      next: ({ estudantes, cadeiras, funcionarios }) => {
+        this.totalEstudantes = estudantes;
+        this.totalCadeiras = cadeiras;
+        this.totalFuncionarios = funcionarios;
+
+        console.log('Totais recebidos:', {
+          estudantes,
+          cadeiras,
+          funcionarios,
+        });
+
+        this.pieChart = new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Funcionários', 'Estudantes', 'Cadeiras'],
+            datasets: [
+              {
+                data: [funcionarios, estudantes, cadeiras],
+                backgroundColor: ['#009cff', 'orange', 'gray'],
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                position: 'right',
+                align: 'start',
+                labels: {
+                  boxWidth: 30,
+                  padding: 10,
+                },
+              },
+            },
+
+          },
+        });
+      },
+      error: (err) => {
+        console.error('Erro ao carregar totais:', err);
+      },
+    });
+  }
+
+
+  verDetalhes(nome: string): void {
+  }
+
+  ngOnDestroy(): void {
+    if (this.pieChart) {
+      this.pieChart.destroy();
     }
   }
 }

@@ -1,9 +1,15 @@
-<div class="container">
- 
-<div class="card">
 
-  <img src="assets/imagens/estudante-masculino.png" alt="Perfil" />
-  <div *ngIf="errorMessage" class="error-message">
+
+<app-lateral></app-lateral>
+
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+<div class="container">
+  <div class="card">
+    <img src="assets/imagens/estudante-masculino.png" alt="Perfil do Professor" />
+
+    <div class="info">
+     <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
@@ -12,7 +18,6 @@
         <h3 > Dados academicos</h3>
 
         <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
-        <p><strong>Data Nasc:</strong>{{estudanteSelecionado.userDetails.dataNascimento| date:'shortDate' }}  </p>
         <p><strong>NumIdentificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
         <p><strong>Contacto:</strong>{{ estudanteSelecionado.userDetails.contacto}}</p>
         <p><strong>StatusEstudante:</strong>{{ estudanteSelecionado.userDetails.statusEstudante}}</p>
@@ -22,10 +27,9 @@
   <ng-template #noEstudantes>
     <p>Nenhum estudante encontrado.</p> 
   </ng-template>
+    </div>
   </div>
 </div>
-
-<app-lateral></app-lateral>
      
     
     

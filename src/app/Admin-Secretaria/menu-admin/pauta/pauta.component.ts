@@ -1,129 +1,136 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
-import { BarralateralComponent } from '../../barralateral/barralateral.component';
+import { PautaService, Disciplina, Estudante } from '../../../services/pauta.service';
+import { BarralateralComponent } from "../../barralateral/barralateral.component";
 
 @Component({
   selector: 'app-pauta',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, BarralateralComponent],
+  imports: [CommonModule, FormsModule, BarralateralComponent],
   templateUrl: './pauta.component.html',
-  styleUrls: ['./pauta.component.css'],
+  styleUrls: ['./pauta.component.css']
 })
-export class PautaComponent {
-  categoriaSelecionada = '3º ano';
+export class PautaComponent implements OnInit {
+  disciplinas: Disciplina[] = [];
+  disciplinaSelecionada!: Disciplina;
+  estudantes: Estudante[] = [];
 
-  constructor(private router: Router) {}
+  //controle do modal
+    mostrarModalOk = false;
+    mostrarModalConfirmacao = false;
+    mostrarModalRejeicao = false;
+    tituloModal = '';
+    mensagemModal = '';
+    motivoRejeicao = '';
+    tipoAcao: 'aprovar' | 'rejeitar' | null = null;
+  
+  constructor(private pautaService: PautaService) {}
 
-  alunos = [
-    {
-      nome: 'Alfredo Kindai',
-      ac1: 7.0,
-      ac2: 0.9,
-      pt: 8.0,
-      pe: 18.0,
-      ms: 5.5,
-      rs: 'CIM',
-    },
-    {
-      nome: 'Ana Edivânia da Silva Capita',
-      ac1: 16.0,
-      ac2: 17.0,
-      pt: 15.0,
-      pe: 14.0,
-      ms: 15.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'David Orlando A. Almeida Tomás',
-      ac1: 7.0,
-      ac2: 11.0,
-      pt: 10.0,
-      pe: 13.0,
-      ms: 10.3,
-      rs: 'CIM',
-    },
-    {
-      nome: 'Firmino da Silva Guerra',
-      ac1: 12.0,
-      ac2: 14.0,
-      pt: 14.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Firmino Sofulano Sayengana',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Frederico Nanima Jerica',
-      ac1: 12.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Isabel Teixeira',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Kesia Marelis dos Santos',
-      ac1: 12.0,
-      ac2: 14.0,
-      pt: 14.0,
-      pe: 12.0,
-      ms: 13.0,
-      rs: 'AP',
-    },
-    {
-      nome: 'Luis Alberto  Domingos',
-      ac1: 14.0,
-      ac2: 15.0,
-      pt: 13.0,
-      pe: 12.0,
-      ms: 13.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Nunes Pascal Gomes ',
-      ac1: 12.0,
-      ac2: 13.0,
-      pt: 14.0,
-      pe: 11.0,
-      ms: 12.5,
-      rs: 'AP',
-    },
-    {
-      nome: 'Odete Vieira Mangumbala',
-      ac1: 16.0,
-      ac2: 11.0,
-      pt: 12.0,
-      pe: 13.0,
-      ms: 13.0,
-      rs: 'CIM',
-    },
-  ];
-
-  pedirRevisao() {
-    this.router.navigate(['/chat'], {
-      queryParams: {
-        destinatario: 'Pedro',
-        assunto: 'Revisão de Pauta ',
+  ngOnInit(): void {
+    this.pautaService.getDisciplinas().subscribe({
+      next: (res) => {
+        this.disciplinas = res;
+        if (this.disciplinas.length > 0) {
+          this.disciplinaSelecionada = this.disciplinas[0];
+          this.carregarEstudantes();
+        }
       },
+      error: (err) => console.error('Erro ao buscar disciplinas:', err)
     });
+  }
+
+  carregarEstudantes(): void {
+    if (!this.disciplinaSelecionada?.disciplinaId) return;
+    this.pautaService.getEstudantesComNotas(this.disciplinaSelecionada.disciplinaId).subscribe({
+      next: (res) => this.estudantes = res,
+      error: (err) => console.error('Erro ao buscar estudantes:', err)
+    });
+  }
+
+  fecharModalOk(): void {
+  this.mostrarModalOk = false;
+}
+
+
+  aprovar(): void {
+    if (!this.disciplinaSelecionada?.disciplinaId) {
+      this.tituloModal = 'Atenção';
+      this.mensagemModal = 'Por favor, selecione uma disciplina antes de aprovar.';
+      this.mostrarModalOk = true;
+      return;
+    }
+
+    this.tituloModal = 'Confirmar Aprovação';
+    this.mensagemModal = 'Tem certeza que deseja aprovar a edição desta pauta?';
+    this.tipoAcao = 'aprovar';
+    this.mostrarModalConfirmacao = true;
+  }
+
+ rejeitar(): void {
+    if (!this.disciplinaSelecionada?.disciplinaId) {
+      this.tituloModal = 'Atenção';
+      this.mensagemModal = 'Por favor, selecione uma disciplina antes de rejeitar.';
+      this.mostrarModalOk = true;
+      return;
+    }
+
+    this.mostrarModalRejeicao = true;
+  }
+
+  confirmarAcao(): void {
+    if (this.tipoAcao === 'aprovar') {
+      this.pautaService.avaliarPauta(this.disciplinaSelecionada.disciplinaId, true).subscribe({
+        next: () => {
+          this.tituloModal = 'Sucesso';
+          this.mensagemModal = '✅ Edição de Pauta Aprovada!';
+          this.mostrarModalOk = true;
+          this.carregarEstudantes();
+        },
+        error: () => {
+          this.tituloModal = 'Erro';
+          this.mensagemModal = '❌ Erro ao aprovar pauta.';
+          this.mostrarModalOk = true;
+        }
+      });
+    }
+
+    this.mostrarModalConfirmacao = false;
+    this.tipoAcao = null;
+  }
+
+  confirmarRejeicao(): void {
+    if (!this.motivoRejeicao.trim()) return;
+
+    this.pautaService.avaliarPauta(this.disciplinaSelecionada.disciplinaId, false, this.motivoRejeicao).subscribe({
+      next: () => {
+        this.tituloModal = 'Sucesso';
+        this.mensagemModal = '✅ Edição de Pauta Rejeitada!';
+        this.mostrarModalOk = true;
+        this.carregarEstudantes();
+      },
+      error: () => {
+        this.tituloModal = 'Erro';
+        this.mensagemModal = '❌ Erro ao rejeitar pauta.';
+        this.mostrarModalOk = true;
+      }
+    });
+
+    this.mostrarModalRejeicao = false;
+    this.motivoRejeicao = '';
+  }
+
+  cancelarAcao(): void {
+    this.mostrarModalConfirmacao = false;
+    this.tipoAcao = null;
+  }
+
+  cancelarRejeicao(): void {
+    this.mostrarModalRejeicao = false;
+    this.motivoRejeicao = '';
+  }
+
+  onDisciplinaChange(): void {
+    this.carregarEstudantes();
   }
 }

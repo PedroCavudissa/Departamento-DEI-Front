@@ -1,9 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
-import { LancamentoService, Nota } from '../../Services/lacamento-notas.service';
+import { LacamentoNotasService, Disciplina, TipoPauta, PautaEstudante } from '../../services/lacamento-notas.service';
 
 @Component({
   selector: 'app-lancamento',
@@ -13,107 +13,235 @@ import { LancamentoService, Nota } from '../../Services/lacamento-notas.service'
   imports: [LateralProfessorComponent, CommonModule, FormsModule],
 })
 export class LancamentoComponent implements OnInit {
-  mensagem = '';
-
-  tipos = [
-    { id: 1, nome: 'AC1 e PF1' },
-    { id: 2, nome: 'AC2 e PF2' },
-    { id: 3, nome: 'Exame' },
-    { id: 4, nome: 'Recurso' },
-    { id: 5, nome: 'Oral' },
-    { id: 6, nome: 'Exame Especial' },
+  professorNome = '';
+  disciplinas: Disciplina[] = [];
+  tipos: TipoPauta[] = [
+    { codigo: 1, descricao: 'Notas Da AC1 e PF1' },
+    { codigo: 2, descricao: 'Notas Da AC2 e PF2' },
+    { codigo: 3, descricao: 'Notas Do Exame Epóca Normal' },
+    { codigo: 4, descricao: 'Notas Do Exame Epóca De Recurso' },
+    { codigo: 5, descricao: 'Notas Da Oral' },
+    { codigo: 6, descricao: 'Notas Do Exame Especial' }
   ];
 
-  disciplinas: { id: number; nome: string }[] = [];
-  disciplinaSelecionada: number | '' = '';
-  tipoSelecionado: number | '' = '';
-  notas: Nota[] = [];
+  disciplinaSelecionadaId: number | null = null;
+  tipoSelecionado: number | null = null;
+  excelFile?: File;
+  carregando = false;
+  mensagem = '';
+  erro = '';
+  tiposDesabilitados: number[] = [];
+  tipoComPendencias: number[] = [];
+  tiposComEstudantesSemNotaMesmoLançado: number[] = [];
 
-  constructor(@Inject(LancamentoService) private lancamentoService: LancamentoService) {}
+  constructor(private lacamentoNotasService: LacamentoNotasService) {}
 
   ngOnInit(): void {
-    this.lancamentoService.listarDisciplinas().subscribe({
-      next: (res) => this.disciplinas = res,
-      error: (err) => console.error('Erro ao carregar disciplinas:', err)
+    this.carregando = true;
+
+    this.lacamentoNotasService.getDadosDoProfessor().subscribe({
+      next: (dados) => this.professorNome = dados.nome,
+      error: () => this.professorNome = ''
+    });
+
+    this.lacamentoNotasService.getDisciplinasDoProfessor().subscribe({
+      next: (dados) => {
+        this.carregando = false;
+        this.disciplinas = dados;
+        if (dados.length === 0) {
+          this.erro = 'Nenhuma Disciplina Disponível.';
+          this.limparMensagensDepoisDeTempo();
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.erro = 'Erro ao Carregar Disciplinas.';
+        console.error(err);
+        this.limparMensagensDepoisDeTempo();
+      }
     });
   }
 
-  gerarExcel(): void {
-    if (!this.disciplinaSelecionada) {
-      alert('Selecione a disciplina.');
-      return;
-    }
+  onDisciplinaChange(): void {
+    this.tipoSelecionado = null;
+    this.mensagem = '';
+    this.erro = '';
+    this.tiposDesabilitados = [];
+    this.tipoComPendencias = [];
+    this.tiposComEstudantesSemNotaMesmoLançado = [];
 
-    const disciplina = this.disciplinas.find(d => d.id === this.disciplinaSelecionada);
-    const tipo = this.tipos.find(t => t.id === this.tipoSelecionado);
-    const nomeDisciplina = disciplina?.nome || 'disciplina';
-    const nomeTipo = tipo?.nome.replace(/\s+/g, '_') || 'tipo';
+    if (!this.disciplinaSelecionadaId) return;
 
-    this.lancamentoService.gerarExcel(this.disciplinaSelecionada).subscribe({
-      next: (blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `notas_${nomeDisciplina}_${nomeTipo}.xlsx`;
-        a.click();
-        window.URL.revokeObjectURL(url);
+    this.lacamentoNotasService.buscarPautaPorDisciplinaId(this.disciplinaSelecionadaId).subscribe({
+      next: (pautas: PautaEstudante[]) => {
+        if (pautas.length === 0) return;
+
+        const todosTemNota = (campo: keyof PautaEstudante): boolean =>
+          pautas.every(estudante => estudante[campo] !== null && estudante[campo] !== undefined);
+
+        const algumFaltandoNota = (campo: keyof PautaEstudante): boolean =>
+          pautas.some(estudante => estudante[campo] === null || estudante[campo] === undefined);
+
+        const processarTipo = (tipo: number, campos: (keyof PautaEstudante)[]) => {
+          const todosTem = campos.every(c => todosTemNota(c));
+          const algumFalta = campos.some(c => algumFaltandoNota(c));
+          const temAlgumPreenchido = pautas.some(est => campos.some(c => est[c] !== null && est[c] !== undefined));
+
+          if (todosTem) {
+            this.tiposDesabilitados.push(tipo);
+          } else if (algumFalta && temAlgumPreenchido) {
+            this.tiposComEstudantesSemNotaMesmoLançado.push(tipo);
+          } else {
+            this.tipoComPendencias.push(tipo);
+          }
+        };
+
+        processarTipo(1, ['ac1', 'p1']);
+        processarTipo(2, ['ac2', 'p2']);
+        processarTipo(3, ['exame']);
+        processarTipo(4, ['exameRecurso']);
+        processarTipo(5, ['exameOral']);
+        processarTipo(6, ['exameEspecial']);
       },
       error: (err) => {
-        console.error('Erro ao gerar Excel:', err);
-        alert('Erro ao gerar Excel.');
+        console.error('Erro ao verificar pautas:', err);
       }
     });
   }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (!input?.files?.length) return;
-  
-    const file = input.files[0];
-    const disciplinaId = Number(this.disciplinaSelecionada);
-    const tipoId = Number(this.tipoSelecionado);
-  
-    if (!disciplinaId || !tipoId) {
-      alert('Selecione a disciplina e o tipo de avaliação antes de importar.');
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const fileName = file.name.toLowerCase();
+
+      if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
+        this.excelFile = file;
+        this.mensagem = '✅ Ficheiro Selecionado Com Sucesso!';
+        this.erro = '';
+      } else {
+        this.excelFile = undefined;
+        this.mensagem = '';
+        this.erro = 'Extensão Inválida. Só são aceites ficheiros Excel (.xlsx ou .xls).';
+      }
+      this.limparMensagensDepoisDeTempo();
+    }
+  }
+
+  enviarExcel(): void {
+    this.mensagem = '';
+    this.erro = '';
+
+
+    const erros: string[] = [];
+
+
+    if (!this.disciplinaSelecionadaId) erros.push('📌 Selecione a Disciplina');
+    if (!this.tipoSelecionado) erros.push('📌 Selecione o Modelo da Pauta');
+    if (!this.excelFile) erros.push('📌 Importe o Ficheiro Excel');
+
+    if (erros.length > 0) {
+      this.erro = erros.join(' | ');
+      this.limparMensagensDepoisDeTempo();
       return;
     }
-  
-    this.lancamentoService.importarExcel(disciplinaId, tipoId, file).subscribe({
-      next: (notasImportadas: Nota[]) => {
-        this.notas = notasImportadas;
-        alert('Arquivo importado com sucesso!');
+
+
+    this.lacamentoNotasService.enviarExcel(
+      this.excelFile!,
+      this.disciplinaSelecionadaId!,
+      this.tipoSelecionado!
+    ).subscribe({
+      next: () => {
+        this.mensagem = '✅ Ficheiro Enviado Com Sucesso!';
+        this.tipoSelecionado = null;
+        this.disciplinaSelecionadaId = null;
+        this.excelFile = undefined;
+        const inputFile = document.getElementById('fileInput') as HTMLInputElement;
+        if (inputFile) inputFile.value = '';
+        this.limparMensagensDepoisDeTempo();
       },
-      error: (err) => alert('Erro ao importar arquivo: ' + (err.message || err)),
-    });
-  }
-  
-
-  salvar(): void {
-    if (!this.tipoSelecionado || !this.disciplinaSelecionada) return;
-
-    this.lancamentoService.salvarNotas(this.disciplinaSelecionada as number, this.notas, this.tipoSelecionado as number).subscribe({
-      next: () => alert('Notas salvas com sucesso!'),
-      error: (err: HttpErrorResponse) => alert('Erro ao salvar notas: ' + this.getErrorMessage(err)),
-    });
-  }
-
-  publicar(): void {
-    if (!this.tipoSelecionado || !this.disciplinaSelecionada) return;
-
-    this.lancamentoService.publicarNotas(this.disciplinaSelecionada as number, this.notas, this.tipoSelecionado as number).subscribe({
-      next: () => alert('Notas publicadas com sucesso!'),
-      error: (err: HttpErrorResponse) => alert('Erro ao publicar notas: ' + this.getErrorMessage(err)),
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 400 && typeof err.error === 'string') {
+          this.erro = `❌ ${err.error}`;
+        } else {
+          this.erro = '❌ Erro ao Enviar o Ficheiro.';
+        }
+        console.error(err);
+        this.limparMensagensDepoisDeTempo();
+      }
     });
   }
 
-  private getErrorMessage(err: HttpErrorResponse): string {
-    return err?.error?.message || err.message || 'Erro desconhecido';
-  }
-  
 
-  resetar(): void {
-    this.tipoSelecionado = '';
-    this.disciplinaSelecionada = '';
-    this.notas = [];
+  baixarModelo(): void {
+  this.erro = '';
+  this.mensagem = '';
+
+  const erros = [];
+  if (!this.disciplinaSelecionadaId) erros.push('a Disciplina');
+  if (!this.tipoSelecionado) erros.push('o Modelo da Pauta');
+
+  if (erros.length > 0) {
+    this.erro = `Por favor, selecione ${erros.join(' e ')} para baixar o modelo.`;
+    this.limparMensagensDepoisDeTempo();
+    return;
+  }
+
+  if (!this.verificarTipoAnteriorEnviado(this.tipoSelecionado!)) {
+    const tipoAnterior = this.tipoSelecionado! - 1;
+    const nomeModeloAnterior = this.tipos.find(t => t.codigo === tipoAnterior)?.descricao || `Modelo ${tipoAnterior}`;
+    this.erro = `⚠️ Você deve enviar primeiro o modelo anterior: "${nomeModeloAnterior}".`;
+    this.limparMensagensDepoisDeTempo();
+    return;
+  }
+
+  this.lacamentoNotasService.baixarModeloExcel(this.disciplinaSelecionadaId!, this.tipoSelecionado!).subscribe({
+    next: (response) => {
+      const blob = response.body!;
+      const contentDisposition = response.headers.get('Content-Disposition');
+      let filename = 'modelo_notas.xlsx';
+
+      if (contentDisposition) {
+        const utf8Match = contentDisposition.match(/filename\*\=UTF-8''(.+)/);
+        if (utf8Match) filename = decodeURIComponent(utf8Match[1]);
+        else {
+          const simpleMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+          if (simpleMatch) filename = simpleMatch[1];
+        }
+      }
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+
+      this.mensagem = 'Modelo baixado com sucesso!';
+      this.tipoSelecionado = null;
+      this.disciplinaSelecionadaId = null;
+      this.tiposDesabilitados = [];
+      this.limparMensagensDepoisDeTempo();
+    },
+    error: (err) => {
+      console.error('Erro ao baixar modelo:', err);
+      this.erro = 'Erro ao baixar modelo Excel.';
+      this.limparMensagensDepoisDeTempo();
+    }
+  });
+}
+  verificarTipoAnteriorEnviado(tipoAtual: number): boolean {
+    if (tipoAtual === 1) return true;
+    const tipoAnterior = tipoAtual - 1;
+    return this.tiposDesabilitados.includes(tipoAnterior) || this.tiposComEstudantesSemNotaMesmoLançado.includes(tipoAnterior);
+  }
+
+  private limparMensagensDepoisDeTempo(): void {
+    setTimeout(() => {
+      this.mensagem = '';
+      this.erro = '';
+
+    }, 8000);
+
   }
 }

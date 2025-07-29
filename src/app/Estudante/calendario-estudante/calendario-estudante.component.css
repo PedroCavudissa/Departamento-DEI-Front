@@ -4,12 +4,13 @@
   background: #fff;
   padding: 28px;
   border-radius: 12px;
-  margin: 30px auto;
-  margin-top: 15%;
-  width: calc(100% - 280px);
+  margin: 150px auto;
   max-width: 700px;
+  width: 100%;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
+  margin-left: 620px;
+  height: 15%;
 }
 
 /* Link para provas */
@@ -18,6 +19,7 @@
   font-weight: bold;
   color: #007bff;
   font-size: 15px;
+  cursor:pointer;
 }
 
 .ver-provas:hover {
@@ -52,8 +54,8 @@
   }
 
   .quadro {
-    margin-left: 230px;
-    width: calc(100% - 260px);
+   margin: 60px auto;
+   width: 100%;
     max-width: 660px;
   }
 }
@@ -66,10 +68,10 @@
   }
 
   .quadro {
-    margin-left: 180px;
-    width: calc(100% - 220px);
-    max-width: 580px;
-  }
+    margin: 180px auto;
+    width: 90%;
+    
+   }
 
   .ver-provas {
     font-size: 14px;
@@ -78,44 +80,4 @@
   .lista-eventos li {
     font-size: 14px;
   }
-}
-@media (max-width: 768px) {
-  .sidebar {
-    width: 120px; /* Sidebar mais fina */
-  }
-
-  .quadro {
-    margin-left: 42%; 
-    margin-top: 30%;   
-    width: calc(100% - 140px); /* Espaço restante após sidebar */
-    max-width: 54%;
-    box-sizing: border-box;
-    padding: 20px;
-  }
-
-  .ver-provas {
-    font-size: 14px;
-  }
-
-  .lista-eventos li {
-    font-size: 14px;
-  }
-
-  
-  /* Responsivo */
-  @media (max-width: 768px) {
-    .titulo-container,
-    .quadro {
-      width: 80%;
-      margin: 120px auto;
-    }
-  
-    .botao {
-      width: 40%;
-      position: static;
-      display: block;
-      margin: 10px 0 20px auto;
-    }
-  }
-
 }
