@@ -12,7 +12,10 @@ export class PerfiprofService {
   
  constructor(private http: HttpClient) { }
     private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token') || '';
+ //   const token = localStorage.getItem('token') || '';
+ const usuarioString = localStorage.getItem('usuario');
+const usuario = usuarioString ? JSON.parse(usuarioString) : null;
+const token = usuario?.token; // Optional chaining in case usuario is null
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',

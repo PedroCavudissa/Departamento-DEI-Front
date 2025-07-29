@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 export interface AlunoPauta {
   id: number;
@@ -41,11 +41,15 @@ export interface Disciplina {
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
+
   private baseUrl =  `${environment.apiUrl}/api`;
+
+  
 
   constructor(private http: HttpClient) {}
 
   private getHeaders(): { headers: HttpHeaders } {
+
     const token = localStorage.getItem('token') || '';
     return {
       headers: new HttpHeaders({
@@ -56,6 +60,7 @@ export class MenuService {
       })
     };
   }
+
 
   listarPautas(modelo: string, anoLetivo: number, disciplinaId: number): Observable<AlunoPauta[]> {
     const params = new HttpParams()

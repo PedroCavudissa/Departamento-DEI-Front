@@ -1,5 +1,7 @@
 .matricula-container {
+
   max-width: 900px;
+
   margin: 80px auto;
   padding: 8px;
 }
@@ -108,6 +110,7 @@
   background-color: #0056b3;
 }
 
+
 .button-container {
   display: flex;  
 }
@@ -119,6 +122,8 @@
   background-color: #0056b3;
 }
 
+
+
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
@@ -127,7 +132,10 @@ button:disabled {
 /* Responsividade */
 @media screen and (width: 375px) and (height: 667px){
   .matricula-container {
+
     margin-top: 91px;
+
+
 
     .back-btn{
       margin-left: 85px;
@@ -142,6 +150,7 @@ button:disabled {
       .back-btn{
       margin-left: 95px;
     }
+
 
     }
    @media screen and (width: 390px) and (height: 844px) {
@@ -230,3 +239,5 @@ button:disabled {
         margin-top: 150px;
       }
     }
+
+    

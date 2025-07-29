@@ -69,79 +69,39 @@ export class PerfilProfessorComponent implements OnInit {
     }, { validator: this.confirmarSenhaValidator });
   }
 
-  ngOnInit(): void {
-    this.carregarDadosProfessor();
-     this.buscarProfessor();
+  
+
+  // Validador personalizado para verificar se as senhas coincidem
+  confirmarSenhaValidator(group: FormGroup): { [key: string]: any } | null {
+    const novaSenha = group.get('novaSenha')?.value;
+    const confirmarSenha = group.get('confirmarSenha')?.value;
+    return novaSenha === confirmarSenha ? null : { senhasNaoCoincidem: true };
   }
 
-  alternarModoEdicao(): void {
-    if (this.modoEdicao) {
-      this.salvarDados();
-    }
-    this.modoEdicao = !this.modoEdicao;
+  // Validador para datas futuras
+  validarDataNaoFutura(control: AbstractControl): ValidationErrors | null {
+    if (!control.value) return null;
+    const data = new Date(control.value);
+    const hoje = new Date();
+    return data > hoje ? { dataFutura: true } : null;
   }
 
-  salvarDados(): void {
-    if (this.formulario.valid) {
-      this.accao();
-      this.modoEdicao = false;
-    } else {
-      this.formulario.markAllAsTouched();
-    }
-  }
 
-  accao(): void {
-    if (!this.professor) return;
 
-    if (this.formulario.invalid) {
-      this.mensagemErro = 'Por favor, preencha todos os campos corretamente';
-      this.formulario.markAllAsTouched();
-      return;
-    }
 
-    const dadosAlterados: any = {};
 
-    if (this.formulario.value.email !== this.professor.email) {
-      dadosAlterados.email = this.formulario.value.email;
-    }
-
-    if (this.formulario.value.endereco !== this.professor.userDetails.endereco) {
-      dadosAlterados.endereco = this.formulario.value.endereco;
-    }
-
-    if (Object.keys(dadosAlterados).length === 0) {
-      this.mensagemErro = 'Nenhum dado foi alterado';
-      return;
-    }
-
-    this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados).subscribe({
-      next: (res: any) => {
-        this.mostrarMensagens = true;
-        this.mensagemSucesso = 'Dados atualizados com sucesso!';
-        if (dadosAlterados.email) this.professor!.email = dadosAlterados.email;
-        if (dadosAlterados.endereco) this.professor!.userDetails.endereco = dadosAlterados.endereco;
-
-        setTimeout(() => this.carregarDadosProfessor(), 1000);
-      },
-      error: (err: HttpErrorResponse) => {
-        console.error('Erro ao atualizar:', err);
-        this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
-      }
-    });
-  }
-
-  abrirModal(): void {
+  abrirModal() {
     this.mostrarModal = true;
     this.formularioSenha.reset();
     this.mensagemErroSenha = '';
     this.mensagemSucessoSenha = '';
   }
 
-  fecharModal(): void {
+  fecharModal() {
     this.mostrarModal = false;
   }
 
-  salvarSenha(): void {
+  salvarSenha() {
     if (this.formularioSenha.invalid) {
       this.formularioSenha.markAllAsTouched();
       this.mensagemErroSenha = 'Por favor, preencha todos os campos corretamente';
@@ -149,80 +109,146 @@ export class PerfilProfessorComponent implements OnInit {
     }
 
     const { senhaAtual, novaSenha } = this.formularioSenha.value;
-
+    
     this.perfiprofService.alterarSenha(senhaAtual, novaSenha).subscribe({
-      next: (response: any) => {
-        this.mensagemSucessoSenha = typeof response === 'string' ? response : 'Senha alterada com sucesso!';
+      next: (response) => {
+        const successMessage = typeof response === 'string' ? response : 'Senha alterada com sucesso!';
+        this.mensagemSucessoSenha = successMessage;
         this.formularioSenha.reset();
         setTimeout(() => this.fecharModal(), 2000);
       },
-      error: (err: any) => {
-        console.error('Erro ao alterar senha:', err);
-        this.mensagemErroSenha = err.error?.text || 'Erro ao alterar senha';
-      }
-    });
-  }
-
-  carregarDadosProfessor(): void {
-    this.professorService.getProfessor().subscribe({
-      next: (res: any) => {
-        if (res && res.userDetails) {
-          this.professor = {
-            nome: res.nome || '',
-            email: res.email || '',
-            userDetails: {
-              id: res.userDetails.id || res.id || 0,
-              endereco: res.userDetails.endereco || '',
-              dataNascimento: res.userDetails.dataNascimento || '',
-              numDocumento: res.userDetails.numIdentificacao || '',
-              tipoDocumento: res.userDetails.tipoDocumento || '',
-              nivelAcademico: res.userDetails.nivelAcademico || '',
-              dataIngresso: res.userDetails.dataIngresso || '',
-              cargo: res.userDetails.cargo || '',
-              curriculo: res.userDetails.curriculo || ''
-            
-            }
-          };
-
-          this.formulario.patchValue({
-            email: this.professor.email,
-            endereco: this.professor.userDetails.endereco,
-             dataNascimento: this.professor.userDetails.dataNascimento,
-              numDocumento: this.professor.userDetails.numDocumento,
-              tipoDocumento: this.professor.userDetails.tipoDocumento, 
-              nivelAcademico: this.professor.userDetails.nivelAcademico ,
-              dataIngresso: this.professor.userDetails.dataIngresso ,
-              cargo: this.professor.userDetails.cargo ,
-              curriculo: this.professor.userDetails.curriculo ,
-             
-          });
-        } else {
-          this.mensagemErro = 'Estrutura de dados inválida da API';
-        }
-      },
       error: (err) => {
-        this.mensagemErro = 'Erro ao carregar dados: ' + err.message;
         console.error('Erro completo:', err);
+        this.mensagemErroSenha = err.error.text || err.error || 'Erro ao alterar senha';
       }
     });
   }
 
-  confirmarSenhaValidator(group: FormGroup): ValidationErrors | null {
-    const novaSenha = group.get('novaSenha')?.value;
-    const confirmarSenha = group.get('confirmarSenha')?.value;
-    return novaSenha === confirmarSenha ? null : { senhasNaoCoincidem: true };
+  ngOnInit(): void {
+    this.carregarDadosProfessor();
+     this.buscarProfessor();
+  }
+carregarDadosProfessor(): void {
+  this.professorService.getProfessor().subscribe({
+    next: (resposta: any) => {
+      if (resposta) {
+        this.professor= {
+          email: resposta.email || '',
+          nome: resposta.nome || '',
+          userDetails: {
+            id: resposta.userDetails?.id || resposta.id || 0,
+            cargo: resposta.userDetails?.cargo || resposta.cargo|| '',
+            endereco: resposta.userDetails?.endereco || resposta.endereco || '',
+            dataNascimento: resposta.userDetails?.dataNascimento || '',
+            numDocumento: resposta.userDetails?.numDocumento || '',
+            tipoDocumento: resposta.userDetails?.tipoDocumento || '',
+            nivelAcademico: resposta.userDetails?.nivelAcademico || 0,
+            dataIngresso: resposta.userDetails?.dataIngresso || '',
+            curriculo: resposta.userDetails?. curriculo || '',
+           
+          }
+        };
+
+        this.formulario.patchValue({
+          email: this.professor?.userDetails['email'],
+          endereco: this.professor?.userDetails.endereco,
+          nivelAcademico: this.professor?.userDetails. nivelAcademico,
+          dataIngresso: this.professor?.userDetails.dataIngresso,
+          dataNascimento: this.professor?.userDetails.dataNascimento,
+          tipoDocumento: this.professor?.userDetails.tipoDocumento,
+          numDocumento: this.professor?.userDetails.numDocumento,
+          cargo: this.professor?.userDetails.cargo,
+        
+       
+        });
+      } else {
+        this.mensagemErro = 'Estrutura de dados inválida da API';
+      }
+    },
+    error: (err) => {
+      this.mensagemErro = 'Erro ao carregar dados: ' + err.message;
+      console.error('Erro completo:', err);
+    }
+  });
+}
+
+accao(): void {
+  // Limpa mensagens anteriores e mostra a área de mensagens
+  this.mostrarMensagens = true;
+  this.mensagemSucesso = '';
+  this.mensagemErro = '';
+
+  // Verifica se o formulário é inválido
+  if (this.formulario.invalid) {
+    this.mensagemErro = 'Por favor, corrija os campos inválidos';
+    this.formulario.markAllAsTouched();
+    return;
   }
 
-   buscarProfessor(): void {
+  if (!this.professor) {
+    this.mensagemSucesso = 'Dados atualizados com sucesso!';
+    return;
+  }
+
+  // Prepara os dados alterados
+  const dadosAlterados: any = {};
+  
+  if (this.formulario.value.endereco !== this.professor.userDetails.endereco) {
+    dadosAlterados.endereco = this.formulario.value.endereco;
+  }
+  
+  if (this.formulario.value.email !== this.professor['email']) {
+    dadosAlterados.email = this.formulario.value.email;
+  }
+
+  // Verifica se há algo para atualizar
+  if (Object.keys(dadosAlterados).length === 0) {
+    this.mensagemErro = 'Nenhum dado foi alterado';
+    return;
+  }
+
+  if (this.professor && this.professor.userDetails) {
+    this.professorService.atualizarPerfil(this.professor.userDetails.id, dadosAlterados)
+      .subscribe({
+        next: (resposta: any) => {
+          // Atualiza os dados localmente
+          if (this.professor) {
+           // if (dadosAlterados.contacto) this.professor.userDetails.contacto = dadosAlterados.contacto;
+            if (dadosAlterados.endereco) this.professor.userDetails.endereco = dadosAlterados.endereco;
+            if (dadosAlterados.email) this.professor['email'] = dadosAlterados.email;
+          }
+          
+          this.mensagemSucesso = 'Dados atualizados com sucesso!';
+          
+          // Limpa a mensagem após 3 segundos
+          setTimeout(() => {
+            this.mensagemSucesso = '';
+          }, 3000);
+          
+          // Recarrega os dados do estudante
+          setTimeout(() => this.carregarDadosProfessor(), 1000);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.mensagemErro = `Erro ${err.status}: ${err.error?.message || err.message}`;
+
+          setTimeout(() => {
+            this.mensagemErro = '';
+          }, 3000);
+        }
+        
+      });
+  } 
+}
+  buscarProfessor(): void {
     this.professorService.getProfessor().subscribe({
       next: (data: Professor) => {
         this.professorSelecionado = data;
         this.errorMessage = null;
       },
       error: (err: { message: string }) => {
-        console.error('Erro ao buscar professor:', err);
+        console.error('Erro ao buscar estudante:', err);
         this.professorSelecionado = undefined;
       }
     });
-
-  }}
+  }
+}

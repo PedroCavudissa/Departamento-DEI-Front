@@ -11,12 +11,15 @@
       <p><strong>Data de Emissão:</strong> {{ rupe.emissionDate | date }}</p>
       <p><strong>Data de Vencimento:</strong> {{ rupe.expirationDate| date }}</p>
       <p>
+
       <strong>Status:</strong>
         <span [ngStyle]="{ color: rupe.status === 'PAID' ? 'green' : 'red' }">{{ rupe.status}}</span></p>
+
     </div>
 
     <ng-template #semRupe>
       <p><strong>Nenhum RUPE gerado.</strong></p>
+
     </ng-template><br><br><br><br><br><br><br><br><br>
     <p class="mensagem">{{ mensagem }}</p>
   </section>
@@ -26,6 +29,7 @@
         <span class="page active" (click)="confi2()">2</span>
         <span class="page active" (click)="confi3()">3</span>
       </div>
+a
 
       <div class="button-container">
         <button class="back-btn" (click)="confi2()">Anterior</button>

@@ -1,5 +1,7 @@
 .matricula-container {
+
   max-width: 900px;
+
   margin: 80px auto;
   padding: 8px;
 }
@@ -65,9 +67,11 @@ li {
   font-size: 14px;
   color: #47B5FF;
   background-color: white;
+
 }
 .page:hover{
   cursor: pointer;
+
 }
 
 .page.active {
@@ -135,16 +139,19 @@ li {
   border: 1px solid #e0b4b4;
 }
 
+
 /* RESPONSIVIDADE*/
 @media screen and (width: 375px) and (height: 667px){
   .matricula-container {
     margin-top: 91px;
+
 
     .back-btn{
       margin-left: 85px;
     }
   }
 }
+
 
 @media screen and (width: 414px) and (height: 896px) {
       .matricula-container {
@@ -242,3 +249,5 @@ li {
         margin-top: 150px;
       }
     }
+
+    

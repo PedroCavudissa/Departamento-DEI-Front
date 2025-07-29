@@ -7,6 +7,7 @@ import { CalendarioService, Evento } from '../../../services/calendario.service'
 import { error } from 'jquery';
 import { NotificationService } from '../../../services/notification.service';
 
+
 @Component({
   selector: 'app-calendario-secretaria',
   standalone: true,

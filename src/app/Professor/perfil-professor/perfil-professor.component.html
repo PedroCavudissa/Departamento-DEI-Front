@@ -1,4 +1,5 @@
 <body>
+
   <form [formGroup]="formulario">
       <!-- Mensagens de sucesso/erro -->
   <div *ngIf="mostrarMensagens">
@@ -8,6 +9,7 @@
   
     <div *ngIf="mensagemErro" class="alert alert-danger">
       {{ mensagemErro }}
+
     </div>
   </div>
     
@@ -51,7 +53,6 @@
           <button type="button" (click)="accao()"><i class="bx bx-edit"></i>Atualizar dados</button>
           <button type="button" (click)="abrirModal()"><i class="bx bx-cog"></i>Mais Configurações</button>
         </div>
-       
       </div>
     </form>
     

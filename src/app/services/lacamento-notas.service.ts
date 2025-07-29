@@ -111,6 +111,7 @@ enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
     });
   }
 
+
   buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders({
@@ -125,6 +126,7 @@ enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
   }
 
  buscarPautaPorDisciplinaId(disciplinaId: number): Observable<PautaEstudante[]> {
+
   const token = localStorage.getItem('token') || '';
   const headers = new HttpHeaders({
     Authorization: `Bearer ${token}`,
@@ -165,3 +167,5 @@ getPedidosRejeitados(disciplinaId: number): Observable<PedidoEdicaoNota[]> {
 }
 
 }
+
+
