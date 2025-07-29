@@ -50,7 +50,10 @@ export class MenuService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token') || '';
+    //const token = localStorage.getItem('token') || '';
+     const usuarioString = localStorage.getItem('usuario');
+const usuario = usuarioString ? JSON.parse(usuarioString) : null;
+const token = usuario?.token;
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
