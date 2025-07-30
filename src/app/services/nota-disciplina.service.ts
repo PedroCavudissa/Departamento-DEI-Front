@@ -10,8 +10,13 @@ export class NotaDisciplinaService {
   constructor(private http: HttpClient) {}
 
   getNotaPorDisciplina(request: NotaDisciplinaRequest): Observable<NotaDisciplinaResponse> {
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
     const params = this.buildParams(request);
     const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
       'ngrok-skip-browser-warning': 'true'
     });

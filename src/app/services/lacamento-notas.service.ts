@@ -112,7 +112,9 @@ enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
   }
 
   buscarPautaPorDisciplinaNome(disciplina: string): Observable<PautaEstudante[]> {
-    const token = localStorage.getItem('token') || '';
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'ngrok-skip-browser-warning': 'true'

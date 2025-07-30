@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
 import {  CadeirasService, DisciplinaEmAtraso } from "../../services/cadeiras.service";
+import { SidebarService } from '../../services/sidebar.service';
 
 @Component({
   selector: 'app-cadeira',
@@ -16,7 +17,7 @@ import {  CadeirasService, DisciplinaEmAtraso } from "../../services/cadeiras.se
 export class CadeiraComponent implements OnInit {
   disciplinas: DisciplinaEmAtraso[] = [];
 
-  constructor(private cadeirasService: CadeirasService) {}
+  constructor(private cadeirasService: CadeirasService,public sidebarService: SidebarService) {}
 
   ngOnInit(): void {
     this.cadeirasService.getDisciplinasEmAtraso().subscribe({
@@ -33,4 +34,12 @@ export class CadeiraComponent implements OnInit {
       }
     });
   }
+
+
+  onContentClick() {
+    if (window.innerWidth < 768) {
+      this.sidebarService.setOpen(false);
+    }
+  }
+  
 }

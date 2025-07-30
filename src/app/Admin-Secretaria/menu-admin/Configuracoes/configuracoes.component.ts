@@ -43,6 +43,10 @@ selecionar(select: string){
               case 'Funcionários':
                 {this.router.navigate(['/cadastro-funcionario'])};
                 break;
+                case 'Cadeira':
+                  {this.router.navigate(['/professor-disciplina'])};
+                  break;
+                
   }
 }
 }

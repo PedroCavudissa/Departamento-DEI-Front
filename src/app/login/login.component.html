@@ -55,25 +55,30 @@
     <div class="esqueci-senha">
       <a href="#" (click)="abrirModal($event)">Esqueci a senha</a>
     </div>
+
+
   </div><!-- Modal de Recuperação -->
-  <div class="modal-overlay" *ngIf="mostrarModal">
-    <div class="modal">
-      <p>Digite seu Email para continuar</p>
+  <div class="modal-overlay" *ngIf="mostrarModal" (click)="fecharModal()">
+    <div class="modal animated-fade-in" (click)="$event.stopPropagation()">
+      <h2 class="modal-title">Recuperar Senha</h2>
+      <p class="modal-subtitle">Digite seu email para continuar</p>
   
       <form [formGroup]="recuperarForm" (ngSubmit)="recuperar()">
         <input
           type="email"
           formControlName="email"
           placeholder="Digite seu email"
+          class="input-control"
         />
+  
         <div class="error-message" *ngIf="recuperarForm.get('email')?.touched">
           <span *ngIf="recuperarForm.get('email')?.hasError('required')">O Email é obrigatório!</span>
           <span *ngIf="recuperarForm.get('email')?.hasError('email')">Email inválido!</span>
         </div>
   
         <div class="modal-buttons">
-          <button type="button" (click)="fecharModal()">Cancelar</button>
-          <button type="submit" >Continuar</button>
+          <button type="button" class="btn-cancel" (click)="fecharModal()">Cancelar</button>
+          <button type="submit" class="btn-confirm">Continuar</button>
         </div>
       </form>
     </div>

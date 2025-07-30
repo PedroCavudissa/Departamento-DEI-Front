@@ -10,6 +10,8 @@
     </select>
 
     <input [(ngModel)]="textoBusca" name="textoBusca" type="text" placeholder="Escreva aqui..." />
+    <button class="btn-add" (click)="abrirModalCadastro()">+ Nova Disciplina</button>
+
   </form>
 
   <table>
@@ -30,11 +32,8 @@
         <td>{{ d.anoAcademico }}</td>
         <td>{{ d.semestre }}</td>
         <td>
-          {{
-            d.precedencia.length
-              ? d.precedencia.split(',').join(', ')
-              : 'Nenhuma'
-          }}
+          {{ d.precedenciasDisciplinaNome?.length ? d.precedenciasDisciplinaNome.join(', ') : 'Nenhuma' }}
+
         </td>
         <td>
           <button (click)="verDetalhes(d)" title="Ver Detalhes" class="btn-acao">
@@ -69,5 +68,42 @@
     </div>
   </div>
 </div>
+<!-- MODAL DE CADASTRO -->
+<div class="modal" *ngIf="mostrarModalCadastro">
+  <div class="modal-content">
+    <span class="close" (click)="fecharModalCadastro()">&times;</span>
+    <h3>Cadastrar Nova Disciplina</h3>
+
+    <form (ngSubmit)="cadastrarDisciplina()" #form="ngForm">
+      <div class="form-group">
+        <input type="text" placeholder="Sigla" [(ngModel)]="novaDisciplina.sigla" name="sigla" required />
+        <input type="text" placeholder="Nome" [(ngModel)]="novaDisciplina.nome" name="nome" required />
+      </div>
+
+      <div class="form-group">
+        <input type="number" placeholder="Ano Acadêmico" [(ngModel)]="novaDisciplina.anoAcademico" name="anoAcademico" required />
+        <input type="number" placeholder="Semestre" [(ngModel)]="novaDisciplina.semestre" name="semestre" required />
+      </div>
+
+      <div class="form-group" *ngFor="let d of precedenciasDisponiveis">
+
+        <label>
+          <input
+          type="checkbox"
+          [checked]="novaDisciplina.precedenciasDisciplinaNome.includes(d.nome)"
+          (change)="togglePrecedencia(d.nome)"
+        />
+        
+          {{ d.nome }}
+        </label>
+      </div>
+      
+
+      <button type="submit">Salvar</button>
+    </form>
+  </div>
+</div>
+
+
 
 <app-barralateral></app-barralateral>

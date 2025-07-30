@@ -21,4 +21,5 @@ export class CadeirasService {
   getDisciplinasEmAtraso(): Observable<DisciplinaEmAtraso[]> {
     return this.http.get<DisciplinaEmAtraso[]>(`${environment.apiUrl}/list/disciplinasemetraso`);
   }
+ 
 }

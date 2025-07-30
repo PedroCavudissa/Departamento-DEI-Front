@@ -32,22 +32,22 @@ export class EstudanteService {
   constructor(private http: HttpClient) {}
 
   cadastrar(estudante: Estudante): Observable<any> {
-    const token = localStorage.getItem('token');
-    console.log('Token JWT comparar:', localStorage.getItem('token'));
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
+    console.log('Token JWT:', token);
     console.log('Estudante a ser cadastrado:', estudante);
-
-
+  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
-        'ngrok-skip-browser-warning': 'true'
-
+      'ngrok-skip-browser-warning': 'true'
     });
-
+  
     return this.http.post(this.apiUrl, estudante, { headers });
   }
- 
+  
   getEstudantesPorAno(ano: number): Observable<Estudante[]> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders({

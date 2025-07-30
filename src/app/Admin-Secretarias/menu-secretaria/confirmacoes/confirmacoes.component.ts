@@ -2,39 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
-import { Notyf } from 'notyf';
-import 'notyf/notyf.min.css';
+import { Confirmacao, ConfirmacaoService } from '../../../services/confirmacao.service';
+import { NotificationService } from '../../../services/notification.service';
 
 
 @Component({
   selector: 'app-confirmacoes',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BarralateralSecretariaComponent],
   templateUrl: './confirmacoes.component.html',
   styleUrls: ['./confirmacoes.component.css']
 })
 export class ConfirmacoesComponent implements OnInit {
-  notyf = new Notyf({
-    duration: 3000,
-    position: { x: 'right', y: 'top' }
-  });
-  /*pendentes: Confirmacao[] = [];*/
+  pendentes: Confirmacao[] = [];
   carregando = false;
   erro = '';
+  
 
-  constructor() {}
+  constructor(private confirmacaoService: ConfirmacaoService,private notification: NotificationService) {}
 
   ngOnInit(): void {
-   /* this.carregarPendentes();*/
+    this.carregarPendentes();
     console.log('ngOnInit chamado!');
   }
 
- /* carregarPendentes(): void {
+  carregarPendentes(): void {
     this.carregando = true;
-    this.confirmacaoService.getConfirmacoesPendentes().subscribe({
+    this.confirmacaoService.listarConfirmacoes().subscribe({
+    
+   
       next: (res) => {
-        console.log('Confirmacoes recebidas:', res);
-        this.pendentes = res.filter((c: Confirmacao) => c.estado === 'NÃO_PAGO');
+     
+        console.log('Confirmacoes recebidas:',res);
+        this.pendentes = res.content.filter(c => c.estado === 'NÃO_PAGO');
         this.carregando = false;
       },
       error: () => {
@@ -42,22 +42,21 @@ export class ConfirmacoesComponent implements OnInit {
         this.carregando = false;
       }
     });
-  }*/
+  }
 
-  /*confirmar(confirmacao: Confirmacao): void {
+
+  confirmar(confirmacao: Confirmacao): void {
     const confirmarAcao = confirm('Tem certeza que deseja alterar o Estado de Pagamento?');
     if (!confirmarAcao) return;
-    
     const atualizada: Confirmacao = { ...confirmacao, estado: 'PAGO' };
-
-    this.confirmacaoService.atualizarEstado(confirmacao.id, atualizada).subscribe({
+    this.confirmacaoService.atualizarStatusUsuario(confirmacao.id, atualizada).subscribe({
       next: () => {
-        this.pendentes = this.pendentes.filter((c: Confirmacao) => c.id !== confirmacao.id);
-        this.notyf.success('Pagamento confirmado com sucesso!');
+        this.pendentes = this.pendentes.filter(c => c.id !== confirmacao.id);
+        this.notification.success('Pagamento confirmado com sucesso!');
       },
       error: () => {
-        this.notyf.error('Erro ao confirmar pagamento.');
+        this.notification.error('Erro ao confirmar pagamento.');
       }
     });
-  }*/
+  }
 }

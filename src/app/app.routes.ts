@@ -37,7 +37,6 @@ import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configurac
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
 import { ChatEstudanteComponent } from './Estudante/chat-estudante/chat-estudante.component';
 import { ChatProfessorComponent } from './Professor/chat-professor/chat-professor.component';
-
 import { CalendarioProfessorComponent } from './Professor/calendario-professor/calendario-professor.component';
 import { CalendarioEstudanteComponent } from './Estudante/calendario-estudante/calendario-estudante.component';
 import { LancamentoComponent } from './Professor/lancamento/lancamento.component';
@@ -51,6 +50,7 @@ import { MaisDetalhesEstudantesComponent } from './Admin-Secretaria/menu-admin/m
 import { CadastroComponent } from './Admin-Secretarias/menu-secretaria/cadastro/cadastro.component';
 import { ConfirmacoesComponent } from './Admin-Secretarias/menu-secretaria/confirmacoes/confirmacoes.component';
 import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
+import { ProfessorDisciplinaComponent } from './Admin-Secretaria/menu-admin/Configuracoes/professor-disciplina/professor-disciplinacomponent';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -66,8 +66,8 @@ export const routes: Routes = [
   { path: 'detalhes-funcionarios', component: DetalhesFuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'detalhes-cadeiras', component: DetalhesCadeirasComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   { path: 'detalhes-estudantes', component: DetalhesEstudantesComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
-  { path: 'Configuracoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINSTRADOR'] }},
-  { path: 'Gerirperfis', component: GerirPerfilComponent, canActivate: [AuthGuard] },
+  { path: 'Configuracoes', component: ConfiguracoesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+  { path: 'Gerirperfis', component: GerirPerfilComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'mais-detalhes-estudantes', component: MaisDetalhesEstudantesComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'funcionarios', component: FuncionariosComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
@@ -76,9 +76,8 @@ export const routes: Routes = [
   { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
-  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
-
+  {path:'professor-disciplina', component: ProfessorDisciplinaComponent, canActivate:[AuthGuard], data:{role: ['ADMINISTRADOR']} },
   // Estudante
   { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] } },
   { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
@@ -113,5 +112,7 @@ export const routes: Routes = [
   { path: 'funcionario-secretaria', component: FuncionariosSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'horario-secretaria', component: HorarioSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
+  { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] }},
   {path:'acesso-negado',component: AcessoNegadoComponent}
+
 ];

@@ -13,7 +13,8 @@ export class RelatorioService {
 
   //  Gera os headers para cada requisição
   private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token') || '';
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,

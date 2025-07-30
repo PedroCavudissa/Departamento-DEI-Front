@@ -7,15 +7,16 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #ad0f0f;
   color: #333;
 }
 
 /* CONTAINER PRINCIPAL */
 .container {
-  margin: 100px auto 0 auto;
-  width: 80%;
+  margin: 200px auto;
+  width: 50%;
   padding: 16px;
+  margin-left: 185px;
 }
 
 /* TÍTULOS */

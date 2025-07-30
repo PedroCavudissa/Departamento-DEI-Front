@@ -4,6 +4,7 @@ import { Chart, registerables } from 'chart.js';
 import { forkJoin } from 'rxjs';
 import { RelatorioService } from '../../services/relatorio.service';
 import { BarralateralComponent } from '../barralateral/barralateral.component';
+import { SidebarService } from '../../services/sidebar.service';
 
 Chart.register(...registerables);
 
@@ -23,7 +24,8 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private relatorioService: RelatorioService
+    private relatorioService: RelatorioService,
+    public sidebarService: SidebarService
   ) {}
 
   ngOnInit(): void {
@@ -106,4 +108,13 @@ export class MenuAdminComponent implements OnInit, OnDestroy {
       this.pieChart.destroy();
     }
   }
+ 
+ 
+  onContentClick() {
+    if (window.innerWidth < 768) {
+      this.sidebarService.setOpen(false);
+    }
+  }
+  
+
 }

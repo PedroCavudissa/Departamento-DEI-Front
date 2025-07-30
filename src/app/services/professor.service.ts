@@ -41,7 +41,8 @@ export class ProfessorService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token') || '';
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,

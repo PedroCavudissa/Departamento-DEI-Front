@@ -46,7 +46,14 @@ export interface Rupe {
   paymentReasons: string[];
 }
 
-
+export interface Confirmacao {
+  id: number;
+  nomeEstudante: string;
+  estudanteId: number | string; 
+  anoLetivo: string;
+  semestre: number;
+  estado: 'PAGO' | 'NÃO_PAGO'; 
+}
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
   private baseUrl =  `${environment.apiUrl}/api`;
@@ -54,7 +61,9 @@ export class ConfirmacaoService {
   constructor(private http: HttpClient) {}
 
   private getHeaders(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token') || '';
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,
@@ -96,6 +105,21 @@ finalizarConfirmacao(disciplinasIds: number[]): Observable<any> {
   getDisciplinasInscritas(): Observable<Disciplina[]> {
     return this.http.get<Disciplina[]>(
       `${this.baseUrl}/departamento/students/student/my-current-subject`,
+      this.getHeaders()
+    );
+  }
+
+  listarConfirmacoes(): Observable<{ content: Confirmacao[] }> {
+    return this.http.get<{ content: Confirmacao[] }>(
+      `${this.baseUrl}/departamento/confirmation`,
+      this.getHeaders()
+    );
+  }
+  
+  atualizarStatusUsuario(id: number, confirmacaoAtualizada: Confirmacao): Observable<any> {
+    return this.http.patch(
+      `${this.baseUrl}/departamento/confirmation/${id}`,
+      confirmacaoAtualizada,
       this.getHeaders()
     );
   }

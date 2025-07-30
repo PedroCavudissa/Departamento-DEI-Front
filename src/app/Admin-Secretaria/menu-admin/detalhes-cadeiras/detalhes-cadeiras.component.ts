@@ -17,14 +17,6 @@ export class DetalhesCadeirasComponent implements OnInit {
   textoBusca: string = '';
   disciplinaSelecionada: any = null;
 
-  verDetalhes(disciplina: any) {
-    this.disciplinaSelecionada = disciplina;
-  }
-  
-  fecharModal() {
-    this.disciplinaSelecionada = null;
-  }
-  
   constructor(private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {
@@ -38,12 +30,11 @@ export class DetalhesCadeirasComponent implements OnInit {
         console.log('📚 Disciplinas:', dados);
       },
       error: (err) => {
-        console.error(' Erro ao carregar disciplinas:', err);
-      
+        console.error('Erro ao carregar disciplinas:', err);
       }
-      
     });
   }
+
   get disciplinasFiltradas(): Disciplina[] {
     return this.disciplinas.filter(d => {
       const buscaTexto = this.textoBusca.toLowerCase();
@@ -52,8 +43,95 @@ export class DetalhesCadeirasComponent implements OnInit {
       return nomeMatch && anoMatch;
     });
   }
+
   
+  novaDisciplina = {
+    sigla: '',
+    nome: '',
+    anoAcademico: null,
+    semestre: null,
+    precedenciasDisciplinaNome: [] as string[]
+  };
+
+  mostrarModalCadastro = false;
+
+  abrirModalCadastro() {
+    this.mostrarModalCadastro = true;
+  }
+
+  fecharModalCadastro() {
+    this.mostrarModalCadastro = false;
+    this.novaDisciplina = {
+      sigla: '',
+      nome: '',
+      anoAcademico: null,
+      semestre: null,
+      precedenciasDisciplinaNome: [] as string[]
+    };
+  }
+
+  cadastrarDisciplina() {
+    console.log('Dados a enviar:', this.novaDisciplina);
+
+    this.disciplinaService.createDisciplina(this.novaDisciplina).subscribe({
+      next: () => {
+        this.fecharModalCadastro();
+        this.carregarDisciplinas();
+      },
+      error: (err) => {
+        console.error('Erro ao cadastrar disciplina:', err);
+        alert('Erro ao cadastrar disciplina');
+      }
+    });
+  }
+
+  verDetalhes(disciplina: any) {
+    this.disciplinaSelecionada = disciplina;
+  }
+
+  fecharModal() {
+    this.disciplinaSelecionada = null;
+  }
+
+  togglePrecedencia(nome: string) {
+    const index = this.novaDisciplina.precedenciasDisciplinaNome.indexOf(nome);
+    if (index === -1) {
+      this.novaDisciplina.precedenciasDisciplinaNome.push(nome);
+    } else {
+      this.novaDisciplina.precedenciasDisciplinaNome.splice(index, 1);
+    }
+  }
+  get precedenciasDisponiveis(): Disciplina[] {
+    if (
+      !this.novaDisciplina ||
+      this.novaDisciplina.anoAcademico == null ||
+      this.novaDisciplina.semestre == null
+    ) {
+      return [];
+    }
   
+    const anoAtual = +this.novaDisciplina.anoAcademico;
+    const semestreAtual = +this.novaDisciplina.semestre;
   
+    // Verifica se semestre é válido (1 ou 2)
+    if (semestreAtual !== 1 && semestreAtual !== 2) {
+      return [];
+    }
+  
+    let anoAlvo: number;
+    let semestreAlvo: number;
+  
+    if (semestreAtual === 1) {
+      anoAlvo = anoAtual - 1;
+      semestreAlvo = 2;
+    } else {
+      anoAlvo = anoAtual;
+      semestreAlvo = 1;
+    }
+  
+    return this.disciplinas.filter(d =>
+      +d.anoAcademico === anoAlvo && +d.semestre === semestreAlvo
+    );
+  }
   
 }

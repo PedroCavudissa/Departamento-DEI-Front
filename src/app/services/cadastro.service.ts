@@ -15,24 +15,21 @@ export interface Funcionario {
   dataIngresso: Date;
 }
 
-
 @Injectable({ providedIn: 'root' })
 
   export class FuncionarioService {
     private baseUrl = `${environment.apiUrl}/api/staff`;
   
     constructor(private http: HttpClient) {}
-  
     cadastrar(funcionario: Funcionario): Observable<any> {
       const url = `${this.baseUrl}`;
-      const token=localStorage.getItem("token");
+      const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
     const headers = new HttpHeaders({
-     
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
       'Accept': 'application/json',
        'ngrok-skip-browser-warning': 'true'
-
     });
       return this.http.post(url, funcionario, { headers });
     }
@@ -43,19 +40,15 @@ export interface Funcionario {
         'Accept': 'application/json',
         'ngrok-skip-browser-warning': 'true'
       });
-    
       const url = `${environment.apiUrl}/api/staff`;
-    
       return this.http.get<any>(url, { headers }).pipe(
         map(res => res.content || []), 
         catchError(err => {
           console.error('Erro ao buscar funcionários:', err);
           return of([]);
         })
-      );
-      
-    }
-    
+      ); 
+    }  
 }
   
   

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
@@ -13,6 +13,8 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./barralateral.component.css']
 
 })export class BarralateralComponent implements OnInit {
+  @Input() isOpen: boolean = true;
+
   titulo = 'Dados Gerais';
   menuAtivo = false;
   abaSelecionada = 'Dados Gerais';
