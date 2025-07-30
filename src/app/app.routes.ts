@@ -100,6 +100,7 @@ export const routes: Routes = [
   { path: 'calendario-professor', component: CalendarioProfessorComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
   { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
 
+
   // Secretaria
   { path: 'menu-secretaria', component: MenuSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },

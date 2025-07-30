@@ -44,7 +44,7 @@ export class DisciplinaService {
   createDisciplina(disciplina: any) {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
-  
+
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -69,3 +69,4 @@ export class DisciplinaService {
     return this.http.put(`${environment.apiUrl}/api/subject/disciplinas/${id}`, disciplina, { headers });
   }
 }
+

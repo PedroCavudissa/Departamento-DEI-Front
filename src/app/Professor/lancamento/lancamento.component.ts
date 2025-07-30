@@ -131,7 +131,9 @@ export class LancamentoComponent implements OnInit {
     this.mensagem = '';
     this.erro = '';
 
+
     const erros: string[] = [];
+
 
     if (!this.disciplinaSelecionadaId) erros.push('📌 Selecione a Disciplina');
     if (!this.tipoSelecionado) erros.push('📌 Selecione o Modelo da Pauta');
@@ -142,6 +144,7 @@ export class LancamentoComponent implements OnInit {
       this.limparMensagensDepoisDeTempo();
       return;
     }
+
 
     this.lacamentoNotasService.enviarExcel(
       this.excelFile!,
@@ -168,6 +171,7 @@ export class LancamentoComponent implements OnInit {
       }
     });
   }
+
 
   baixarModelo(): void {
   this.erro = '';
@@ -236,6 +240,8 @@ export class LancamentoComponent implements OnInit {
     setTimeout(() => {
       this.mensagem = '';
       this.erro = '';
+
     }, 8000);
+
   }
 }

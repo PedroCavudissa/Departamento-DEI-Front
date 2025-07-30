@@ -1,9 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { AlunoPauta, MenuService, Disciplina } from '../../../services/ver-pauta-secretaria.service';
+
 import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-ver-pauta',
@@ -18,6 +22,7 @@ import { CommonModule } from '@angular/common';
 })
 
 export class VerPautaComponent implements OnInit {
+
   // Dados do formulário
   modelo: string = '';
   disciplinaSelecionada: Disciplina | null = null;

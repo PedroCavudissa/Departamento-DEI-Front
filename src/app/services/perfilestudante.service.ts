@@ -13,9 +13,10 @@ export class PerfilestudanteService {
   
  constructor(private http: HttpClient) { }
     private getHeaders(): HttpHeaders {
+
       const usuario = localStorage.getItem('usuario');
       const token = usuario ? JSON.parse(usuario).token : null;
-    
+ 
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -23,9 +24,6 @@ export class PerfilestudanteService {
       'ngrok-skip-browser-warning': 'true'
     });
   }
-
-
-
 
 alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
   const body = {

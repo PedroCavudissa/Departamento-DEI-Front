@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+
 import { ComunicadoService } from '../../services/comunicado.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

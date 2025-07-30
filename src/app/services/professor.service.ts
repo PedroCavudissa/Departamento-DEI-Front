@@ -43,6 +43,8 @@ export class ProfessorService {
   private getHeaders(): { headers: HttpHeaders } {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
+
+   
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`,

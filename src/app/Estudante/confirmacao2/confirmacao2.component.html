@@ -1,5 +1,6 @@
 <div class="matricula-container">
 
+
   <section class="secao">
       <h3 class="secao-titulo">Dados Académicos </h3>
       
@@ -15,6 +16,7 @@
   </section>
 
   <section class="secao">  
+
     <h3 class="secao-titulo">Disciplinas Do Próximo Semestre</h3>
     <ul *ngIf="disciplinasfaze.length > 0">
       <li *ngFor="let disciplina of disciplinasfaze">{{ disciplina.nome }}</li>
@@ -23,6 +25,7 @@
   </section>
 
   <section class="secao">
+
       <h3 class="secao-titulo">Disciplinas em Atraso</h3>
       <ul *ngIf="disciplinasAtrasadas.length > 0; else semAtrasadas">
         <li *ngFor="let disciplina of disciplinasAtrasadas">{{ disciplina }}</li>
@@ -30,6 +33,7 @@
       <ng-template #semAtrasadas>
         <p>Não Há Disciplinas Em Atraso.</p>
       </ng-template>
+
   </section>
   
       <div class="pagination">
@@ -43,10 +47,12 @@
         <button class="confirm-btn" (click)="confi3()">Continuar</button>
       </div>  
 
+
       <div *ngIf="mensagem" class="alert alert-success">
           ✅ {{ mensagem }}
       </div>
     <p *ngIf="erro" style="color: red">{{ erro }}</p>
     
+
 </div>
 <app-lateral></app-lateral>

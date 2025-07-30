@@ -3,6 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+export interface Confirmacao {
+  id: number;
+  nomeEstudante: string;
+  estudanteId: number | string; // depende do backend, pode ajustar
+  anoLetivo: string;
+  semestre: number;
+  estado: 'PAGO' | 'NÃO_PAGO'; // se quiser mais preciso, ou apenas: string
+}
+
 export interface UserDetails {
   id: number;
   nome: string;
@@ -28,11 +37,13 @@ export interface DadosAcademicos {
 }
 
 export interface Disciplina {
+
    disciplinaId: number;
    nome: string;
     nomeDisciplina: string;
   siglaDisciplina: string;
   status: string; 
+
 }
 
 export interface Rupe {
@@ -46,6 +57,7 @@ export interface Rupe {
   paymentReasons: string[];
 }
 
+<<<<<<< HEAD
 export interface Confirmacao {
   id: number;
   nomeEstudante: string;
@@ -54,6 +66,10 @@ export interface Confirmacao {
   semestre: number;
   estado: 'PAGO' | 'NÃO_PAGO'; 
 }
+=======
+
+
+>>>>>>> f3f91b48bce128dba6f05079718266b49b264a56
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
   private baseUrl =  `${environment.apiUrl}/api`;
@@ -78,12 +94,15 @@ export class ConfirmacaoService {
     return this.http.get<DadosAcademicos>(`${this.baseUrl}/auth/me`, this.getHeaders());
   }
 
+
   getDisciplinasFazer(): Observable<Disciplina[]> {
   return this.http.get<Disciplina[]>(
     `${this.baseUrl}/departamento/students/disciplinas`,
     this.getHeaders()
   );
 }
+
+
 
   getDisciplinasAtrasadas(): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}/departamento/students/list/disciplinasemetraso`, this.getHeaders());
@@ -95,8 +114,10 @@ export class ConfirmacaoService {
 
 finalizarConfirmacao(disciplinasIds: number[]): Observable<any> {
   return this.http.post(
+
     `${this.baseUrl}/departamento/students/confirmar`,
     disciplinasIds,
+
     this.getHeaders()
   );
 }

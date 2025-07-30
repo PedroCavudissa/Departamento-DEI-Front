@@ -3,7 +3,6 @@ import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { BarralateralSecretariaComponent } from "../barralateral-secretaria/barralateral-secretaria.component";
 import { MenuService } from '../../services/menu.service';
-
 import { forkJoin } from 'rxjs';
 import { RelatorioService } from '../../services/relatorio.service';
 

@@ -1,5 +1,8 @@
 .container {
+
   max-width: 900px;
+
+
   margin: 80px auto;
   padding: 8px;
 }
@@ -11,11 +14,13 @@
   padding: 8px;
   margin-bottom: 15px;
   background-color: #fff;
+
   overflow: hidden;
   padding-top: 40px;
 }
 
 .secao-titulo {
+
   position: absolute;
   top: 0;
   left: 0;
@@ -86,14 +91,16 @@ button {
 
 button:hover{
   background-color: #0056b3;
+
 }
 
 button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+ opacity: 0.6;
+ cursor: not-allowed;
 }
 
 .alert {
+
   padding: 10px 15px;
   border-radius: 6px;
   margin-bottom: 20px;
@@ -104,13 +111,15 @@ button:disabled {
   background-color: #e9f8ef;
   color: #2c7a4b;
   border: 1px solid #c3e6cb;
+
 }
 
 .alert-danger {
-  background-color: #fbeaea;
-  color: #c0392b;
-  border: 1px solid #e0b4b4;
+ background-color: #fbeaea;
+ color: #c0392b;
+ border: 1px solid #e0b4b4;
 }
+
 
 
 /* RESPONSIVIDADE*/
@@ -191,6 +200,7 @@ button:disabled {
         margin-top: 150px;
       }
     }
+
  @media screen and (width: 1024px) and (height: 600px) {
       .container  {
         margin-top: 80px;
