@@ -33,8 +33,12 @@ export interface Funcionario {
     });
       return this.http.post(url, funcionario, { headers });
     }
+
+
     getFuncionarios(): Observable<Funcionario[]> {
-      const token = localStorage.getItem('token') || '';
+  
+      const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',

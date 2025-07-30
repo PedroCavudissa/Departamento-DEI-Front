@@ -12,22 +12,29 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class ComunicadosService {
-  private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'ngrok-skip-browser-warning': 'true',
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    }),
-  };
-
   private readonly API_URL = `${environment.apiUrl}/api/departamento/notices`;
 
   constructor(private http: HttpClient) {}
 
+  private getToken(): string | null {
+    const user = localStorage.getItem('usuario');
+    return user ? JSON.parse(user).token : null;
+  }
+
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+        Authorization: 'Bearer ' + this.getToken(),
+      }),
+    };
+  }
+
   listar(): Observable<Comunicado[]> {
     return this.http
-      .get<Comunicado[]>(`${this.API_URL}/list`, this.httpOptions)
+      .get<Comunicado[]>(`${this.API_URL}/list`, this.getHttpOptions())
       .pipe(catchError(this.handleError));
   }
 
@@ -43,7 +50,7 @@ export class ComunicadosService {
 
     const url = `${this.API_URL}/destinado/${encodeURIComponent(destinoFormatado)}`;
 
-    return this.http.get<Comunicado[]>(url, this.httpOptions).pipe(
+    return this.http.get<Comunicado[]>(url, this.getHttpOptions()).pipe(
       catchError((error) => {
         console.error('Erro na filtragem:', error);
         return throwError(() =>
@@ -59,11 +66,11 @@ export class ComunicadosService {
 
   criar(comunicado: NovoComunicado): Observable<Comunicado> {
     return this.http
-      .post<Comunicado>(`${this.API_URL}/create`, comunicado, this.httpOptions)
+      .post<Comunicado>(`${this.API_URL}/create`, comunicado, this.getHttpOptions())
       .pipe(
         catchError((error) => {
           if (error.status === 404) {
-            return this.http.post<Comunicado>(`${this.API_URL}/createNotice`, comunicado, this.httpOptions);
+            return this.http.post<Comunicado>(`${this.API_URL}/createNotice`, comunicado, this.getHttpOptions());
           }
           return throwError(() => error);
         })
@@ -76,14 +83,14 @@ export class ComunicadosService {
     console.log('Enviando PATCH para ID:', id);
     console.log('Payload:', payload);
 
-    return this.http.patch<Comunicado>(`${this.API_URL}/update/${id}`, payload, this.httpOptions).pipe(
+    return this.http.patch<Comunicado>(`${this.API_URL}/update/${id}`, payload, this.getHttpOptions()).pipe(
       catchError(this.handleError)
     );
   }
 
   remover(id: number): Observable<void> {
     return this.http
-      .delete<void>(`${this.API_URL}/delete/${id}`, this.httpOptions)
+      .delete<void>(`${this.API_URL}/delete/${id}`, this.getHttpOptions())
       .pipe(catchError(this.handleError));
   }
 

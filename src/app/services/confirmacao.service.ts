@@ -57,7 +57,7 @@ export interface Rupe {
   paymentReasons: string[];
 }
 
-<<<<<<< HEAD
+
 export interface Confirmacao {
   id: number;
   nomeEstudante: string;
@@ -66,10 +66,7 @@ export interface Confirmacao {
   semestre: number;
   estado: 'PAGO' | 'NÃO_PAGO'; 
 }
-=======
 
-
->>>>>>> f3f91b48bce128dba6f05079718266b49b264a56
 @Injectable({ providedIn: 'root' })
 export class ConfirmacaoService {
   private baseUrl =  `${environment.apiUrl}/api`;
