@@ -39,7 +39,7 @@ export class CalendarioService {
     });
   }
 
-  /** 🔄 Listar todos os eventos */
+  /** Listar todos os eventos */
   listarEventos(): Observable<Evento[]> {
     return this.http.get<Evento[]>(this.baseUrl, { headers: this.getAuthHeaders() }).pipe(
       catchError(err => {
@@ -74,7 +74,7 @@ export class CalendarioService {
     );
   }
 
-  /** ✏️ Atualizar evento por ID */
+  /** Atualizar evento por ID */
   atualizarEvento(id: number, dadosAtualizados: Partial<Evento>): Observable<Evento> {
     return this.http.patch<Evento>(`${this.baseUrl}/${id}`, dadosAtualizados, { headers: this.getAuthHeaders() }).pipe(
       catchError(err => {
