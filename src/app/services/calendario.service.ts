@@ -3,21 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
+import { map } from 'rxjs/operators'; 
 
 export interface Evento {
   id?: number;
-  data: string;
   titulo: string;
-  tipo: string;
-  link?: string;
-  hora?: string;
-  calendarStatus?: string;
+  conteudo?: string;
   nomeFuncionario?: string;
+  calendarStatus?: string;
+  data: string;
+  createdAt?: string;
   updatedAt?: string;
   deletedAt?: string;
-  conteudo?: string;
+  tipo?: string;       
+  link?: string;
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,6 @@ export class CalendarioService {
   private getAuthHeaders(): HttpHeaders {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
-  
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -40,25 +41,30 @@ export class CalendarioService {
   }
 
   /** Listar todos os eventos */
+
   listarEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(this.baseUrl, { headers: this.getAuthHeaders() }).pipe(
+    return this.http.get<{ content: Evento[] }>(`${this.baseUrl}`, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      map(res => res.content || []), 
       catchError(err => {
         console.error('Erro ao listar eventos:', err);
         return of([]);
       })
     );
   }
+  
 
-  /** 📥 Criar um novo evento */
+  /**  Criar um novo evento */
   salvarEvento(evento: Evento): Observable<Evento> {
-    return this.http.post<Evento>(this.baseUrl, evento, { headers: this.getAuthHeaders() });
+    return this.http.post<Evento>(`${this.baseUrl}`, evento, { headers: this.getAuthHeaders() });
   }
 
   /** 🔍 Buscar evento por ID */
   obterEventos(id: number): Observable<Evento[]> {
-    return this.http.get<Evento>(`${this.baseUrl}/${id}`, { headers: this.getAuthHeaders() }).pipe(
+    return this.http.get<Evento>(`${this.baseUrl}`, { headers: this.getAuthHeaders() }).pipe(
       catchError(err => {
-        console.error(`Erro ao buscar evento ID ${id}:`, err);
+
         return of(null as any);
       })
     );

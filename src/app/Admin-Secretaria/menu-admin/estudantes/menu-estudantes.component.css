@@ -6,25 +6,25 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   color: #333;
+  background-color: #f7f7f7;
   overflow-x: hidden;
 }
 
 /* CONTAINER PRINCIPAL */
 .container {
-  margin: 200px auto;
-  width: 50%;
+  margin: 60px auto;
   padding: 16px;
-  margin-left: 185px;
+  width: 90%;
+  max-width: 1200px;
   overflow-x: hidden;
-
 }
 
 /* TÍTULOS */
 h2 {
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 15px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
@@ -40,10 +40,10 @@ h2 {
 
 .chart-box {
   background: #fff;
-  border-radius: 8px;
-  border: 1px solid #333;
-  padding: 16px;
-  box-shadow: 1px 5px 4px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   flex: 1 1 100%;
 }
 
@@ -60,14 +60,14 @@ h2 {
   display: flex;
   justify-content: center;
   gap: 16px;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 4px;
-  font-size: 12px;
+  gap: 6px;
+  font-size: 13px;
 }
 
 .legend-color {
@@ -90,26 +90,34 @@ form,
 select,
 input,
 button {
-  font-size: 14px;
-  padding: 8px 12px;
+  font-size: 15px;
+  padding: 10px 14px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  max-width: 300px;
-  flex: 1;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  transition: border 0.3s, box-shadow 0.3s;
+  width: 100%;
+  max-width: 320px;
+  background-color: #fff;
 }
 
-option{
-  border-radius: 20px;
-}
 select {
   appearance: none;
-  background: #fff url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><path fill="%23666" d="M0,0l5,5 5-5z"/></svg>') no-repeat right 8px center;
+  background: #fff url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><path fill="%23666" d="M0,0l5,5 5-5z"/></svg>') no-repeat right 12px center;
   background-size: 10px 5px;
-  border-radius: 10px;
+  padding-right: 30px;
+}
+
+input:focus,
+select:focus {
+  border-color: #009cff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,156,255,0.3);
 }
 
 button {
   cursor: pointer;
+  font-weight: 500;
 }
 
 .btn-new {
@@ -124,12 +132,12 @@ button {
   border: none;
 }
 
-/* ÁREA DE RESULTADOS */
+/* RESULTADOS */
 .results {
   background: #fff;
   border-radius: 8px;
-  padding: 16px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   width: 100%;
   min-height: 150px;
   overflow-x: auto;
@@ -238,6 +246,7 @@ tbody td[colspan] {
 .close:hover {
   color: #000;
 }
+
 .scroll-container {
   overflow-x: auto;
   margin-top: 20px;
@@ -246,30 +255,35 @@ tbody td[colspan] {
   -webkit-overflow-scrolling: touch;
 }
 
+/* RESPONSIVIDADE */
 
-
-/* Telas pequenas */
+/* Até 768px */
 @media (max-width: 768px) {
   .container {
-    margin-top: 60px;
+    margin: 60px auto;
     width: 90%;
-    padding: 12px;
-    overflow-x: hidden;
+    padding: 16px;
   }
 
   .row {
     flex-direction: column;
-    gap: 16px;
+    gap: 20px;
   }
 
   .chart-box {
     width: 100%;
   }
 
-  .form-search,
-  form {
+  form,
+  .form-search {
     flex-direction: column;
-    gap: 12px;
+    align-items: stretch;
+  }
+
+  select,
+  input,
+  button {
+    width: 100%;
   }
 
   table,
@@ -277,38 +291,19 @@ tbody td[colspan] {
   td {
     font-size: 14px;
   }
-
-  select,
-  input,
-  button {
-    width: 100%;
-  }
 }
 
+/* Até 568px */
 @media (max-width: 568px) {
-  .chart-box h2 {
-    font-size: 12px;
+  h2 {
+    font-size: 13px;
   }
 
   .modal-content {
     padding: 20px;
   }
-}
 
-/* Telas maiores */
-@media (min-width: 769px) {
-  .container {
-    margin-top: 100px;
-    width: 90%;
-  }
-
-  .chart-box {
-    flex: 1 1 calc(50% - 20px);
-  }
-
-  select,
-  input,
-  button {
-    width: 100%;
+  .chart-box h2 {
+    font-size: 12px;
   }
 }

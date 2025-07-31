@@ -51,6 +51,8 @@ import { CadastroComponent } from './Admin-Secretarias/menu-secretaria/cadastro/
 import { ConfirmacoesComponent } from './Admin-Secretarias/menu-secretaria/confirmacoes/confirmacoes.component';
 import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 import { ProfessorDisciplinaComponent } from './Admin-Secretaria/menu-admin/Configuracoes/professor-disciplina/professor-disciplinacomponent';
+import { MinhasTurmasComponent } from './Professor/minhas-turmas/minhas-turmas.component';
+import { VerPautaProfessorComponent } from './Professor/ver-pauta-professor/ver-pauta-professor.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -99,8 +101,8 @@ export const routes: Routes = [
   { path: 'lancamento', component: LancamentoComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
   { path: 'calendario-professor', component: CalendarioProfessorComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
   { path: 'comunicado-professor', component: ComunicadoProfessorComponent, canActivate: [AuthGuard] ,data: { role: ['PROFESSOR'] } },
-
-
+{path: 'ver-pauta-professor', component: VerPautaProfessorComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
+{path:'minhas-turmas', component: MinhasTurmasComponent, canActivate: [AuthGuard],data: { role: ['PROFESSOR'] }  },
   // Secretaria
   { path: 'menu-secretaria', component: MenuSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },

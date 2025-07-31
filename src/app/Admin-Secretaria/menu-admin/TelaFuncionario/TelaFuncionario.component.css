@@ -1,82 +1,146 @@
-*{
-  margin :0px;
-  padding:0px;
-}
-.pagina-wrapper{
-  margin:150px auto;
+/* RESET GERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Container dos gráficos */
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: #333;
+  background-color: #f8f8f8;
+  overflow-x: hidden;
+}
+
+/* CONTAINER PRINCIPAL */
+.pagina-wrapper {
+  margin: 140px auto 60px auto;
+  max-width: 1200px;
+  padding: 0 16px;
+}
+
+/* GERAL */
+h2, h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-bottom: 16px;
+  letter-spacing: 0.8px;
+}
+
+/* GRAFICOS */
 .graficos {
   display: flex;
-  justify-content: center;
-  gap: 25px;
-  margin-bottom: 80px;
   flex-wrap: wrap;
-  margin-left: 180px;
- 
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 80px;
 }
-/* Caixa do gráfico */
+
 .grafico-box {
   background: #fff;
+  border: 1px solid #ccc;
   border-radius: 8px;
-  border: 1px solid #333;
-  width: 42%;
-  padding: 16px;
-  box-shadow: 1px 5px 4px rgba(0,0,0,0.1);
+  flex: 1 1 420px;
+  max-width: 48%;
+  padding: 20px;
+  box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  margin-top: -40px;
-
+  align-items: center;
 }
 
-/* Container interno do gráfico */
+/* GRÁFICO */
 .grafico-container {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Estilo do canvas do gráfico */
 .grafico-box canvas {
   max-width: 100% !important;
-  max-height: 100% !important;
-  width: auto !important;
   height: auto !important;
 }
 
-/* FORM DE BUSCA */
+/* FORM SEARCH */
 .form-search {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 30px;
 }
 
 .form-search select,
-.form-search input {
-  flex: 1;
-  width:75%;
+.form-search input,
+.form-search button {
   padding: 10px 14px;
   font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f9f9f9;
-  transition: border-color 0.2s;
+  flex: 1 1 250px;
+  max-width: 100%;
 }
 
-.select-funcao{
-  width: 20px;
-  color: #47B5FF;
+select {
+  appearance: none;
+  background: #fff url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><path fill="%23666" d="M0,0l5,5 5-5z"/></svg>') no-repeat right 12px center;
+  background-size: 10px 5px;
+  padding-right: 32px;
 }
-/* Mensagem de carregamento */
-.loading-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+
+button {
+  background-color: #009cff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #0078cc;
+}
+
+/* TABELA */
+.tabela-funcionarios {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+}
+
+.tabela-funcionarios th {
+  background-color: #47B5FF;
+  color: #fff;
+  text-align: left;
+  padding: 14px;
+  position: sticky;
+  top: 0;
+  font-weight: 500;
+}
+
+.tabela-funcionarios td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.tabela-funcionarios tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tabela-funcionarios tr:hover {
+  background-color: #eef7ff;
+}
+
+/* MENSAGENS */
+.loading-message,
+.no-results {
+  text-align: center;
   padding: 20px;
   color: #666;
 }
@@ -89,50 +153,65 @@
   height: 20px;
   animation: spin 1s linear infinite;
 }
+
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
-/* Mensagem sem resultados */
+
 .no-results {
-  text-align: center;
-  padding: 30px;
-  color: #666;
   background-color: #fff;
-  border-radius: 4px;
-  width:75%;
-  margin-top: 40px;
-  margin-left: 265px;
-}
-/* Estilos da tabela */
-.tabela-funcionarios {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-.tabela-funcionarios th {
-  background-color: #47B5FF;
-  color: white;
-  padding: 12px;
-  text-align: left;
-  position: sticky;
-  top: 0;
+  border-radius: 8px;
+  margin: 0 auto;
+  max-width: 500px;
 }
 
-.tabela-funcionarios td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.tabela-funcionarios tr:hover {
-  background-color: #f5f5f5;
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  position: relative;
 }
 
-.tabela-funcionarios tr:nth-child(even) {
-  background-color: #f9f9f9;
+.modal-content h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
 }
 
-/* Botão do menu mobile */
+.modal-content p {
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #999;
+}
+
+.close:hover {
+  color: #000;
+}
+
+/* MENU MOBILE */
 .menu-toggle {
   display: none;
   position: fixed;
@@ -148,170 +227,59 @@
   cursor: pointer;
 }
 
+/* RESPONSIVO */
 
-/* MODAL */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.modal-content h3 {
-  margin-bottom: 16px;
-  font-size: 20px;
-}
-
-.modal-content p {
-  margin: 8px 0;
-  font-size: 16px;
-}
-
-.close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  font-size: 26px;
-  cursor: pointer;
-  color: #999;
-}
-
-.close:hover {
-  color: #000;
-}
-
-
-/* ========= RESPONSIVIDADE ========= */
-
-/* Tablet - 992px ou menos */
+/* Tablets */
 @media (max-width: 992px) {
-  .graficos {
-    gap: 20px;
-  }
-
   .grafico-box {
-    height: 280px;
-  }
-
-  .filtros-wrapper {
-    gap: 12px;
-  }
-
-  .select-funcao, 
-  .campo-pesquisa-func {
-    max-width: 250px;
+    max-width: 100%;
+    flex: 1 1 100%;
   }
 }
 
-/* Tablet pequeno - 768px ou menos */
+/* Celulares */
 @media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
-    width: 280px;
+  .pagina-wrapper {
+    margin-top: 80px;
+    padding: 0 12px;
   }
-
-  .sidebar.active {
-    transform: translateX(0);
-  }
-
-
-
-  .main-wrapper {
-
-    margin:60px auto;
-    width: 90%;
-    padding: 15px;
+  table{
+    overflow-x:auto;
   }
 
   .menu-toggle {
     display: block;
   }
 
-  .filtros-wrapper {
+  .form-search {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
 
-  .select-funcao, 
-  .campo-pesquisa-func, 
-  .buscar-btn {
-    max-width: 90%;
+  .form-search select,
+  .form-search input,
+  .form-search button {
+    width: 100%;
   }
 
-  .titulo-principal {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
-}
-
-/* Celular grande - 576px ou menos */
-@media (max-width: 576px) {
-  .grafico-box {
-    height: 250px;
-    padding: 15px;
-  }
-
-  .supbar h2 {
-    font-size: 1.2rem;
-  }
-
-  .tabela-funcionarios th, 
+  .tabela-funcionarios th,
   .tabela-funcionarios td {
-    padding: 8px 10px;
     font-size: 14px;
-  }
-
-  .select-funcao, 
-  .campo-pesquisa-func {
-    font-size: 14px;
-    padding: 12px 15px;
-  }
-
-  .buscar-btn {
-    font-size: 15px;
-    padding: 12px;
-  }
-}
-
-/* Celular pequeno - 400px ou menos */
-@media (max-width: 400px) {
-  .main-wrapper {
     padding: 10px;
   }
+}
+
+/* Celular pequeno */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+  }
+
+  h2, h3 {
+    font-size: 14px;
+  }
 
   .grafico-box {
-    height: 220px;
+    padding: 16px;
   }
-
-  .campo-pesquisa-func {
-    min-width: 100%;
-  }
-
-  .campo-pesquisa-func::placeholder {
-    font-size: 13px;
-  }
-
-  .select-funcao, 
-  .campo-pesquisa-func {
-    padding: 10px 12px;
-  }
-
-  .filtros-wrapper {
-    gap: 8px;
-  }}
+}

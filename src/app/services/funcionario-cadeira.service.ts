@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 export interface ProfessorDisciplina {
   id: number;
+  funcionarioId?: number;
   funcionarioNome: string;
   disciplinaNome: string;
   disciplinaId: number;

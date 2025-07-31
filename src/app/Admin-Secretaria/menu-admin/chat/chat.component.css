@@ -121,12 +121,9 @@ background-color: #3aaaf3;
 @media (max-width: 768px) {
   .chat-layout {
     flex-direction: column;
-    margin-left: 0;
-    height: auto;
+    width: 90%;
   transition: background-color 0.3s;
-  width: fit-content;
-  margin: 1rem auto 0 auto;
-  display: block;
+
 }
 
 .send-message-btn:hover {

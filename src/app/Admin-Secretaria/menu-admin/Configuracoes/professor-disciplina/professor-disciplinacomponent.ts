@@ -7,7 +7,8 @@ import { Disciplina, DisciplinaService } from '../../../../services/disciplina.s
 import { Professor } from '../../../../services/professor.service';
 import { error } from 'jquery';
 import { NotificationService } from '../../../../services/notification.service';
-import { Funcionario } from '../../../../funcionario.service';
+import { Funcionario, FuncionarioService } from '../../../../services/cadastro.service';
+
 
 @Component({
   selector: 'app-professor-disciplina',
@@ -28,11 +29,13 @@ import { Funcionario } from '../../../../funcionario.service';
   associacoes: ProfessorDisciplina[] = [];
   disciplinas: Disciplina[] = [];
   funcionarios: Funcionario[] = [];
-  constructor(private service: FuncionarioCadeiraService,private notification: NotificationService,private disciplinaService: DisciplinaService) {}
+  constructor(
+    private serviceFuncionario: FuncionarioService,private service: FuncionarioCadeiraService,private notification: NotificationService,private disciplinaService: DisciplinaService) {}
 
   ngOnInit(): void {
     this.carregarAssociacoes();
     this.carregarDisciplinas();
+    this.carregarFuncionarios();
   }
   carregarAssociacoes(): void {
     this.service.listar().subscribe({
@@ -93,6 +96,20 @@ carregarDisciplinas(): void {
   });
  
 }
+
+carregarFuncionarios(): void {
+  this.serviceFuncionario.getFuncionarios().subscribe({
+    next: data => {
+      console.log('Funcionários recebidos:', data); 
+      this.funcionarios = data.filter(f => f.nome?.toLocaleLowerCase() === 'Admin1');
+
+    },
+    error: err => {
+      console.error('Erro ao carregar funcionários:', err);
+    }
+  });
+}
+
 
 
 }

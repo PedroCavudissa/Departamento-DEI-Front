@@ -4,6 +4,7 @@ import { catchError, generate, map, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface Funcionario {
+  id?: number;
   nome: string;
   dataNascimento: Date;
   numDocumento: string;

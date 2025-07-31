@@ -36,9 +36,13 @@
     <div class="form">
         <select [(ngModel)]="novaAssociacao.id" class="form-control">
             <option value="">-- Selecione um Professor --</option>
-            <option *ngFor="let prof of funcionarios" [value]="prof.id">
-              {{ prof.nome }}
-            </option>
+            <select [(ngModel)]="novaAssociacao.funcionarioId" class="form-control">
+              <option value="">-- Selecione um Professor --</option>
+              <option *ngFor="let prof of funcionarios" [value]="prof.id">
+                {{ prof.nome }}
+              </option>
+            </select>
+            
           </select>
           
 

@@ -85,7 +85,7 @@
     flex-direction: column;
     margin: 60px auto 0 auto;
     padding: 1.5rem;
-    width: 95%;
+    width: 90%;
   }
 
   .chat-area {
@@ -112,7 +112,7 @@
     margin: 60px auto;
     margin-right: 10%;
     padding: 1rem;
-    width: 80%;
+    width: 70%;
   }
 
   .chat-header h2 {
