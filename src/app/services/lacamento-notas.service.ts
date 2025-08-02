@@ -71,16 +71,24 @@ export class LacamentoNotasService {
 
   enviarExcel(file: File, disciplinaId: number, tipo: number): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
-
+    formData.append('file', file); // o backend espera "file"
+  
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'ngrok-skip-browser-warning': 'true'
+    });
+  
     const url = `${this.baseUrl}/departamento/studentsubject/upload?disciplinaId=${disciplinaId}&tipoP=${tipo}`;
-    const headers = this.getHeaders();
-
+  
     return this.http.post(url, formData, {
       headers,
       responseType: 'text' as 'json'
     });
   }
+  
 
   baixarModeloExcel(disciplinaId: number, tipo: number): Observable<HttpResponse<Blob>> {
     return this.http.get(`${this.baseUrl}/departamento/studentsubject/pauta/${disciplinaId}?tipoP=${tipo}`, {
