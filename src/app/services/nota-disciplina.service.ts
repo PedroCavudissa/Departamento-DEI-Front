@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NotaDisciplinaRequest, NotaDisciplinaResponse } from '../models/nota-disciplina.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class NotaDisciplinaService {
-  private readonly baseUrl = 'https://9c257c8cf488.ngrok-free.app/api/departamento/students/list/myscore';
+  private readonly baseUrl =`${environment.apiUrl}/api/departamento/students/list/myscore`;
 
   constructor(private http: HttpClient) {}
 

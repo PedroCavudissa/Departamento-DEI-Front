@@ -68,7 +68,6 @@ export class CadastroComponent {
     this.estudanteService.cadastrar(estudanteFormatado).subscribe({
       next: () => {
         this.notyf.success('Estudante cadastrado com sucesso!');
-        this.router.navigate(['/menu-admin']);
       },
 
       error: (err) => {

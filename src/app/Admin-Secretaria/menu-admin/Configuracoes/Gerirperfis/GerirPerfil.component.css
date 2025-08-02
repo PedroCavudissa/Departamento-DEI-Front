@@ -132,6 +132,9 @@ body, html {
     transform: translateX(-100%);
     display: block;
   }
+  table{
+    overflow: auto;
+  }
 
   .sidebar.active {
     transform: translateX(0);

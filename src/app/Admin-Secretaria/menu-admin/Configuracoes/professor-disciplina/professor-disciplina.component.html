@@ -28,34 +28,34 @@
     </tbody>
   </table>
 </div>
-
 <!-- MODAL -->
 <div *ngIf="modalAberto" class="modal-overlay">
   <div class="modal-content">
     <h3>Nova Associação</h3>
-    <div class="form">
-        <select [(ngModel)]="novaAssociacao.id" class="form-control">
-            <option value="">-- Selecione um Professor --</option>
-            <select [(ngModel)]="novaAssociacao.funcionarioId" class="form-control">
-              <option value="">-- Selecione um Professor --</option>
-              <option *ngFor="let prof of funcionarios" [value]="prof.id">
-                {{ prof.nome }}
-              </option>
-            </select>
-            
-          </select>
-          
 
-      <select [(ngModel)]="novaAssociacao.disciplinaId">
+    <div class="form">
+      <!-- Seleção de Professor -->
+      <label>Professor</label>
+      <select [(ngModel)]="novaAssociacao.funcionarioId" class="form-control">
+        <option value="">-- Selecione um Professor --</option>
+        <option *ngFor="let prof of funcionarios" [value]="prof.id">
+          {{ prof.nome }}
+        </option>
+      </select>
+
+      <!-- Seleção de Disciplina -->
+      <label>Disciplina</label>
+      <select [(ngModel)]="novaAssociacao.disciplinaId" class="form-control">
         <option value="">-- Selecione uma Disciplina --</option>
         <option *ngFor="let disciplina of disciplinas" [value]="disciplina.id">
           {{ disciplina.nome }}
         </option>
       </select>
 
-      <div style="margin-top: 10px;">
+      <!-- Botões -->
+      <div class="modal-actions">
         <button (click)="associarProfessor()">Salvar</button>
-        <button (click)="fecharModal()" style="margin-left: 10px;">Cancelar</button>
+        <button (click)="fecharModal()" class="cancelar">Cancelar</button>
       </div>
     </div>
   </div>

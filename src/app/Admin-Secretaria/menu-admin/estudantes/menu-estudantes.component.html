@@ -37,7 +37,6 @@
         <th>Nome</th>
         <th>Nº Do Documento</th>
         <th>Ano Acadêmico</th>
-        <th>Status</th>
         <th>Ações</th>
       </tr>
     </thead>
@@ -46,7 +45,7 @@
         <td>{{ e.nome }}</td>
         <td>{{ e.numIdentificacao }}</td>
         <td>{{ e.anoAcademico }}</td>
-        <td>{{ e.statusEstudante }}</td>
+        
         <td>
           <button (click)="verDetalhes(e)" title="Ver Detalhes" class="btn-acao">
             <i class='bx bx-show'></i>

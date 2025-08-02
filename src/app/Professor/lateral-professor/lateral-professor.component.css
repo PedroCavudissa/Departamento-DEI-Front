@@ -132,7 +132,7 @@
 
   .sidebar {
     transform: translateX(-100%);
-    overflow: auto;
+    width: 80%;
   }
 
   .sidebar.active {

@@ -11,6 +11,11 @@ export interface ProfessorDisciplina {
   disciplinaNome: string;
   disciplinaId: number;
 }
+export interface AssociarProfessorDisciplinaDto {
+  funcionario_id: number;
+  disciplina_id: number;
+}
+
 
 export interface Page<T> {
   content: T[];
@@ -49,10 +54,12 @@ export class FuncionarioCadeiraService {
   }
   
   
-
-  associar(dado: ProfessorDisciplina): Observable<any> {
-    return this.http.post(this.baseUrl, dado, { headers: this.getHeaders() });
+  associar(payload: AssociarProfessorDisciplinaDto): Observable<any> {
+    return this.http.post(`${this.baseUrl}`, payload, {
+      headers: this.getHeaders() 
+    });
   }
+  
 
   remover(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/delete/${id}`, { headers: this.getHeaders() });

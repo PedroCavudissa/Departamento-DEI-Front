@@ -1,14 +1,14 @@
-// src/app/tela-notas/components/tela-notas-filter/tela-notas-filter.component.ts
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ModeloNota, NotaFilter } from '../../../../models/nota.model';
-import { BarralateralComponent } from "../../../../Admin-Secretaria/barralateral/barralateral.component";
+
+import { LateralComponent } from "../../lateral/lateral.component";
+import { ModeloNota ,NotaFilter} from '../../../models/nota.model';
 
 @Component({
   selector: 'app-tela-notas-filter',
   standalone: true,
-  imports: [CommonModule, FormsModule, BarralateralComponent],
+  imports: [CommonModule, FormsModule, LateralComponent],
   templateUrl: './tela-notas-filter.component.html',
   styleUrls: ['./tela-notas-filter.component.css']
 })

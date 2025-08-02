@@ -116,6 +116,7 @@ export const routes: Routes = [
   { path: 'horario-secretaria', component: HorarioSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
   { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] }},
+  {path: 'estudantes-secretaria', component: MenuEstudantesSecretariaComponent,canActivate: [AuthGuard], data: {role: ['SECRETARIA']}},
   {path:'acesso-negado',component: AcessoNegadoComponent}
 
 ];

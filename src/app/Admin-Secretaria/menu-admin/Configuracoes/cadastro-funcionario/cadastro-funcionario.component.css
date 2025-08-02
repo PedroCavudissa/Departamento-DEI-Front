@@ -73,3 +73,8 @@
   button[type="submit"]:hover {
     background-color: #2980b9;
   }  
+  @media (max-width:500px){
+    .cadastro-container {
+      width: 90%;
+    }
+  }

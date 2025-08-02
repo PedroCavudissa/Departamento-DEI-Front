@@ -3,15 +3,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TelaNotasService } from '../../services/tela-notas.service';
 import { DisciplinaNota, NotaFilter, ModeloNota } from '../../models/nota.model';
-import { TelaNotasFilterComponent } from './components/tela-notas-filter/tela-notas-filter.component';
 import { NotaDisciplinaComponent } from "./nota-disciplina/nota-disciplina.component";
-import { LateralComponent } from '../lateral/lateral.component';
+import { TelaNotasFilterComponent } from './tela-notas-filter/tela-notas-filter.component';
+import { LateralComponent } from "../lateral/lateral.component";
 
 
 @Component({
   selector: 'app-notas',
   standalone: true,
-  imports: [CommonModule, TelaNotasFilterComponent,LateralComponent],
+  imports: [CommonModule, TelaNotasFilterComponent, LateralComponent],
   templateUrl: './tela-notas.component.html',
   styleUrls: ['./tela-notas.component.css']
 })

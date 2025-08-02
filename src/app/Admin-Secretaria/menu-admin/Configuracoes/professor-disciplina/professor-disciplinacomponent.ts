@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BarralateralComponent } from '../../../barralateral/barralateral.component';
-import { FuncionarioCadeiraService, ProfessorDisciplina } from '../../../../services/funcionario-cadeira.service';
+import { AssociarProfessorDisciplinaDto, FuncionarioCadeiraService, ProfessorDisciplina } from '../../../../services/funcionario-cadeira.service';
 import { Disciplina, DisciplinaService } from '../../../../services/disciplina.service';
 import { Professor } from '../../../../services/professor.service';
 import { error } from 'jquery';
@@ -55,19 +55,30 @@ import { Funcionario, FuncionarioService } from '../../../../services/cadastro.s
 
   fecharModal(): void {
     this.modalAberto = false;
-    this.novaAssociacao = { id: 0, funcionarioNome: '', disciplinaNome: '', disciplinaId: 0 };
   }
-
   associarProfessor(): void {
-    this.associacoes.push({ ...this.novaAssociacao });
-
-    this.service.associar(this.novaAssociacao).subscribe({
-      next: () => alert('Associação feita com sucesso'),
-      error: err => console.error('Erro ao associar:', err)
+    const payload: AssociarProfessorDisciplinaDto = {
+      funcionario_id: Number(this.novaAssociacao.funcionarioId),
+      disciplina_id: Number(this.novaAssociacao.disciplinaId)
+    };
+  
+    console.log('Payload enviado:', payload);
+  
+    this.service.associar(payload).subscribe({
+      next: () => {
+        this.notification.success('Associação feita com sucesso');
+        this.fecharModal();
+        this.carregarAssociacoes(); 
+      },
+      error: (err) => {
+        console.error(err);
+        this.notification.error('Erro ao associar');
+      }
     });
-
-    this.fecharModal();
   }
+  
+  
+  
 
   removerAssociacao(disciplinaId: number): void {
     const confirmacao = confirm('Tem certeza que deseja remover esta associação?');
@@ -101,7 +112,7 @@ carregarFuncionarios(): void {
   this.serviceFuncionario.getFuncionarios().subscribe({
     next: data => {
       console.log('Funcionários recebidos:', data); 
-      this.funcionarios = data.filter(f => f.nome?.toLocaleLowerCase() === 'Admin1');
+      this.funcionarios = data.filter(f => f.cargo?.toLocaleUpperCase().trim() === 'PROFESSOR');
 
     },
     error: err => {
