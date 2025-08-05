@@ -15,9 +15,13 @@ export class LoginService {
     return this.http.post(this.baseUrl, credentials);
   }
   sair() {
-    const token = localStorage.getItem('token');
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
     });
 
     return this.http.post(`${environment.apiUrl}/api/auth/logOut`, {}, { headers });

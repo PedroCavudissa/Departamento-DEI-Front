@@ -21,15 +21,15 @@ export class UsuarioService {
     });
   }
 
-  listarUsuarios(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/api/auth/users`, {
+  listarUsuarios(page = 0, size = 10): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/api/auth/users?page=${page}&size=${size}`, {
       headers: this.getHeaders()
     });
   }
+  
 
   atualizarStatusUsuario(userId: number, status: boolean): Observable<any> {
     const url = `${environment.apiUrl}/api/auth/users/${userId}/status?active=${status}`;
-  
     return this.http.put(url, null, {
       headers: this.getHeaders(),
       responseType: 'text' 
@@ -40,12 +40,9 @@ export class UsuarioService {
         throw error;
       })
     );
-  }
-  
-  
+  }  
   enviarEmail(email: string): Observable<any> {
     const url = `${environment.apiUrl}/api/auth/forgot-password?email=${encodeURIComponent(email)}`;
-  
     return this.http.post(url, null).pipe(
       tap(response => console.log('Email enviado com sucesso:', response)),
       catchError(error => {

@@ -46,6 +46,9 @@ selecionar(select: string){
                 case 'Cadeira':
                   {this.router.navigate(['/professor-disciplina'])};
                   break;
+                  case 'Meu Perfil':
+                    {this.router.navigate(['/perfil-admin'])};
+                    break;
                 
   }
 }

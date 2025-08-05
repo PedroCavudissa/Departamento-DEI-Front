@@ -1,11 +1,9 @@
-// src/app/components/cadeira/cadeira.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralComponent } from "../lateral/lateral.component";
 import {  CadeirasService, DisciplinaEmAtraso } from "../../services/cadeiras.service";
-import { SidebarService } from '../../services/sidebar.service';
+
 
 @Component({
   selector: 'app-cadeira',
@@ -16,30 +14,36 @@ import { SidebarService } from '../../services/sidebar.service';
 })
 export class CadeiraComponent implements OnInit {
   disciplinas: DisciplinaEmAtraso[] = [];
-
-  constructor(private cadeirasService: CadeirasService,public sidebarService: SidebarService) {}
+  carregouComSucesso = false;
+  mensagem = ''; // Para armazenar a mensagem de texto do backend
+  constructor(private disciplinaService: CadeirasService) {}
 
   ngOnInit(): void {
-    this.cadeirasService.getDisciplinasEmAtraso().subscribe({
-      next: (dados) => {
-        this.disciplinas = dados.map(d => ({
-          ...d,
-          ano_academico: typeof d.ano_academico === 'string' ? Number(d.ano_academico) : d.ano_academico,
-          semestre: d.semestre ?? '',
-          status: d.status ?? 'desconhecido'
-        }));
-      },
-      error: (err) => {
-        console.error('Erro ao buscar disciplinas em atraso:', err);
-      }
-    });
+    this.carregarDisciplinas();
   }
 
-
-  onContentClick() {
-    if (window.innerWidth < 768) {
-      this.sidebarService.setOpen(false);
-    }
-  }
   
+
+ carregarDisciplinas(): void {
+  this.disciplinaService.getDisciplinasEmAtraso().subscribe({
+    next: (res: DisciplinaEmAtraso[] | string) => {
+      console.log('Resposta recebida:', res);
+
+      if (Array.isArray(res)) {
+        this.disciplinas = res;
+        this.mensagem = '';
+      } else {
+        this.disciplinas = [];
+        this.mensagem = res; // Guardar a string retornada pelo backend
+      }
+
+      this.carregouComSucesso = true;
+    },
+    error: (erro) => {
+      console.error('Erro ao buscar disciplinas em atraso:', erro);
+      this.carregouComSucesso = false;
+      this.mensagem = 'Erro ao carregar as disciplinas.';
+    }
+   });
+  }
 }

@@ -6,10 +6,10 @@ import { environment } from '../../environments/environment';
 export interface Confirmacao {
   id: number;
   nomeEstudante: string;
-  estudanteId: number | string; // depende do backend, pode ajustar
+  estudanteId: number | string; 
   anoLetivo: string;
   semestre: number;
-  estado: 'PAGO' | 'NÃO_PAGO'; // se quiser mais preciso, ou apenas: string
+  estado: 'PAGO' | 'NÃO_PAGO'; 
 }
 
 export interface UserDetails {
@@ -41,7 +41,7 @@ export interface Disciplina {
    disciplinaId: number;
    nome: string;
     nomeDisciplina: string;
-  siglaDisciplina: string;
+    sigla: string;
   status: string; 
 
 }

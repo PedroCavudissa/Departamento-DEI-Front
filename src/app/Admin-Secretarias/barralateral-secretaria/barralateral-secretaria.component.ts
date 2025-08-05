@@ -45,7 +45,7 @@ export class BarralateralSecretariaComponent implements OnInit {
       case 'Chat': this.router.navigate(['/chat-secretaria']); break;
       case 'Comunicados': this.router.navigate(['/comunicado-secretaria']); break;
       case 'Confirmacões': this.router.navigate(['/confirmacoes']); break;
-
+      case 'Meu Perfil': this.router.navigate(['perfil-secretaria']);break;
       case 'Sair':
         const confirmacao = window.confirm('Tem certeza que deseja sair?');
         if (confirmacao) {

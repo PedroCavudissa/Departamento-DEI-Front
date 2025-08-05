@@ -1,0 +1,99 @@
+:host {
+    display: block;
+    padding: 1rem;
+    max-width: 768px; /* largura máxima no desktop */
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  /* Título */
+  h2 {
+    font-size: 1.5rem; /* equivalente a text-2xl */
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1e293b; /* text-primary-800 */
+    text-align: center;
+  }
+  
+  /* Estado de carregamento ou vazio */
+  .text-center {
+    text-align: center;
+  }
+  .text-gray-500 {
+    color: #6b7280;
+  }
+  .text-gray-600 {
+    color: #4b5563;
+  }
+  
+  /* Lista de logs */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+    padding: 0.75rem 0;
+    margin-bottom: 1rem;
+  }
+  
+  /* Container interno de cada log */
+  .log-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  /* Estilo do nome e ação */
+  .log-entry .user-action {
+    font-size: 1rem;
+    color: #1f2937;
+    word-wrap: break-word;
+  }
+  
+  /* Nome do criador */
+  .log-entry .user-action strong {
+    color: #334155;
+  }
+  
+  /* Entidade */
+  .log-entry .entidade {
+    font-size: 0.875rem;
+    font-style: italic;
+    color: #6b7280;
+  }
+  
+  /* Data */
+  .log-entry .data {
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+  
+  /* ===== RESPONSIVIDADE ===== */
+  
+  @media (max-width: 600px) {
+    :host {
+      padding: 0.75rem;
+    }
+  
+    h2 {
+      font-size: 1.25rem;
+    }
+  
+    .log-entry .user-action {
+      font-size: 0.95rem;
+    }
+  
+    .log-entry .entidade,
+    .log-entry .data {
+      font-size: 0.8rem;
+    }
+  
+    li {
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+  

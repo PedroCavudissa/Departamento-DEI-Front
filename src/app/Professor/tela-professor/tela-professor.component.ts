@@ -39,7 +39,7 @@ fecharPerfilModal() {
    this.buscarProfessor();
   }
    buscarProfessor(): void {
-    this.professorService.getProfessor().subscribe({
+    this.professorService.getPerfilUsuario().subscribe({
       next: (data: Professor) => {
         this.professorSelecionado = data;
         this.errorMessage = null;

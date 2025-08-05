@@ -2,35 +2,54 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 export interface DisciplinaEmAtraso {
-  sigla: string;
+  id: number;
   nome: string;
-  ano_academico: number | string;
+  sigla: string;
+  ano_academico: string;
+  precedencia: string;
   semestre: string;
-  status: string;
+  detalhes: string;
 }
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CadeirasService {
+ private baseUrl = `${environment.apiUrl}/api/departamento/students/list/disciplinasemetraso`;
+
   constructor(private http: HttpClient) {}
 
-  getDisciplinasEmAtraso(): Observable<DisciplinaEmAtraso[]> {
+  private getAuthHeaders(): HttpHeaders {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
   
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'ngrok-skip-browser-warning': 'true',
-      Authorization: `Bearer ${token}`
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
     });
+  }
+  
 
-    return this.http.get<DisciplinaEmAtraso[]>(
-      `${environment.apiUrl}/list/disciplinasemetraso`,
-      { headers }
+  /**
+   * Retorna as disciplinas em atraso para o estudante logado.
+   */
+  
+
+  getDisciplinasEmAtraso(): Observable<string | DisciplinaEmAtraso[]> {
+    return this.http.get<DisciplinaEmAtraso[] | string>(this.baseUrl, {
+      headers: this.getAuthHeaders()
+    }).pipe(
+      map((res) => {
+        console.log('Resposta do backend:', res);
+        return res;
+      })
     );
   }
+  
 }

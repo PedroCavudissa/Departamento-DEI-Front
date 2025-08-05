@@ -1,11 +1,9 @@
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-// Defina interfaces 
-interface UserDetails {
+export interface UserDetails {
   id: number;
   dataNascimento: string;
   numDocumento: string;
@@ -15,10 +13,13 @@ interface UserDetails {
   dataIngresso: string;
   nivelAcademico: number;
   curriculo: string;
+  [key: string]: any;
+}
 
- 
-
-  [key: string]: any; // Permite propriedades adicionais
+export interface Usuario {
+  email: string;
+  nome: string;
+  userDetails: Partial<UserDetails>;
 }
 
 export interface Professor {
@@ -32,57 +33,44 @@ export interface Professor {
   providedIn: 'root'
 })
 export class ProfessorService {
-
-  cadastrar(professor: Professor) {
-    throw new Error('Method not implemented.');
-  }
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) {}
 
-  private getHeaders(): { headers: HttpHeaders } {
+  // Corrigido: retorna apenas HttpHeaders
+  private getHeaders(): HttpHeaders {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
 
-   
-    return {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'ngrok-skip-browser-warning': 'true'
-      })
-    };
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    });
   }
 
-  getProfessor(): Observable<Professor> {
-    return this.http.get<Professor>(`${this.baseUrl}/auth/me`, this.getHeaders());
+  // Obter perfil
+  getPerfilUsuario(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/auth/me`, {
+      headers: this.getHeaders()
+    });
+  }
+
+  // Atualizar perfil
+  atualizarPerfil(id: number, dadosAtualizados: Partial<Professor>): Observable<Professor> {
+    return this.http.patch<Professor>(`${this.baseUrl}/staff/${id}`, dadosAtualizados, {
+      headers: this.getHeaders()
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Tratar erros
+  private handleError(error: HttpErrorResponse): Observable<never> {
+    console.error('Erro na requisição:', error);
+    return throwError(() => new Error('Erro ao processar a requisição.'));
   }
 
 
-atualizarPerfil(id: number, dadosAtualizados: Partial<Professor>): Observable<Professor> {
-  return this.http.patch<Professor>(`${this.baseUrl}/staff/${id}`, dadosAtualizados, 
-    this.getHeaders()
-  );
 }
-} 
-
-
-
-
-
-
-
-
-
-
-/*
-atualizarPerfil(id: number, dadosAtualizados: Partial<Professor>): Observable<Professor> {
-  // Corrigido: usando template literals corretamente
-  return this.http.patch<Professor>(`${this.apiUrl}/staff/${id}`, dadosAtualizados, {
-    headers: this.getHeaders()
-  }).pipe(
-    catchError(this.handleError)
-  );
-}
-*/

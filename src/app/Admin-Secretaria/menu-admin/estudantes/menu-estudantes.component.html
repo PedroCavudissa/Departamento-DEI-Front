@@ -37,7 +37,7 @@
         <th>Nome</th>
         <th>Nº Do Documento</th>
         <th>Ano Acadêmico</th>
-        <th>Ações</th>
+        <th>Detalhes</th>
       </tr>
     </thead>
     <tbody *ngIf="estudantesFiltrados.length > 0; else semDados">
@@ -67,11 +67,9 @@
       <h3>Detalhes do Estudante</h3>
       <p><strong>Nome:</strong> {{ estudanteSelecionado.nome }}</p>
       <p><strong>Documento:</strong> {{ estudanteSelecionado.numIdentificacao }}</p>
-      <p><strong>Email:</strong> {{ estudanteSelecionado.email || '—' }}</p>
       <p><strong>Contacto:</strong> {{ estudanteSelecionado.contacto || '—' }}</p>
       <p><strong>Endereço:</strong> {{ estudanteSelecionado.endereco || '—' }}</p>
       <p><strong>Ano Acadêmico:</strong> {{ estudanteSelecionado.anoAcademico }}</p>
-      <p><strong>Status:</strong> {{ estudanteSelecionado.statusEstudante }}</p>
       <p><strong>Data de Nascimento:</strong> {{ estudanteSelecionado.dataNascimento | date: 'dd/MM/yyyy' }}</p>
     </div>
   </div>

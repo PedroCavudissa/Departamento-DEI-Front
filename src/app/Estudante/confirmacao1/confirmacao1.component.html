@@ -5,13 +5,12 @@
       <table>
         <thead>
           <tr>
-            <th>Código</th>
+          
             <th>Nome da Disciplina</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let disciplina of disciplinasfaze">
-            <td>{{ disciplina.disciplinaId }}</td>
             <td>{{ disciplina.nome }}</td>
           </tr>
         </tbody>
@@ -36,9 +35,7 @@
 
     <ul *ngIf="disciplinasInscritas.length > 0; else nenhuma">
       <li *ngFor="let disciplina of disciplinasInscritas">
-        <strong>{{ disciplina.nomeDisciplina }}</strong> 
-        ({{ disciplina.siglaDisciplina }})
-      </li>
+        <strong>{{ disciplina.nomeDisciplina }}</strong>       </li>
     </ul>
 
     <ng-template #nenhuma>

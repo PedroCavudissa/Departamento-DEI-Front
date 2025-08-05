@@ -7,10 +7,7 @@
       <div class="grid-dados" *ngIf="dadosAcademicos">
         <p><strong>Nome:</strong> {{ dadosAcademicos.nome }}</p>
         <p><strong>Email:</strong> {{ dadosAcademicos.email }}</p>
-        <p><strong>Nº Estudante (ID):</strong> {{ dadosAcademicos.userDetails.id }}</p>
         <p><strong>Número do BI:</strong> {{ dadosAcademicos.userDetails.numIdentificacao }}</p>
-        <p><strong>Data de Nascimento:</strong> {{ dadosAcademicos.userDetails.dataNascimento }}</p>
-        <p><strong>Status do Estudante: </strong> {{ dadosAcademicos.userDetails.statusEstudante }}</p>
         <p class="confirmacao"><strong>Confirmação a ser feita:</strong> {{ dadosAcademicos.confirmacao }}</p>
       </div>
   </section>

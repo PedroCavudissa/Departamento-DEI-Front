@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 
 export interface Disciplina {
   id?: number;
+  
   sigla: string;
   nome: string;
   anoAcademico: string;

@@ -53,6 +53,9 @@ import { AcessoNegadoComponent } from './acesso-negado/acesso-negado.component';
 import { ProfessorDisciplinaComponent } from './Admin-Secretaria/menu-admin/Configuracoes/professor-disciplina/professor-disciplinacomponent';
 import { MinhasTurmasComponent } from './Professor/minhas-turmas/minhas-turmas.component';
 import { VerPautaProfessorComponent } from './Professor/ver-pauta-professor/ver-pauta-professor.component';
+import { PerfilSecretariaComponent } from './Admin-Secretarias/menu-secretaria/perfil-secretaria/perfil-secretaria.component';
+import { PerfilAdminComponent } from './Admin-Secretaria/menu-admin/Configuracoes/perfil-admin/perfil-admin.component';
+import { LogsComponent } from './Admin-Secretaria/menu-admin/Configuracoes/logs/logs.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -80,6 +83,8 @@ export const routes: Routes = [
   { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   {path:'professor-disciplina', component: ProfessorDisciplinaComponent, canActivate:[AuthGuard], data:{role: ['ADMINISTRADOR']} },
+  {path:'perfil-admin', component: PerfilAdminComponent, canActivate: [AuthGuard], data: {role: ['ADMINISTRADOR']}},
+  {path:'logs', component: LogsComponent, canActivate: [AuthGuard], data: {role: ['ADMINISTRADOR']}},
   // Estudante
   { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] } },
   { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },
@@ -117,6 +122,7 @@ export const routes: Routes = [
   { path: 'confirmacoes', component: ConfirmacoesComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
   { path: 'cadastro', component: CadastroComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] }},
   {path: 'estudantes-secretaria', component: MenuEstudantesSecretariaComponent,canActivate: [AuthGuard], data: {role: ['SECRETARIA']}},
-  {path:'acesso-negado',component: AcessoNegadoComponent}
+  {path:'perfil-secretaria', component: PerfilSecretariaComponent, canActivate: [AuthGuard], data: {role: ['SECRETARIA']}},
+  {path:'acesso-negado', component: AcessoNegadoComponent}
 
 ];

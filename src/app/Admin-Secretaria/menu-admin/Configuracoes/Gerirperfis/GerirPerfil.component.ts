@@ -16,6 +16,9 @@ export class GerirPerfilComponent implements OnInit {
   usuarios: any[] = [];
   filtroRole: string = '';
   carregando = true;
+  paginaAtual = 0;
+tamanhoPagina = 10;
+totalPaginas = 0;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -28,10 +31,18 @@ export class GerirPerfilComponent implements OnInit {
 
   carregarUsuarios() {
     this.carregando = true;
-    this.usuarioService.listarUsuarios().subscribe({
+  
+    const usuarioLocal = localStorage.getItem('usuario');
+    const idLogado = usuarioLocal ? JSON.parse(usuarioLocal).id : null;
+  
+    this.usuarioService.listarUsuarios(this.paginaAtual, this.tamanhoPagina).subscribe({
       next: (response) => {
         if (Array.isArray(response?.content)) {
-          this.usuarios = response.content;
+          // Oculta o usuário logado da lista
+          this.usuarios = response.content.filter((u: any) => u.id !== idLogado);
+  
+          const total = response.totalElements || response.total || 0;
+          this.totalPaginas = Math.ceil(total / this.tamanhoPagina);
         } else {
           this.usuarios = [];
           console.error('Formato inesperado da resposta:', response);
@@ -84,5 +95,9 @@ export class GerirPerfilComponent implements OnInit {
         this.notification.error(mensagemErro);
       }
     });
+  }
+  carregarMais() {
+    this.paginaAtual++;
+    this.carregarUsuarios();
   }
 }

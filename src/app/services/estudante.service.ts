@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { LogRegistro } from './logs.service';
 
 export interface Estudante {
   nome: string;
@@ -67,7 +68,17 @@ export class EstudanteService {
     );
   }
   
-  
+  getLogsEstudantes(): Observable<LogRegistro[]> {
+    return this.http.get<any[]>('/api/estudantes').pipe(
+      map(estudantes => estudantes.map(est => ({
+        acao: 'Criou estudante',
+        entidade: 'Estudante',
+        entidadeId: est.id,
+        criadoPor: est.createdBy?.nome || est.createdBy?.id || 'Desconhecido',
+        data: est.createdAt,
+      })))
+    );
+  }
 
   }
   
