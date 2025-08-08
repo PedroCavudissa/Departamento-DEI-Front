@@ -9,7 +9,7 @@ export interface LogRegistro {
   entidade: string;
   entidadeId: number;
   criadoPor: string;
-  data: string;
+  data: Date;
 }
 
 @Injectable({ providedIn: 'root' })

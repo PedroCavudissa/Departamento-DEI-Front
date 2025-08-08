@@ -1,82 +1,227 @@
+/* ======= Layout Base ======= */
 .container {
+  max-width: 1000px;
+  margin: 100px auto;
   padding: 20px;
   font-family: Arial, sans-serif;
-  max-width: 600px;
-  margin-top: 60px;
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
 }
 
-.filtros {
+h2 {
+  text-align: center;
+  color: #004a99;
+  margin-bottom: 20px;
+}
+
+.mb-4 {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  gap: 15px;
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
-select {
-  padding: 10px;
-  width: 100%;
-  max-width: 180px;
-  border-radius: 5px;
-  box-sizing: border-box;
+label {
+  font-weight: bold;
+  color: #333;
 }
 
-.visualizacao-horario {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 6px;
-  margin-bottom: 30px;
+select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
   text-align: center;
 }
 
-.upload-horario {
-  background-color: #e9f7ff;
-  padding: 20px;
-  border-radius: 6px;
-  border: 1px dashed #3aaaf3;
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
 
-.upload-horario input[type="file"] {
-  margin-bottom: 10px;
+tbody tr:hover {
+  background-color: #eef5ff;
+}
+
+div[ngIf] {
+  margin-top: 20px;
+  text-align: center;
+  font-style: italic;
+  color: #666;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ======= Modal ======= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 30px;
+  width: 400px;
+  max-width: 95%;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeInScale 0.3s ease;
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  text-align: center;
+  color: #0056b3;
+  border-bottom: 2px solid #e5e5e5;
+  padding-bottom: 8px;
+}
+
+.modal label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.modal input,
+.modal select {
   width: 100%;
-  box-sizing: border-box;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
 }
 
-/* Responsividade */
+.modal input:focus,
+.modal select:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.actions button[type="submit"] {
+  background-color: #0056b3;
+  color: white;
+}
+
+.actions button[type="submit"]:hover {
+  background-color: #004494;
+}
+
+.actions button[type="button"] {
+  background-color: #ccc;
+  color: #333;
+}
+
+.actions button[type="button"]:hover {
+  background-color: #b3b3b3;
+}
+
+/* ======= Responsividade ======= */
 @media (max-width: 768px) {
   .container {
-    max-width: 90%;
-    margin-top: 40px;
+    margin: 50px auto;
     padding: 15px;
   }
 
-  .filtros {
-    gap: 8px;
+  h2 {
+    font-size: 1.4rem;
   }
 
-  select {
-    max-width: 100%;
+  .mb-4 {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .visualizacao-horario, .upload-horario {
-    padding: 15px;
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .modal {
+    width: 90%;
+    padding: 20px;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding: 10px;
-    margin-top: 30px;
+  h2 {
+    font-size: 1.2rem;
   }
 
-  select {
-    padding: 8px;
+  .mb-4 {
+    gap: 10px;
   }
 
-  .visualizacao-horario, .upload-horario {
-    padding: 10px;
-    font-size: 14px;
+  select, input, button {
+    width: 100%;
+  }
+
+  th, td {
+    font-size: 0.85rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .actions button {
+    width: 100%;
   }
 }

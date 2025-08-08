@@ -1,0 +1,103 @@
+<div class="container">
+  <h2>Grade Horária</h2>
+
+  <div class="mb-4">
+    <label>Turma:</label>
+    <select [(ngModel)]="turmaSelecionada" (ngModelChange)="aplicarFiltros()">
+      <option value="">Selecione...</option>
+      <option *ngFor="let t of turmas" [value]="t.sigla">{{ t.sigla }}</option>
+    </select>
+
+    <label>Semestre:</label>
+    <select [(ngModel)]="semestreSelecionado" (ngModelChange)="aplicarFiltros()">
+      <option value="">Selecione...</option>
+      <option [value]="1">1º Semestre</option>
+      <option [value]="2">2º Semestre</option>
+    </select>
+   
+<button class="btn-novo" (click)="abrirModal()">Novo Horário</button>
+
+  </div>
+
+  <table *ngIf="grade.length > 0">
+    <thead>
+      <tr>
+        <th>Horário</th>
+        <th *ngFor="let dia of diasSemana">{{ dia }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let linha of grade">
+        <td>{{ linha.horario }}</td>
+        <td *ngFor="let dia of diasSemana">{{ linha[dia] }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!grade.length && turmaSelecionada && semestreSelecionado">
+    Nenhum horário encontrado para os filtros selecionados.
+  </div>
+  
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="mostrarModal">
+  <div class="modal">
+    <h3>Novo Horário</h3>
+    
+    <form (ngSubmit)="salvarHorario()" #formHorario="ngForm">
+  <!-- TURMA -->
+<label>Turma:</label>
+<select [(ngModel)]="novoHorario.turmaSigla" name="turmaSigla">
+  <option value="">Selecione...</option>
+  <option *ngFor="let t of turmas" [value]="t.sigla">{{ t.sigla }}</option>
+</select>
+
+<!-- DISCIPLINA -->
+<label>Disciplina:</label>
+<select [(ngModel)]="novoHorario.disciplinaSigla" name="disciplinaSigla">
+  <option value="">Selecione...</option>
+  <option *ngFor="let d of disciplinas" [value]="d.sigla">{{ d.sigla }}</option>
+</select>
+
+
+
+      <label>Dia da Semana:</label>
+      <select name="diaSemana" [(ngModel)]="novoHorario.diaSemana" required>
+        <option value="SEGUNDA">Segunda</option>
+        <option value="TERCA">Terça</option>
+        <option value="QUARTA">Quarta</option>
+        <option value="QUINTA">Quinta</option>
+        <option value="SEXTA">Sexta</option>
+        <option value="SABADO">Sábado</option>
+      </select>
+
+      <label>Hora Início:</label>
+      <select name="horaInicio" [(ngModel)]="novoHorario.horaInicio" required>
+        <option value="">Selecione...</option>
+        <option *ngFor="let h of horarios" [value]="h.inicio">{{ h.inicio }}</option>
+      </select>
+      
+      <label>Hora Fim:</label>
+      <select name="horaFim" [(ngModel)]="novoHorario.horaFim" required>
+        <option value="">Selecione...</option>
+        <option *ngFor="let h of horarios" [value]="h.fim">{{ h.fim }}</option>
+      </select>
+      
+      
+      <label>Ano Letivo:</label>
+      <input type="number" name="anoLetivo" [(ngModel)]="novoHorario.anoLetivo" required>
+
+      <label>Semestre:</label>
+      <input type="number" name="semestre" [(ngModel)]="novoHorario.semestre" required>
+
+      <div class="actions">
+        <button type="submit" [disabled]="formHorario.invalid">Salvar</button>
+        <button type="button" (click)="fecharModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<app-barralateral></app-barralateral>

@@ -1,29 +1,41 @@
-<body>
-    <div class="container">
-      <h2>Consultar Horário</h2>
-      <div class="filtros">
-        <select name="ano" id="ano-select">
-          <option selected disabled>Ano Acadêmico</option>
-          <option value="1">1º Ano</option>
-          <option value="2">2º Ano</option>
-          <option value="3">3º Ano</option>
-          <option value="4">4º Ano</option>
-          <option value="5">5º Ano</option>
-        </select>
+<div class="container">
+  <h2>Grade Horária</h2>
+
+  <div class="mb-4">
+    <label>Turma:</label>
+    <select [(ngModel)]="turmaSelecionada" (ngModelChange)="aplicarFiltros()">
+      <option value="">Selecione...</option>
+      <option *ngFor="let t of turmas" [value]="t.sigla">{{ t.sigla }}</option>
+    </select>
+
+    <label>Semestre:</label>
+    <select [(ngModel)]="semestreSelecionado" (ngModelChange)="aplicarFiltros()">
+      <option value="">Selecione...</option>
+      <option [value]="1">1º Semestre</option>
+      <option [value]="2">2º Semestre</option>
+    </select>
+  </div>
+
+  <table *ngIf="grade.length > 0">
+    <thead>
+      <tr>
+        <th>Horário</th>
+        <th *ngFor="let dia of diasSemana">{{ dia }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let linha of grade">
+        <td>{{ linha.horario }}</td>
+        <td *ngFor="let dia of diasSemana">{{ linha[dia] }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!grade.length && turmaSelecionada && semestreSelecionado">
+    Nenhum horário encontrado para os filtros selecionados.
+  </div>
   
-        <select name="semestre" id="semestre-select">
-          <option selected disabled>Semestre</option>
-          <option value="1">1º Semestre</option>
-          <option value="2">2º Semestre</option>
-        </select>
-      </div>
-  
-      <div class="visualizacao-horario" id="visualizacao-horario">
-        <p>Selecione o ano e semestre para visualizar o horário.</p>
-        <!-- Aqui aparece um link ou visualização do arquivo -->
-      </div>
-  
-     
-    </div>
-  </body>
+</div>
+
+
   <app-lateral></app-lateral>

@@ -28,10 +28,10 @@ import { MenuEstudantesSecretariaComponent } from './Admin-Secretarias/menu-secr
 import { FuncionariosSecretariaComponent } from './Admin-Secretarias/menu-secretaria/funcionario-secretaria/funcionarios-secretaria.component';
 import { PerfilEstudanteComponent } from './Estudante/perfil-estudante/perfil-estudante.component';
 import { GerirPerfilComponent } from './Admin-Secretaria/menu-admin/Configuracoes/Gerirperfis/GerirPerfil.component';
-import { HorarioComponent } from './Admin-Secretaria/menu-admin/horario/horario.component';
+//import { HorarioComponent } from './Admin-Secretaria/menu-admin/horario/horario.component';
 import { VerPautaSecretariaComponent } from './Admin-Secretarias/menu-secretaria/ver-pauta-secretaria/ver-pauta-secretaria.component';
 import { HorarioSecretariaComponent } from './Admin-Secretarias/menu-secretaria/horario-secretaria/horario-secretaria.component';
-import { HorarioEstudanteComponent } from './Estudante/horario-estudante/horario-estudante.component';
+
 import { HorarioProfessorComponent } from './Professor/horario-professor/horario-professor.component';
 import { ConfiguracoesComponent } from './Admin-Secretaria/menu-admin/Configuracoes/configuracoes.component';
 import { VerPautaComponent } from './Admin-Secretaria/menu-admin/ver-pauta/ver-pauta.component';
@@ -56,6 +56,8 @@ import { VerPautaProfessorComponent } from './Professor/ver-pauta-professor/ver-
 import { PerfilSecretariaComponent } from './Admin-Secretarias/menu-secretaria/perfil-secretaria/perfil-secretaria.component';
 import { PerfilAdminComponent } from './Admin-Secretaria/menu-admin/Configuracoes/perfil-admin/perfil-admin.component';
 import { LogsComponent } from './Admin-Secretaria/menu-admin/Configuracoes/logs/logs.component';
+import { TimeTableComponent } from './Admin-Secretaria/menu-admin/time-table/time-table.component';
+import { HorarioEstudanteComponent } from './Estudante/horario-estudante/horario-estudante.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -78,13 +80,14 @@ export const routes: Routes = [
   { path: 'calendario', component: CalendarioComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'pauta', component: PautaComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
-  { path: 'pautas', component: PautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   { path: 'ver-pauta', component: VerPautaComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
-  { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
+//  { path: 'horario', component: HorarioComponent, canActivate: [AuthGuard] ,data: { role: ['ADMINISTRADOR'] }},
   { path: 'Tela-Funcionario', component: FuncionariosComponent, canActivate: [AuthGuard],data: { role: ['ADMINISTRADOR'] } },
   {path:'professor-disciplina', component: ProfessorDisciplinaComponent, canActivate:[AuthGuard], data:{role: ['ADMINISTRADOR']} },
   {path:'perfil-admin', component: PerfilAdminComponent, canActivate: [AuthGuard], data: {role: ['ADMINISTRADOR']}},
-  {path:'logs', component: LogsComponent, canActivate: [AuthGuard], data: {role: ['ADMINISTRADOR']}},
+  {path:'logs', component: LogsComponent, canActivate: [AuthGuard], data: {role: ['ADMINISTRADOR']}}
+  ,
+  {path: 'time-table', component: TimeTableComponent, canActivate: [AuthGuard], data: {role: ['ADMINISTRADOR']}},
   // Estudante
   { path: 'tela-notas', component: TelaNotasComponent, canActivate: [AuthGuard],data: { role: ['ESTUDANTE'] } },
   { path: 'tela-estudante', component: TelaEstudanteComponent, canActivate: [AuthGuard] ,data: { role: ['ESTUDANTE'] } },

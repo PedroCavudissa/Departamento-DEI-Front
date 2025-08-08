@@ -1,5 +1,3 @@
-
-// estudante.service.ts
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -23,7 +21,11 @@ export interface Estudante {
   regimeIngresso: string;
   dataConclusao:  string;
   statusEstudante: string;
-   userDetails?: any; 
+
+  createdAt?: Date;
+  updatedAt?: Date;
+  createdBy?: any; 
+  updatedBy?: any;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -69,14 +71,30 @@ export class EstudanteService {
   }
   
   getLogsEstudantes(): Observable<LogRegistro[]> {
-    return this.http.get<any[]>('/api/estudantes').pipe(
-      map(estudantes => estudantes.map(est => ({
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    });
+  
+  
+    const url = `${environment.apiUrl}/api/departamento/students`;
+    
+    return this.http.get<any>(url, { headers }).pipe(
+      map(response => (response.content || []).map((est: any) => ({
         acao: 'Criou estudante',
         entidade: 'Estudante',
         entidadeId: est.id,
         criadoPor: est.createdBy?.nome || est.createdBy?.id || 'Desconhecido',
         data: est.createdAt,
-      })))
+      }))),
+      catchError(err => {
+        console.error('Erro ao buscar logs de funcionários:', err);
+        return of([]);
+      })
     );
   }
 

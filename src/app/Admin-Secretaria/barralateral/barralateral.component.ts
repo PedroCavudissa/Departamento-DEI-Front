@@ -40,12 +40,13 @@ import { Router, RouterModule } from '@angular/router';
       case 'Estudantes': this.router.navigate(['/menu-estudantes']); break;
       case 'Funcionários': this.router.navigate(['/Tela-Funcionario']); break;
       case 'Disciplinas': this.router.navigate(['/detalhes-cadeiras']); break;
-      case 'Horários': this.router.navigate(['/horario']); break;
+      case 'Horários': this.router.navigate(['/time-table']); break;
       case 'Pautas': this.router.navigate(['/ver-pauta']); break;
       case 'Calendário': this.router.navigate(['/calendario']); break;
       case 'Chat': this.router.navigate(['/chat']); break;
       case 'Comunicados': this.router.navigate(['/comunicado']); break;
       case 'Definições': this.router.navigate(['/Configuracoes']); break;
+      case 'Teste': this.router.navigate(['/horario']); break;
       case 'Sair':
         const confirmacao = window.confirm('Tem certeza que deseja sair?');
         if (confirmacao) {

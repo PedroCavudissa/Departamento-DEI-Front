@@ -41,12 +41,7 @@
         </a>
       </li>
 
-      <li>
-        <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Minhas Turmas' }" >
-          <i class='bx bx-certification'></i>
-          <span (click)="selecionarMenu('Minhas Turmas','Minhas Turmas')" tabindex="0" (keyup.enter)="selecionarMenu('Minhas Turmas','Minhas Turmas')">Minhas Turmas</span>
-        </a>
-      </li>
+   
 
       <li>
         <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Calendário' }" >
@@ -69,9 +64,7 @@
         </a>
       </li>
 
-            <li><a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Chat' }"> <i class='bx bx-chat'></i>
-              <span (click)="selecionarMenu('Chat','Chat')" tabindex="0" (keyup.enter)="selecionarMenu('Chat','Chat')">Chat</span> </a> </li>
-          
+            
               <li><a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Sair' }"> <i class='bx bx-log-out'></i>
                 <span (click)="selecionarMenu('Sair','Sair')" tabindex="0" (keyup.enter)="selecionarMenu('Sair','Sair')">Sair</span> </a> </li>
             

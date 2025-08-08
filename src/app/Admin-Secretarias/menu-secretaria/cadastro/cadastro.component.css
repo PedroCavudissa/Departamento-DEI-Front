@@ -3,7 +3,6 @@
   font-size: 24px;
   color: #333;
 }
-
 .container {
   display: flex;
   flex-direction: column;
@@ -13,14 +12,11 @@
   padding: 20px;
   background-color: #1a6cb3;
 }
-
 .formulario-container {
   position: relative;
   max-width: 850px;
   width: 100%;
-  
 }
-
 .formulario-estudante {
   display: flex;
   flex-direction: column;
@@ -33,7 +29,6 @@
   margin: 60px auto;
   margin-left: 200px;
 }
-
 .form-wrapper {
   display: flex;
   flex-wrap: wrap;

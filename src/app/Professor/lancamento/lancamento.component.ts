@@ -95,12 +95,34 @@ export class LancamentoComponent implements OnInit {
           }
         };
 
+        // Mantém o processamento normal para ACs
         processarTipo(1, ['ac1', 'p1']);
         processarTipo(2, ['ac2', 'p2']);
-        processarTipo(3, ['exame']);
-        processarTipo(4, ['exameRecurso']);
-        processarTipo(5, ['exameOral']);
-        processarTipo(6, ['exameEspecial']);
+
+        // 🔹 Nova regra: cada exame é tratado separadamente
+        if (pautas.some(est => est.exame !== null && est.exame !== undefined)) {
+          this.tiposDesabilitados.push(3); // Exame Época Normal
+        }
+        if (pautas.some(est => est.exameRecurso !== null && est.exameRecurso !== undefined)) {
+          this.tiposDesabilitados.push(4); // Exame de Recurso
+        }
+        if (pautas.some(est => est.exameOral !== null && est.exameOral !== undefined)) {
+          this.tiposDesabilitados.push(5); // Oral
+        }
+        if (pautas.some(est => est.exameEspecial !== null && est.exameEspecial !== undefined)) {
+          this.tiposDesabilitados.push(6); // Exame Especial
+        }
+
+        // 🔹 Nova regra 2: Se média ms > 13.5, desabilitar todos os modelos após AC2/P2
+
+            const todosComMsMaiorOuIgual135 = pautas.every(est => (est.ms ?? 0) >= 13.5);
+      if (todosComMsMaiorOuIgual135) {
+        [3, 4, 5, 6].forEach(tipo => {
+          if (!this.tiposDesabilitados.includes(tipo)) {
+            this.tiposDesabilitados.push(tipo);
+          }
+        });
+      }
       },
       error: (err) => {
         console.error('Erro ao verificar pautas:', err);
@@ -131,9 +153,7 @@ export class LancamentoComponent implements OnInit {
     this.mensagem = '';
     this.erro = '';
 
-
     const erros: string[] = [];
-
 
     if (!this.disciplinaSelecionadaId) erros.push('📌 Selecione a Disciplina');
     if (!this.tipoSelecionado) erros.push('📌 Selecione o Modelo da Pauta');
@@ -144,7 +164,6 @@ export class LancamentoComponent implements OnInit {
       this.limparMensagensDepoisDeTempo();
       return;
     }
-
 
     this.lacamentoNotasService.enviarExcel(
       this.excelFile!,
@@ -172,67 +191,67 @@ export class LancamentoComponent implements OnInit {
     });
   }
 
-
   baixarModelo(): void {
-  this.erro = '';
-  this.mensagem = '';
+    this.erro = '';
+    this.mensagem = '';
 
-  const erros = [];
-  if (!this.disciplinaSelecionadaId) erros.push('a Disciplina');
-  if (!this.tipoSelecionado) erros.push('o Modelo da Pauta');
+    const erros = [];
+    if (!this.disciplinaSelecionadaId) erros.push('a Disciplina');
+    if (!this.tipoSelecionado) erros.push('o Modelo da Pauta');
 
-  if (erros.length > 0) {
-    this.erro = `Por favor, selecione ${erros.join(' e ')} para baixar o modelo.`;
-    this.limparMensagensDepoisDeTempo();
-    return;
-  }
-
-  if (!this.verificarTipoAnteriorEnviado(this.tipoSelecionado!)) {
-    const tipoAnterior = this.tipoSelecionado! - 1;
-    const nomeModeloAnterior = this.tipos.find(t => t.codigo === tipoAnterior)?.descricao || `Modelo ${tipoAnterior}`;
-    this.erro = `⚠️ Você deve enviar primeiro o modelo anterior: "${nomeModeloAnterior}".`;
-    this.limparMensagensDepoisDeTempo();
-    return;
-  }
-
-  this.lacamentoNotasService.baixarModeloExcel(this.disciplinaSelecionadaId!, this.tipoSelecionado!).subscribe({
-    next: (response) => {
-      const blob = response.body!;
-      const contentDisposition = response.headers.get('Content-Disposition');
-      let filename = 'modelo_notas.xlsx';
-
-      if (contentDisposition) {
-        const utf8Match = contentDisposition.match(/filename\*\=UTF-8''(.+)/);
-        if (utf8Match) filename = decodeURIComponent(utf8Match[1]);
-        else {
-          const simpleMatch = contentDisposition.match(/filename="?([^"]+)"?/);
-          if (simpleMatch) filename = simpleMatch[1];
-        }
-      }
-
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.click();
-      window.URL.revokeObjectURL(url);
-
-      this.mensagem = 'Modelo baixado com sucesso!';
-      this.tipoSelecionado = null;
-      this.disciplinaSelecionadaId = null;
-      this.tiposDesabilitados = [];
+    if (erros.length > 0) {
+      this.erro = `Por favor, selecione ${erros.join(' e ')} para baixar o modelo.`;
       this.limparMensagensDepoisDeTempo();
-    },
-    error: (err) => {
-      console.error('Erro ao baixar modelo:', err);
-      this.erro = 'Erro ao baixar modelo Excel.';
-      this.limparMensagensDepoisDeTempo();
+      return;
     }
-  });
-}
+
+    if (!this.verificarTipoAnteriorEnviado(this.tipoSelecionado!)) {
+      const tipoAnterior = this.tipoSelecionado! - 1;
+      const nomeModeloAnterior = this.tipos.find(t => t.codigo === tipoAnterior)?.descricao || `Modelo ${tipoAnterior}`;
+      this.erro = `⚠️ Você deve enviar primeiro o modelo anterior: "${nomeModeloAnterior}".`;
+      this.limparMensagensDepoisDeTempo();
+      return;
+    }
+
+    this.lacamentoNotasService.baixarModeloExcel(this.disciplinaSelecionadaId!, this.tipoSelecionado!).subscribe({
+      next: (response) => {
+        const blob = response.body!;
+        const contentDisposition = response.headers.get('Content-Disposition');
+        let filename = 'modelo_notas.xlsx';
+
+        if (contentDisposition) {
+          const utf8Match = contentDisposition.match(/filename\*\=UTF-8''(.+)/);
+          if (utf8Match) filename = decodeURIComponent(utf8Match[1]);
+          else {
+            const simpleMatch = contentDisposition.match(/filename="?([^"]+)"?/);
+            if (simpleMatch) filename = simpleMatch[1];
+          }
+        }
+
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+        this.mensagem = 'Modelo baixado com sucesso!';
+        this.tipoSelecionado = null;
+        this.disciplinaSelecionadaId = null;
+        this.tiposDesabilitados = [];
+        this.limparMensagensDepoisDeTempo();
+      },
+      error: (err) => {
+        console.error('Erro ao baixar modelo:', err);
+        this.erro = 'Erro ao baixar modelo Excel.';
+        this.limparMensagensDepoisDeTempo();
+      }
+    });
+  }
+
   verificarTipoAnteriorEnviado(tipoAtual: number): boolean {
     if (tipoAtual === 1) return true;
-    const tipoAnterior = tipoAtual - 1;
+    const tipoAnterior= tipoAtual - 1;
     return this.tiposDesabilitados.includes(tipoAnterior) || this.tiposComEstudantesSemNotaMesmoLançado.includes(tipoAnterior);
   }
 
@@ -240,8 +259,7 @@ export class LancamentoComponent implements OnInit {
     setTimeout(() => {
       this.mensagem = '';
       this.erro = '';
-
-    }, 8000);
-
+    }, 15000);
   }
 }
+

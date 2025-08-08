@@ -69,24 +69,18 @@
             <option value="OUTRO">Outro</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="anoAcademico">Ano Acadêmico:</label>
-          <input type="number" id="anoAcademico" name="anoAcademico" [(ngModel)]="estudante.anoAcademico" min="1" max="5" required>
-        </div>
+      
         <div class="form-group">
           <label for="dataIngresso">Data de Ingresso:</label>
           <input type="date" id="dataIngresso" name="dataIngresso" [(ngModel)]="estudante.dataIngresso" required>
         </div>
-        <div class="form-group">
-          <label for="dataConclusao">Data de Conclusão (opcional):</label>
-          <input type="date" id="dataConclusao" name="dataConclusao" [(ngModel)]="estudante.dataConclusao">
-        </div>
+     
         <div class="form-group">
           <label for="statusEstudante">Status:</label>
           <select id="statusEstudante" name="statusEstudante" [(ngModel)]="estudante.statusEstudante" required>
             <option value="">Selecione</option>
-            <option value="ACTIVO">Activo</option>
-            <option value="SUSPENSO">Inactivo</option>
+            <option value="EM_FORMAÇÃO">EM Formação</option>
+            <option value="TRANCADO">Trancado</option>
           </select>
         </div>
       </div>

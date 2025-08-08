@@ -13,7 +13,8 @@ export class AuthGuard implements CanActivate {
     const usuarioRaw = localStorage.getItem('usuario');
     
     if (!usuarioRaw) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/acesso-negado']);
+
       return false;
     }
 

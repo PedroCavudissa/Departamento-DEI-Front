@@ -1,20 +1,19 @@
-import { Component } from '@angular/core';
-import { BarralateralSecretariaComponent } from "../../barralateral-secretaria/barralateral-secretaria.component";
-import { HorarioItem, HorarioService, Turma } from '../../../services/horario.service';
-import { Disciplina, DisciplinaService } from '../../../services/disciplina.service';
-import { NotificationService } from '../../../services/notification.service';
+import { Component, OnInit } from '@angular/core';
+import { BarralateralComponent } from "../../barralateral/barralateral.component";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HorarioService, HorarioItem, Turma } from '../../../services/horario.service';
+import { NotificationService } from '../../../services/notification.service';
+import { DisciplinaService, Disciplina } from '../../../services/disciplina.service';
 
 @Component({
-  selector: 'app-horario-secretaria',
+  selector: 'app-time-table',
   standalone: true,
-  imports: [BarralateralSecretariaComponent, FormsModule,CommonModule],
-  templateUrl: './horario-secretaria.component.html',
-  styleUrl: './horario-secretaria.component.css'
+  imports: [BarralateralComponent, FormsModule, CommonModule],
+  templateUrl: './time-table.component.html',
+  styleUrls: ['./time-table.component.css']
 })
-export class HorarioSecretariaComponent {
-  
+export class TimeTableComponent implements OnInit {
   diasSemana = ['SEGUNDA', 'TERCA', 'QUARTA', 'QUINTA', 'SEXTA', 'SABADO'];
   horariosUnicos: string[] = [];
   grade: any[] = [];
@@ -61,7 +60,6 @@ export class HorarioSecretariaComponent {
     private horarioService: HorarioService,
     private disciplinaService: DisciplinaService,
     private notificationService: NotificationService
-
   ) {}
 
   ngOnInit(): void {
@@ -186,6 +184,3 @@ export class HorarioSecretariaComponent {
   }
   
 }
-
-
-

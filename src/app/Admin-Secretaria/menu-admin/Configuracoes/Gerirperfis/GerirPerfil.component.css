@@ -123,6 +123,75 @@ body, html {
   cursor: pointer;
   z-index: 1100;
 }
+.tabela-estilizada {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+.tabela-estilizada th,
+.tabela-estilizada td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.tabela-estilizada thead {
+  background-color: #f2f2f2;
+}
+
+.sem-dados {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+.paginacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-info {
+  font-weight: bold;
+}
+
+.page-size select {
+  padding: 4px;
+  margin-left: 8px;
+}
+button {
+  cursor: pointer;
+  background-color: #4DB8FF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #3399dd;
+  transform: translateY(-1px);
+}
+
+button:focus {
+  outline: 2px solid #1a8cff;
+  outline-offset: 2px;
+}
+
+button:active {
+  background-color: #2a85c5;
+  transform: scale(0.98);
+}
+.page-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 
 /* ===========================
    RESPONSIVIDADE

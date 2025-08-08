@@ -49,7 +49,10 @@ selecionar(select: string){
                   case 'Meu Perfil':
                     {this.router.navigate(['/perfil-admin'])};
                     break;
-                
+                    case 'Logs':
+                      {this.router.navigate(['/logs'])};
+                      break;
+                  
   }
 }
 }

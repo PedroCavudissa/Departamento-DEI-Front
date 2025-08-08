@@ -47,11 +47,10 @@
        placeholder="Exem.: 2025" />
         <small class="text-danger" *ngIf="mensagemErroAno">{{ mensagemErroAno }}</small>
       </div>
-      <!-- BOTÃO -->
-      <button class="btn-azul" (click)="carregarPautas()">Buscar</button>
+    
 <br><br>
 <div class="info-cadeira" *ngIf="disciplinaId">
-  <strong>Cadeira:</strong> {{ nomeDisciplinaSelecionada() }}
+  <strong>Cadeira Selecionada:</strong> {{ nomeDisciplinaSelecionada() }}
 </div>
 
 <!-- TABELA DE PAUTA -->

@@ -16,10 +16,12 @@ export class GerirPerfilComponent implements OnInit {
   usuarios: any[] = [];
   filtroRole: string = '';
   carregando = true;
-  paginaAtual = 0;
+// Paginação
+paginaAtual = 1; 
 tamanhoPagina = 10;
-totalPaginas = 0;
-
+tamanhosPagina = [5, 10, 20, 50];
+totalPaginas = 1;
+totalElementos = 0;
   constructor(
     private usuarioService: UsuarioService,
     private notification: NotificationService
@@ -27,25 +29,22 @@ totalPaginas = 0;
 
   ngOnInit() {
     this.carregarUsuarios();
+   
   }
 
   carregarUsuarios() {
     this.carregando = true;
+    const paginaParaApi = this.paginaAtual - 1; 
   
-    const usuarioLocal = localStorage.getItem('usuario');
-    const idLogado = usuarioLocal ? JSON.parse(usuarioLocal).id : null;
-  
-    this.usuarioService.listarUsuarios(this.paginaAtual, this.tamanhoPagina).subscribe({
+    this.usuarioService.listarUsuarios(paginaParaApi, this.tamanhoPagina).subscribe({
       next: (response) => {
         if (Array.isArray(response?.content)) {
-          // Oculta o usuário logado da lista
-          this.usuarios = response.content.filter((u: any) => u.id !== idLogado);
-  
-          const total = response.totalElements || response.total || 0;
-          this.totalPaginas = Math.ceil(total / this.tamanhoPagina);
+          this.usuarios = response.content;
+          this.totalPaginas = response.totalPages;
+          this.totalElementos = response.totalElements;
         } else {
           this.usuarios = [];
-          console.error('Formato inesperado da resposta:', response);
+          this.totalPaginas = 1;
         }
         this.carregando = false;
       },
@@ -56,7 +55,7 @@ totalPaginas = 0;
       }
     });
   }
-
+  
   usuariosFiltrados() {
     return this.filtroRole
       ? this.usuarios.filter(u => u.role === this.filtroRole)
@@ -95,9 +94,5 @@ totalPaginas = 0;
         this.notification.error(mensagemErro);
       }
     });
-  }
-  carregarMais() {
-    this.paginaAtual++;
-    this.carregarUsuarios();
   }
 }

@@ -63,6 +63,7 @@ export class PerfilAdminComponent implements OnInit {
     this.adminService.getPerfilUsuario().subscribe({
       next: (res: Funcionario) => {
         this.admin = res;
+        this.usuarioSelecionado = res;
 
         this.formulario.patchValue({
           email: res.email,

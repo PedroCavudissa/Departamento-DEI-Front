@@ -1,18 +1,24 @@
-<div class="p-4">
-    <h2 class="text-lg font-semibold mb-4">Registros de Atividades</h2>
+<div class="container">
+  <h2>Logs de Ações</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Ação</th>
+        <th>Entidade</th>
+        <th>Criado por</th>
+        <th>Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of logs">
+        <td>{{ log.acao }}</td>
+        <td>{{ log.entidade }}</td>
+        <td>{{ log.criadoPor }}</td>
+        <td>{{ log.data | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
   
-    <div *ngIf="carregando">Carregando...</div>
-  
-    <ul *ngIf="!carregando && logs.length">
-      <li *ngFor="let log of logs" class="mb-2 border-b pb-2">
-        <strong>{{ log.criadoPor }}</strong> {{ log.acao.toLowerCase() }} 
-        <span class="text-sm italic text-gray-500">
-          ({{ log.entidade }} #{{ log.entidadeId }}) em {{ log.data | date:'short' }}
-        </span>
-      </li>
-    </ul>
-  
-    <div *ngIf="!carregando && !logs.length">Nenhum log encontrado.</div>
-  </div>
+</div>
 
   <app-barralateral></app-barralateral>

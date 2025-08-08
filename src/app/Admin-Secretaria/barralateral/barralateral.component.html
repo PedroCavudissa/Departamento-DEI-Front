@@ -41,6 +41,7 @@
                    
          <li> <a class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Horários' }"> <i class='bx bx-time'></i>
            <span  (click)="selecionarMenu('Horários','Horários')"tabindex="0" (keyup.enter)="selecionarMenu('Horários','Horários')">Horários</span> </a></li>
+           
                
            <li> <a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Pautas' }"> <i class='bx bx-list-check'></i>
             <span (click)="selecionarMenu('Pautas','Pautas')"tabindex="0" (keyup.enter)="selecionarMenu('Pautas','Pautas')">Pautas</span> </a> </li>
@@ -48,9 +49,7 @@
            <li><a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Calendário' }"> <i class='bx bx-calendar'></i>
              <span (click)="selecionarMenu('Calendário','Calendário')" tabindex="0" (keyup.enter)="selecionarMenu('Calendário','Calendário')">Calendário</span></a></li>
                   
-            <li> <a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Chat' }">  <i class='bx bx-chat'></i>
-           <span  (click)="selecionarMenu('Chat','Chat')"tabindex="0" (keyup.enter)="selecionarMenu('Chat','Chat')">Chat</span></a> </li>
-                  
+           
            <li> <a  class="menu-link" [ngClass]="{ ativo: abaSelecionada === 'Comunicados' }"> <i class='bx bx-notification'></i>
              <span (click)="selecionarMenu('Comunicados','Comunicados')" tabindex="0" (keyup.enter)="selecionarMenu('Comunicados','Comunicados')">Comunicados</span></a></li>
                   

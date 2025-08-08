@@ -15,6 +15,11 @@ export interface Funcionario {
   cargo: string;
   email: string;
   dataIngresso: Date;
+
+  createdAt?: Date;
+  updatedAt?: Date;
+  createdBy?: any; 
+  updatedBy?: any;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -57,16 +62,32 @@ export interface Funcionario {
     }  
 
     getLogsFuncionarios(): Observable<LogRegistro[]> {
-      return this.http.get<any[]>('/api/estudantes').pipe(
-        map(estudantes => estudantes.map(est => ({
-          acao: 'Criou Funcionários',
+      const usuario = localStorage.getItem('usuario');
+      const token = usuario ? JSON.parse(usuario).token : null;
+    
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
+      });
+    
+      const url = `${environment.apiUrl}/api/staff`;
+    
+      return this.http.get<any>(url, { headers }).pipe(
+        map(response => (response.content || []).map((func: any) => ({
+          acao: 'Criou Funcionário',
           entidade: 'Funcionário',
-          entidadeId: est.id,
-          criadoPor: est.createdBy?.nome || est.createdBy?.id || 'Desconhecido',
-          data: est.createdAt,
-        })))
+          entidadeId: func.id,
+          criadoPor: typeof func.createdBy === 'object' ? func.createdBy.nome : func.createdBy || 'Desconhecido',
+          data: func.createdAt
+        }))),
+        catchError(err => {
+          console.error('Erro ao buscar logs de funcionários:', err);
+          return of([]);
+        })
       );
     }
+    
 }
   
   
