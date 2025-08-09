@@ -18,13 +18,10 @@ export class LogsComponent implements OnInit {
 
   constructor(private logsService: LogsService,private funcionarioService: FuncionarioService,private estudanteService: EstudanteService ) {}
   ngOnInit() {
-    this.funcionarioService.getLogsFuncionarios().subscribe({
+    this.logsService.carregarTodosLogs().subscribe({
       next: (res) => this.logs = res,
       error: (err) => console.error('Erro ao carregar logs:', err)
     });
-    this.estudanteService.getLogsEstudantes().subscribe({
-      next: (res) => this.logs = [...this.logs, ...res],
-      error: (err) => console.error('Erro ao carregar logs:', err)
-    });
   }
+  
 }

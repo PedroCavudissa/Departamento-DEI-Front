@@ -75,44 +75,31 @@ h2 {
   display: inline-block;
 }
 
-/* FORMULÁRIOS */
-form,
 .form-search {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
   align-items: center;
   margin-bottom: 20px;
-  width: 100%;
+  width: 100%; /* Acompanha a largura do card */
 }
 
 select,
-input,
-button {
+input {
   font-size: 15px;
   padding: 10px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.06);
   transition: border 0.3s, box-shadow 0.3s;
-  width: 100%;
-  max-width: 320px;
+  width: 100%;        /* Preenche o espaço disponível */
+  max-width: 320px;   /* Limite máximo para inputs largos */
   background-color: #fff;
+  flex-grow: 1;       /* Faz o input crescer para preencher espaço */
+  min-width: 150px;   /* Limite mínimo para não ficar muito pequeno */
 }
 
-select {
-  appearance: none;
-  background: #fff url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5"><path fill="%23666" d="M0,0l5,5 5-5z"/></svg>') no-repeat right 12px center;
-  background-size: 10px 5px;
-  padding-right: 30px;
-}
 
-input:focus,
-select:focus {
-  border-color: #009cff;
-  outline: none;
-  box-shadow: 0 0 4px rgba(0,156,255,0.3);
-}
 
 button {
   cursor: pointer;

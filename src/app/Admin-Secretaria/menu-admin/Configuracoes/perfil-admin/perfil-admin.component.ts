@@ -75,6 +75,9 @@ export class PerfilAdminComponent implements OnInit {
           cargo: res.cargo,
           nivelAcademico: res.nivelAcademico
         });
+        
+        console.log('Valores do formulário após patch:', this.formulario.value);
+        
       },
       error: (err) => {
         this.mensagemErro = 'Erro ao carregar dados do administrador.';

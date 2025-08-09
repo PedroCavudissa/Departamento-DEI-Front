@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface HorarioItem {
   turmaSigla: string;
@@ -32,7 +33,7 @@ export interface Turma {
 
 @Injectable({ providedIn: 'root' })
 export class HorarioService {
-  private baseUrl = 'https://10bd580d93e8.ngrok-free.app';
+  private baseUrl = `${environment.apiUrl}`; // URL base da API, definida no environment.ts
 
   constructor(private http: HttpClient) {}
 
@@ -40,7 +41,7 @@ export class HorarioService {
   private getAuthHeaders(): HttpHeaders {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
-
+    console.log('Token usado no header:', token);
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json',
@@ -48,6 +49,7 @@ export class HorarioService {
       'ngrok-skip-browser-warning': 'true'
     });
   }
+  
 
   /** Busca grade horária filtrando por ano, semestre e turma */
   getGradeHoraria(): Observable<HorarioItem[]> {

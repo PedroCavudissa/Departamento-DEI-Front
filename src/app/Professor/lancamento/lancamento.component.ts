@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LateralProfessorComponent } from '../lateral-professor/lateral-professor.component';
 import { LacamentoNotasService, Disciplina, TipoPauta, PautaEstudante } from '../../services/lacamento-notas.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-lancamento',
@@ -34,7 +35,7 @@ export class LancamentoComponent implements OnInit {
   tipoComPendencias: number[] = [];
   tiposComEstudantesSemNotaMesmoLançado: number[] = [];
 
-  constructor(private lacamentoNotasService: LacamentoNotasService) {}
+  constructor(private lacamentoNotasService: LacamentoNotasService,private notification: NotificationService) {}
 
   ngOnInit(): void {
     this.carregando = true;
@@ -216,9 +217,17 @@ export class LancamentoComponent implements OnInit {
     this.lacamentoNotasService.baixarModeloExcel(this.disciplinaSelecionadaId!, this.tipoSelecionado!).subscribe({
       next: (response) => {
         const blob = response.body!;
+        
+        if (blob.size < 1000) { // Exemplo: se menor que 1KB, considerar vazio
+          this.notification.error('Não há estudantes cadastrados para este modelo.');
+          this.limparMensagensDepoisDeTempo();
+          return;
+        }
+        
+        // continua processo de download
         const contentDisposition = response.headers.get('Content-Disposition');
         let filename = 'modelo_notas.xlsx';
-
+    
         if (contentDisposition) {
           const utf8Match = contentDisposition.match(/filename\*\=UTF-8''(.+)/);
           if (utf8Match) filename = decodeURIComponent(utf8Match[1]);
@@ -227,14 +236,14 @@ export class LancamentoComponent implements OnInit {
             if (simpleMatch) filename = simpleMatch[1];
           }
         }
-
+    
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = filename;
         a.click();
         window.URL.revokeObjectURL(url);
-
+    
         this.mensagem = 'Modelo baixado com sucesso!';
         this.tipoSelecionado = null;
         this.disciplinaSelecionadaId = null;
@@ -243,10 +252,12 @@ export class LancamentoComponent implements OnInit {
       },
       error: (err) => {
         console.error('Erro ao baixar modelo:', err);
+        this.notification.error('Não há estudantes cadastrados para este modelo.');
         this.erro = 'Erro ao baixar modelo Excel.';
         this.limparMensagensDepoisDeTempo();
       }
     });
+    
   }
 
   verificarTipoAnteriorEnviado(tipoAtual: number): boolean {

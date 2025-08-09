@@ -18,6 +18,8 @@
 
 <h2>Lista de Estudantes</h2>
 
+
+<div class="scroll-container" >
   <form class="form-search" (submit)="false">
     <select [(ngModel)]="anoSelecionado" name="anoSelecionado" (change)="carregarEstudantes()">
       <option [ngValue]="''">Selecionar Ano</option>
@@ -30,7 +32,6 @@
 
     <input [(ngModel)]="textoBusca" name="textoBusca" type="text" placeholder="Escreva aqui..." />
   </form>
-<div class="scroll-container" >
   <table>
      <thead>
       <tr>
@@ -67,8 +68,6 @@
       <h3>Detalhes do Estudante</h3>
       <p><strong>Nome:</strong> {{ estudanteSelecionado.nome }}</p>
       <p><strong>Documento:</strong> {{ estudanteSelecionado.numIdentificacao }}</p>
-      <p><strong>Contacto:</strong> {{ estudanteSelecionado.contacto || '—' }}</p>
-      <p><strong>Endereço:</strong> {{ estudanteSelecionado.endereco || '—' }}</p>
       <p><strong>Ano Acadêmico:</strong> {{ estudanteSelecionado.anoAcademico }}</p>
       <p><strong>Data de Nascimento:</strong> {{ estudanteSelecionado.dataNascimento | date: 'dd/MM/yyyy' }}</p>
     </div>

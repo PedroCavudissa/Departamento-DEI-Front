@@ -114,7 +114,7 @@ export const routes: Routes = [
   // Secretaria
   { path: 'menu-secretaria', component: MenuSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'chat-secretaria', component: ChatSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
-  { path: 'calendario-normal', component: CalendarioNormalComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
+  { path: 'calendario-secretaria', component: CalendarioNormalComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'comunicado-secretaria', component: ComunicadoSecretariaComponent, canActivate: [AuthGuard] ,data: { role: ['SECRETARIA'] } },
   { path: 'detalhes-cadeiras-secretaria', component: DetalhesCadeirasSecretariaComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },
   { path: 'detalhes-estudantes-secretaria', component: DetalhesEstudantesSecretariaComponent, canActivate: [AuthGuard],data: { role: ['SECRETARIA'] }  },

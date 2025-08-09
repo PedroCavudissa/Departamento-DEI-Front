@@ -9,7 +9,8 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   gap: 1.5rem;
   margin-top: 90px;
-  margin-left: 200px;
+  margin-left: 420px;
+  width: 60%;
 }
 .form-section {
   position: relative;
@@ -175,175 +176,39 @@ label {
     font-size: 14px;
     background-color: white; 
   }
-
-/* RESPONSIVIDADE*/
-@media screen and (width: 375px) and (height: 667px){
-  .container  {
-    padding: 16px;
-    margin-top: 91px;
-  }
-}
-
-@media screen and (width: 414px) and (height: 896px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-    @media screen and (width: 390px) and (height: 844px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
-
- @media screen and (width: 430px) and (height: 932px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
-     @media screen and (width: 412px) and (height: 914px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-
-  @media screen and (width: 412px) and (height: 915px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-
- @media screen and (width: 360px) and (height: 740px) {
-      .container  {
-        margin-top: 80px;
-      }
-    }
-     @media screen and (width: 768px) and (height: 1024px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
-     @media screen and (width: 820px) and (height: 1180px) {
-      .container {
-        margin-top: 200px;
-      }
-    }
-     @media screen and (width: 1024px) and (height: 1366px) {
-      .container  {
-        margin-top: 180px;
-      }
-    }
-
- @media screen and (width: 912px) and (height: 1368px) {
-     .container  {
-        margin-top: 180px;
-      }
-    }
- @media screen and (width: 540px) and (height: 720px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-
- @media screen and (width: 344px) and (height: 882px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
- @media screen and (width: 853px) and (height: 1280px) {
-      .container {
-        margin-top: 150px;
-      }
-    }
- @media screen and (width: 1024px) and (height: 600px) {
-      .container  {
-        margin-top: 80px;
-      }
-    }
-
- @media screen and (width: 1280px) and (height: 800px) {
-      .container  {
-        margin-top: 100px;
-        
-      }
-    }
-
-
- /* Responsividade da tabela para todos os tamanhos */
-
-.table-section {
-  overflow-x: auto;
-}
-
-.table-section table {
-  min-width: 700px; /* Garante scroll horizontal se necessário */
-}
-
-.table-section table th,
-.table-section table td {
-  white-space: nowrap; /* Evita quebra de linha nas células */
-}
-/* Responsividade do .form-section para todos os tamanhos */
-
-@media screen and (max-width: 1024px) {
-  .form-section {
-    padding: 16px;
-    margin-left: 0;
-    border-radius: 12px;
-  }
-
+/* Telas muito pequenas (até 480px) */
+@media screen and (max-width: 480px) {
   .container {
+    padding: 16px;
+    margin-top: 80px; /* valor base para mobile */
     margin-left: 0;
-    max-width: 100%;
-    padding: 12px;
+    width: 80%;
   }
 }
-/* Responsividade completa para inputs, selects, buttons etc. */
-@media screen and (max-width: 1024px) {
-  /* Inputs genéricos */
-  input[type="text"],
-  input[type="number"],
-  input[type="email"],
-  input[type="date"],
-  input[type="password"],
-  select,
-  textarea {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 6px;
-  }
 
-  /* Seletor personalizado */
-  select.form-control {
-    width: 100%;
-    max-width: 100%;
-    font-size: 14px;
+/* Smartphones grandes e tablets pequenos (481px até 767px) */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+  .container {
+    margin-top: 90px;
+    margin-left: 0;
+    width: 80%;
   }
+}
 
-  /* Estilo para opções (se o navegador permitir) */
-  select option {
-    font-size: 14px;
+/* Tablets e telas médias (768px até 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    margin-top: 100px auto;
+    margin-left: 0;
+    width: 90%;
   }
+}
 
-  /* Campo customizado */
-  .input-custom {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px;
-    font-size: 14px;
-  }
-
-  /* Botões */
-  .btn-azul,
-  .btn-ok,
-  .confirm-btn {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    box-sizing: border-box;
-    text-align: center;
+/* Telas grandes (desktop acima de 1024px) */
+@media screen and (min-width: 1024px) {
+  .container {
+    margin-left: 420px; /* seu padrão */
+    width: 60%;
+    margin-top: 90px;
   }
 }

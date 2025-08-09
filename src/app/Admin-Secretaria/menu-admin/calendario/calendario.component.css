@@ -7,7 +7,7 @@
   border-radius: 8px;
   color: #fff;
   margin: 140px auto 20px;
-  max-width: 380px;
+  max-width: 580px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -18,7 +18,7 @@
 
 /* Quadro principal */
 .quadro {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 20px auto;
   background: #fff;
   padding: 25px;

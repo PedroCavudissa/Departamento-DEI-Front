@@ -83,6 +83,41 @@ h2, h3 {
   flex: 1 1 250px;
   max-width: 100%;
 }
+.filtro-item {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  transition: border 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+}
+
+.campo-pesquisa-func {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  transition: border 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+}
+
+.campo-pesquisa-func:focus {
+  border-color: #009cff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,156,255,0.3);
+}
+
+/* Se quiser, para responsividade */
+
+@media (max-width: 768px) {
+  .filtro-item {
+    max-width: 100%; /* ocupa toda largura em telas menores */
+  }
+}
 
 select {
   appearance: none;
@@ -242,6 +277,7 @@ button:hover {
   .pagina-wrapper {
     margin-top: 80px;
     padding: 0 12px;
+    width: 90%;
   }
   table{
     overflow-x:auto;
@@ -266,6 +302,7 @@ button:hover {
   .tabela-funcionarios td {
     font-size: 14px;
     padding: 10px;
+    overflow: auto;
   }
 }
 

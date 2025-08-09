@@ -27,21 +27,21 @@
   <div class="form-container">
     <form (ngSubmit)="salvarEvento()" #eventoForm="ngForm">
       <button type="button" class="close-btn" (click)="fecharFormulario()">X</button>
-
+    
       <label for="data">Data</label>
-      <input type="text" id="data" name="data" placeholder="aaaa/mm/dd" [(ngModel)]="data" required />
-
+      <input type="date" id="data" name="data" [(ngModel)]="data" required />
+    
       <label for="titulo">Título</label>
       <input type="text" id="titulo" name="titulo" [(ngModel)]="titulo" required />
-
+    
       <label for="conteudo">Conteudo</label>
       <input type="text" id="conteudo" name="conteudo" [(ngModel)]="conteudo" required />
-
-      <!-- Campo oculto -->
+    
       <input type="hidden" name="calendarStatus" value="VALIDO" />
-
+    
       <button type="submit" class="btn-salvar">Salvar</button>
     </form>
+    
   </div>
 </div>
 

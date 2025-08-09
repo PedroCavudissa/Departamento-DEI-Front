@@ -69,8 +69,7 @@ export class EstudanteService {
       })
     );
   }
-  
-  getLogsEstudantes(): Observable<LogRegistro[]> {
+  getLogsEstudantes(page = 0, size = 10): Observable<LogRegistro[]> {
     const usuario = localStorage.getItem('usuario');
     const token = usuario ? JSON.parse(usuario).token : null;
   
@@ -80,24 +79,25 @@ export class EstudanteService {
       'ngrok-skip-browser-warning': 'true'
     });
   
+    const url = `${environment.apiUrl}/api/departamento/students/paged?page=${page}&size=${size}`;
   
-    const url = `${environment.apiUrl}/api/departamento/students`;
-    
-    return this.http.get<any>(url, { headers }).pipe(
-      map(response => (response.content || []).map((est: any) => ({
-        acao: 'Criou estudante',
-        entidade: 'Estudante',
-        entidadeId: est.id,
-        criadoPor: est.createdBy?.nome || est.createdBy?.id || 'Desconhecido',
-        data: est.createdAt,
-      }))),
+    return this.http.get<any[]>(url, { headers }).pipe(
+      map(estudantesArray =>
+        (estudantesArray || []).map(est => ({
+          acao: 'Criou estudante',
+          entidade: 'Estudante',
+          entidadeId: est.id,
+          criadoPor: est.createdBy || 'Desconhecido',
+          data: est.createdAt,
+        }))
+      ),
       catchError(err => {
-        console.error('Erro ao buscar logs de funcionários:', err);
+        console.error('Erro ao buscar logs de estudantes:', err);
         return of([]);
       })
     );
   }
-
+  
   }
   
   
