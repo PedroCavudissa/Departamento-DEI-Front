@@ -53,16 +53,18 @@ h2, h3 {
 /* GRÁFICO */
 .grafico-container {
   width: 100%;
-  height: auto;
+  height: 300px; /* altura fixa para o gráfico */
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative; /* importante para Chart.js */
 }
 
 .grafico-box canvas {
-  max-width: 100% !important;
-  height: auto !important;
+  width: 100% !important;
+  height: 100% !important; /* ocupar toda a altura do container */
 }
+
 
 /* FORM SEARCH */
 .form-search {

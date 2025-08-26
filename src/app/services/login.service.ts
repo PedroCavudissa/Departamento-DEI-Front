@@ -26,4 +26,12 @@ export class LoginService {
 
     return this.http.post(`${environment.apiUrl}/api/auth/logOut`, {}, { headers });
   }
+
+  alterarSenha(senhaAtual: string, novaSenha: string) {
+    return this.http.post(`${environment.apiUrl}/api/auth/me/update-password`, {
+      senhaAtual,
+      novaSenha
+    });
+  }
+  
 }

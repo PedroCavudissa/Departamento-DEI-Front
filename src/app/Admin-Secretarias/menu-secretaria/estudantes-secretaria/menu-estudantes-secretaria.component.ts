@@ -30,6 +30,7 @@ export class MenuEstudantesSecretariaComponent implements AfterViewInit {
   anoSelecionado: string = '';
   textoBusca: string = '';
   estudanteSelecionado: any = null;
+  modoEdicao: boolean = false;
 
   verDetalhes(estudante: any) {
     this.estudanteSelecionado = estudante;
@@ -154,6 +155,24 @@ export class MenuEstudantesSecretariaComponent implements AfterViewInit {
       });
     }).catch(err => {
       console.error('❌ Erro ao gerar gráficos:', err);
+    });
+  }
+
+  salvarEdicao() {
+    if (!this.estudanteSelecionado) return;
+
+    this.estudanteService.updateEstudante(this.estudanteSelecionado).subscribe({
+      next: (atualizado) => {
+        // Atualiza na lista local
+        const idx = this.estudantes.findIndex(e => e.id === atualizado.id);
+        if (idx !== -1) this.estudantes[idx] = atualizado;
+
+        this.fecharModal();
+        console.log('✅ Estudante atualizado com sucesso!');
+      },
+      error: (err) => {
+        console.error('❌ Erro ao atualizar estudante:', err);
+      }
     });
   }
 }

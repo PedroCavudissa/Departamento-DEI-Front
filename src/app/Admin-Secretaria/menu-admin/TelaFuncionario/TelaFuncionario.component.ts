@@ -24,6 +24,7 @@ export class FuncionariosComponent implements OnInit, AfterViewInit {
   graficoDI: any;
   graficoProfessores: any;
   funcionarioSelecionado: any = null;
+  modoEdicao: boolean = false;
 
   private pesquisaSubject = new Subject<string>();
   constructor(
@@ -312,6 +313,26 @@ this.funcionarios = [...this.todosFuncionarios];
 
     }
 
+  }
+
+  
+
+  salvarEdicao() {
+    if (!this.funcionarioSelecionado) return;
+
+    this.funcionarioService.upDateFuncionario(this.funcionarioSelecionado).subscribe({
+      next: (atualizado) => {
+        // Atualiza na lista local
+        const idx = this.funcionarios.findIndex(e => e.id === atualizado.id);
+        if (idx !== -1) this.funcionarios[idx] = atualizado;
+
+        this.fecharModal();
+        console.log('✅ Estudante atualizado com sucesso!');
+      },
+      error: (err) => {
+        console.error('❌ Erro ao atualizar estudante:', err);
+      }
+    });
   }
 
 }

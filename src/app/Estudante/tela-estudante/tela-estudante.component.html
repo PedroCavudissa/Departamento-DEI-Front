@@ -5,8 +5,10 @@
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
 <div class="container">
+  
   <div class="card">
-   
+    <img src="assets/imagens/estudante-masculino.png" alt="Perfil do Professor" />
+
 
     <div class="info">
      <div *ngIf="errorMessage" class="error-message">
@@ -18,10 +20,11 @@
         <h3 > Dados academicos</h3>
 
         <p><strong>Nome:</strong> {{ estudanteSelecionado.nome}}</p>
-        <p><strong>NumIdentificação:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
+        <p><strong>Nº Documento:</strong>{{ estudanteSelecionado.userDetails.numIdentificacao}}</p>
         <p><strong>Contacto:</strong>{{ estudanteSelecionado.userDetails.contacto}}</p>
-        <p><strong>AnoAcademico:</strong>{{ estudanteSelecionado.userDetails.anoAcademico}}</p>
-    
+        <p><strong>Ano Academico:</strong>{{ estudanteSelecionado.userDetails.anoAcademico}}</p>
+        <p><strong>Data de Igresso:</strong>{{ estudanteSelecionado.userDetails.dataIngresso}}</p>
+      
     </div>
   <ng-template #noEstudantes>
     <p>Nenhum estudante encontrado.</p> 

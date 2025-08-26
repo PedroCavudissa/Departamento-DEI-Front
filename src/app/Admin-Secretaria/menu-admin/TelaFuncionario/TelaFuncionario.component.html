@@ -76,6 +76,9 @@
                 <button (click)="verDetalhes(funcionario)" class="btn-acao" title="Ver Detalhes">
                   <i class="bx bx-show"></i>
                 </button>
+                <button (click)="verDetalhes(funcionario)" class="btn-acao" title="Ver Detalhes">
+                  <i class="bx bx-edit"></i>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -90,10 +93,36 @@
           <p><strong>Nome:</strong> {{ funcionarioSelecionado.nome }}</p>
           <p><strong>Documento:</strong> {{ funcionarioSelecionado.numDocumento }}</p>
           <p><strong>Cargo:</strong> {{ funcionarioSelecionado.cargo }}</p>
-    
+          <p><strong>Email:</strong> {{ funcionarioSelecionado.email || '—' }}</p>
+          <p><strong>Contacto:</strong> {{ funcionarioSelecionado.contacto || '—' }}</p>
+          <p><strong>Endereço:</strong> {{ funcionarioSelecionado.endereco || '—' }}</p>
+        
         </div>
       </div>
-
+      <form *ngIf="modoEdicao">
+        <label>Nome</label>
+        <input [(ngModel)]="funcionarioSelecionado.nome" name="nome" />
+  
+        <label>Documento</label>
+        <input [(ngModel)]="funcionarioSelecionado.numDocumento" name="doc" />
+  
+        <label>Email</label>
+        <input [(ngModel)]="funcionarioSelecionado.email" name="email" />
+  
+        <label>Contacto</label>
+        <input [(ngModel)]="funcionarioSelecionado.contacto" name="contacto" />
+  
+        <label>Endereço</label>
+        <input [(ngModel)]="funcionarioSelecionado.endereco" name="endereco" />
+  
+        <label>Ano Acadêmico</label>
+        <input type="number" [(ngModel)]="funcionarioSelecionado.anoAcademico" name="ano" />
+  
+        <label>Status</label>
+       
+  
+        <button type="button" (click)="salvarEdicao()">Salvar</button>
+      </form>
     </div> 
   </div> 
 </div>

@@ -58,6 +58,7 @@ import { PerfilAdminComponent } from './Admin-Secretaria/menu-admin/Configuracoe
 import { LogsComponent } from './Admin-Secretaria/menu-admin/Configuracoes/logs/logs.component';
 import { TimeTableComponent } from './Admin-Secretaria/menu-admin/time-table/time-table.component';
 import { HorarioEstudanteComponent } from './Estudante/horario-estudante/horario-estudante.component';
+import { AlterarSenhaComponent } from './alterar-senha/alterar-senha.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -127,5 +128,6 @@ export const routes: Routes = [
   {path: 'estudantes-secretaria', component: MenuEstudantesSecretariaComponent,canActivate: [AuthGuard], data: {role: ['SECRETARIA']}},
   {path:'perfil-secretaria', component: PerfilSecretariaComponent, canActivate: [AuthGuard], data: {role: ['SECRETARIA']}},
   {path:'acesso-negado', component: AcessoNegadoComponent}
-
+,
+{path: 'alterar-senha', component: AlterarSenhaComponent}
 ];

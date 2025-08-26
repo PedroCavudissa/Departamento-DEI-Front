@@ -105,6 +105,7 @@ entrar() {
         const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
+    
             this.router.navigate(['/menu-admin']);
             break;
           case 'SECRETARIA':

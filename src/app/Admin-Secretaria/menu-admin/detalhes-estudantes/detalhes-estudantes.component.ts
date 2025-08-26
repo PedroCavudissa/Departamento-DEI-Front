@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BarralateralComponent } from '../../barralateral/barralateral.component';
-
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Estudante, EstudanteService } from '../../../services/estudante.service';
@@ -8,52 +7,39 @@ import { Estudante, EstudanteService } from '../../../services/estudante.service
 @Component({
   selector: 'app-detalhes-estudantes',
   standalone: true,
-  imports: [BarralateralComponent,FormsModule,CommonModule],
+  imports: [BarralateralComponent, FormsModule, CommonModule],
   templateUrl: './detalhes-estudantes.component.html',
-  styleUrl: './detalhes-estudantes.component.css',
+  styleUrls: ['./detalhes-estudantes.component.css'],
 })
-export class DetalhesEstudantesComponent  implements OnInit{
-
+export class DetalhesEstudantesComponent implements OnInit {
   estudantes: Estudante[] = [];
   anoSelecionado: string = '';
   textoBusca: string = '';
-  estudanteSelecionado: any = null;
+  estudanteSelecionado: Estudante | null = null;
+  modoEdicao: boolean = false;
 
-  verDetalhes(estudante: any) {
-    this.estudanteSelecionado = estudante;
-  }
-  
-  fecharModal() {
-    this.estudanteSelecionado = null;
-  }
-  
   constructor(private estudanteService: EstudanteService) {}
 
- 
-    ngOnInit(): void {
-      this.carregarEstudantes();
-    }
-
+  ngOnInit(): void {
+    this.carregarEstudantes();
+  }
 
   carregarEstudantes(): void {
     const ano = Number(this.anoSelecionado);
     if (!ano) {
       this.estudantes = [];
-      console.warn('⚠️ Selecione um ano para buscar os estudantes.');
       return;
     }
-  
+
     this.estudanteService.getEstudantesPorAno(ano).subscribe({
       next: (dados) => {
         this.estudantes = dados;
-        console.log(`📚 Estudantes do ${ano}º ano:`, dados);
       },
       error: (err) => {
         console.error('❌ Erro ao carregar estudantes:', err);
       }
     });
   }
-  
 
   get estudantesFiltrados(): Estudante[] {
     return this.estudantes.filter(d => {
@@ -62,6 +48,39 @@ export class DetalhesEstudantesComponent  implements OnInit{
       const anoMatch = this.anoSelecionado === '' || d.anoAcademico === parseInt(this.anoSelecionado, 10);
 
       return nomeMatch && anoMatch;
+    });
+  }
+
+  verDetalhes(estudante: Estudante) {
+    this.estudanteSelecionado = { ...estudante }; // clone para edição
+    this.modoEdicao = false;
+  }
+
+  editar(estudante: Estudante) {
+    this.estudanteSelecionado = { ...estudante }; // clone para evitar edição direta
+    this.modoEdicao = true;
+  }
+
+  fecharModal() {
+    this.estudanteSelecionado = null;
+    this.modoEdicao = false;
+  }
+
+  salvarEdicao() {
+    if (!this.estudanteSelecionado) return;
+
+    this.estudanteService.updateEstudante(this.estudanteSelecionado).subscribe({
+      next: (atualizado) => {
+        // Atualiza na lista local
+        const idx = this.estudantes.findIndex(e => e.id === atualizado.id);
+        if (idx !== -1) this.estudantes[idx] = atualizado;
+
+        this.fecharModal();
+        console.log('✅ Estudante atualizado com sucesso!');
+      },
+      error: (err) => {
+        console.error('❌ Erro ao atualizar estudante:', err);
+      }
     });
   }
 }

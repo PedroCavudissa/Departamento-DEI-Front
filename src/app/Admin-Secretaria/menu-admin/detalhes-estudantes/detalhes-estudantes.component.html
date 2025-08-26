@@ -34,6 +34,9 @@
           <button (click)="verDetalhes(e)" title="Ver Detalhes" class="btn-acao">
             <i class='bx bx-show'></i>
           </button>
+          <button (click)="verDetalhes(e)" title="Editar" class="btn-acao">
+            <i class='bx bx-edit'></i>
+          </button>
         </td>
       </tr>
     </tbody>
@@ -44,11 +47,15 @@
     </ng-template>
   </table>
 
-  <!-- MODAL -->
-  <div class="modal" *ngIf="estudanteSelecionado">
-    <div class="modal-content">
-      <span class="close" (click)="fecharModal()">&times;</span>
-      <h3>Detalhes do Estudante</h3>
+ <!-- MODAL -->
+<div class="modal" *ngIf="estudanteSelecionado">
+  <div class="modal-content">
+    <span class="close" (click)="fecharModal()">&times;</span>
+
+    <h3 *ngIf="!modoEdicao">Detalhes do Estudante</h3>
+    <h3 *ngIf="modoEdicao">Editar Estudante</h3>
+
+    <div *ngIf="!modoEdicao">
       <p><strong>Nome:</strong> {{ estudanteSelecionado.nome }}</p>
       <p><strong>Documento:</strong> {{ estudanteSelecionado.numIdentificacao }}</p>
       <p><strong>Email:</strong> {{ estudanteSelecionado.email || '—' }}</p>
@@ -56,9 +63,38 @@
       <p><strong>Endereço:</strong> {{ estudanteSelecionado.endereco || '—' }}</p>
       <p><strong>Ano Acadêmico:</strong> {{ estudanteSelecionado.anoAcademico }}</p>
       <p><strong>Status:</strong> {{ estudanteSelecionado.statusEstudante }}</p>
-      <!-- Adicione mais campos se quiser -->
     </div>
+
+    <form *ngIf="modoEdicao">
+      <label>Nome</label>
+      <input [(ngModel)]="estudanteSelecionado.nome" name="nome" />
+
+      <label>Documento</label>
+      <input [(ngModel)]="estudanteSelecionado.numIdentificacao" name="doc" />
+
+      <label>Email</label>
+      <input [(ngModel)]="estudanteSelecionado.email" name="email" />
+
+      <label>Contacto</label>
+      <input [(ngModel)]="estudanteSelecionado.contacto" name="contacto" />
+
+      <label>Endereço</label>
+      <input [(ngModel)]="estudanteSelecionado.endereco" name="endereco" />
+
+      <label>Ano Acadêmico</label>
+      <input type="number" [(ngModel)]="estudanteSelecionado.anoAcademico" name="ano" />
+
+      <label>Status</label>
+      <select [(ngModel)]="estudanteSelecionado.statusEstudante" name="status">
+        <option value="ATIVO">Ativo</option>
+        <option value="INATIVO">Inativo</option>
+      </select>
+
+      <button type="button" (click)="salvarEdicao()">Salvar</button>
+    </form>
   </div>
+</div>
+
 </div>
 
 <app-barralateral></app-barralateral>

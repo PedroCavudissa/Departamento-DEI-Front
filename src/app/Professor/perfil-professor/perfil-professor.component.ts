@@ -149,18 +149,7 @@ carregarDadosProfessor(): void {
           }
         };
 
-        this.formulario.patchValue({
-          email: this.professor?.userDetails['email'],
-          endereco: this.professor?.userDetails.endereco,
-          nivelAcademico: this.professor?.userDetails. nivelAcademico,
-          dataIngresso: this.professor?.userDetails.dataIngresso,
-          dataNascimento: this.professor?.userDetails.dataNascimento,
-          tipoDocumento: this.professor?.userDetails.tipoDocumento,
-          numDocumento: this.professor?.userDetails.numDocumento,
-          cargo: this.professor?.userDetails.cargo,
-        
-       
-        });
+      
       } else {
         this.mensagemErro = 'Estrutura de dados inválida da API';
       }

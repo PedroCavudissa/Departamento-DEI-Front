@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { LogRegistro } from './logs.service';
 
 export interface Estudante {
+  id: number;  
   nome: string;
   dataNascimento: string; 
   numIdentificacao: string;
@@ -97,9 +98,23 @@ export class EstudanteService {
       })
     );
   }
+
+  updateEstudante(estudante: Estudante): Observable<Estudante> {
+    const usuario = localStorage.getItem('usuario');
+    const token = usuario ? JSON.parse(usuario).token : null;
+  
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true'
+    });
+  
+    return this.http.put<Estudante>(`${this.apiUrl}/${estudante.numIdentificacao}`, estudante, { headers });
   
   }
   
   
 
 
+}

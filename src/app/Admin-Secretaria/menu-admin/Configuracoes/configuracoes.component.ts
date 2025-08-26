@@ -31,7 +31,7 @@ selecionar(select: string){
         {this.router.navigate(['/Horarios'])};
         break;
         case 'Pautas':
-          {this.router.navigate(['/pautas'])};
+          {this.router.navigate(['/pauta'])};
           break;
           case 'Aprovar':
             {this.router.navigate(['/aprovar-comunicado'])};

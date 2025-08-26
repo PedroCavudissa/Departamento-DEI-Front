@@ -88,6 +88,18 @@ export interface Funcionario {
       );
     }
     
+    upDateFuncionario(funcionario: Funcionario): Observable<any> {
+      const usuario = localStorage.getItem('usuario');
+      const token = usuario ? JSON.parse(usuario).token : null;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+        'ngrok-skip-browser-warning': 'true'
+      });
+      const url = `${this.baseUrl}/${funcionario.id}`;
+      return this.http.put(url, funcionario, { headers });
+    }
 }
   
   

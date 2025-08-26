@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/browser",
+            "outputPath": "dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -21,11 +21,9 @@
             "assets": ["src/assets"],
             "scripts": [],
             "styles": [
-
               "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.css",
               "node_modules/notyf/notyf.min.css"
-
             ]
           },
           "configurations": {
@@ -50,7 +48,11 @@
                 }
               ],
               "outputHashing": "all",
-              "optimization": true,
+              "optimization": {
+                "scripts": true,
+                "styles": true,
+                "fonts": false
+              },
               "sourceMap": false,
               "namedChunks": false,
               "aot": true
