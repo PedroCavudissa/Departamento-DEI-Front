@@ -23,7 +23,7 @@ export class AlterarSenhaComponent {
   ) {
     this.form = this.fb.group({
       senhaAtual: ['', Validators.required],
-      novaSenha: ['', [Validators.required, Validators.minLength(6)]],
+      novaSenha: ['', [Validators.required, Validators.minLength(8)]],
       confirmarSenha: ['', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
@@ -34,21 +34,24 @@ export class AlterarSenhaComponent {
   }
 
   alterarSenha() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      if (this.form.controls['novaSenha'].errors?.['minlength']) {
+        this.notification.error('A nova senha deve ter pelo menos 8 caracteres.');
+      } else {
+        this.notification.error('Preencha todos os campos corretamente.');
+      }
+      return;
+    }
   
     const { senhaAtual, novaSenha } = this.form.value;
-    console.log('Payload enviado:', { currentPassword: senhaAtual, newPassword: novaSenha });
-  
     this.loginService.alterarSenha(senhaAtual, novaSenha).subscribe({
       next: () => {
         this.notification.success('Senha alterada com sucesso!');
-  
         const usuarioRaw = localStorage.getItem('usuario');
         if (usuarioRaw) {
           const usuario = JSON.parse(usuarioRaw);
-          usuario.mustChangePassword = false; // garante que não redirecione de novo
+          usuario.mustChangePassword = false; 
           localStorage.setItem('usuario', JSON.stringify(usuario));
-  
           switch (usuario.role) {
             case 'ADMIN':
               this.router.navigate(['/menu-admin']);
@@ -69,9 +72,25 @@ export class AlterarSenhaComponent {
       },
       error: (err) => {
         console.error('Erro ao alterar senha:', err);
-        this.notification.error('Não foi possível alterar a senha. Verifique os dados e tente novamente.');
+  
+        // Mensagens de Erro
+        const msgApi = err.error?.message || '';
+  
+        if (msgApi.includes('Senha atual incorreta')) {
+          this.notification.error('A senha atual está incorreta.');
+        } 
+        else if (msgApi.includes('Senha muito curta')) {
+          this.notification.error('A nova senha é muito curta.');
+        } 
+        else if (msgApi.includes('Senhas não coincidem')) {
+          this.notification.error('As senhas não coincidem.');
+        } 
+        else {
+          this.notification.error('Não foi possível alterar a senha. Tente novamente.');
+        }
       }
     });
   }
+  
   
 }

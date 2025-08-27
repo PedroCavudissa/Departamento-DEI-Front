@@ -79,6 +79,8 @@ export class PautaComponent implements OnInit {
   }
 
   confirmarAcao(): void {
+    if (!this.disciplinaSelecionada?.disciplinaId) return;
+  
     if (this.tipoAcao === 'aprovar') {
       this.pautaService.avaliarPauta(this.disciplinaSelecionada.disciplinaId, true).subscribe({
         next: () => {
@@ -87,21 +89,32 @@ export class PautaComponent implements OnInit {
           this.mostrarModalOk = true;
           this.carregarEstudantes();
         },
-        error: () => {
+        error: (err) => {
+          console.error('Erro ao aprovar pauta:', err);
           this.tituloModal = 'Erro';
-          this.mensagemModal = '❌ Erro ao aprovar pauta.';
+          if (err.status === 401 || err.status === 403) {
+            this.mensagemModal = 'Sua sessão expirou. Faça login novamente.';
+          } else {
+            this.mensagemModal = ' Não foi possível aprovar a pauta.';
+          }
           this.mostrarModalOk = true;
+        },
+        complete: () => {
+          this.mostrarModalConfirmacao = false;
+          this.tipoAcao = null;
         }
       });
     }
-
-    this.mostrarModalConfirmacao = false;
-    this.tipoAcao = null;
   }
-
+  
   confirmarRejeicao(): void {
-    if (!this.motivoRejeicao.trim()) return;
-
+    if (!this.motivoRejeicao.trim()) {
+      this.tituloModal = 'Atenção';
+      this.mensagemModal = 'Informe o motivo da rejeição.';
+      this.mostrarModalOk = true;
+      return;
+    }
+  
     this.pautaService.avaliarPauta(this.disciplinaSelecionada.disciplinaId, false, this.motivoRejeicao).subscribe({
       next: () => {
         this.tituloModal = 'Sucesso';
@@ -109,16 +122,21 @@ export class PautaComponent implements OnInit {
         this.mostrarModalOk = true;
         this.carregarEstudantes();
       },
-      error: () => {
+      error: (err) => {
+        console.error('Erro ao rejeitar pauta:', err);
         this.tituloModal = 'Erro';
-        this.mensagemModal = '❌ Erro ao rejeitar pauta.';
+        this.mensagemModal = err.status === 400
+          ? 'Motivo inválido ou dados incorretos.'
+          : 'Não foi possível rejeitar a pauta.';
         this.mostrarModalOk = true;
+      },
+      complete: () => {
+        this.mostrarModalRejeicao = false;
+        this.motivoRejeicao = '';
       }
     });
-
-    this.mostrarModalRejeicao = false;
-    this.motivoRejeicao = '';
   }
+  
 
   cancelarAcao(): void {
     this.mostrarModalConfirmacao = false;

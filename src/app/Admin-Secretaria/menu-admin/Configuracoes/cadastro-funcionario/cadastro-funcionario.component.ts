@@ -38,6 +38,12 @@ export class CadastroFuncionarioComponent {
   ) {}
 
   cadastrar(): void {
+    // 🔹 Validação mínima no front (evita requisições desnecessárias)
+    if (!this.funcionario.nome || !this.funcionario.email || !this.funcionario.dataNascimento) {
+      this.notyf.error('Preencha os campos obrigatórios: Nome, Email e Data de Nascimento.');
+      return;
+    }
+  
     const funcionarioCorrigido = {
       ...this.funcionario,
       dataNascimento: new Date(this.funcionario.dataNascimento),
@@ -50,11 +56,31 @@ export class CadastroFuncionarioComponent {
         this.router.navigate(['/menu-admin']);
       },
       error: (err) => {
-        console.error(err);
-        this.notyf.error('Erro ao cadastrar funcionário!');
+        console.error('Erro no cadastro:', err);
+  
+        // 🔹 Tratamento específico por código de status
+        switch (err.status) {
+          case 400:
+            this.notyf.error('Dados inválidos. Verifique os campos e tente novamente.');
+            break;
+          case 401:
+          case 403:
+            this.notyf.error('Sessão expirada. Faça login novamente.');
+            this.router.navigate(['/login']);
+            break;
+          case 409:
+            this.notyf.error('Já existe um funcionário cadastrado com este email ou identificação.');
+            break;
+          case 0: // falha de rede
+            this.notyf.error('Falha de conexão com o servidor. Verifique sua internet.');
+            break;
+          default:
+            this.notyf.error('Erro inesperado ao cadastrar funcionário.');
+        }
       }
     });
   }
+  
   
 
 

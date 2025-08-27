@@ -1,88 +1,105 @@
+/* Container principal */
 .container {
-  max-width: 50px;
-margin: 80px auto;
-padding: 8px;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
+/* Card da secção */
 .form-section {
-position: relative;
-border: 1px solid #ccc;
-border-radius: 20px;
-padding: 8px;
-margin-bottom: 15px;
-background-color: #fff;
- overflow: hidden;
- padding-top: 40px;
-
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  padding: 20px 16px 16px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  overflow: hidden;
+  padding-top: 50px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
+/* Título */
+.secao-titulo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #47B5FF;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 0 0 8px 0;
+  margin: 0;
+  font-size: 16px;
+  width: auto;
+  font-weight: bold;
+}
+
+/* Select */
 select.form-control {
-width: 100%;
-max-width: 98%;
-min-height: 40px;     /* Altura mínima consistente */
-font-size: 15px;
-border-radius: 6px;
-border: 1px solid #ccc;
-padding: 8px 12px;
-box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 select.form-control:focus {
-border-color: #2980b9;
-box-shadow: 0 0 4px rgba(41, 128, 185, 0.3);
-outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 4px rgba(41, 128, 185, 0.3);
+  outline: none;
 }
 
-.secao-titulo {
- position: absolute;
-top: 0;
-left: 0;
-background-color: #47B5FF;
-text-align: center;
-padding: 10px;
-border-radius: 4px;
-margin: 0px;
-font-size: 14px;
-width: 98%;
+/* Informação extra */
+.info-cadeira {
+  padding: 10px 0;
+  margin-bottom: 15px;
+  color: #444;
+  font-size: 14px;
+}
+
+/* Tabela */
+.table-section {
+  overflow-x: auto; /* Importante para mobile */
 }
 
 .table-section table {
-width: 100%;
-border-collapse: separate;
-margin-bottom: 20px;
-border-radius: 20px;
-border-spacing: 0;
-overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  font-size: 14px;
 }
 
-.table-section table thead tr:first-child th:first-child {
-border-top-left-radius: 20px;
+.table-section th, 
+.table-section td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  background-color: white;
 }
 
-.table-section table thead tr:first-child th:last-child {
-border-top-right-radius: 20px;
+.table-section thead th {
+  background: #f5f5f5;
+  font-weight: bold;
 }
 
-.table-section table tbody tr:last-child td:first-child {
-border-bottom-left-radius: 20px;
+/* Botões */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
-.table-section table tbody tr:last-child td:last-child {
-border-bottom-right-radius: 20px;
-}
-
-.table-section table th, .table-section table td {
-border: 1px solid #ddd;
-padding: 8px 10px;
-text-align: center;
-font-size: 14px;
-background-color: white; 
-}
-
-  /* Botão */
 .back-btn,
 .confirm-btn {
-  padding: 10px 16px;
+  padding: 10px 20px;
   background-color: #47B5FF;
   color: white;
   border: none;
@@ -90,37 +107,21 @@ background-color: white;
   font-size: 14px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin: 0; /* Remove margens desnecessárias */
 }
 
-.confirm-btn:hover {
-  background-color: #0056b3;
-}
-
+.confirm-btn:hover,
 .back-btn:hover {
   background-color: #0056b3;
 }
-.button-container {
-   display: flex;
-  justify-content: center; /* Centraliza os botões horizontalmente */
-  gap: 20px; /* Espaçamento entre os botões */
-  margin-top: 20px; /* Espaço superior opcional */ 
-}
 
-.info-cadeira {
-  padding: 0 20px;
-  margin-bottom: 15px;
-  color: #444;
-}
-
-/*Modal Estilo */
+/* Modal */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,12 +134,10 @@ background-color: white;
   background-color: #fff;
   padding: 1.5rem;
   border-radius: 12px;
-  max-width: 100%;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   box-sizing: border-box;
   text-align: center;
-  word-wrap: break-word;
 }
 
 .modal-content h4 {
@@ -172,196 +171,48 @@ background-color: white;
   background-color: #1976d2;
   color: white;
   font-weight: bold;
+  transition: background 0.3s ease;
 }
 
 .modal-actions button:hover {
   background-color: #155a9c;
 }
 
-
 /* Responsividade */
-  
-@media screen and (width: 375px) and (height: 667px){
-  .container  {
-    padding: 16px;
-    margin-top: 91px;
+@media (max-width: 992px) {
+  .table-section table {
+    font-size: 13px;
+    min-width: 700px;
   }
 }
 
-@media screen and (width: 414px) and (height: 896px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-    @media screen and (width: 390px) and (height: 844px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
-
- @media screen and (width: 430px) and (height: 932px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
-     @media screen and (width: 412px) and (height: 914px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-
-  @media screen and (width: 412px) and (height: 915px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-
- @media screen and (width: 360px) and (height: 740px) {
-      .container  {
-        margin-top: 80px;
-      }
-    }
-     @media screen and (width: 768px) and (height: 1024px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
-     @media screen and (width: 820px) and (height: 1180px) {
-      .container {
-        margin-top: 150px;
-      }
-    }
-     @media screen and (width: 1024px) and (height: 1366px) {
-      .container  {
-        margin-top: 180px;
-      }
-    }
-
- @media screen and (width: 912px) and (height: 1368px) {
-     .container  {
-        margin-top: 180px;
-      }
-    }
- @media screen and (width: 540px) and (height: 720px) {
-      .container {
-        margin-top: 100px;
-      }
-    }
-
- @media screen and (width: 344px) and (height: 882px) {
-      .container  {
-        margin-top: 100px;
-      }
-    }
- @media screen and (width: 853px) and (height: 1280px) {
-      .container {
-        margin-top: 150px;
-      }
-    }
- @media screen and (width: 1024px) and (height: 600px) {
-      .container  {
-        margin-top: 80px;
-      }
-    }
-
- @media screen and (width: 1280px) and (height: 800px) {
-      .container  {
-        margin-top: 100px;
-        
-      }
-    }
-
-  @media screen and (max-width: 1024px) {
-  .container {
-    padding: 16px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
   }
-
+  
   .form-section {
-    padding: 20px 12px 12px 12px;
-    border-radius: 16px;
+    padding: 16px;
   }
 
   .secao-titulo {
     font-size: 14px;
     padding: 8px;
-    width: 100%;
   }
+}
 
-  /* TABELA */
-  .table-section {
-    overflow-x: auto;
+@media (max-width: 576px) {
+  .container {
+    margin: 40px auto;
+    padding: 12px;
   }
 
   .table-section table {
-    min-width: 700px;
-    width: 100%;
-    font-size: 13px;
+    font-size: 12px;
   }
 
-  .table-section table th,
-  .table-section table td {
-    padding: 6px;
-    white-space: nowrap;
-  }
-
-  /* INPUTS & TEXTAREAS */
-  input[type="text"],
-  input[type="number"],
-  input[type="email"],
-  input[type="date"],
-  textarea,
-  .input-custom {
-    width: 100%;
-    font-size: 14px;
-    padding: 10px;
-    box-sizing: border-box;
-    margin-bottom: 12px;
-  }
-
-  /* SELECTS */
-  select.form-control {
-    width: 100%;
-    max-width: 100%;
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  /* OPTION (onde aplicável) */
-  select.form-control option {
-    font-size: 14px;
-  }
-
-  /* BOTÕES */
-  .btn-azul,
-  .confirm-btn,
-  .back-btn,
-  .btn-ok,
-  .modal-actions button {
-    width: 100%;
-    max-width: 100%;
-    font-size: 14px;
-    padding: 12px;
-    box-sizing: border-box;
-  }
-
-  .button-container {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* MODAL */
   .modal-content {
-    width: 100%;
     max-width: 95vw;
-    padding: 1rem;
-  }
-
-  .modal-content textarea {
-    font-size: 14px;
   }
 }

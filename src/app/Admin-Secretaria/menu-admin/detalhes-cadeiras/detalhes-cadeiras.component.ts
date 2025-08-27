@@ -101,6 +101,7 @@ export class DetalhesCadeirasComponent implements OnInit {
       this.novaDisciplina.precedenciasDisciplinaNome.splice(index, 1);
     }
   }
+
   get precedenciasDisponiveis(): Disciplina[] {
     if (
       !this.novaDisciplina ||
@@ -113,25 +114,19 @@ export class DetalhesCadeirasComponent implements OnInit {
     const anoAtual = +this.novaDisciplina.anoAcademico;
     const semestreAtual = +this.novaDisciplina.semestre;
   
-    // Verifica se semestre é válido (1 ou 2)
-    if (semestreAtual !== 1 && semestreAtual !== 2) {
-      return [];
-    }
+    return this.disciplinas.filter(d => {
+      const ano = +d.anoAcademico;
+      const semestre = +d.semestre;
   
-    let anoAlvo: number;
-    let semestreAlvo: number;
+      // disciplinas de anos anteriores entram sempre
+      if (ano < anoAtual) return true;
   
-    if (semestreAtual === 1) {
-      anoAlvo = anoAtual - 1;
-      semestreAlvo = 2;
-    } else {
-      anoAlvo = anoAtual;
-      semestreAlvo = 1;
-    }
+      // disciplinas do mesmo ano mas semestre menor também entram
+      if (ano === anoAtual && semestre < semestreAtual) return true;
   
-    return this.disciplinas.filter(d =>
-      +d.anoAcademico === anoAlvo && +d.semestre === semestreAlvo
-    );
+      return false;
+    });
   }
+  
   
 }

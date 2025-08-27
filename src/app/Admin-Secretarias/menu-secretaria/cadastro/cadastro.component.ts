@@ -3,10 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
 import { EstudanteService, Estudante } from '../../../services/estudante.service';
-
-import { Notyf } from 'notyf';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
 
 @Component({
@@ -17,8 +14,7 @@ import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/b
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent {
-  notyf = new Notyf({ duration: 3000, position: { x: 'right', y: 'top' } });
-
+  
   estudante: Estudante = {
     id: 0,
     nome: '',
@@ -53,8 +49,13 @@ export class CadastroComponent {
     const day = d.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
-  
   avancar(): void {
+    // 🔹 Validação simples no front antes de enviar
+    if (!this.estudante.nome || !this.estudante.email || !this.estudante.dataNascimento) {
+      this.notyf.error('Preencha os campos obrigatórios: Nome, Email e Data de Nascimento.');
+      return;
+    }
+  
     const estudanteFormatado: Estudante = {
       ...this.estudante,
       dataNascimento: this.formatDate(this.estudante.dataNascimento),
@@ -62,20 +63,31 @@ export class CadastroComponent {
       dataConclusao: this.estudante.dataConclusao ? this.formatDate(this.estudante.dataConclusao) : ''
     };
   
-    console.log('Token JWT:', localStorage.getItem('token'));
-    console.log('Enviando estudante:', estudanteFormatado);
-  
     this.estudanteService.cadastrar(estudanteFormatado).subscribe({
       next: () => {
         this.notyf.success('Estudante cadastrado com sucesso!');
+        this.router.navigate(['/detalhes-estudantes-secretaria']); 
       },
-
       error: (err) => {
         console.error('Erro no cadastro:', err);
-        this.notyf.error('Erro ao cadastrar estudante. Veja o console.');
+  
+        // 🔹 Tratamento mais específico
+        if (err.status === 400) {
+          this.notyf.error('Dados inválidos. Verifique os campos e tente novamente.');
+        } else if (err.status === 401 || err.status === 403) {
+          this.notyf.error('Sessão expirada. Faça login novamente.');
+          this.router.navigate(['/login']);
+        } else if (err.status === 409) {
+          this.notyf.error('Já existe um estudante com este número de identificação ou e-mail.');
+        } else if (err.status === 0) {
+          this.notyf.error('Falha de conexão com o servidor.');
+        } else {
+          this.notyf.error('Erro inesperado ao cadastrar estudante.');
+        }
       }
     });
   }
+  
   
   
   

@@ -77,80 +77,88 @@ fecharModal() {
 }
 alterarSenha(){}
 entrar() {
-  if (this.loginForm.valid) {
-    const usuario = {
-      email: this.loginForm.get('email')?.value,
-      password: this.loginForm.get('senha')?.value
-    };
-
-    this.loginService.entrar(usuario).subscribe({
-      next: (res: unknown) => {
-        const response = res as { token: string; email: string; role: string; mustChangePassword: boolean; };
-        
-        // Armazenar APENAS o objeto completo
-        const usuarioLogado = {
-          token: response.token,
-          email: response.email,
-          role: response.role,
-          mustChangePassword: response.mustChangePassword
-        };
-        localStorage.setItem('usuario', JSON.stringify(usuarioLogado));  
-        console.log(usuarioLogado.mustChangePassword);    
-           const role = response.role;
-        switch (role) {
-          case 'ADMINISTRADOR':
-    
-            this.router.navigate(['/menu-admin']);
-            break;
-          case 'SECRETARIA':
-            this.router.navigate(['/menu-secretaria']);
-            break;
-          case 'PROFESSOR':
-            this.router.navigate(['/tela-professor']);
-            break;
-          case 'ESTUDANTE':
-            this.router.navigate(['/tela-estudante']);
-            break;
-          default:
-            this.router.navigate(['/login']);
-        }
-        this.notification.success('Login realizado com sucesso!');
-       
-      
-      },
-      error: (error: unknown) => {
-        console.error('Erro ao logar:', error);
-        this.notification.error('E-mail ou senha inválidos');
-      }
-    });
-
-  } else {
+  if (this.loginForm.invalid) {
     this.loginForm.markAllAsTouched();
     this.notification.error('Preencha todos os campos corretamente.');
+    return;
   }
+
+  const usuario = {
+    email: this.loginForm.get('email')?.value,
+    password: this.loginForm.get('senha')?.value
+  };
+
+  this.loginService.entrar(usuario).subscribe({
+    next: (res: any) => {
+      const usuarioLogado = {
+        token: res.token,
+        email: res.email,
+        role: res.role,
+        mustChangePassword: res.mustChangePassword
+      };
+
+      localStorage.setItem('usuario', JSON.stringify(usuarioLogado));
+
+      // Redirecionar conforme o perfil
+      switch (res.role) {
+        case 'ADMINISTRADOR': this.router.navigate(['/menu-admin']); break;
+        case 'SECRETARIA': this.router.navigate(['/menu-secretaria']); break;
+        case 'PROFESSOR': this.router.navigate(['/tela-professor']); break;
+        case 'ESTUDANTE': this.router.navigate(['/tela-estudante']); break;
+        default: this.router.navigate(['/login']);
+      }
+
+      this.notification.success('Login realizado com sucesso!');
+    },
+    error: (err) => {
+      console.error('Erro ao logar:', err);
+
+      // Mensagens especificas
+      const msgApi = err.error?.message || '';
+
+      if (msgApi.includes('Usuário não encontrado')) {
+        this.notification.error('Este e-mail não está cadastrado.');
+      } else if (msgApi.includes('Senha incorreta')) {
+        this.notification.error('Senha incorreta. Tente novamente.');
+      } else if (err.status === 0) {
+        this.notification.error('Falha de conexão com o servidor.');
+      } else {
+        this.notification.error('E-mail ou senha inválidos.');
+      }
+    }
+  });
 }
 
 
-
 recuperar(): void {
-  console.log('Tentando recuperar...');
   if (this.recuperarForm.invalid) {
     this.recuperarForm.markAllAsTouched();
-    console.error('Formulário inválido');
+    this.notification.error('Informe um e-mail válido.');
     return;
   }
 
   const email = this.recuperarForm.get('email')?.value;
+
   this.usuarioService.enviarEmail(email).subscribe({
     next: () => {
-      this.notification.success('Verifique a sua caixa de email!');
+      this.notification.success('Verifique sua caixa de e-mail para redefinir a senha.');
       this.fecharModal();
     },
-    error: () => {
-      this.notification.error('Erro ao enviar o email de recuperação.');
+    error: (err) => {
+      console.error('Erro ao enviar e-mail:', err);
+      const msgApi = err.error?.message || '';
+
+      if (msgApi.includes('E-mail não encontrado')) {
+        this.notification.error('Este e-mail não está cadastrado.');
+      } else if (err.status === 0) {
+        this.notification.error('Não foi possível conectar ao servidor.');
+      } else {
+        this.notification.error('Erro ao enviar o e-mail de recuperação.');
+      }
     }
   });
 }
+
 
 
 }

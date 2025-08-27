@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LateralComponent } from "../lateral/lateral.component";
 
-import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service'; // <== Adicione 'Disciplina'
+import { ConfirmacaoService, DadosAcademicos, Disciplina } from '../../services/confirmacao.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ ngOnInit(): void {
     next: (dados) => {
       const estudanteId = dados.userDetails.id;
       const ano = dados.userDetails.anoAcademico;
-      const semestre = this.getSemestre(); // Certifica-te que essa função retorna 1 ou 2
+      const semestre = this.getSemestre(); 
 
       if (!semestre) {
         console.error('⚠️ Semestre inválido.');
@@ -63,7 +63,7 @@ getSemestre(): number {
 abrirModal(): void {
   this.confirmacaoService.getDisciplinasInscritas().subscribe({
     next: (disciplinas) => {
-      console.log('Disciplinas inscritas recebidas:', disciplinas);
+   
       this.disciplinasInscritas = disciplinas;
       this.mostrarModal = true;
     },

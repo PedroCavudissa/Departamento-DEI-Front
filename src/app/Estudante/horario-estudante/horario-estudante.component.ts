@@ -162,25 +162,40 @@ export class HorarioEstudanteComponent implements OnInit {
   fecharModal() {
     this.mostrarModal = false;
   }
-
   salvarHorario() {
     console.log('Salvando horário:', this.novoHorario);
+  
+    // Validação dos campos obrigatórios
     if (!this.novoHorario.turmaSigla || !this.novoHorario.disciplinaSigla ||
         !this.novoHorario.diaSemana || !this.novoHorario.horaInicio || !this.novoHorario.horaFim) {
-      this.notificationService.error('Preencha todos os campos obrigatórios!');
+      this.notificationService.error('⚠️ Preencha todos os campos obrigatórios!');
       return;
     }
   
+    // Chamada ao serviço
     this.horarioService.cadastrarHorario(this.novoHorario).subscribe({
       next: () => {
-        this.notificationService.success('Horário adicionado com sucesso!');
+        this.notificationService.success(' Horário adicionado com sucesso!');
         this.fecharModal();
         this.carregarTodosHorarios();
       },
       error: (err) => {
-        this.notificationService.error('Erro ao adicionar horário!');
-        console.error(err);
+        console.error('Erro ao salvar horário:', err);
+  
+        // Tratamento de erros detalhado
+        if (err.status === 0) {
+          this.notificationService.error(' Falha de conexão com o servidor. Verifique sua internet.');
+        } else if (err.status === 400) {
+          this.notificationService.error(err.error?.message || 'Dados inválidos! Verifique os campos preenchidos.');
+        } else if (err.status === 401 || err.status === 403) {
+          this.notificationService.error(' Acesso não autorizado. Faça login novamente.');
+        } else if (err.status === 500) {
+          this.notificationService.error(' Erro interno do servidor. Tente novamente mais tarde.');
+        } else {
+          this.notificationService.error(' Ocorreu um erro inesperado. Tente novamente.');
+        }
       }
     });
   }
+  
 }
