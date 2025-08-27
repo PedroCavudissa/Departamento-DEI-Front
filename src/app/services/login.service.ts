@@ -1,15 +1,28 @@
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import { filter, map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
   
   private baseUrl = `${environment.apiUrl}/api/auth/login`;
 
-  constructor(private http: HttpClient) {}
+   
+ constructor(private http: HttpClient) { }
+ private getHeaders(): HttpHeaders {
+
+   const usuario = localStorage.getItem('usuario');
+   const token = usuario ? JSON.parse(usuario).token : null;
+
+ return new HttpHeaders({
+   'Authorization': `Bearer ${token}`,
+   'Content-Type': 'application/json',
+   'Accept': 'application/json',
+   'ngrok-skip-browser-warning': 'true'
+ });
+}
+
 
   entrar(credentials: { email: string; password: string }) {
     return this.http.post(this.baseUrl, credentials);
@@ -27,11 +40,33 @@ export class LoginService {
     return this.http.post(`${environment.apiUrl}/api/auth/logOut`, {}, { headers });
   }
 
-  alterarSenha(senhaAtual: string, novaSenha: string) {
-    return this.http.post(`${environment.apiUrl}/api/auth/me/update-password`, {
-      senhaAtual,
-      novaSenha
-    });
+  alterarSenha(senhaAtual: string, novaSenha: string): Observable<any> {
+    const body = {
+      currentPassword: senhaAtual,
+      newPassword: novaSenha
+    };
+  
+    // request() diretamente
+    const req = new HttpRequest(
+      'PUT',
+      `${environment.apiUrl}/api/auth/me/update-password`,
+      body,
+      {
+        headers: this.getHeaders(),
+        responseType: 'text'
+      }
+    );
+  
+    return this.http.request(req).pipe(
+      map(event => {
+        if (event instanceof HttpResponse) {
+          return event.body;
+        }
+        return null;
+      }),
+      filter(Boolean)
+    );
+  }
   }
   
-}
+

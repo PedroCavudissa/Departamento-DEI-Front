@@ -35,21 +35,20 @@ export class AlterarSenhaComponent {
 
   alterarSenha() {
     if (this.form.invalid) return;
-
+  
     const { senhaAtual, novaSenha } = this.form.value;
-
+    console.log('Payload enviado:', { currentPassword: senhaAtual, newPassword: novaSenha });
+  
     this.loginService.alterarSenha(senhaAtual, novaSenha).subscribe({
       next: () => {
-        this.notification.success('Senha alterada com sucesso! Faça login novamente.');
-
-        // Atualizar flag mustChangePassword no localStorage
+        this.notification.success('Senha alterada com sucesso!');
+  
         const usuarioRaw = localStorage.getItem('usuario');
         if (usuarioRaw) {
           const usuario = JSON.parse(usuarioRaw);
-          usuario.mustChangePassword = false;
+          usuario.mustChangePassword = false; // garante que não redirecione de novo
           localStorage.setItem('usuario', JSON.stringify(usuario));
-
-          // Redirecionar conforme perfil
+  
           switch (usuario.role) {
             case 'ADMIN':
               this.router.navigate(['/menu-admin']);
@@ -68,9 +67,11 @@ export class AlterarSenhaComponent {
           }
         }
       },
-      error: () => {
-        this.notification.error('Erro ao alterar a senha. Tente novamente.');
+      error: (err) => {
+        console.error('Erro ao alterar senha:', err);
+        this.notification.error('Não foi possível alterar a senha. Verifique os dados e tente novamente.');
       }
     });
   }
+  
 }

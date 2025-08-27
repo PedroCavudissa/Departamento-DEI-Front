@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  
+
  notyf = new Notyf({
   duration: 3000,
   position: {
@@ -51,12 +53,7 @@ export class LoginComponent implements OnInit {
   tipoMensagem: 'erro' | 'sucesso' | '' = '';
   mostrarModal = false;
   recuperarForm!: FormGroup;
-
-
   loginForm!: FormGroup;
-
-
-
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -70,7 +67,6 @@ export class LoginComponent implements OnInit {
 
 localStorage.removeItem('token');
 }
-
 // Senha esquecida
   abrirModal(event: Event) {
       event.preventDefault();
@@ -79,9 +75,7 @@ localStorage.removeItem('token');
 fecharModal() {
   this.mostrarModal = false;
 }
-
 alterarSenha(){}
-
 entrar() {
   if (this.loginForm.valid) {
     const usuario = {
@@ -91,18 +85,18 @@ entrar() {
 
     this.loginService.entrar(usuario).subscribe({
       next: (res: unknown) => {
-        const response = res as { token: string; email: string; role: string };
+        const response = res as { token: string; email: string; role: string; mustChangePassword: boolean; };
         
         // Armazenar APENAS o objeto completo
         const usuarioLogado = {
           token: response.token,
           email: response.email,
-          role: response.role
+          role: response.role,
+          mustChangePassword: response.mustChangePassword
         };
-        localStorage.setItem('usuario', JSON.stringify(usuarioLogado));       
-     
-
-        const role = response.role;
+        localStorage.setItem('usuario', JSON.stringify(usuarioLogado));  
+        console.log(usuarioLogado.mustChangePassword);    
+           const role = response.role;
         switch (role) {
           case 'ADMINISTRADOR':
     
@@ -118,7 +112,7 @@ entrar() {
             this.router.navigate(['/tela-estudante']);
             break;
           default:
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
         }
         this.notification.success('Login realizado com sucesso!');
        

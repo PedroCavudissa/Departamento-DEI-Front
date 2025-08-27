@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       }
 
       //  Se a senha ainda não foi trocada → obriga ir para tela de redefinição
-      if (!senhaTrocada) {
+      if (usuario.mustChangePassword) {
         this.router.navigate(['/alterar-senha']);
         return false;
       }
