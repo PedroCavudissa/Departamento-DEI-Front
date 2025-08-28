@@ -47,15 +47,16 @@
         </div>
       </fieldset>
     </form>
+  
+
 
     <div class="mensagem-login" *ngIf="mensagemLogin" [ngClass]="tipoMensagem">
       {{ mensagemLogin }}
     </div>
-
     <div class="esqueci-senha">
       <a href="#" (click)="abrirModal($event)">Esqueci a senha</a>
     </div>
-
+   
 
   </div><!-- Modal de Recuperação -->
   <div class="modal-overlay" *ngIf="mostrarModal" (click)="fecharModal()">

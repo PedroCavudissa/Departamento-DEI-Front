@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { EstudanteService, Estudante } from '../../../services/estudante.service';
 import { BarralateralSecretariaComponent } from '../../barralateral-secretaria/barralateral-secretaria.component';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -38,7 +39,8 @@ export class CadastroComponent {
 
   constructor(
     private router: Router,
-    private estudanteService: EstudanteService
+    private estudanteService: EstudanteService,
+    private notification: NotificationService
   ) {}
 
   formatDate(date: Date | string): string {
@@ -52,7 +54,7 @@ export class CadastroComponent {
   avancar(): void {
     // 🔹 Validação simples no front antes de enviar
     if (!this.estudante.nome || !this.estudante.email || !this.estudante.dataNascimento) {
-      this.notyf.error('Preencha os campos obrigatórios: Nome, Email e Data de Nascimento.');
+      this.notification.error('Preencha os campos obrigatórios: Nome, Email e Data de Nascimento.');
       return;
     }
   
@@ -65,7 +67,7 @@ export class CadastroComponent {
   
     this.estudanteService.cadastrar(estudanteFormatado).subscribe({
       next: () => {
-        this.notyf.success('Estudante cadastrado com sucesso!');
+        this.notification.success('Estudante cadastrado com sucesso!');
         this.router.navigate(['/detalhes-estudantes-secretaria']); 
       },
       error: (err) => {
@@ -73,16 +75,16 @@ export class CadastroComponent {
   
         // 🔹 Tratamento mais específico
         if (err.status === 400) {
-          this.notyf.error('Dados inválidos. Verifique os campos e tente novamente.');
+          this.notification.error('Dados inválidos. Verifique os campos e tente novamente.');
         } else if (err.status === 401 || err.status === 403) {
-          this.notyf.error('Sessão expirada. Faça login novamente.');
+          this.notification.error('Sessão expirada. Faça login novamente.');
           this.router.navigate(['/login']);
         } else if (err.status === 409) {
-          this.notyf.error('Já existe um estudante com este número de identificação ou e-mail.');
+          this.notification.error('Já existe um estudante com este número de identificação ou e-mail.');
         } else if (err.status === 0) {
-          this.notyf.error('Falha de conexão com o servidor.');
+          this.notification.error('Falha de conexão com o servidor.');
         } else {
-          this.notyf.error('Erro inesperado ao cadastrar estudante.');
+          this.notification.error('Erro inesperado ao cadastrar estudante.');
         }
       }
     });

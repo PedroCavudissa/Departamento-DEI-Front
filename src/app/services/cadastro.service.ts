@@ -71,7 +71,7 @@ export interface Funcionario {
         'ngrok-skip-browser-warning': 'true'
       });
     
-      const url = `${environment.apiUrl}/api/staff`;
+      const url = `${environment.apiUrl}/api/zstaff`;
     
       return this.http.get<any>(url, { headers }).pipe(
         map(response => (response.content || []).map((func: any) => ({

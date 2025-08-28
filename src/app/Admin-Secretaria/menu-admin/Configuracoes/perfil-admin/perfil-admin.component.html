@@ -4,9 +4,7 @@
     <img src="assets/imagens/estudante-masculino.png" alt="Perfil do Professor" />
 
     <div class="info">
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
+   
 
       <div *ngIf="professorSelecionado; else noProfessores">
         <h3>Dados Pessoais</h3>
@@ -19,7 +17,7 @@
       </div>
 
       <ng-template #noProfessores>
-        <p>Nenhum professor encontrado.</p>
+        <p>Verifique a Conexão a Internet.</p>
       </ng-template>
     </div>
   </div>
