@@ -52,8 +52,10 @@ export class AlterarSenhaComponent {
           const usuario = JSON.parse(usuarioRaw);
           usuario.mustChangePassword = false; 
           localStorage.setItem('usuario', JSON.stringify(usuario));
+         
+         console.log('Usuário após alteração de senha:', usuario.m);
           switch (usuario.role) {
-            case 'ADMIN':
+            case 'ADMINISTRADOR':
               this.router.navigate(['/menu-admin']);
               break;
             case 'PROFESSOR':

@@ -129,5 +129,5 @@ export const routes: Routes = [
   {path:'perfil-secretaria', component: PerfilSecretariaComponent, canActivate: [AuthGuard], data: {role: ['SECRETARIA']}},
   {path:'acesso-negado', component: AcessoNegadoComponent}
 ,
-{path: 'alterar-senha', component: AlterarSenhaComponent, canActivate: [AuthGuard]}
+{path: 'alterar-senha', component: AlterarSenhaComponent}
 ];
